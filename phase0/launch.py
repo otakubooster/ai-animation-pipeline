@@ -111,11 +111,18 @@ def _create(a, offer: dict) -> None:
     print(f"Created instance {iid} on offer {offer['id']} ({offer.get('geolocation')}) (run {run_id}) at ${offer['dph_total']:.3f}/h; box self-stops after {max_seconds/3600:.2f} h.")
 
 
-def get_instance(iid: int) -> dict | None:
-    try:
-        return call("GET", f"/instances/{iid}/").get("instances") or None
-    except SystemExit:
-        return None
+def get_instance(iid: int, retries: int = 5) -> dict | None:
+    """Return the instance, None if Vast says it no longer exists. Transient API errors are retried."""
+    for attempt in range(retries):
+        try:
+            return call("GET", f"/instances/{iid}/").get("instances") or None
+        except SystemExit as exc:
+            if "-> 404" in str(exc):
+                return None
+            time.sleep(10 * (attempt + 1))
+        except OSError:
+            time.sleep(10 * (attempt + 1))
+    raise RuntimeError(f"Vast API unreachable after {retries} tries; instance {iid} state unknown")
 
 
 def cmd_destroy(a) -> None:
