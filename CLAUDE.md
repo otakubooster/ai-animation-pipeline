@@ -32,6 +32,16 @@ script (+ optional reference ad) → shot list → GPT Image 2 first + last fram
 6. Assembler: ffmpeg. Concat clips, lay VO per shot, optional music bed from a local folder, burned-in captions timed to the VO, exports in 9:16, 1:1 and 16:9.
 7. Orchestrator: Python 3.11+ CLI (Typer), SQLite job queue, parallel render submissions, retry with a new seed on failure, resumable jobs, one output folder per job with a cost/timing report.
 
+
+# TEAM SOP (docs/ai_video_ad_sop.md, received 2026-11-05) — the pipeline automates this process
+The user's team makes ads with a 4-phase manual SOP (Claude + text-to-image + Kling/Runway + CapCut). The pipeline must reproduce its steps and quality rules, swapping in gpt-image-2 and Wan 2.2.
+- Script phase: brand inputs (niche, product, avatar, problem mechanism, solution mechanism, traffic source, length) → analyse a winning competitor script (hook, story, objections, mechanism, proof, CTA) → rewrite for the brand modelling that structure → lock → break into scenes. Word budget ≈ 2.5 words/s (45 s ≈ 110-120 words, 15 s ≈ 30-40 words).
+- A scene = one visual setting or one speaker segment = one continuous camera angle; cuts only between scenes. Scenes run 5-14 s, so scenes longer than one Wan clip (81 frames ≈ 5 s) must be chained: last frame of clip n = first frame of clip n+1.
+- Start-frame prompt rules: subject + setting detail, camera/lens/DoF/lighting, explicit "NOT in frame" list, product label text spelled out line by line, overlay text exact (font, placement, colour), frame = frozen moment BEFORE the action.
+- Motion prompt rules: what happens at t=0 (speaking immediately vs hold), all movement with speed/direction, what stays STILL (product labels), delivery style, ambient sound / silence, visual events anchored to specific words, background vs foreground action separated, target runtime, end instruction (hard cut / hold a beat).
+- Assembly rules: trim first/last 0.5 s of each clip, hard cuts, text overlays, end card (product, guarantee, CTA), 1080x1920 and 1080x1080 (+16:9), human review gates for frames and clips before publishing.
+- Gaps vs Kling-style models that the pipeline must cover itself: Wan has no native audio or speech (TTS + lip-sync for on-screen speakers + SFX/ambient layer); word-anchored events need VO word timestamps; product labels warp in motion (keep product shots near-static and/or composite the real label back in post).
+
 # shots.json SCHEMA (enforce with pydantic)
 ```json
 {
