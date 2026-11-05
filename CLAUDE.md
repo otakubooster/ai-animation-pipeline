@@ -8,18 +8,18 @@ script → shot list → GPT Image 2 first + last frames → Wan 2.2 image-to-vi
 
 # HARD CONSTRAINTS
 - Video model = open weights only (Wan 2.2, Apache 2.0). Never use Kling, Runway or any credit-based video API.
-- GPU = rented, pay-per-second, scale to zero when idle. Primary: RunPod Serverless on RTX 5090 (Blackwell). Verify 5090 availability on Serverless first; fallback = RunPod Pods or Vast.ai with auto-shutdown.
+- GPU = rented, pay-per-second, scale to zero when idle. Primary: **Vast.ai** RTX 5090 (Blackwell) — user decision 2026-11-05, replaces RunPod. Phase 0 runs on a plain Vast instance with auto-destroy; production worker targets Vast Serverless (min_load=0, cold_workers=0, positive inactivity_timeout) if 5090s are available there, else on-demand Vast instances started/destroyed per batch.
 - The user's laptop does orchestration only (Dell XPS 15, RTX 3050 Ti 4 GB VRAM, 32 GB RAM). Never render video locally. Detect the OS and adapt commands.
 - Cost guardrails: ask the user before creating any paid GPU resource; every job has a max-spend setting; pods auto-terminate; log seconds + $ per clip.
-- Secrets only in .env (OPENAI_API_KEY, RUNPOD_API_KEY, ANTHROPIC_API_KEY), with .env in .gitignore and a .env.example committed.
+- Secrets only in .env (OPENAI_API_KEY, VAST_API_KEY, ANTHROPIC_API_KEY), with .env in .gitignore and a .env.example committed.
 
 # ARCHITECTURE
 1. Planner: LLM turns a script into shots.json (schema below).
 2. Frame generator: OpenAI Images API, model gpt-image-2. Generate a character sheet first, then the first + last frame of every shot using that sheet as a reference for consistency. Generate at the target aspect ratio natively, don't crop. Check the current OpenAI docs for the right endpoint and parameters.
-3. Render worker: Docker image deployed as a RunPod Serverless endpoint, stateless. Input: first frame, optional last frame, motion prompt, resolution, frame count, seed. Output: MP4 URL plus timing stats.
+3. Render worker: Docker image deployed on Vast.ai (Serverless endpoint or per-batch instance), stateless. Input: first frame, optional last frame, motion prompt, resolution, frame count, seed. Output: MP4 URL plus timing stats.
    - Engine A (preferred): lightx2v/LightWan2.2-A14B (NVFP4, 4 steps, sparse attention) via the LightX2V framework. Needs Blackwell. Base runtime image: lightx2v/lightx2v:26052801-cu130-5090. Vendor benchmark on one 5090: I2V ~10.7 s at 480p and ~26.7 s at 720p per 81-frame clip.
    - Engine B (fallback): ComfyUI + Wan 2.2 I2V A14B fp8 (Comfy-Org repackaged) + lightx2v 4-step LoRAs, using the WanFirstLastFrameToVideo node, run headless through the ComfyUI API.
-   - Put weights on a network volume or bake them into the image. Never download weights on cold start.
+   - Bake weights into the image or a Vast volume on the host. Never download weights on cold start.
 4. Post-processing, on the same GPU worker: RIFE interpolation (16 → 24/30 fps), then Real-ESRGAN upscale to 1080p.
 5. Voiceover: pluggable TTS interface. Default Kokoro (local, free). For languages Kokoro doesn't cover (check German and Dutch), use Piper or another open TTS. Languages: EN, DE, IT, FR, NL.
 6. Assembler: ffmpeg. Concat clips, lay VO per shot, optional music bed from a local folder, burned-in captions timed to the VO, exports in 9:16, 1:1 and 16:9.
@@ -99,10 +99,15 @@ Phase 7 – Style LoRAs (optional):
 - README with setup, costs, and one-command usage.
 - Design the CLI so it can later be exposed as an API module of the user's Marketing OS (keep core logic separate from the CLI layer).
 
-# OPEN QUESTIONS (asked before Phase 0)
-1. OpenAI API key with gpt-image-2 access?
-2. Which animation styles first (2D flat, 3D Pixar-style, stickman, anime)?
-3. RunPod account ready, or plan for Vast.ai?
+# DECISIONS (answers to pre-Phase-0 questions, 2026-11-05)
+1. OpenAI: user has a ChatGPT plan only, NO API key yet. ChatGPT subscriptions don't include API access; the API is billed separately at platform.openai.com. Phase 0 test frames can be made in ChatGPT and uploaded. Phase 2 needs a real API key.
+2. Styles: 3D Pixar-style first.
+3. GPU host: Vast.ai (account not yet funded). RunPod dropped.
+
+# FINDINGS
+- LightX2V (ModelTC/LightX2V, checked 2026-11-05) has task `flf2v` for `wan2.2_moe` (scripts/wan22/run_wan22_moe_flf2v.sh, configs/wan22/wan_moe_flf2v.json: 40 steps, CFG on, no NVFP4). The NVFP4 4-step distilled config exists only for i2v (configs/wan22/extreme/wan_moe_i2v_distill_nvfp4_sparse_attn.json). Untested: NVFP4 distill weights + task flf2v. Phase 0 must test this on the GPU.
+- Kokoro: official model card confirms only EN/ZH reliably; German is community/partial, Dutch not supported. Plan Piper (or another open TTS) for DE and NL; check IT/FR quality.
+- Vast Serverless supports scale-to-zero; cold start documented at 3-5 min.
 
 # PROGRESS LOG
-- Phase 0: not started (awaiting answers to open questions).
+- Phase 0: research done; blocked on (a) Vast.ai account funding + API key, (b) 5 test frames (from ChatGPT) or an OpenAI API key.
