@@ -68,3 +68,11 @@ def test_prepare_cases_fit(tmp_path):
     Image.new("RGB", (1024, 1536), "red").save(src)
     out = Path(prep.fit(src, tmp_path / "out.png", 480, 832))
     assert Image.open(out).size == (480, 832)
+
+
+def test_watch_does_not_destroy_briefly_exited_instance():
+    now = 10_000.0
+    assert launch.should_destroy("exited", now - 30, now, None) is None          # just restarted
+    assert "exited" in launch.should_destroy("exited", now - 700, now, None)     # stuck stopped
+    assert launch.should_destroy("running", None, now, None) is None
+    assert "spend" in launch.should_destroy("running", None, now, "spend $5.10 >= cap $5.00")

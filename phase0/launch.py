@@ -129,9 +129,23 @@ def cmd_destroy(a) -> None:
     print(call("DELETE", f"/instances/{a.instance}/"))
 
 
+EXITED_GRACE_S = 600  # an instance must stay exited/offline this long before watch destroys it
+
+
+def should_destroy(status: str | None, exited_since: float | None, now: float, cap_reason: str | None) -> str | None:
+    """Caps always win. A stopped/exited state is only acted on after EXITED_GRACE_S, because instances
+    report 'exited' briefly while starting or restarting."""
+    if cap_reason:
+        return cap_reason
+    if status in ("exited", "offline") and exited_since is not None and now - exited_since >= EXITED_GRACE_S:
+        return f"{status} for {int(now - exited_since)} s"
+    return None
+
+
 def cmd_watch(a) -> None:
     st = json.loads(STATE.read_text()) if STATE.exists() else {}
     max_usd, max_hours = st.get("max_usd", a.max_usd), st.get("max_hours", a.max_hours)
+    exited_since = None
     while True:
         inst = get_instance(a.instance)
         if not inst:
@@ -142,9 +156,11 @@ def cmd_watch(a) -> None:
         dph = inst.get("dph_total") or st.get("dph", 0)
         print(f"{time.strftime('%H:%M:%S')} status={inst.get('actual_status')} msg={str(inst.get('status_msg'))[:80]!r} "
               f"elapsed={elapsed/60:.1f} min spent≈${elapsed/3600*dph:.2f}", flush=True)
-        reason = over_cap(elapsed, dph, max_usd, max_hours)
-        if reason or inst.get("actual_status") in ("exited", "offline"):
-            print(f"Destroying: {reason or inst.get('actual_status')}")
+        status = inst.get("actual_status")
+        exited_since = (exited_since or time.time()) if status in ("exited", "offline") else None
+        reason = should_destroy(status, exited_since, time.time(), over_cap(elapsed, dph, max_usd, max_hours))
+        if reason:
+            print(f"Destroying: {reason}")
             call("DELETE", f"/instances/{a.instance}/")
             return
         time.sleep(a.every)
