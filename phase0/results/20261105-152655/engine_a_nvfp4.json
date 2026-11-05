@@ -1,0 +1,60 @@
+{
+  "engine": "A",
+  "variant": "nvfp4",
+  "gpu": "NVIDIA GeForce RTX 5090, 32607 MiB, 580.178.04",
+  "started": "2026-11-05T16:04:01Z",
+  "runs": [
+    {
+      "case": "s1",
+      "task": "i2v",
+      "file": "clips/A_nvfp4_i2v_s1.mp4",
+      "cold": true,
+      "seconds": 61.66,
+      "ok": true
+    },
+    {
+      "case": "s1",
+      "task": "flf2v",
+      "file": "clips/A_nvfp4_flf2v_s1.mp4",
+      "cold": false,
+      "seconds": 0.0,
+      "ok": false,
+      "error": "Traceback (most recent call last):\n  File \"/workspace/repo/phase0/engine_a.py\", line 90, in main\n    pipe.generate(\n  File \"/app/miniconda/lib/python3.11/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/pipeline.py\", line 449, in generate\n    input_info = self.runner.prepare_request(request_data)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/wan/wan_runner.py\", line 101, in prepare_request\n    input_info = super().prepare_request(request_data)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/base_runner.py\", line 136, in prepare_request\n    raise ValueError(f\"Task {task!r} is not supported by this runner; expected one of: {task_names}\")\nValueError: Task 'flf2v' is not supported by this runner; expected one of: i2v\n"
+    },
+    {
+      "case": "s2",
+      "task": "i2v",
+      "file": "clips/A_nvfp4_i2v_s2.mp4",
+      "cold": false,
+      "seconds": 12.05,
+      "ok": true
+    },
+    {
+      "case": "s3",
+      "task": "i2v",
+      "file": "clips/A_nvfp4_i2v_s3.mp4",
+      "cold": false,
+      "seconds": 12.47,
+      "ok": true
+    },
+    {
+      "case": "s4",
+      "task": "i2v",
+      "file": "clips/A_nvfp4_i2v_s4.mp4",
+      "cold": false,
+      "seconds": 12.29,
+      "ok": true
+    },
+    {
+      "case": "s5",
+      "task": "i2v",
+      "file": "clips/A_nvfp4_i2v_s5.mp4",
+      "cold": false,
+      "seconds": 12.15,
+      "ok": true
+    }
+  ],
+  "load_s": 82.16,
+  "finished": "2026-11-05T16:07:14Z",
+  "total_s": 192.79
+}

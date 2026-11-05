@@ -1,0 +1,70 @@
+{
+  "generated": "2026-11-05T16:36:12Z",
+  "dph": 0.5777777777777778,
+  "wall_s_so_far": 12,
+  "instance_usd_so_far": 0.0019,
+  "engines": [
+    {
+      "engine": "A",
+      "variant": "nvfp4",
+      "gpu": "NVIDIA GeForce RTX 5090, 32607 MiB, 580.178.04",
+      "load_s": 82.16,
+      "load_error": false,
+      "tasks": {
+        "flf2v": {
+          "ok": 0,
+          "failed": 1,
+          "median_s_per_clip": null,
+          "cold_first_clip_s": null,
+          "usd_per_clip": null,
+          "first_error": "t_info = self.runner.prepare_request(request_data)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/wan/wan_runner.py\", line 101, in prepare_request\n    input_info = super().prepare_request(request_data)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/base_runner.py\", line 136, in prepare_request\n    raise ValueError(f\"Task {task!r} is not supported by this runner; expected one of: {task_names}\")\nValueError: Task 'flf2v' is not supported by this runner; expected one of: i2v\n"
+        },
+        "i2v": {
+          "ok": 5,
+          "failed": 0,
+          "median_s_per_clip": 12.219999999999999,
+          "cold_first_clip_s": 61.66,
+          "usd_per_clip": 0.002,
+          "first_error": null
+        }
+      }
+    }
+  ],
+  "downloads": [
+    {
+      "repo": "Wan-AI/Wan2.2-I2V-A14B",
+      "file": "base (VAE, T5, tokenizer, configs)",
+      "seconds": 196.0
+    },
+    {
+      "repo": "lightx2v/LightWan2.2-A14B",
+      "file": "Wan2.2-I2V-A14B_NVFP4_Sparse_high.safetensors",
+      "seconds": 288.9,
+      "gb": 8.38
+    },
+    {
+      "repo": "lightx2v/LightWan2.2-A14B",
+      "file": "Wan2.2-I2V-A14B_NVFP4_Sparse_low.safetensors",
+      "seconds": 744.0,
+      "gb": 8.38
+    },
+    {
+      "repo": "Wan-AI/Wan2.2-I2V-A14B",
+      "file": "base (VAE, T5, tokenizer, configs)",
+      "seconds": 2.9
+    },
+    {
+      "repo": "lightx2v/LightWan2.2-A14B",
+      "file": "Wan2.2-I2V-A14B_NVFP4_Sparse_high.safetensors",
+      "seconds": 0.4,
+      "gb": 8.38
+    },
+    {
+      "repo": "lightx2v/LightWan2.2-A14B",
+      "file": "Wan2.2-I2V-A14B_NVFP4_Sparse_low.safetensors",
+      "seconds": 0.3,
+      "gb": 8.38
+    }
+  ],
+  "model_errors": []
+}
