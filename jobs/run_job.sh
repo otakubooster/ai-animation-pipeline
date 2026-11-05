@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Render a whole job on the rented 5090 (started by phase0/onstart.sh with RUN_SCRIPT=jobs/run_job.sh JOB=<dir>).
-# Order: prove the GitHub push works -> voiceover candidates -> download frames + models -> render all shots
+# Order: prove the GitHub push works -> download frames + models -> render all shots
 # (push every few clips) -> 16->32 fps interpolation -> final push -> self-destroy.
 # Everything is mirrored to the container log so it can be read from outside via the Vast logs API.
 set -uo pipefail
@@ -37,11 +37,7 @@ command -v ffmpeg >/dev/null && command -v rsync >/dev/null && command -v espeak
   || (apt-get update -qq && apt-get install -y -qq ffmpeg rsync espeak-ng unzip >/dev/null)
 pip install -q -U "huggingface_hub[hf_xet]" pillow
 
-stage "voiceover candidates (kokoro, isolated venv so the render stack's torch is untouched)"
-python -m venv --system-site-packages /workspace/tts-venv
-/workspace/tts-venv/bin/pip install -q soundfile "kokoro>=0.9.2" || /workspace/tts-venv/bin/pip install -q soundfile kokoro || echo "kokoro install failed"
-timeout 1200 /workspace/tts-venv/bin/python $REPO_DIR/jobs/tts_job.py "$JOB_JSON" "$OUT" || echo "TTS failed (non-fatal)"
-push "voiceover"
+# Voiceover is made with ElevenLabs outside the GPU box; the box only animates.
 
 stage "download frames from release"
 REL=$(python -c "import json;r=json.load(open('$JOB_JSON'))['frames_release'];print(r['repo'],r['tag'],r['asset'])")
