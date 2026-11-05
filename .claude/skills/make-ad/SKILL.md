@@ -48,14 +48,21 @@ avoid jumps/standing up (subjects leave the frame).
    `words_download_url` to `jobs/<slug>/vo/words.json`.
 5. `python pipeline/fit_to_vo.py jobs/<slug>/job.json jobs/<slug>/vo/words.json` (sizes every clip to the real VO).
 
-## 4. Render (cheapest 5090, unattended)
+## 4. Render (cheapest 5090, unattended, ALL new jobs in ONE GPU session)
+Do steps 1-3 for every new job first, then render them together: the ~20 min GPU setup (image + model
+download) is paid once per batch, and the model loads once.
 ```bash
-git add jobs/<slug>/job.json && git commit -m "<slug>: shot list" && git push origin main
-python3 phase0/launch.py create --best --script jobs/run_job.sh --job jobs/<slug> --max-usd 3 --max-hours 2 --yes
+git add jobs/*/job.json && git commit -m "batch: shot lists" && git push origin main
+N=<number of jobs>
+python3 phase0/launch.py create --best --script jobs/run_job.sh --job jobs/<a> jobs/<b> ... \
+  --max-usd <min(3*N, 15 - spent today)> --max-hours <0.75 + 0.25*N> --yes
 python3 -u phase0/launch.py watch <instance> --every 60 > <scratch>/watch.log 2>&1   # run_in_background
 ```
-Record Vast credit before and after (`GET /api/v0/users/current/` -> `credit`). Watch the `job-results` branch;
-the box pushes every 5 clips and a final push, then destroys itself.
+One 5090 renders ~29 short shots in ~13 min, so 10 ads of ~30 shots take ~2.5 h and ~$1.50 GPU in total.
+Record Vast credit before and after (`GET /api/v0/users/current/` -> `credit`); split the batch cost across ads
+by render seconds. The box pushes to branch `job-results` every 10 clips and a "<job_id> ready" commit as each
+job finishes interpolation (`jobs/<job_id>/results/<run>/READY`), then destroys itself after the last one.
+Start QA + edit of each job as soon as its READY push lands, while the GPU renders the next jobs.
 
 ## 5. Automatic QA
 ```bash

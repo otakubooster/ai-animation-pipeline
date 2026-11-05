@@ -1,53 +1,55 @@
 #!/usr/bin/env bash
-# Render a whole job on the rented 5090 (started by phase0/onstart.sh with RUN_SCRIPT=jobs/run_job.sh JOB=<dir>).
-# Order: prove the GitHub push works -> download frames + models -> render all shots
-# (push every few clips) -> 16->32 fps interpolation -> final push -> self-destroy.
-# Everything is mirrored to the container log so it can be read from outside via the Vast logs API.
+# Render one or many ad jobs on one rented 5090 (started by phase0/onstart.sh with RUN_SCRIPT=jobs/run_job.sh).
+#   JOBS="jobs/a jobs/b ..."   (or JOB=jobs/a for a single ad)
+# The model loads once for the whole batch. Order: prove the GitHub push works -> download every job's frames
+# + the models -> render job by job (push every few clips) -> each finished job is interpolated 16->32 fps on
+# the CPU while the GPU renders the next one, then pushed -> final push -> self-destroy.
+# Output per job: branch job-results, jobs/<job_id>/results/<RUN_ID>/{clips,clips_32fps,render.json}.
+# Everything is mirrored to the container log (readable via the Vast logs API).
 set -uo pipefail
 
 REPO_DIR=/workspace/repo
-JOB_DIR=$REPO_DIR/${JOB:?JOB env var required, e.g. jobs/meow-mouth-uk}
-JOB_JSON=$JOB_DIR/job.json
-JOB_ID=$(python -c "import json;print(json.load(open('$JOB_JSON'))['job_id'])")
+JOBS=${JOBS:-${JOB:?set JOBS="jobs/a jobs/b" or JOB=jobs/a}}
 WORK=/workspace/job
-OUT=$WORK/out
-mkdir -p "$OUT"
+OUT_ROOT=$WORK/out
+mkdir -p "$OUT_ROOT"
 [ -f "$WORK/run_id" ] && RUN_ID=$(cat "$WORK/run_id") || { RUN_ID=${RUN_ID:-$(date -u +%Y%m%d-%H%M%S)}; echo "$RUN_ID" > "$WORK/run_id"; }
 MAX_SECONDS=${SPIKE_MAX_SECONDS:-9000}
-exec > >(tee -a "$OUT/job.log" /proc/1/fd/1) 2>&1
-export GIT_TERMINAL_PROMPT=0
+exec > >(tee -a "$OUT_ROOT/batch.log" /proc/1/fd/1) 2>&1
+export GIT_TERMINAL_PROMPT=0 OUT_ROOT RUN_ID GH_REPO
 START=$(date +%s)
-stage() { echo "$(date -u +%FT%TZ) [+$(( $(date +%s) - START ))s] === $*"; echo "{\"t\": $(( $(date +%s) - START )), \"stage\": \"$*\"}" >> "$OUT/timeline.jsonl"; }
-
-export OUT JOB_ID RUN_ID GH_REPO
+stage() { echo "$(date -u +%FT%TZ) [+$(( $(date +%s) - START ))s] === $*"; echo "{\"t\": $(( $(date +%s) - START )), \"stage\": \"$*\"}" >> "$OUT_ROOT/timeline.jsonl"; }
 push() { bash $REPO_DIR/jobs/push_results.sh "$1"; }
+job_id() { python -c "import json;print(json.load(open('$REPO_DIR/$1/job.json'))['job_id'])"; }
 
 finish() { push "final"; stage "self-destroy"
   curl -sS -X DELETE "https://console.vast.ai/api/v0/instances/${CONTAINER_ID}/" -H "Authorization: Bearer ${CONTAINER_API_KEY}" || true; }
 trap finish EXIT
 trap 'exit 1' TERM INT
-( sleep "$MAX_SECONDS"; echo "HARD TIMEOUT after ${MAX_SECONDS}s"; pkill -f 'render_job.py|tts_job.py|fetch_models.py|ffmpeg'; sleep 5; kill -TERM $$ ) &
+( sleep "$MAX_SECONDS"; echo "HARD TIMEOUT after ${MAX_SECONDS}s"; pkill -f 'render_job.py|fetch_models.py|ffmpeg'; sleep 5; kill -TERM $$ ) &
 
-stage "setup"
-nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader | tee "$OUT/gpu.txt"
-cp "$JOB_JSON" "$OUT/job.json"
+stage "setup ($(echo $JOBS | wc -w) jobs: $JOBS)"
+nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader | tee "$OUT_ROOT/gpu.txt"
+for J in $JOBS; do mkdir -p "$OUT_ROOT/$(job_id $J)"; cp "$REPO_DIR/$J/job.json" "$OUT_ROOT/$(job_id $J)/job.json"; done
 push "box alive - upload test"
-
-command -v ffmpeg >/dev/null && command -v rsync >/dev/null && command -v espeak-ng >/dev/null \
-  || (apt-get update -qq && apt-get install -y -qq ffmpeg rsync espeak-ng unzip >/dev/null)
+command -v ffmpeg >/dev/null && command -v rsync >/dev/null && command -v unzip >/dev/null \
+  || (apt-get update -qq && apt-get install -y -qq ffmpeg rsync unzip >/dev/null)
 pip install -q -U "huggingface_hub[hf_xet]" pillow
 
-# Voiceover is made with ElevenLabs outside the GPU box; the box only animates.
-
-stage "download frames from release"
-REL=$(python -c "import json;r=json.load(open('$JOB_JSON'))['frames_release'];print(r['repo'],r['tag'],r['asset'])")
-read -r REL_REPO REL_TAG REL_ASSET <<<"$REL"
-ASSET_ID=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$REL_REPO/releases/tags/$REL_TAG" \
-  | python -c "import sys,json;print(next(a['id'] for a in json.load(sys.stdin)['assets'] if a['name']=='$REL_ASSET'))")
-mkdir -p $WORK/frames
-curl -sSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" \
-  "https://api.github.com/repos/$REL_REPO/releases/assets/$ASSET_ID" -o $WORK/frames.zip
-unzip -q -o -j $WORK/frames.zip -d $WORK/frames && ls $WORK/frames | wc -l
+stage "download frames for every job"
+SPECS=()
+for J in $JOBS; do
+  ID=$(job_id $J)
+  REL=$(python -c "import json;r=json.load(open('$REPO_DIR/$J/job.json'))['frames_release'];print(r['repo'],r['tag'],r['asset'])")
+  read -r REL_REPO REL_TAG REL_ASSET <<<"$REL"
+  ASSET_ID=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$REL_REPO/releases/tags/$REL_TAG" \
+    | python -c "import sys,json;print(next(a['id'] for a in json.load(sys.stdin)['assets'] if a['name']=='$REL_ASSET'))")
+  mkdir -p "$WORK/frames/$ID"
+  curl -sSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" \
+    "https://api.github.com/repos/$REL_REPO/releases/assets/$ASSET_ID" -o "$WORK/frames/$ID.zip"
+  unzip -q -o -j "$WORK/frames/$ID.zip" -d "$WORK/frames/$ID" && echo "$ID: $(ls $WORK/frames/$ID | wc -l) frames"
+  SPECS+=("$REPO_DIR/$J/job.json:$WORK/frames/$ID:$OUT_ROOT/$ID")
+done
 
 stage "engine A: models"
 LX_DIR=$(python -c "import lightx2v,os;print(os.path.dirname(os.path.dirname(lightx2v.__file__)))" 2>/dev/null || true)
@@ -56,21 +58,22 @@ if [ -z "$LX_DIR" ] || [ ! -d "$LX_DIR/configs" ]; then
   python -c "import lightx2v" 2>/dev/null || pip install -q -e /workspace/LightX2V
   LX_DIR=/workspace/LightX2V
 fi
-(cd $LX_DIR && echo "LightX2V $(git rev-parse --short HEAD 2>/dev/null)") | tee "$OUT/versions.txt"
+(cd $LX_DIR && echo "LightX2V $(git rev-parse --short HEAD 2>/dev/null)") | tee "$OUT_ROOT/versions.txt"
 export PYTHONPATH="$REPO_DIR/phase0:${PYTHONPATH:-}"
 timeout 2700 python $REPO_DIR/phase0/fetch_models.py engine_a
-cp /workspace/spike/results/models.json "$OUT/models.json"
-A=$(python -c "import json;m=json.load(open('$OUT/models.json'))['engine_a'];print(m['model_path'],m['high'],m['low'])")
+cp /workspace/spike/results/models.json "$OUT_ROOT/models.json"
+A=$(python -c "import json;m=json.load(open('$OUT_ROOT/models.json'))['engine_a'];print(m['model_path'],m['high'],m['low'])")
 read -r A_BASE A_HIGH A_LOW <<<"$A"
 
-stage "render all shots"
-PUSH_HOOK="bash $REPO_DIR/jobs/push_results.sh clips" PUSH_EVERY=5 \
-  python $REPO_DIR/jobs/render_job.py "$JOB_JSON" $WORK/frames "$OUT" "$A_BASE" "$A_HIGH" "$A_LOW" \
-  "$LX_DIR/configs/wan22/extreme/wan_moe_i2v_distill_nvfp4_sparse_attn.json"
-push "all clips rendered"
-
-stage "interpolate 16 -> 32 fps"
-mkdir -p "$OUT/clips_32fps"
-ls "$OUT"/clips/*.mp4 | xargs -P "$(nproc)" -I{} sh -c \
-  'ffmpeg -loglevel error -y -i "{}" -vf "minterpolate=fps=32:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1" -c:v libx264 -crf 17 -pix_fmt yuv420p "$OUT/clips_32fps/$(basename {})"'
-stage "done"
+stage "render all jobs (model loaded once)"
+# After each job, ON_JOB_DONE interpolates it in the background (CPU) and pushes it, while the GPU continues.
+export ON_JOB_DONE="bash $REPO_DIR/jobs/finish_job.sh"
+PUSH_HOOK="bash $REPO_DIR/jobs/push_results.sh clips" PUSH_EVERY=10 \
+  python $REPO_DIR/jobs/render_job.py --model-path "$A_BASE" --high "$A_HIGH" --low "$A_LOW" \
+  --base-config "$LX_DIR/configs/wan22/extreme/wan_moe_i2v_distill_nvfp4_sparse_attn.json" "${SPECS[@]}"
+stage "waiting for every job's interpolation (READY markers)"
+for i in $(seq 1 180); do
+  missing=0; for S in "${SPECS[@]}"; do [ -f "${S##*:}/READY" ] || missing=$((missing+1)); done
+  [ $missing -eq 0 ] && break; sleep 10
+done
+stage "done ($missing jobs not ready)"
