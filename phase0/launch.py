@@ -100,7 +100,7 @@ def _create(a, offer: dict) -> None:
         "client_id": "me", "image": IMAGE, "disk": DISK_GB, "runtype": "ssh", "label": f"phase0-spike-{run_id}",
         "onstart": (HERE / "onstart.sh").read_text(),
         "env": {"GH_REPO": a.repo, "RUN_ID": run_id, "SPIKE_DPH": str(offer["dph_total"]),
-                "SPIKE_MAX_SECONDS": str(max_seconds)},
+                "SPIKE_MAX_SECONDS": str(max_seconds), "RUN_SCRIPT": a.script, **({"JOB": a.job} if a.job else {})},
     }
     res = call("PUT", f"/asks/{offer['id']}/", body)
     iid = res.get("new_contract")
@@ -179,6 +179,8 @@ def main(argv=None) -> None:
     c.add_argument("--max-hours", type=float, default=2.5)
     c.add_argument("--repo", default="otakubooster/ai-animation-pipeline")
     c.add_argument("--yes", action="store_true")
+    c.add_argument("--script", default="phase0/run_spike.sh", help="repo-relative script the box runs")
+    c.add_argument("--job", default="", help="job folder for jobs/run_job.sh, e.g. jobs/meow-mouth-uk")
     c.set_defaults(fn=cmd_create)
     w = sub.add_parser("watch")
     w.add_argument("instance", type=int)

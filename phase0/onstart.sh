@@ -10,4 +10,4 @@ if ! git clone -q --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${GH_
   curl -sS -X DELETE "https://console.vast.ai/api/v0/instances/${CONTAINER_ID}/" -H "Authorization: Bearer ${CONTAINER_API_KEY}"
   exit 1
 fi
-nohup bash /workspace/repo/phase0/run_spike.sh > /workspace/spike-boot.log 2>&1 &
+nohup bash "/workspace/repo/${RUN_SCRIPT:-phase0/run_spike.sh}" > /workspace/spike-boot.log 2>&1 &
