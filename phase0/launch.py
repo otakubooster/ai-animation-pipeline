@@ -78,9 +78,22 @@ def cmd_offers(_a) -> None:
 def cmd_create(a) -> None:
     if not a.yes:
         raise SystemExit("Refusing to rent without --yes (this costs money).")
-    offer = next((o for o in search_offers() if o["id"] == a.offer), None)
-    if not offer:
-        raise SystemExit(f"Offer {a.offer} is no longer available; run `offers` again.")
+    offers = search_offers()
+    if a.offer:
+        offers = [o for o in offers if o["id"] == a.offer]
+    else:  # --best: try the cheapest few by estimated total cost, skipping any over the cost cap
+        offers = [o for o in offers if est_cost(o) <= a.max_usd][: a.tries]
+    if not offers:
+        raise SystemExit("No matching offer available; run `offers` again.")
+    for offer in offers:
+        try:
+            return _create(a, offer)
+        except SystemExit as exc:
+            print(f"offer {offer['id']} failed: {exc}")
+    raise SystemExit("All candidate offers failed.")
+
+
+def _create(a, offer: dict) -> None:
     run_id = time.strftime("%Y%m%d-%H%M%S", time.gmtime())
     max_seconds = int(min(a.max_hours, a.max_usd / offer["dph_total"]) * 3600) - 300  # box stops 5 min early
     body = {
@@ -89,13 +102,13 @@ def cmd_create(a) -> None:
         "env": {"GH_REPO": a.repo, "RUN_ID": run_id, "SPIKE_DPH": str(offer["dph_total"]),
                 "SPIKE_MAX_SECONDS": str(max_seconds)},
     }
-    res = call("PUT", f"/asks/{a.offer}/", body)
+    res = call("PUT", f"/asks/{offer['id']}/", body)
     iid = res.get("new_contract")
     if not iid:
         raise SystemExit(f"Create failed: {res}")
-    STATE.write_text(json.dumps({"instance": iid, "offer": a.offer, "run_id": run_id, "dph": offer["dph_total"],
+    STATE.write_text(json.dumps({"instance": iid, "offer": offer["id"], "run_id": run_id, "dph": offer["dph_total"],
                                  "max_usd": a.max_usd, "max_hours": a.max_hours, "created": time.time()}, indent=2))
-    print(f"Created instance {iid} (run {run_id}) at ${offer['dph_total']:.3f}/h; box self-stops after {max_seconds/3600:.2f} h.")
+    print(f"Created instance {iid} on offer {offer['id']} ({offer.get('geolocation')}) (run {run_id}) at ${offer['dph_total']:.3f}/h; box self-stops after {max_seconds/3600:.2f} h.")
 
 
 def get_instance(iid: int) -> dict | None:
@@ -135,7 +148,10 @@ def main(argv=None) -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("offers").set_defaults(fn=cmd_offers)
     c = sub.add_parser("create")
-    c.add_argument("--offer", type=int, required=True)
+    g = c.add_mutually_exclusive_group(required=True)
+    g.add_argument("--offer", type=int)
+    g.add_argument("--best", action="store_true", help="rent the cheapest live offer by est. total cost")
+    c.add_argument("--tries", type=int, default=4)
     c.add_argument("--max-usd", type=float, default=5.0)
     c.add_argument("--max-hours", type=float, default=2.5)
     c.add_argument("--repo", default="otakubooster/ai-animation-pipeline")
