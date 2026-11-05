@@ -79,8 +79,8 @@ def align_shots(shots: list[dict], words: list[dict]) -> list[dict]:
     return out
 
 
-def render_segment(src: Path, dur: float, dst: Path, still: bool) -> dict:
-    """Cut one shot to exactly `dur` seconds at 1080x1920/30 fps."""
+def render_segment(src: Path, dur: float, dst: Path, still: bool, head: float = HEAD_TRIM) -> dict:
+    """Cut one shot to exactly `dur` seconds at 1080x1920/30 fps, starting `head` seconds into the clip."""
     scale = f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H},setsar=1"
     if still:
         frames = int(round(dur * FPS))
@@ -89,12 +89,12 @@ def render_segment(src: Path, dur: float, dst: Path, still: bool) -> dict:
              f"scale={W*2}:{H*2}:flags=lanczos,{zoom},setsar=1", "-frames:v", str(frames),
              "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(dst)])
         return {"mode": "still"}
-    usable = max(probe_duration(src) - HEAD_TRIM, 0.1)
+    usable = max(probe_duration(src) - head, 0.1)
     slow = min(max(dur / usable, 1.0), MAX_SLOW)
-    vf = f"trim=start={HEAD_TRIM},setpts=(PTS-STARTPTS)*{slow:.4f},fps={FPS},{scale},tpad=stop_mode=clone:stop_duration={dur}"
+    vf = f"trim=start={head},setpts=(PTS-STARTPTS)*{slow:.4f},fps={FPS},{scale},tpad=stop_mode=clone:stop_duration={dur}"
     run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf", vf, "-t", f"{dur:.3f}",
          "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(dst)])
-    return {"mode": "clip", "source_s": round(usable + HEAD_TRIM, 2), "slowdown": round(slow, 3),
+    return {"mode": "clip", "clip_start": head, "source_s": round(usable + head, 2), "slowdown": round(slow, 3),
             "held_s": round(max(dur - usable * slow, 0), 2)}
 
 
@@ -187,7 +187,7 @@ def main() -> None:
         else:
             src = next((p for p in [a.clips / "clips_32fps" / f"{shot['id']}.mp4", a.clips / "clips" / f"{shot['id']}.mp4",
                                     a.clips / f"{shot['id']}.mp4"] if p.exists()), None)
-            info = render_segment(src, t["dur"], dst, still=False) if src else \
+            info = render_segment(src, t["dur"], dst, still=False, head=shot.get("clip_start", HEAD_TRIM)) if src else \
                 render_segment(a.job_dir / "frames" / shot["frame"], t["dur"], dst, still=True) | {"missing_clip": True}
         seg_files.append(dst)
         report.append({"id": shot["id"], "start": round(t["start"], 2), "dur": t["dur"], **info})
