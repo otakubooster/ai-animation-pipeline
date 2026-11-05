@@ -136,9 +136,9 @@ Phase 7 – Style LoRAs (optional):
 - Cloud session limits: outbound SSH blocked, huggingface.co and platform.openai.com not reachable from this session. The GPU box downloads models itself and pushes results to the `phase0-results` branch with a GitHub token stored as a Vast account env var (GH_TOKEN).
 
 # AUTOMATION (user decision 2026-11-05)
-- Runs in the cloud as scheduled Claude sessions following .claude/skills/make-ad/SKILL.md. No per-step approvals; only stop for a real blocker.
+- Chat-driven (user decision 2026-11-05, replaces the 2-hourly scheduled task, now disabled): the user uploads frame zips in the chat (one zip = one ad) and says go; Claude follows .claude/skills/make-ad/SKILL.md end to end. The user never touches GitHub. No per-step approvals; only stop for a real blocker.
 - Voiceover = the ElevenLabs connector in the Claude session (not an API key), 1 take, eleven_v4.
-- Intake: a GitHub Release tagged job-<slug> with a frames zip (Shot_01.png ...) and a script file (per-shot VO lines). Output: finished MP4s sent to the user in the session + jobs/<slug>/DONE.json with costs.
+- Intake: pipeline/stage_frames.py puts the zip's frames on branch frames-store (frames/<slug>/Shot_NN.jpg) for the GPU box. Script from the zip or chat, else Claude writes it. Output: finished MP4s sent in the chat + jobs/<slug>/DONE.json with costs. Several zips = one batch on one GPU.
 
 # PROGRESS LOG
 - Phase 0: spike code written (phase0/: launch.py, onstart.sh, run_spike.sh, engine_a.py, engine_b.py, fetch_models.py, report.py; tests/test_phase0.py passing). Vast funded ($10 credit), key saved as a network secret for console.vast.ai. Waiting on: GH_TOKEN in Vast account env vars, 10 test frames (phase0/frames/README.md), user go-ahead to rent.

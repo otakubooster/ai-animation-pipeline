@@ -1,6 +1,6 @@
 ---
 name: make-ad
-description: Turn a queued ad job (GitHub Release tagged job-<slug> with a frames zip and a script) into finished animated video ads with ElevenLabs voiceover, fully unattended and at the lowest cost. Use for "make the ad", "process new jobs", or when a scheduled run fires.
+description: Turn zips of first frames uploaded in the chat (one zip = one ad) into finished animated video ads with ElevenLabs voiceover, fully unattended and at the lowest cost. Use when the user uploads frame zips and says "go", "make the ad(s)", or similar.
 ---
 
 # Make an ad, end to end, without asking
@@ -13,25 +13,23 @@ blocker (missing input, a cap reached, an access error). Follow CLAUDE.md for ru
 - $3 GPU spend per ad, $15 per day across ads (`jobs/ledger.json`, sum today's `gpu_usd`). Over the day cap: stop, report.
 - GPU instances always run with `--max-usd` and self-destroy; never leave one running.
 
-## 0. Find work
-```bash
-cd /home/user/ai-animation-pipeline 2>/dev/null || cd "$(git rev-parse --show-toplevel)"
-git pull -q origin main
-gh api repos/otakubooster/ai-animation-pipeline/releases --jq '.[] | select(.tag_name|startswith("job-")) | .tag_name'
-```
-A job is new when `jobs/<slug>/DONE.json` does not exist (slug = tag without `job-`). Process all new jobs;
-render them in ONE GPU session when there are several (batching saves the ~20 min setup per ad).
+## 0. Inputs (the user only uploads zips in the chat and says go)
+Each uploaded zip is one ad. Uploads land in `/root/.claude/uploads/<session>/`. Slug = zip name, lowercased,
+spaces -> dashes (e.g. `uk-cat-pov-v2`). Never ask the user to use GitHub.
 
-## 1. Intake
-Download the release assets with `gh api -H "Accept: application/octet-stream" repos/OWNER/REPO/releases/assets/<id> > file`.
-- Frames zip: `Shot_01.png` ... (9:16). Unzip into the scratchpad, never into the repo (public repo).
-- Script file (.md/.txt): VO line per shot. If the script has no per-shot lines, split it into shots, one
-  visual beat per frame, in frame order.
-Look at every frame (contact sheet) before writing anything; write prompts from what is actually in the frame.
+## 1. Intake (per zip)
+```bash
+python3 pipeline/stage_frames.py "<upload.zip>" <slug>      # frames -> branch frames-store/frames/<slug>/Shot_NN.jpg
+```
+It prints the frames, the unzipped folder and any script file inside the zip (.md/.txt/.docx/.pdf).
+- Script: use the one in the zip, else one pasted in the chat. If there is none, write the VO yourself from the
+  frames following the SOP (one line per shot, ~2.5 words/s) and the brand/product visible in the frames.
+- Look at every frame (contact sheet) before writing anything; write prompts from what is actually in the frame.
+- In job.json use `"frames_git": {"branch": "frames-store", "path": "frames/<slug>"}` and frame names `Shot_NN.jpg`.
 
 ## 2. Shot list -> jobs/<slug>/job.json
 Copy the shape of `jobs/meow-mouth-uk/job.json`: `job_id`, `render` (720x1280, 16 fps, interpolate 32),
-`frames_release` {repo, tag, asset}, `banner` (offer text + first shot, if the script has an offer),
+`banner` (offer text + first shot, if the script has an offer),
 `captions` {`high_on_shots`: shots whose product/label sits in the lower third}, `shots` [{id, frame, vo_line,
 motion_prompt, seed}].
 Motion prompts (SOP): movement and camera only, what stays still (product labels: "stays completely still with
