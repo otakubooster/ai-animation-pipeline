@@ -120,6 +120,11 @@ Phase 7 – Style LoRAs (optional):
 - LightX2V (ModelTC/LightX2V, checked 2026-11-05) has task `flf2v` for `wan2.2_moe` (scripts/wan22/run_wan22_moe_flf2v.sh, configs/wan22/wan_moe_flf2v.json: 40 steps, CFG on, no NVFP4). The NVFP4 4-step distilled config exists only for i2v (configs/wan22/extreme/wan_moe_i2v_distill_nvfp4_sparse_attn.json). Untested: NVFP4 distill weights + task flf2v. Phase 0 must test this on the GPU.
 - Kokoro: official model card confirms only EN/ZH reliably; German is community/partial, Dutch not supported. Plan Piper (or another open TTS) for DE and NL; check IT/FR quality.
 - Vast Serverless supports scale-to-zero; cold start documented at 3-5 min.
+- LightX2V also ships an official 4-step distilled (bf16, not NVFP4) Wan 2.2 FLF2V path: scripts/wan22/inference/distill/run_wan22_distill_moe_flf2v.sh + configs/wan22/wan_distill_moe_flf2v.json (weights: lightx2v/Wan2.2-Distill-Models). One LightX2VPipeline can serve both tasks (support_tasks=["i2v","flf2v"], generate(task=...)).
+- Lip-sync options in LightX2V: Wan 2.2 S2V (40 steps + CFG, slow), SekoTalk and InfiniteTalk (4-step distilled, SekoTalk has 5090 configs). Not tested yet.
+- Vast hidden cost: download bandwidth ranges $0-53/TB between hosts; always rank offers by total est. cost (launch.py offers does).
+- Cloud session limits: outbound SSH blocked, huggingface.co and platform.openai.com not reachable from this session. The GPU box downloads models itself and pushes results to the `phase0-results` branch with a GitHub token stored as a Vast account env var (GH_TOKEN).
 
 # PROGRESS LOG
-- Phase 0: research done; blocked on (a) Vast.ai account funding + API key, (b) 5 test frames (from ChatGPT) or an OpenAI API key.
+- Phase 0: spike code written (phase0/: launch.py, onstart.sh, run_spike.sh, engine_a.py, engine_b.py, fetch_models.py, report.py; tests/test_phase0.py passing). Vast funded ($10 credit), key saved as a network secret for console.vast.ai. Waiting on: GH_TOKEN in Vast account env vars, 10 test frames (phase0/frames/README.md), user go-ahead to rent.
+- Cost estimate (not yet measured): video on own 5090 ~$0.20-0.70 per finished minute; gpt-image-2 frames ~$1.50-2.50/min at medium quality dominate total cost.
