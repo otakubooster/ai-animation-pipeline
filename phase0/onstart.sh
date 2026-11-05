@@ -2,6 +2,7 @@
 # Vast.ai onstart script for the Phase 0 spike (launch.py sends this file as the instance's onstart).
 # Needs GH_TOKEN (Vast account environment variable) and GH_REPO / RUN_ID / SPIKE_DPH / SPIKE_MAX_SECONDS
 # (instance env set by launch.py). Clones the repo and starts run_spike.sh in the background.
+exec >> /proc/1/fd/1 2>&1   # onstart output visible in the Vast container log
 [ -f /etc/environment ] && set -a && . /etc/environment && set +a
 mkdir -p /workspace && cd /workspace
 command -v git >/dev/null || (apt-get update -qq && apt-get install -y -qq git >/dev/null)
