@@ -11,7 +11,11 @@ RESULTS=$SPIKE/results
 RUN_ID=${RUN_ID:-$(date -u +%Y%m%d-%H%M%S)}
 MAX_SECONDS=${SPIKE_MAX_SECONDS:-9000}
 mkdir -p "$RESULTS/clips"
-exec > >(tee -a "$RESULTS/spike.log") 2>&1
+# Resume: keep the run id of an earlier interrupted run on this box.
+[ -f "$SPIKE/run_id" ] && RUN_ID=$(cat "$SPIKE/run_id") || echo "$RUN_ID" > "$SPIKE/run_id"
+# Mirror everything to the container log (PID 1 stdout) so it is readable via the Vast logs API.
+exec > >(tee -a "$RESULTS/spike.log" /proc/1/fd/1) 2>&1
+export GIT_TERMINAL_PROMPT=0
 START=$(date +%s)
 cd "$REPO_DIR/phase0"
 
@@ -22,13 +26,13 @@ push_results() {
   python report.py >/dev/null 2>&1 || true
   local dst=/workspace/results-repo
   if [ ! -d $dst/.git ]; then
-    git clone -q --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git" $dst || return 0
-    (cd $dst && (git fetch -q --depth 1 origin phase0-results && git checkout -q -B phase0-results FETCH_HEAD) || git checkout -q --orphan phase0-results)
+    timeout 300 git clone -q --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git" $dst || { echo "PUSH: clone failed"; return 0; }
+    (cd $dst && { timeout 120 git fetch -q --depth 1 origin phase0-results && git checkout -q -B phase0-results FETCH_HEAD; } || git checkout -q -b phase0-results)
   fi
   mkdir -p $dst/phase0/results/$RUN_ID
   rsync -a --exclude '*.tmp' "$RESULTS/" $dst/phase0/results/$RUN_ID/
   (cd $dst && git add -A phase0/results && git -c user.name=vast-spike -c user.email=spike@localhost \
-     commit -qm "Phase 0 spike results $RUN_ID ($1)" && git push -q origin HEAD:phase0-results) || true
+     commit -qm "Phase 0 spike results $RUN_ID ($1)"; timeout 300 git push origin HEAD:phase0-results 2>&1 | sed 's/x-access-token:[^@]*@/x-access-token:***@/'; echo "PUSH exit ${PIPESTATUS[0]}") || true
 }
 
 self_destroy() {
@@ -60,11 +64,11 @@ fi
 echo "LightX2V at $LX_DIR ($(cd $LX_DIR && git rev-parse --short HEAD 2>/dev/null || echo no-git))" | tee "$RESULTS/lightx2v_version.txt"
 export PYTHONPATH="$REPO_DIR/phase0:${PYTHONPATH:-}"
 python prepare_cases.py "$LX_DIR" | tee -a "$RESULTS/cases.txt"
-cp $SPIKE/cases.json "$RESULTS/cases.json"; cp -r $SPIKE/frames "$RESULTS/frames"
+cp $SPIKE/cases.json "$RESULTS/cases.json"; mkdir -p "$RESULTS/frames"; cp -r $SPIKE/frames/. "$RESULTS/frames/"
 
 # ---------------- Engine A ----------------
 stage "engine A: download"
-python fetch_models.py engine_a
+timeout 2400 python fetch_models.py engine_a
 A=$(python -c "import json;m=json.load(open('$RESULTS/models.json'))['engine_a'];print(m.get('model_path',''),m.get('high',''),m.get('low',''))")
 read -r A_BASE A_HIGH A_LOW <<<"$A"
 NVFP4_CFG=$LX_DIR/configs/wan22/extreme/wan_moe_i2v_distill_nvfp4_sparse_attn.json
@@ -76,7 +80,9 @@ try: r=json.load(open('$RESULTS/engine_a_$1.json'))
 except Exception: print(''); sys.exit()
 print(','.join(sorted({x['task'] for x in r.get('runs',[]) if x.get('ok')})))"; }
 
-if [ -n "$A_HIGH" ]; then
+if [ -n "$(ok_tasks nvfp4)" ]; then
+  stage "engine A: nvfp4 already done ($(ok_tasks nvfp4)) - resuming"
+elif [ -n "$A_HIGH" ]; then
   stage "engine A: nvfp4 + sparse attention (i2v, flf2v)"
   python engine_a.py --variant nvfp4 --model-path "$A_BASE" --high "$A_HIGH" --low "$A_LOW" --base-config "$NVFP4_CFG"
   if [ -z "$(ok_tasks nvfp4)" ]; then
@@ -86,9 +92,9 @@ if [ -n "$A_HIGH" ]; then
 fi
 push_results "engine A nvfp4"
 
-if ! { ok_tasks nvfp4; ok_tasks nvfp4_dense; } | grep -q flf2v; then
+if [ "${SPIKE_DISTILL:-0}" = 1 ] && ! { ok_tasks nvfp4; ok_tasks nvfp4_dense; } | grep -q flf2v; then
   stage "engine A: nvfp4 flf2v failed -> official 4-step distilled bf16 flf2v"
-  if python fetch_models.py engine_a_distill; then
+  if timeout 3600 python fetch_models.py engine_a_distill; then
     D=$(python -c "import json;m=json.load(open('$RESULTS/models.json'))['engine_a_distill'];print(m['high'],m['low'])")
     read -r D_HIGH D_LOW <<<"$D"
     python engine_a.py --variant distill_bf16 --tasks flf2v --model-path "$A_BASE" --high "$D_HIGH" --low "$D_LOW" --base-config "$FLF_CFG"
@@ -101,14 +107,14 @@ rm -rf /workspace/models/lightx2v/Wan2.2-Distill-Models
 
 # ---------------- Engine B ----------------
 stage "engine B: ComfyUI install"
-git clone -q --depth 1 https://github.com/comfyanonymous/ComfyUI.git /workspace/ComfyUI
+[ -d /workspace/ComfyUI ] || git clone -q --depth 1 https://github.com/comfyanonymous/ComfyUI.git /workspace/ComfyUI
 python -m venv --system-site-packages /workspace/comfy-venv
 grep -viE '^(torch|torchvision|torchaudio)([<>=~ ]|$)' /workspace/ComfyUI/requirements.txt > /tmp/comfy-req.txt
 /workspace/comfy-venv/bin/pip install -q -r /tmp/comfy-req.txt
 (cd /workspace/ComfyUI && echo "ComfyUI $(git rev-parse --short HEAD)") | tee -a "$RESULTS/lightx2v_version.txt"
 
 stage "engine B: download"
-python fetch_models.py engine_b /workspace/ComfyUI
+timeout 3600 python fetch_models.py engine_b /workspace/ComfyUI
 B_MODELS=$(python -c "import json;print(json.dumps(json.load(open('$RESULTS/models.json'))['engine_b']))")
 
 stage "engine B: render"
