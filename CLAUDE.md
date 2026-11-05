@@ -10,7 +10,7 @@ script (+ optional reference ad) → shot list → GPT Image 2 first + last fram
 - Video model = open weights only (Wan 2.2, Apache 2.0). Never use Kling, Runway or any credit-based video API.
 - GPU = rented, pay-per-second, scale to zero when idle. Primary: **Vast.ai** RTX 5090 (Blackwell) — user decision 2026-11-05, replaces RunPod. Phase 0 runs on a plain Vast instance with auto-destroy; production worker targets Vast Serverless (min_load=0, cold_workers=0, positive inactivity_timeout) if 5090s are available there, else on-demand Vast instances started/destroyed per batch.
 - The user's laptop does orchestration only (Dell XPS 15, RTX 3050 Ti 4 GB VRAM, 32 GB RAM). Never render video locally. Detect the OS and adapt commands.
-- Cost guardrails: ask the user before creating any paid GPU resource; every job has a max-spend setting; pods auto-terminate; log seconds + $ per clip.
+- Cost guardrails (updated 2026-11-05, user: "lowest cost every time", no approvals): rent GPUs WITHOUT asking, always the cheapest option that works (cheapest Vast offer by est. total cost incl. bandwidth, 1 ElevenLabs take, batch ads into one GPU session). Hard safety caps stay: $3 per ad, $15 per day, instance self-destroys; log seconds + $ per clip and per ad.
 - Secrets only in .env (OPENAI_API_KEY, VAST_API_KEY, ANTHROPIC_API_KEY), with .env in .gitignore and a .env.example committed.
 
 # ARCHITECTURE
@@ -134,6 +134,11 @@ Phase 7 – Style LoRAs (optional):
 - Lip-sync options in LightX2V: Wan 2.2 S2V (40 steps + CFG, slow), SekoTalk and InfiniteTalk (4-step distilled, SekoTalk has 5090 configs). Not tested yet.
 - Vast hidden cost: download bandwidth ranges $0-53/TB between hosts; always rank offers by total est. cost (launch.py offers does).
 - Cloud session limits: outbound SSH blocked, huggingface.co and platform.openai.com not reachable from this session. The GPU box downloads models itself and pushes results to the `phase0-results` branch with a GitHub token stored as a Vast account env var (GH_TOKEN).
+
+# AUTOMATION (user decision 2026-11-05)
+- Runs in the cloud as scheduled Claude sessions following .claude/skills/make-ad/SKILL.md. No per-step approvals; only stop for a real blocker.
+- Voiceover = the ElevenLabs connector in the Claude session (not an API key), 1 take, eleven_v4.
+- Intake: a GitHub Release tagged job-<slug> with a frames zip (Shot_01.png ...) and a script file (per-shot VO lines). Output: finished MP4s sent to the user in the session + jobs/<slug>/DONE.json with costs.
 
 # PROGRESS LOG
 - Phase 0: spike code written (phase0/: launch.py, onstart.sh, run_spike.sh, engine_a.py, engine_b.py, fetch_models.py, report.py; tests/test_phase0.py passing). Vast funded ($10 credit), key saved as a network secret for console.vast.ai. Waiting on: GH_TOKEN in Vast account env vars, 10 test frames (phase0/frames/README.md), user go-ahead to rent.
