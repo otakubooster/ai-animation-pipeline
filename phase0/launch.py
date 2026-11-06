@@ -135,11 +135,17 @@ def cmd_destroy(a) -> None:
 EXITED_GRACE_S = 600  # an instance must stay exited/offline this long before watch destroys it
 
 
-def should_destroy(status: str | None, exited_since: float | None, now: float, cap_reason: str | None) -> str | None:
+MAX_LOADING_S = 900         # a host that needs >15 min to pull the image is too slow (Taiwan 2026-11-06: 30+ min)
+
+
+def should_destroy(status: str | None, exited_since: float | None, now: float, cap_reason: str | None,
+                   loading_s: float = 0.0) -> str | None:
     """Caps always win. A stopped/exited state is only acted on after EXITED_GRACE_S, because instances
-    report 'exited' briefly while starting or restarting."""
+    report 'exited' briefly while starting or restarting. A box still loading after MAX_LOADING_S is dropped."""
     if cap_reason:
         return cap_reason
+    if status in (None, "loading", "created") and loading_s >= MAX_LOADING_S:
+        return f"still loading after {int(loading_s)} s (slow host)"
     if status in ("exited", "offline") and exited_since is not None and now - exited_since >= EXITED_GRACE_S:
         return f"{status} for {int(now - exited_since)} s"
     return None
@@ -161,7 +167,10 @@ def cmd_watch(a) -> None:
               f"elapsed={elapsed/60:.1f} min spent≈${elapsed/3600*dph:.2f}", flush=True)
         status = inst.get("actual_status")
         exited_since = (exited_since or time.time()) if status in ("exited", "offline") else None
-        reason = should_destroy(status, exited_since, time.time(), over_cap(elapsed, dph, max_usd, max_hours))
+        if status == "running":
+            st["ran"] = True
+        loading_s = 0.0 if st.get("ran") else time.time() - st.get("created", time.time())
+        reason = should_destroy(status, exited_since, time.time(), over_cap(elapsed, dph, max_usd, max_hours), loading_s)
         if reason:
             print(f"Destroying: {reason}")
             call("DELETE", f"/instances/{a.instance}/")

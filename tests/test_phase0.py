@@ -76,3 +76,10 @@ def test_watch_does_not_destroy_briefly_exited_instance():
     assert "exited" in launch.should_destroy("exited", now - 700, now, None)     # stuck stopped
     assert launch.should_destroy("running", None, now, None) is None
     assert "spend" in launch.should_destroy("running", None, now, "spend $5.10 >= cap $5.00")
+
+
+def test_watch_drops_a_host_that_never_finishes_loading():
+    import launch
+    assert launch.should_destroy("loading", None, 0, None, loading_s=200) is None
+    assert "slow host" in launch.should_destroy("loading", None, 0, None, loading_s=901)
+    assert launch.should_destroy("running", None, 0, None, loading_s=5000) is None
