@@ -227,6 +227,47 @@ def hook_png(text: str, red: str, path: Path, width: int) -> None:
     img.save(path)
 
 
+def find_clip(clips: Path, sid: str) -> Path | None:
+    return next((p for p in [clips / "clips_32fps" / f"{sid}.mp4", clips / "clips" / f"{sid}.mp4", clips / f"{sid}.mp4"]
+                 if p.exists()), None)
+
+
+def clip_source(shot: dict) -> str:
+    """Which rendered clip a shot shows: its own, or a neighbour's when its frame was damaged or off-story."""
+    return shot.get("fill_from") or shot.get("clip_from") or shot["id"]
+
+
+def share_plan(shots: list[dict], timeline: list[dict], locate, length=None) -> dict:
+    """{shot id: (source clip id, head, end)}. Shots that share one clip get consecutive pieces of it, in timeline
+    order; when the clip is too short for all of them, each gets a piece proportional to its duration (the editor
+    then slows it, up to MAX_SLOW, and holds the last frame)."""
+    length = length or (lambda path: probe_duration(path))
+    dur = {t["id"]: t["dur"] for t in timeline}
+    groups: dict[str, list[dict]] = {}
+    for sh in shots:
+        groups.setdefault(clip_source(sh), []).append(sh)
+    plan = {}
+    for src_id, members in groups.items():
+        owner = next((m for m in shots if m["id"] == src_id), {})
+        start = owner.get("clip_start", HEAD_TRIM)
+        path = locate(src_id)
+        stop = min(length(path), owner.get("clip_end") or 1e9) if path else None
+        if stop is None or len(members) == 1:
+            plan[members[0]["id"]] = (src_id, start, owner.get("clip_end"))
+            for m in members[1:]:
+                plan[m["id"]] = (src_id, start, None)
+            continue
+        need = sum(dur[m["id"]] for m in members)
+        usable = max(stop - start, 0.1)
+        scale = min(1.0, usable / need)
+        cur = start
+        for m in members:
+            piece = dur[m["id"]] * scale
+            plan[m["id"]] = (src_id, round(cur, 3), round(cur + piece, 3))
+            cur += piece
+    return plan
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("job_dir", type=Path)
@@ -245,27 +286,19 @@ def main() -> None:
     words = spoken_words(a.words)
     timeline = align_shots(job["shots"], words)
 
-    seg_files, report, used = [], [], {}
+    plan = {} if a.stills else share_plan(job["shots"], timeline, lambda sid: find_clip(a.clips, sid))
+    seg_files, report = [], []
     for t, shot in zip(timeline, job["shots"]):
         dst = tmp / f"{shot['id']}.mp4"
-        if shot.get("fill_from") and not a.stills:
-            # Unrenderable shot (damaged frame): continue the source shot's clip from where its own slot ended.
-            src_id = shot["fill_from"]
-            src = next((p for p in [a.clips / "clips_32fps" / f"{src_id}.mp4", a.clips / "clips" / f"{src_id}.mp4"] if p.exists()), None)
-            head = used.get(src_id, HEAD_TRIM)
-            info = render_segment(src, t["dur"], dst, still=False, head=head) | {"fill_from": src_id}
-            seg_files.append(dst)
-            report.append({"id": shot["id"], "start": round(t["start"], 2), "dur": t["dur"], **info})
-            continue
         if a.stills:
             info = render_segment(a.stills / shot["frame"], t["dur"], dst, still=True)
         else:
-            src = next((p for p in [a.clips / "clips_32fps" / f"{shot['id']}.mp4", a.clips / "clips" / f"{shot['id']}.mp4",
-                                    a.clips / f"{shot['id']}.mp4"] if p.exists()), None)
-            head = shot.get("clip_start", HEAD_TRIM)
-            used[shot["id"]] = head + t["dur"]
-            info = render_segment(src, t["dur"], dst, still=False, head=head, end=shot.get("clip_end")) if src else \
+            src_id, head, end = plan[shot["id"]]
+            src = find_clip(a.clips, src_id)
+            info = render_segment(src, t["dur"], dst, still=False, head=head, end=end) if src else \
                 render_segment(a.job_dir / "frames" / shot["frame"], t["dur"], dst, still=True) | {"missing_clip": True}
+            if src_id != shot["id"]:
+                info |= {"clip_of": src_id}
         seg_files.append(dst)
         report.append({"id": shot["id"], "start": round(t["start"], 2), "dur": t["dur"], **info})
     (tmp / "concat.txt").write_text("".join(f"file '{p.resolve()}'\n" for p in seg_files))

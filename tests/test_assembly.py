@@ -73,3 +73,14 @@ def test_hook_card_has_red_phrase(tmp_path):
     assert im.width <= 1092
     reds = sum(1 for r, g, b in im.getdata() if r > 180 and g < 60 and b < 80)
     assert reds > 500
+
+
+def test_share_plan_splits_a_clip_between_shots():
+    shots = [{"id": "s1"}, {"id": "s2", "clip_from": "s3"}, {"id": "s3"}, {"id": "s4", "fill_from": "s3"}]
+    tl = [{"id": "s1", "dur": 2.0}, {"id": "s2", "dur": 1.0}, {"id": "s3", "dur": 2.0}, {"id": "s4", "dur": 1.0}]
+    plan = edit_ad.share_plan(shots, tl, locate=lambda sid: Path(sid), length=lambda p: 6.5)
+    assert plan["s1"] == ("s1", 0.5, None)
+    # plenty of clip: consecutive pieces at real speed, in timeline order
+    assert plan["s2"] == ("s3", 0.5, 1.5) and plan["s3"] == ("s3", 1.5, 3.5) and plan["s4"] == ("s3", 3.5, 4.5)
+    short = edit_ad.share_plan(shots, tl, locate=lambda sid: Path(sid), length=lambda p: 2.5)
+    assert short["s3"] == ("s3", 1.0, 2.0)          # 2 s usable for 4 s of lines: proportional halves

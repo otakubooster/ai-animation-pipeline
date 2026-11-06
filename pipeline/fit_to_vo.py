@@ -37,7 +37,7 @@ def main(job_path: str, words_path: str) -> None:
     for shot in job["shots"]:
         need = shot["vo_s"]
         # A shot whose damaged neighbour borrows its clip must cover both lines.
-        need += sum(o["vo_s"] for o in job["shots"] if o.get("fill_from") == shot["id"])
+        need += sum(o["vo_s"] for o in job["shots"] if (o.get("fill_from") or o.get("clip_from")) == shot["id"] and o is not shot)
         shot["num_frames"] = frames_for(need + PAD_S)
     jp.write_text(json.dumps(job, indent=2, ensure_ascii=False))
     total = sum(s["num_frames"] for s in job["shots"]) / FPS
