@@ -27,7 +27,7 @@ HERE = Path(__file__).resolve().parent
 STATE = HERE / ".launch_state.json"
 DOWNLOAD_TB = 0.05          # Engine A batch: ~15 GB image + ~30 GB weights (measured 2026-11-06)
 EST_HOURS = 2.0             # expected spike wall time
-DISK_GB = 80                # image + Engine A weights + clips of a 12-ad batch, with headroom
+DISK_GB = 120               # ~40 GB image + 29 GB Engine A weights + clips and their push copy (80 GB filled up on 2026-11-06)
 MIN_DOWN_MBPS = 600         # slow links cost more in idle GPU time than they save (Nepal 2026-11-06: ~2 MB/s real)
 MIN_DISK_MBPS = 1000
 
