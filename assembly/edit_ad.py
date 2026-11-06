@@ -229,7 +229,7 @@ def hook_png(text: str, red: str, path: Path, width: int) -> None:
 
 def find_clip(clips: Path, sid: str) -> Path | None:
     return next((p for p in [clips / "clips_32fps" / f"{sid}.mp4", clips / "clips" / f"{sid}.mp4", clips / f"{sid}.mp4"]
-                 if p.exists()), None)
+                 if p.exists() and p.stat().st_size > 0), None)     # an empty file = interpolation cut short
 
 
 def clip_source(shot: dict) -> str:
