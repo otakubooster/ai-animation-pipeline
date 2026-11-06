@@ -62,3 +62,14 @@ def test_music_only_shot_gets_a_fixed_slot_at_the_end():
 
 def test_spoken_text_drops_directions_and_quotes():
     assert edit_ad.spoken_text("\"I'm Tartar! Ha ha!\" (laughs)") == "I'm Tartar! Ha ha!"
+
+
+def test_hook_card_has_red_phrase(tmp_path):
+    from PIL import Image
+    from edit_ad import hook_png
+    p = tmp_path / "hook.png"
+    hook_png("3 mistakes that shorten your cat's life…", "3 mistakes", p, 1080)
+    im = Image.open(p).convert("RGB")
+    assert im.width <= 1092
+    reds = sum(1 for r, g, b in im.getdata() if r > 180 and g < 60 and b < 80)
+    assert reds > 500

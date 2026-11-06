@@ -197,6 +197,36 @@ def banner_png(text: str, path: Path, width: int) -> None:
     img.save(path)
 
 
+def hook_png(text: str, red: str, path: Path, width: int) -> None:
+    """Hook title card: white rounded box with bold black text; the words of `red` are drawn in red."""
+    fsize = int(width * 0.068)
+    font = ImageFont.truetype(BANNER_FONT, fsize)
+    red_words = {norm(w) for w in red.split()}
+    words, maxw, space = text.split(), int(width * 0.80), font.getbbox(" ")[2] or fsize // 3
+    lines, cur = [], []
+    for w in words:
+        trial = " ".join(cur + [w])
+        if cur and font.getbbox(trial)[2] > maxw:
+            lines.append(cur); cur = [w]
+        else:
+            cur.append(w)
+    lines.append(cur)
+    lh = int(fsize * 1.22)
+    widths = [font.getbbox(" ".join(l))[2] for l in lines]
+    pad_x, pad_y = int(fsize * 0.65), int(fsize * 0.5)
+    bw, bh = max(widths) + 2 * pad_x, lh * len(lines) + 2 * pad_y
+    img = Image.new("RGBA", (bw + 12, bh + 14), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([6, 11, bw + 6, bh + 11], radius=int(fsize * 0.6), fill=(0, 0, 0, 70))
+    d.rounded_rectangle([6, 6, bw + 6, bh + 6], radius=int(fsize * 0.6), fill=(255, 255, 255, 255))
+    for i, (l, lw) in enumerate(zip(lines, widths)):
+        x, y = 6 + (bw - lw) // 2, 6 + pad_y + i * lh - int(fsize * 0.1)
+        for w in l:
+            d.text((x, y), w, font=font, fill=(200, 16, 46, 255) if norm(w) in red_words else (20, 20, 20, 255))
+            x += font.getbbox(w)[2] + space
+    img.save(path)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("job_dir", type=Path)
@@ -271,9 +301,19 @@ def main() -> None:
         else:
             Image.new("RGBA", (2, 2), (0, 0, 0, 0)).save(png)
             overlay = "[base]null[b]"
+        hook = job.get("hook_card")
+        hpng = tmp / f"hook_{name}.png"
+        if hook:
+            hook_png(hook["text"], hook.get("red", ""), hpng, f["banner_w"])
+            spans = [(t["start"], t["end"]) for t in timeline if t["id"] in set(hook["shots"])]
+            h0, h1 = min(a for a, _ in spans), max(b for _, b in spans)
+            overlay += f";[b][3:v]overlay=(W-w)/2:{f['banner_y']}:enable='between(t,{h0:.2f},{h1:.2f})'[b2]"
+        else:
+            Image.new("RGBA", (2, 2), (0, 0, 0, 0)).save(hpng)
+            overlay += ";[b]null[b2]"
         dst = out / f"{a.name}_{name}.mp4"
-        fc = f"{f['vf']};{overlay};[b]ass={ass}[v]"
-        run(["ffmpeg", "-v", "error", "-y", "-i", str(clean), "-i", str(png), "-i", str(vo), "-filter_complex", fc,
+        fc = f"{f['vf']};{overlay};[b2]ass={ass}[v]"
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(clean), "-i", str(png), "-i", str(vo), "-i", str(hpng), "-filter_complex", fc,
              "-map", "[v]", "-map", "2:a", "-c:v", "libx264", "-crf", str(a.crf), "-preset", "medium", "-pix_fmt", "yuv420p",
              "-c:a", "copy", "-t", f"{total:.2f}", "-movflags", "+faststart", str(dst)])
         outputs.append(str(dst))
