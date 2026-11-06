@@ -5999,3 +5999,15 @@ PUSH done
 2026-11-06 16:06:19.164 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 4.010704 seconds
 2026-11-06 16:06:19.164 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000343 seconds
 2026-11-06 16:06:19.164 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 4.011683 seconds
+2026-11-06 16:06:25.916 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 6.751886 seconds
+2026-11-06 16:06:25.916 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 22.752777 seconds
+2026-11-06 16:06:25.918 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001769 seconds
+2026-11-06 16:06:25.918 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-06 16:06:27.400 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/what-slowly-happens-when-her-teeth-are-ignored-r-v1/clips/s005.mp4 ✅
+2026-11-06 16:06:27.402 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.01 GiB, allocated=16.71 GiB, reserved=28.63 GiB, reclaimable=11.92 GiB, force=False
+2026-11-06 16:06:27.498 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 24.335395 seconds
+2026-11-06 16:06:27.498 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 28.875316 seconds
+2026-11-06 16:06:27.498 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "what-slowly-happens-when-her-teeth-are-ignored-r-v1", "id": "s005", "file": "clips/s005.mp4", "ok": true, "seconds": 28.88, "usd": 0.0062, "size": [720, 1280], "num_frames": 81}
+PUSH done
+2026-11-06T16:06:56Z === push (clips)
