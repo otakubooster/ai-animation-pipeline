@@ -12,6 +12,7 @@ British voices: bf_emma (best), bf_isabella, bf_alice, bf_lily, bm_george, bm_fa
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import subprocess
 from pathlib import Path
@@ -30,7 +31,7 @@ def sentences(text: str) -> list[str]:
 
 def synth(text: str, out: Path, model_dir: Path, voice: str, speed: float = 0.85, pause: float = 0.28) -> float:
     """Speak `text` sentence by sentence (steadier prosody than one long call) with short pauses; write MP3.
-    Returns the duration in seconds."""
+    Returns the duration in seconds. Sentence start/end times go to <out>.sentences.json (for voice/align.py)."""
     import numpy as np
     import soundfile as sf
     from kokoro_onnx import Kokoro
@@ -38,15 +39,19 @@ def synth(text: str, out: Path, model_dir: Path, voice: str, speed: float = 0.85
     k = Kokoro(str(model_dir / "kokoro-v1.0.onnx"), str(model_dir / "voices-v1.0.bin"))
     gap = np.zeros(int(pause * SR), dtype=np.float32)
     parts = [np.zeros(int(0.15 * SR), dtype=np.float32)]
+    spans, t = [], 0.15
     for s in sentences(text):
         audio, sr = k.create(s, voice=voice, speed=speed, lang="en-gb")
         assert sr == SR
         parts += [audio.astype(np.float32), gap]
+        spans.append({"text": s, "start": round(t, 3), "end": round(t + len(audio) / SR, 3)})
+        t += (len(audio) + len(gap)) / SR
     wav = out.with_suffix(".wav")
     sf.write(wav, np.concatenate(parts), SR)
     subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(wav), "-ar", "44100", "-b:a", "128k", str(out)],
                    check=True)
     wav.unlink()
+    out.with_suffix(".sentences.json").write_text(json.dumps(spans, indent=1, ensure_ascii=False))
     return sum(len(p) for p in parts) / SR
 
 
