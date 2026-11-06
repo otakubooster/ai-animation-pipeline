@@ -79,6 +79,7 @@ def cmd_create(a) -> None:
     if not a.yes:
         raise SystemExit("Refusing to rent without --yes (this costs money).")
     offers = search_offers()
+    offers = [o for o in offers if not any(x.lower() in str(o.get("geolocation", "")).lower() for x in a.avoid)]
     if a.offer:
         offers = [o for o in offers if o["id"] == a.offer]
     else:  # --best: try the cheapest few by estimated total cost, skipping any over the cost cap
@@ -179,6 +180,7 @@ def main(argv=None) -> None:
     c.add_argument("--max-hours", type=float, default=2.5)
     c.add_argument("--repo", default="otakubooster/ai-animation-pipeline")
     c.add_argument("--yes", action="store_true")
+    c.add_argument("--avoid", nargs="*", default=[], help="skip offers whose location contains any of these (slow hosts)")
     c.add_argument("--script", default="phase0/run_spike.sh", help="repo-relative script the box runs")
     c.add_argument("--job", nargs="*", default=[], help="job folder(s) for jobs/run_job.sh; several = one batch on one GPU")
     c.set_defaults(fn=cmd_create)
