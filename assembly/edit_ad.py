@@ -104,7 +104,7 @@ def ass_time(t: float) -> str:
 
 
 def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int, margin_v: int, max_words: int = 3,
-                 high_spans: list[tuple[float, float]] = (), margin_high: int = 0) -> None:
+                 high_spans: list[tuple[float, float]] = (), margin_high: int = 0, style: str = "word-highlight") -> None:
     """Word-by-word captions: 2-3 word groups, white, the word being spoken in yellow.
     Inside `high_spans` (product shots) captions move up to `margin_high` so they never cover the label."""
     groups, cur = [], []
@@ -120,8 +120,11 @@ def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int,
              "[V4+ Styles]",
              "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
              "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
-             f"Style: Cap,{CAPTION_FONT},{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,"
-             f"{max(size // 13, 4)},2,2,60,60,{margin_v},1", "", "[Events]",
+             (f"Style: Cap,{CAPTION_FONT},{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,"
+              f"{max(size // 13, 4)},2,2,60,60,{margin_v},1" if style != "subtitle" else
+              # Subtitle look: small white sentence-case text, soft shadow, middle of the frame.
+              f"Style: Cap,Inter Display SemiBold,{int(size * 0.62)},&H00FFFFFF,&H00FFFFFF,&H50000000,&H78000000,0,0,0,0,"
+              f"100,100,0,0,1,1.2,3,5,80,80,0,1"), "", "[Events]",
              "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
     for gi, g in enumerate(groups):
         g_end = groups[gi + 1][0]["start"] if gi + 1 < len(groups) else g[-1]["end"] + 0.6
@@ -129,7 +132,13 @@ def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int,
         for wi, w in enumerate(g):
             start = w["start"]
             end = g[wi + 1]["start"] if wi + 1 < len(g) else g_end
-            text = " ".join(("{\\c&H00E5FF&}" + clean(x["text"]) + "{\\c&HFFFFFF&}") if x is w else clean(x["text"]) for x in g)
+            if style == "subtitle":
+                if wi:            # one event per group: plain text, no per-word highlight
+                    continue
+                end = g_end
+                text = " ".join(x["text"] for x in g).rstrip(",")
+            else:
+                text = " ".join(("{\\c&H00E5FF&}" + clean(x["text"]) + "{\\c&HFFFFFF&}") if x is w else clean(x["text"]) for x in g)
             mv = margin_high if any(a <= start < b for a, b in high_spans) else 0
             lines.append(f"Dialogue: 0,{ass_time(start)},{ass_time(end)},Cap,,0,0,{mv},,{text}")
     path.write_text("\n".join(lines) + "\n")
@@ -209,7 +218,7 @@ def main() -> None:
     vo = tmp / "vo.m4a"
     run(["ffmpeg", "-v", "error", "-y", "-i", str(a.vo), "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k", str(vo)])
 
-    banner_t = next(t["start"] for t in timeline if t["id"] == job["banner"]["from_shot"])
+    banner_t = next((t["start"] for t in timeline if job.get("banner") and t["id"] == job["banner"]["from_shot"]), 0.0)
     total = timeline[-1]["end"]
     formats = {
         "9x16": {"res": (1080, 1920), "cap": (84, 470), "cap_high": 1000, "banner_w": 1080, "banner_y": 150,
@@ -225,12 +234,18 @@ def main() -> None:
     outputs = []
     for name, f in formats.items():
         ass = tmp / f"captions_{name}.ass"
-        captions_ass(words, ass, f["res"], f["cap"][0], f["cap"][1], high_spans=high_spans, margin_high=f["cap_high"])
+        cstyle = job.get("captions", {}).get("style", "word-highlight")
+        captions_ass(words, ass, f["res"], f["cap"][0], f["cap"][1], max_words=4 if cstyle == "subtitle" else 3,
+                     high_spans=high_spans, margin_high=f["cap_high"], style=cstyle)
         png = tmp / f"banner_{name}.png"
-        banner_png(job["banner"]["text"], png, f["banner_w"])
+        if job.get("banner"):
+            banner_png(job["banner"]["text"], png, f["banner_w"])
+            overlay = f"[base][1:v]overlay=(W-w)/2:{f['banner_y']}:enable='gte(t,{banner_t:.2f})'[b]"
+        else:
+            Image.new("RGBA", (2, 2), (0, 0, 0, 0)).save(png)
+            overlay = "[base]null[b]"
         dst = out / f"{a.name}_{name}.mp4"
-        fc = (f"{f['vf']};[base][1:v]overlay=(W-w)/2:{f['banner_y']}:enable='gte(t,{banner_t:.2f})'[b];"
-              f"[b]ass={ass}[v]")
+        fc = f"{f['vf']};{overlay};[b]ass={ass}[v]"
         run(["ffmpeg", "-v", "error", "-y", "-i", str(clean), "-i", str(png), "-i", str(vo), "-filter_complex", fc,
              "-map", "[v]", "-map", "2:a", "-c:v", "libx264", "-crf", "19", "-preset", "medium", "-pix_fmt", "yuv420p",
              "-c:a", "copy", "-t", f"{total:.2f}", "-movflags", "+faststart", str(dst)])

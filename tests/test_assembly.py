@@ -42,3 +42,12 @@ def test_captions_highlight_one_word_and_move_up_on_product_shots(tmp_path):
     events = [l for l in p.read_text().splitlines() if l.startswith("Dialogue")]
     assert len(events) == 3 and all(e.count("\\c&H00E5FF&") == 1 for e in events)
     assert events[0].split(",")[7] == "0" and events[1].split(",")[7] == "1000"
+
+
+def test_subtitle_style_one_event_per_group_no_highlight(tmp_path):
+    p = tmp_path / "s.ass"
+    words = [W("Her", 0.0, 0.2), W("blood", 0.3, 0.5), W("tests", 0.6, 0.8), W("were", 0.9, 1.0), W("perfect.", 1.1, 1.5)]
+    edit_ad.captions_ass(words, p, (1080, 1920), 84, 470, max_words=4, style="subtitle")
+    events = [l for l in p.read_text().splitlines() if l.startswith("Dialogue")]
+    assert [e.split(",,")[-1] for e in events] == ["Her blood tests were", "perfect."]
+    assert "\\c&H00E5FF&" not in p.read_text() and "Inter Display SemiBold" in p.read_text()
