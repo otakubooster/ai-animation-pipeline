@@ -51,3 +51,14 @@ def test_subtitle_style_one_event_per_group_no_highlight(tmp_path):
     events = [l for l in p.read_text().splitlines() if l.startswith("Dialogue")]
     assert [e.split(",,")[-1] for e in events] == ["Her blood tests were", "perfect."]
     assert "\\c&H00E5FF&" not in p.read_text() and "Inter Display Bold" in p.read_text()
+
+
+def test_music_only_shot_gets_a_fixed_slot_at_the_end():
+    shots = [{"id": "s01", "vo_line": "Start it tomorrow."}, {"id": "s02", "vo_line": "(music only)"}]
+    words = [W("Start", 0.0, 0.3), W("it", 0.4, 0.5), W("tomorrow.", 0.6, 1.2)]
+    t = edit_ad.align_shots(shots, words)
+    assert t[0]["end"] == pytest.approx(1.6) and t[1]["dur"] == pytest.approx(3.0)
+
+
+def test_spoken_text_drops_directions_and_quotes():
+    assert edit_ad.spoken_text("\"I'm Tartar! Ha ha!\" (laughs)") == "I'm Tartar! Ha ha!"

@@ -60,21 +60,46 @@ def spoken_words(words_json: Path) -> list[dict]:
     return words
 
 
+SILENT_SHOT_S = 3.0  # shots whose line is only a stage direction, e.g. "(music only)"
+
+
+def spoken_text(line: str) -> str:
+    """The words actually spoken: drops stage directions in parentheses and quote marks."""
+    return re.sub(r"\([^)]*\)", " ", line).replace('"', " ").strip()
+
+
 def align_shots(shots: list[dict], words: list[dict]) -> list[dict]:
-    """Assign transcript words to shots in order; returns per-shot start/end and its words."""
+    """Assign transcript words to shots in order; returns per-shot start/end and its words.
+    A shot with no spoken words gets SILENT_SHOT_S seconds after the previous shot."""
     i, out = 0, []
     for s in shots:
-        toks = [norm(t) for t in s["vo_line"].split() if norm(t)]
+        toks = [norm(t) for t in spoken_text(s["vo_line"]).split() if norm(t)]
+        if not toks:
+            out.append({"id": s["id"], "words": [], "silent": True})
+            continue
         seg = words[i:i + len(toks)]
         got = [norm(w["text"]) for w in seg]
         if got != toks:
             raise ValueError(f"{s['id']}: transcript mismatch\n  script: {toks}\n  audio:  {got}")
         out.append({"id": s["id"], "words": seg})
         i += len(toks)
+    # Starts: first spoken word (or right after the previous shot for silent shots).
     for k, o in enumerate(out):
+        if o.get("silent"):
+            continue
         o["start"] = 0.0 if k == 0 else o["words"][0]["start"] - 0.05
     for k, o in enumerate(out):
-        o["end"] = out[k + 1]["start"] if k + 1 < len(out) else o["words"][-1]["end"] + 1.0
+        if not o.get("silent"):
+            continue
+        prev = out[k - 1] if k else None
+        o["start"] = (prev["words"][-1]["end"] + 0.4) if prev and prev.get("words") else (prev["start"] + 1 if prev else 0.0)
+    for k, o in enumerate(out):
+        if o.get("silent"):
+            nxt = out[k + 1]["start"] if k + 1 < len(out) else None
+            o["end"] = nxt if nxt else o["start"] + SILENT_SHOT_S
+        else:
+            nxt = out[k + 1]["start"] if k + 1 < len(out) else None
+            o["end"] = nxt if nxt is not None else o["words"][-1]["end"] + 1.0
         o["dur"] = round(o["end"] - o["start"], 3)
     return out
 
