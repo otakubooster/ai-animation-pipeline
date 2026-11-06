@@ -25,9 +25,11 @@ API = "https://console.vast.ai/api/v0"
 IMAGE = "lightx2v/lightx2v:26052801-cu130-5090"
 HERE = Path(__file__).resolve().parent
 STATE = HERE / ".launch_state.json"
-DOWNLOAD_TB = 0.15          # ~150 GB of weights for both engines (upper bound)
+DOWNLOAD_TB = 0.05          # Engine A batch: ~15 GB image + ~30 GB weights (measured 2026-11-06)
 EST_HOURS = 2.0             # expected spike wall time
-DISK_GB = 200
+DISK_GB = 80                # image + Engine A weights + clips of a 12-ad batch, with headroom
+MIN_DOWN_MBPS = 600         # slow links cost more in idle GPU time than they save (Nepal 2026-11-06: ~2 MB/s real)
+MIN_DISK_MBPS = 1000
 
 
 def call(method: str, path: str, body: dict | None = None) -> dict:
@@ -52,7 +54,7 @@ def est_cost(o: dict, hours: float = EST_HOURS) -> float:
 def search_offers() -> list[dict]:
     q = {"gpu_name": {"eq": "RTX 5090"}, "num_gpus": {"eq": 1}, "verified": {"eq": True},
          "rentable": {"eq": True}, "cpu_ram": {"gte": 58000}, "disk_space": {"gte": DISK_GB},
-         "reliability2": {"gte": 0.98}, "cuda_max_good": {"gte": 13.0}, "type": "on-demand",
+         "reliability2": {"gte": 0.99}, "inet_down": {"gte": MIN_DOWN_MBPS}, "disk_bw": {"gte": MIN_DISK_MBPS}, "cuda_max_good": {"gte": 13.0}, "type": "on-demand",
          "order": [["dph_total", "asc"]], "limit": 60}
     offers = [o for o in call("POST", "/bundles/", q)["offers"] if not str(o.get("geolocation", "")).endswith("CN")]
     return sorted(offers, key=est_cost)
@@ -180,7 +182,7 @@ def main(argv=None) -> None:
     c.add_argument("--max-hours", type=float, default=2.5)
     c.add_argument("--repo", default="otakubooster/ai-animation-pipeline")
     c.add_argument("--yes", action="store_true")
-    c.add_argument("--avoid", nargs="*", default=[], help="skip offers whose location contains any of these (slow hosts)")
+    c.add_argument("--avoid", nargs="*", default=["Nepal"], help="skip offers whose location contains any of these (slow hosts)")
     c.add_argument("--script", default="phase0/run_spike.sh", help="repo-relative script the box runs")
     c.add_argument("--job", nargs="*", default=[], help="job folder(s) for jobs/run_job.sh; several = one batch on one GPU")
     c.set_defaults(fn=cmd_create)
