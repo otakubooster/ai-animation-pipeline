@@ -8,16 +8,23 @@ flock 9
 echo "$(date -u +%FT%TZ) === push ($1)"
 dst=/workspace/results-repo
 if [ ! -d $dst/.git ]; then
-  timeout 300 git clone -q --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git" $dst || { echo "PUSH: clone failed"; exit 0; }
-  (cd $dst && { timeout 120 git fetch -q --depth 1 origin job-results && git checkout -q -B job-results FETCH_HEAD; } || git checkout -q -b job-results)
+  # Blobless + sparse: only this run's folders are checked out, so earlier batches' clips are never downloaded.
+  url="https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git"
+  if timeout 300 git clone -q --depth 1 --filter=blob:none --no-checkout -b job-results "$url" $dst; then
+    (cd $dst && git sparse-checkout set --no-cone "/batches/$RUN_ID/" && git checkout -q job-results)
+  else
+    rm -rf $dst; timeout 300 git clone -q --depth 1 --filter=blob:none --no-checkout "$url" $dst || { echo "PUSH: clone failed"; exit 0; }
+    (cd $dst && git sparse-checkout set --no-cone "/batches/$RUN_ID/" && git checkout -q --orphan job-results && git rm -rqf --cached . 2>/dev/null)
+  fi
 fi
 for d in "$OUT_ROOT"/*/; do
   id=$(basename "$d")
+  (cd $dst && git sparse-checkout add "/jobs/$id/results/$RUN_ID/")
   mkdir -p "$dst/jobs/$id/results/$RUN_ID"
   rsync -a --exclude '*.tmp' "$d" "$dst/jobs/$id/results/$RUN_ID/"
 done
 mkdir -p "$dst/batches/$RUN_ID" && cp "$OUT_ROOT"/*.log "$OUT_ROOT"/*.jsonl "$OUT_ROOT"/*.txt "$dst/batches/$RUN_ID/" 2>/dev/null
-cd $dst && git add -A jobs batches && git -c user.name=vast-render -c user.email=render@localhost commit -qm "$RUN_ID: $1"
+cd $dst && git add --sparse -A jobs batches && git -c user.name=vast-render -c user.email=render@localhost commit -qm "$RUN_ID: $1"
 # If the branch moved (a concurrent push), rebase once and retry.
 if ! out=$(timeout 300 git push -q origin HEAD:job-results 2>&1); then
   echo "$out" | sed 's/x-access-token:[^@]*@/***@/'
