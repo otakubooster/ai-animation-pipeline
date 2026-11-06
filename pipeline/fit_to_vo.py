@@ -33,7 +33,12 @@ def main(job_path: str, words_path: str) -> None:
     timeline = align_shots(job["shots"], spoken_words(Path(words_path)))
     for shot, t in zip(job["shots"], timeline):
         shot["vo_s"] = t["dur"]
-        shot["num_frames"] = frames_for(t["dur"] + PAD_S)
+    by_id = {s["id"]: s for s in job["shots"]}
+    for shot in job["shots"]:
+        need = shot["vo_s"]
+        # A shot whose damaged neighbour borrows its clip must cover both lines.
+        need += sum(o["vo_s"] for o in job["shots"] if o.get("fill_from") == shot["id"])
+        shot["num_frames"] = frames_for(need + PAD_S)
     jp.write_text(json.dumps(job, indent=2, ensure_ascii=False))
     total = sum(s["num_frames"] for s in job["shots"]) / FPS
     print(f"{len(job['shots'])} shots, VO {timeline[-1]['end']:.1f} s, render footage {total:.0f} s")

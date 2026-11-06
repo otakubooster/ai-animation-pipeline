@@ -46,7 +46,7 @@ def render_job(pipe, job_json: Path, frames_dir: Path, out: Path, dph: float, ho
     done = {r["id"] for r in report["runs"] if r.get("ok")}
     w, h = job["render"]["width"], job["render"]["height"]
     for shot in job["shots"]:
-        if shot["id"] in done:
+        if shot["id"] in done or shot.get("skip_render"):
             continue
         run = {"id": shot["id"], "file": f"clips/{shot['id']}.mp4", "attempts": []}
         for (hh, ww, nf) in attempts_for(shot, w, h):

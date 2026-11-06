@@ -179,15 +179,26 @@ def main() -> None:
     words = spoken_words(a.words)
     timeline = align_shots(job["shots"], words)
 
-    seg_files, report = [], []
+    seg_files, report, used = [], [], {}
     for t, shot in zip(timeline, job["shots"]):
         dst = tmp / f"{shot['id']}.mp4"
+        if shot.get("fill_from") and not a.stills:
+            # Unrenderable shot (damaged frame): continue the source shot's clip from where its own slot ended.
+            src_id = shot["fill_from"]
+            src = next((p for p in [a.clips / "clips_32fps" / f"{src_id}.mp4", a.clips / "clips" / f"{src_id}.mp4"] if p.exists()), None)
+            head = used.get(src_id, HEAD_TRIM)
+            info = render_segment(src, t["dur"], dst, still=False, head=head) | {"fill_from": src_id}
+            seg_files.append(dst)
+            report.append({"id": shot["id"], "start": round(t["start"], 2), "dur": t["dur"], **info})
+            continue
         if a.stills:
             info = render_segment(a.stills / shot["frame"], t["dur"], dst, still=True)
         else:
             src = next((p for p in [a.clips / "clips_32fps" / f"{shot['id']}.mp4", a.clips / "clips" / f"{shot['id']}.mp4",
                                     a.clips / f"{shot['id']}.mp4"] if p.exists()), None)
-            info = render_segment(src, t["dur"], dst, still=False, head=shot.get("clip_start", HEAD_TRIM)) if src else \
+            head = shot.get("clip_start", HEAD_TRIM)
+            used[shot["id"]] = head + t["dur"]
+            info = render_segment(src, t["dur"], dst, still=False, head=head) if src else \
                 render_segment(a.job_dir / "frames" / shot["frame"], t["dur"], dst, still=True) | {"missing_clip": True}
         seg_files.append(dst)
         report.append({"id": shot["id"], "start": round(t["start"], 2), "dur": t["dur"], **info})
