@@ -124,8 +124,8 @@ def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int,
              (f"Style: Cap,{CAPTION_FONT},{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,"
               f"{max(size // 13, 4)},2,2,60,60,{margin_v},1" if style != "subtitle" else
               # Subtitle look: small white sentence-case text, soft shadow, middle of the frame.
-              f"Style: Cap,Inter Display SemiBold,{int(size * 0.62)},&H00FFFFFF,&H00FFFFFF,&H50000000,&H78000000,0,0,0,0,"
-              f"100,100,0,0,1,1.2,3,5,80,80,0,1"), "", "[Events]",
+              f"Style: Cap,Inter Display Bold,{int(size * 0.78)},&H00FFFFFF,&H00FFFFFF,&H28000000,&H64000000,0,0,0,0,"
+              f"100,100,0,0,1,2.6,2.5,5,80,80,0,1"), "", "[Events]",
              "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
     for gi, g in enumerate(groups):
         g_end = groups[gi + 1][0]["start"] if gi + 1 < len(groups) else g[-1]["end"] + 0.6
@@ -181,6 +181,7 @@ def main() -> None:
     ap.add_argument("--words", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--name", default="ad")
+    ap.add_argument("--crf", type=int, default=19, help="final export quality (higher = smaller file)")
     a = ap.parse_args()
 
     job = json.loads((a.job_dir / "job.json").read_text())
@@ -248,7 +249,7 @@ def main() -> None:
         dst = out / f"{a.name}_{name}.mp4"
         fc = f"{f['vf']};{overlay};[b]ass={ass}[v]"
         run(["ffmpeg", "-v", "error", "-y", "-i", str(clean), "-i", str(png), "-i", str(vo), "-filter_complex", fc,
-             "-map", "[v]", "-map", "2:a", "-c:v", "libx264", "-crf", "19", "-preset", "medium", "-pix_fmt", "yuv420p",
+             "-map", "[v]", "-map", "2:a", "-c:v", "libx264", "-crf", str(a.crf), "-preset", "medium", "-pix_fmt", "yuv420p",
              "-c:a", "copy", "-t", f"{total:.2f}", "-movflags", "+faststart", str(dst)])
         outputs.append(str(dst))
     (out / f"{a.name}_edit_report.json").write_text(json.dumps({"total_s": round(total, 2), "banner_from_s": round(banner_t, 2),

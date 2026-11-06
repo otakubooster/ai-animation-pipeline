@@ -50,4 +50,4 @@ def test_subtitle_style_one_event_per_group_no_highlight(tmp_path):
     edit_ad.captions_ass(words, p, (1080, 1920), 84, 470, max_words=4, style="subtitle")
     events = [l for l in p.read_text().splitlines() if l.startswith("Dialogue")]
     assert [e.split(",,")[-1] for e in events] == ["Her blood tests were", "perfect."]
-    assert "\\c&H00E5FF&" not in p.read_text() and "Inter Display SemiBold" in p.read_text()
+    assert "\\c&H00E5FF&" not in p.read_text() and "Inter Display Bold" in p.read_text()
