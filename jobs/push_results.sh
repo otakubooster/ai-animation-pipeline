@@ -7,6 +7,8 @@ exec 9>/tmp/push_results.lock
 flock 9
 echo "$(date -u +%FT%TZ) === push ($1)"
 dst=/workspace/results-repo
+# Pushes are serialized by the flock above, so a leftover git lock can only come from a crashed git process.
+rm -f $dst/.git/index.lock $dst/.git/HEAD.lock $dst/.git/refs/heads/*.lock 2>/dev/null
 if [ ! -d $dst/.git ]; then
   # Blobless + sparse: only this run's folders are checked out, so earlier batches' clips are never downloaded.
   url="https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git"
