@@ -1,0 +1,31 @@
+2026-11-07 21:19:13.924 | INFO     | lightx2v_platform.base.base:init_ai_device:17 - Initialized AI_DEVICE: cuda
+2026-11-07 21:19:14.073 | INFO     | lightx2v_platform.base.base:check_ai_device:34 - AI device for platform 'cuda' is available.
+2026-11-07 21:19:14.711 | INFO     | lightx2v.utils.set_config:build_startup_config:72 - Loading some config from /workspace/job/infinitetalk_720.json
+2026-11-07 21:19:14.712 | DEBUG    | lightx2v.utils.utils:validate_config_paths:779 - ✓ Verified dit_original_ckpt: /workspace/models/talk/wan2.1_i2v_480p_lightx2v_4step.safetensors
+2026-11-07 21:19:14.712 | DEBUG    | lightx2v.utils.utils:validate_config_paths:809 - ✓ Verified adapter_model_path: /workspace/models/talk/single/infinitetalk.safetensors
+2026-11-07 21:19:14.712 | INFO     | lightx2v.utils.utils:validate_config_paths:832 - ✓ Config checkpoint paths validated successfully
+/app/MagiAttention/magi_attention/__init__.py:46: UserWarning: You are using magi_attention without installing it. This may cause some unexpected errors.
+  warnings.warn(
+2026-11-07 21:19:15.658 | INFO     | lightx2v.common.ops.attn.dynamic_sparse_attn:<module>:30 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 21:19:15.811 | INFO     | lightx2v.common.ops.attn.sage_attn:<module>:17 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 21:19:15.825 | INFO     | lightx2v.common.ops.attn.sage_attn:<module>:56 - sageattn3_sparse not found, please install sageattention sparse first
+2026-11-07 21:19:15.832 | INFO     | lightx2v.common.ops.attn.sparse_operator:<module>:19 - sageattn3_sparse not found, please install sageattn3_sparse first
+Traceback (most recent call last):
+  File "/workspace/repo/jobs/talk_render.py", line 99, in <module>
+    main()
+  File "/workspace/repo/jobs/talk_render.py", line 69, in main
+    pipe.create_generator(config_json=str(cfg))
+  File "/workspace/LightX2V/lightx2v/pipeline.py", line 164, in create_generator
+    self.runner = build_runner(config)
+                  ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/LightX2V/lightx2v/models/runners/runner_factory.py", line 74, in build_runner
+    runner = RUNNER_REGISTER[model_cls](config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/LightX2V/lightx2v/models/runners/wan/wan_infinitetalk_runner.py", line 126, in __init__
+    super().__init__(config)
+  File "/workspace/LightX2V/lightx2v/models/runners/wan/wan_runner.py", line 87, in __init__
+    self.distill_method = get_wan_distill_method(config)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/LightX2V/lightx2v/models/schedulers/wan/scheduler_factory.py", line 23, in get_wan_distill_method
+    raise NotImplementedError(f"{model_cls} does not support distill_method {distill_method!r}; supported methods: {supported}")
+NotImplementedError: infinitetalk does not support distill_method 'dmd2'; supported methods: none
