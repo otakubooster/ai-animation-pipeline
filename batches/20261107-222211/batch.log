@@ -12,3 +12,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 /workspace/repo/jobs/talk_matrix.sh: line 35:  1129 Killed                  timeout 900 python $REPO_DIR/jobs/talk_render.py --models $OUT/talk_models.json --base-config $CFG --size 480 ${2:+--dit "$2"} --override "$3" $WORK/items_$1.json 2>&1
       1130 Done                    | tail -n 300 > "$OUT/$1.log"
 2026-11-07T22:46:16Z === push (matrix bf16_sdpa)
+PUSH ok
+PUSH done
+{"id": "fp8_sdpa", "size": "480", "audio_s": 5.0, "ok": false, "seconds": 21.7}
+2026-11-07T22:47:52Z === push (matrix fp8_sdpa)
