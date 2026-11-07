@@ -104,7 +104,8 @@ def align_shots(shots: list[dict], words: list[dict]) -> list[dict]:
     return out
 
 
-def render_segment(src: Path, dur: float, dst: Path, still: bool, head: float = HEAD_TRIM, end: float | None = None) -> dict:
+def render_segment(src: Path, dur: float, dst: Path, still: bool, head: float = HEAD_TRIM, end: float | None = None,
+                   boomerang: bool = True) -> dict:
     """Cut one shot to exactly `dur` seconds at 1080x1920/30 fps, starting `head` seconds into the clip."""
     scale = f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H},setsar=1"
     if still:
@@ -117,11 +118,47 @@ def render_segment(src: Path, dur: float, dst: Path, still: bool, head: float = 
     usable = max(min(probe_duration(src), end or 1e9) - head, 0.1)
     slow = min(max(dur / usable, 1.0), MAX_SLOW)
     trim = f"trim=start={head}" + (f":end={end}" if end else "")
+    held = max(dur - usable * slow, 0)
+    if held > 0.3 and boomerang:
+        # Too short even slowed: play it forward then backward (ping-pong) instead of freezing on the last frame.
+        pp = dst.with_name(dst.stem + "_pp.mp4")
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-filter_complex",
+             f"[0:v]{trim},setpts=(PTS-STARTPTS)*{slow:.4f},fps={FPS},{scale},split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1[v]",
+             "-map", "[v]", "-c:v", "libx264", "-crf", "16", "-pix_fmt", "yuv420p", "-an", str(pp)])
+        run(["ffmpeg", "-v", "error", "-y", "-stream_loop", "-1", "-i", str(pp), "-t", f"{dur:.3f}",
+             "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(dst)])
+        pp.unlink(missing_ok=True)
+        return {"mode": "clip", "clip_start": head, "source_s": round(usable + head, 2), "slowdown": round(slow, 3),
+                "held_s": 0.0, "boomerang": True}
     vf = f"{trim},setpts=(PTS-STARTPTS)*{slow:.4f},fps={FPS},{scale},tpad=stop_mode=clone:stop_duration={dur}"
     run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf", vf, "-t", f"{dur:.3f}",
          "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(dst)])
     return {"mode": "clip", "clip_start": head, "source_s": round(usable + head, 2), "slowdown": round(slow, 3),
-            "held_s": round(max(dur - usable * slow, 0), 2)}
+            "held_s": round(held, 2)}
+
+
+def overlay_box(base: Path, inner: Path, dst: Path, dur: float) -> None:
+    """Picture in picture: `inner` (already cut to dur) in a white-framed box over the middle of `base`."""
+    bw = int(W * 0.74)
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(base), "-i", str(inner), "-filter_complex",
+         f"[1:v]scale={bw}:-2:force_original_aspect_ratio=decrease,pad=iw+20:ih+20:10:10:white[p];"
+         f"[0:v][p]overlay=(W-w)/2:(H-h)/2-40:shortest=1[v]", "-map", "[v]", "-t", f"{dur:.3f}",
+         "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(dst)])
+
+
+def overlay_inset(base: Path, talker: Path, dst: Path, dur: float, mask: Path) -> None:
+    """Small round inset of the talking presenter in the lower left (inside the 1:1 crop's safe area)."""
+    d = 330
+    if not mask.exists():
+        m = Image.new("L", (d, d), 0)
+        ImageDraw.Draw(m).ellipse([0, 0, d - 1, d - 1], fill=255)
+        m.save(mask)
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(base), "-i", str(talker), "-loop", "1", "-i", str(mask), "-filter_complex",
+         f"[1:v]crop=iw:iw:0:ih*0.08,scale={d}:{d}[t];[2:v]format=gray,scale={d}:{d}[m];[t][m]alphamerge[c];"
+         f"[c]pad={d + 12}:{d + 12}:6:6:color=white@0[c2];"
+         f"[0:v]drawbox=x=34:y={1460 - d - 52}:w={d + 12}:h={d + 12}:color=white@0:t=0[b];"
+         f"[b][c2]overlay=34:{1460 - d - 52}:shortest=1[v]",
+         "-map", "[v]", "-t", f"{dur:.3f}", "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(dst)])
 
 
 def ass_time(t: float) -> str:
@@ -129,44 +166,79 @@ def ass_time(t: float) -> str:
     return f"{int(t // 3600)}:{int(t % 3600 // 60):02d}:{t % 60:05.2f}"
 
 
+CAPTION_PRESETS = {
+    # name: font, size factor, upper, outline, shadow, box, highlight colour (ASS BGR) or None, words per group, place
+    "word-highlight":  ("Inter Display Black", 1.0, False, None, 2, False, "&H00E5FF&", 3, "low"),
+    "subtitle":        ("Inter Display Bold", 0.78, False, 2.6, 2.5, False, None, 4, "middle"),
+    "caps-outline":    ("Inter Display Black", 0.95, True, None, 2, False, None, 3, "low"),
+    "caps-outline-mid": ("Inter Display Black", 0.95, True, None, 2, False, None, 3, "middle"),
+    "caps-key-yellow": ("Inter Display Black", 1.0, True, None, 2, False, "&H00E5FF&", 3, "middle"),
+    "caps-key-yellow-low": ("Inter Display Black", 1.0, True, None, 2, False, "&H00E5FF&", 3, "low"),
+    "phrase-key-red":  ("Inter Display Black", 0.85, False, None, 2, False, "&H2E10C8&", 5, "low"),
+    "one-word":        ("Inter Display Black", 1.25, False, None, 2, False, None, 1, "low"),
+    "boxed":           ("Inter Display Bold", 0.7, False, 0, 0, True, None, 5, "low"),
+}
+
+
 def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int, margin_v: int, max_words: int = 3,
                  high_spans: list[tuple[float, float]] = (), margin_high: int = 0, style: str = "word-highlight") -> None:
-    """Word-by-word captions: 2-3 word groups, white, the word being spoken in yellow.
-    Inside `high_spans` (product shots) captions move up to `margin_high` so they never cover the label."""
+    """Captions timed to the VO words in one of CAPTION_PRESETS (word groups; the spoken word highlighted when the
+    preset has a highlight colour). Inside `high_spans` (product shots) captions move up to `margin_high`."""
+    font, fac, upper, outline, shadow, box, hl, per, place = CAPTION_PRESETS.get(style, CAPTION_PRESETS["word-highlight"])
+    per = max_words if style == "word-highlight" else per
     groups, cur = [], []
     for w in words:
         cur.append(w)
-        if len(cur) >= max_words or re.search(r"[,.!?]$", w["text"]):
+        if len(cur) >= per or re.search(r"[,.!?]$", w["text"]):
             groups.append(cur)
             cur = []
     if cur:
         groups.append(cur)
     clean = lambda t: re.sub(r"[,.!?]+$", "", t)
+    up = (lambda t: t.upper()) if upper else (lambda t: t)
+    fs = int(size * fac)
+    ol = max(fs // 13, 4) if outline is None else outline
+    align, mv0 = (2, margin_v) if place == "low" else (5, 0)
+    border, back = (3, "&H96000000") if box else (1, "&H64000000")
     lines = ["[Script Info]", "ScriptType: v4.00+", f"PlayResX: {res[0]}", f"PlayResY: {res[1]}", "WrapStyle: 2", "",
              "[V4+ Styles]",
              "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
              "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
-             (f"Style: Cap,{CAPTION_FONT},{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,"
-              f"{max(size // 13, 4)},2,2,60,60,{margin_v},1" if style != "subtitle" else
-              # Subtitle look: small white sentence-case text, soft shadow, middle of the frame.
-              f"Style: Cap,Inter Display Bold,{int(size * 0.78)},&H00FFFFFF,&H00FFFFFF,&H28000000,&H64000000,0,0,0,0,"
-              f"100,100,0,0,1,2.6,2.5,5,80,80,0,1"), "", "[Events]",
+             f"Style: Cap,{font},{fs},&H00FFFFFF,&H00FFFFFF,{'&H28000000' if style == 'subtitle' else '&H00000000'},{back},0,0,0,0,"
+             f"100,100,0,0,{border},{ol if not box else 12},{shadow},{align},80,80,{mv0},1", "", "[Events]",
              "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
     for gi, g in enumerate(groups):
         g_end = groups[gi + 1][0]["start"] if gi + 1 < len(groups) else g[-1]["end"] + 0.6
         g_end = min(g_end, g[-1]["end"] + 0.6)
+        mv = margin_high if place == "low" and any(a <= g[0]["start"] < b for a, b in high_spans) else 0
+        if not hl:            # one event per group, plain text
+            text = up(" ".join(x["text"] for x in g).rstrip(",")) if style == "subtitle" else up(" ".join(clean(x["text"]) for x in g))
+            lines.append(f"Dialogue: 0,{ass_time(g[0]['start'])},{ass_time(g_end)},Cap,,0,0,{mv},,{text}")
+            continue
         for wi, w in enumerate(g):
-            start = w["start"]
             end = g[wi + 1]["start"] if wi + 1 < len(g) else g_end
-            if style == "subtitle":
-                if wi:            # one event per group: plain text, no per-word highlight
-                    continue
-                end = g_end
-                text = " ".join(x["text"] for x in g).rstrip(",")
-            else:
-                text = " ".join(("{\\c&H00E5FF&}" + clean(x["text"]) + "{\\c&HFFFFFF&}") if x is w else clean(x["text"]) for x in g)
-            mv = margin_high if any(a <= start < b for a, b in high_spans) else 0
-            lines.append(f"Dialogue: 0,{ass_time(start)},{ass_time(end)},Cap,,0,0,{mv},,{text}")
+            mv = margin_high if place == "low" and any(a <= w["start"] < b for a, b in high_spans) else 0
+            text = " ".join(("{\\c" + hl + "}" + up(clean(x["text"])) + "{\\c&HFFFFFF&}") if x is w else up(clean(x["text"])) for x in g)
+            lines.append(f"Dialogue: 0,{ass_time(w['start'])},{ass_time(end)},Cap,,0,0,{mv},,{text}")
+    path.write_text("\n".join(lines) + "\n")
+
+
+def on_screen_ass(cards: list[tuple[float, float, str]], path: Path, res: tuple[int, int], size: int) -> None:
+    """Music-only ads: each shot's on-screen text (parts split by ' / ' shown one after the other), white sentence
+    case with a soft shadow, in the middle of the frame."""
+    lines = ["[Script Info]", "ScriptType: v4.00+", f"PlayResX: {res[0]}", f"PlayResY: {res[1]}", "WrapStyle: 0", "",
+             "[V4+ Styles]",
+             "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
+             "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
+             f"Style: Txt,Inter Display Bold,{size},&H00FFFFFF,&H00FFFFFF,&H50000000,&H78000000,0,0,0,0,100,100,0,0,1,2.5,3,5,90,90,0,1",
+             "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
+    for a, b, text in cards:
+        parts = [x.strip() for x in text.split(" / ") if x.strip()]
+        if not parts:
+            continue
+        step = (b - a) / len(parts)
+        for i, part in enumerate(parts):
+            lines.append(f"Dialogue: 0,{ass_time(a + i * step + 0.05)},{ass_time(a + (i + 1) * step - 0.05)},Txt,,0,0,0,,{part}")
     path.write_text("\n".join(lines) + "\n")
 
 
@@ -197,7 +269,7 @@ def banner_png(text: str, path: Path, width: int) -> None:
     img.save(path)
 
 
-def hook_png(text: str, red: str, path: Path, width: int) -> None:
+def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg=(20, 20, 20)) -> None:
     """Hook title card: white rounded box with bold black text; the words of `red` are drawn in red."""
     fsize = int(width * 0.068)
     font = ImageFont.truetype(BANNER_FONT, fsize)
@@ -218,11 +290,11 @@ def hook_png(text: str, red: str, path: Path, width: int) -> None:
     img = Image.new("RGBA", (bw + 12, bh + 14), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     d.rounded_rectangle([6, 11, bw + 6, bh + 11], radius=int(fsize * 0.6), fill=(0, 0, 0, 70))
-    d.rounded_rectangle([6, 6, bw + 6, bh + 6], radius=int(fsize * 0.6), fill=(255, 255, 255, 255))
+    d.rounded_rectangle([6, 6, bw + 6, bh + 6], radius=int(fsize * 0.6), fill=tuple(bg) + (255,))
     for i, (l, lw) in enumerate(zip(lines, widths)):
         x, y = 6 + (bw - lw) // 2, 6 + pad_y + i * lh - int(fsize * 0.1)
         for w in l:
-            d.text((x, y), w, font=font, fill=(200, 16, 46, 255) if norm(w) in red_words else (20, 20, 20, 255))
+            d.text((x, y), w, font=font, fill=(200, 16, 46, 255) if norm(w) in red_words else tuple(fg) + (255,))
             x += font.getbbox(w)[2] + space
     img.save(path)
 
@@ -273,8 +345,8 @@ def main() -> None:
     ap.add_argument("job_dir", type=Path)
     ap.add_argument("--clips", type=Path)
     ap.add_argument("--stills", type=Path, help="folder of first frames: build an animatic instead")
-    ap.add_argument("--vo", type=Path, required=True)
-    ap.add_argument("--words", type=Path, required=True)
+    ap.add_argument("--vo", type=Path, help="voiceover (omit for a music-only on-screen-text ad)")
+    ap.add_argument("--words", type=Path)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--name", default="ad")
     ap.add_argument("--crf", type=int, default=19, help="final export quality (higher = smaller file)")
@@ -283,20 +355,58 @@ def main() -> None:
     job = json.loads((a.job_dir / "job.json").read_text())
     out, tmp = a.out, a.out / "work"
     tmp.mkdir(parents=True, exist_ok=True)
-    words = spoken_words(a.words)
-    timeline = align_shots(job["shots"], words)
+    if a.words:
+        words = spoken_words(a.words)
+        timeline = align_shots(job["shots"], words)
+    else:                      # music-only ad: shot lengths come from job.json (vo_s), text from on_screen
+        words, timeline, t0 = [], [], 0.0
+        for sh in job["shots"]:
+            timeline.append({"id": sh["id"], "start": t0, "end": t0 + sh["vo_s"], "dur": sh["vo_s"], "words": []})
+            t0 += sh["vo_s"]
 
-    plan = {} if a.stills else share_plan(job["shots"], timeline, lambda sid: find_clip(a.clips, sid))
+    talk = {g["id"]: g for g in job.get("talk", {}).get("segments", [])}
+    full = talk.get("full")
+
+    def talk_slice(shot: dict, t: dict) -> tuple[Path, float] | None:
+        """The lip-synced clip covering this shot's time, and where in it the shot starts."""
+        cands = ([full] if full and shot["frame"] == full["frame"] else []) + \
+                [g for g in talk.values() if g["id"] != "full" and shot["id"] in g["shots"]]
+        for g in cands:
+            src = a.clips / "talk" / f"{g['id']}.mp4"
+            if src.exists() and src.stat().st_size > 0:
+                return src, max(0.0, t["start"] - g["start"])
+        return None
+
+    def full_slice(t: dict) -> tuple[Path, float] | None:
+        src = a.clips / "talk" / "full.mp4" if full else None
+        return (src, max(0.0, t["start"] - full["start"])) if src and src.exists() else None
+
+    plan = {} if a.stills else share_plan([s_ for s_ in job["shots"] if not s_.get("skip_render")], timeline, lambda sid: find_clip(a.clips, sid))
     seg_files, report = [], []
     for t, shot in zip(timeline, job["shots"]):
         dst = tmp / f"{shot['id']}.mp4"
         if a.stills:
             info = render_segment(a.stills / shot["frame"], t["dur"], dst, still=True)
+        elif shot.get("talking") and (ts := talk_slice(shot, t)):
+            info = render_segment(ts[0], t["dur"], dst, still=False, head=ts[1], boomerang=False) | {"talk": ts[0].stem}
         else:
-            src_id, head, end = plan[shot["id"]]
+            src_id, head, end = plan.get(shot["id"], (shot["id"], HEAD_TRIM, None))
             src = find_clip(a.clips, src_id)
-            info = render_segment(src, t["dur"], dst, still=False, head=head, end=end) if src else \
-                render_segment(a.job_dir / "frames" / shot["frame"], t["dur"], dst, still=True) | {"missing_clip": True}
+            if shot.get("pip") == "box" and (fs := full_slice(t)) and src:
+                inner, base = tmp / f"{shot['id']}_in.mp4", tmp / f"{shot['id']}_base.mp4"
+                info = render_segment(src, t["dur"], inner, still=False, head=head, end=end)
+                render_segment(fs[0], t["dur"], base, still=False, head=fs[1], boomerang=False)
+                overlay_box(base, inner, dst, t["dur"])
+                info |= {"pip": "box"}
+            else:
+                info = render_segment(src, t["dur"], dst, still=False, head=head, end=end) if src else \
+                    render_segment(a.job_dir / "frames" / shot["frame"], t["dur"], dst, still=True) | {"missing_clip": True}
+                if job.get("talk_inset") and not shot.get("talking") and (fs := full_slice(t)):
+                    base, talker = dst.with_name(dst.stem + "_b.mp4"), tmp / f"{shot['id']}_talker.mp4"
+                    dst.rename(base)
+                    render_segment(fs[0], t["dur"], talker, still=False, head=fs[1], boomerang=False)
+                    overlay_inset(base, talker, dst, t["dur"], tmp / "inset_mask.png")
+                    info |= {"inset": True}
             if src_id != shot["id"]:
                 info |= {"clip_of": src_id}
         seg_files.append(dst)
@@ -306,7 +416,11 @@ def main() -> None:
     run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(tmp / "concat.txt"), "-c", "copy", str(clean)])
 
     vo = tmp / "vo.m4a"
-    run(["ffmpeg", "-v", "error", "-y", "-i", str(a.vo), "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k", str(vo)])
+    if a.vo:
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(a.vo), "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k", str(vo)])
+    else:                      # silent track so the music bed can be mixed in afterwards
+        run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", f"{timeline[-1]['end']:.2f}",
+             "-c:a", "aac", "-b:a", "128k", str(vo)])
 
     banner_t = next((t["start"] for t in timeline if job.get("banner") and t["id"] == job["banner"]["from_shot"]), 0.0)
     total = timeline[-1]["end"]
@@ -325,8 +439,12 @@ def main() -> None:
     for name, f in formats.items():
         ass = tmp / f"captions_{name}.ass"
         cstyle = job.get("captions", {}).get("style", "word-highlight")
-        captions_ass(words, ass, f["res"], f["cap"][0], f["cap"][1], max_words=4 if cstyle == "subtitle" else 3,
-                     high_spans=high_spans, margin_high=f["cap_high"], style=cstyle)
+        if words:
+            captions_ass(words, ass, f["res"], f["cap"][0], f["cap"][1], max_words=4 if cstyle == "subtitle" else 3,
+                         high_spans=high_spans, margin_high=f["cap_high"], style=cstyle)
+        else:
+            on_screen_ass([(t["start"], t["end"], sh.get("on_screen", "")) for t, sh in zip(timeline, job["shots"])],
+                          ass, f["res"], int(f["cap"][0] * 0.8))
         png = tmp / f"banner_{name}.png"
         if job.get("banner"):
             banner_png(job["banner"]["text"], png, f["banner_w"])
@@ -337,7 +455,7 @@ def main() -> None:
         hook = job.get("hook_card")
         hpng = tmp / f"hook_{name}.png"
         if hook:
-            hook_png(hook["text"], hook.get("red", ""), hpng, f["banner_w"])
+            hook_png(hook["text"], hook.get("red", ""), hpng, f["banner_w"], hook.get("bg", (255, 255, 255)), hook.get("fg", (20, 20, 20)))
             spans = [(t["start"], t["end"]) for t in timeline if t["id"] in set(hook["shots"])]
             h0, h1 = min(a for a, _ in spans), max(b for _, b in spans)
             overlay += f";[b][3:v]overlay=(W-w)/2:{f['banner_y']}:enable='between(t,{h0:.2f},{h1:.2f})'[b2]"

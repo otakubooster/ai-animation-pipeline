@@ -49,7 +49,7 @@ for J in $JOBS; do
     [ -d $WORK/frames-store/.git ] || timeout 600 git clone -q --depth 1 --filter=blob:none --sparse -b "$FG_BRANCH" \
       "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git" $WORK/frames-store
     (cd $WORK/frames-store && git sparse-checkout add "$FG_PATH")
-    cp "$WORK/frames-store/$FG_PATH"/* "$WORK/frames/$ID/"
+    cp -r "$WORK/frames-store/$FG_PATH"/. "$WORK/frames/$ID/"
   else
     REL=$(python -c "import json;r=json.load(open('$REPO_DIR/$J/job.json'))['frames_release'];print(r['repo'],r['tag'],r['asset'])")
     read -r REL_REPO REL_TAG REL_ASSET <<<"$REL"
@@ -76,6 +76,31 @@ timeout 2700 python $REPO_DIR/phase0/fetch_models.py engine_a
 cp /workspace/spike/results/models.json "$OUT_ROOT/models.json"
 A=$(python -c "import json;m=json.load(open('$OUT_ROOT/models.json'))['engine_a'];print(m['model_path'],m['high'],m['low'])")
 read -r A_BASE A_HIGH A_LOW <<<"$A"
+
+# Lip-sync (InfiniteTalk) for jobs with talking-presenter segments: runs before the b-roll so each job's READY
+# marker (set after its b-roll) covers both. A failure here never stops the b-roll render.
+TALK_ITEMS=$WORK/talk_items.json
+python - "$TALK_ITEMS" "$WORK" "$OUT_ROOT" "$REPO_DIR" $JOBS <<'PY'
+import json, sys
+out, work, root, repo, jobs = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:]
+items = []
+for J in jobs:
+    j = json.load(open(f"{repo}/{J}/job.json"))
+    for g in j.get("talk", {}).get("segments", []):
+        items.append({"id": f"{j['job_id']}/{g['id']}", "image": f"{work}/frames/{j['job_id']}/{g['frame']}",
+                      "audio": f"{work}/frames/{j['job_id']}/talk/{g['id']}.wav", "out": f"{root}/{j['job_id']}/talk/{g['id']}.mp4",
+                      "prompt": "The person talks naturally and warmly straight to the camera, with small natural head movements and blinks."})
+json.dump(items, open(out, "w"), indent=1)
+print(f"{len(items)} lip-sync segments")
+PY
+if [ "$(python -c "import json;print(len(json.load(open('$TALK_ITEMS'))))")" -gt 0 ]; then
+  stage "lip-sync: models"
+  timeout 3000 python $REPO_DIR/phase0/fetch_talk.py && cp /workspace/spike/results/talk_models.json "$OUT_ROOT/talk_models.json"
+  stage "lip-sync: render $(python -c "import json;print(len(json.load(open('$TALK_ITEMS'))))") segments"
+  PUSH_HOOK="bash $REPO_DIR/jobs/push_results.sh talk" timeout ${TALK_TIMEOUT:-7200} python $REPO_DIR/jobs/talk_render.py \
+    --models "$OUT_ROOT/talk_models.json" --base-config "$LX_DIR/configs/infinitetalk/5090/infinitetalk_single_distilled.json" \
+    --size "${TALK_SIZE:-720}" "$TALK_ITEMS" || echo "lip-sync stage failed (b-roll continues)"
+fi
 
 stage "render all jobs (model loaded once)"
 # After each job, ON_JOB_DONE interpolates it in the background (CPU) and pushes it, while the GPU continues.

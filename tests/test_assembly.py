@@ -84,3 +84,24 @@ def test_share_plan_splits_a_clip_between_shots():
     assert plan["s2"] == ("s3", 0.5, 1.5) and plan["s3"] == ("s3", 1.5, 3.5) and plan["s4"] == ("s3", 3.5, 4.5)
     short = edit_ad.share_plan(shots, tl, locate=lambda sid: Path(sid), length=lambda p: 2.5)
     assert short["s3"] == ("s3", 1.0, 2.0)          # 2 s usable for 4 s of lines: proportional halves
+
+
+def test_caption_presets_caps_one_word_and_boxed(tmp_path):
+    words = [W("Your", 0.0, 0.2), W("cat's", 0.3, 0.5), W("teeth.", 0.6, 0.9)]
+    p = tmp_path / "a.ass"
+    edit_ad.captions_ass(words, p, (1080, 1920), 84, 470, style="caps-outline")
+    ev = [l.split(",,")[-1] for l in p.read_text().splitlines() if l.startswith("Dialogue")]
+    assert ev == ["YOUR CAT'S TEETH"]
+    edit_ad.captions_ass(words, p, (1080, 1920), 84, 470, style="one-word")
+    assert len([l for l in p.read_text().splitlines() if l.startswith("Dialogue")]) == 3
+    edit_ad.captions_ass(words, p, (1080, 1920), 84, 470, style="phrase-key-red")
+    assert "\\c&H2E10C8&" in p.read_text()
+    edit_ad.captions_ass(words, p, (1080, 1920), 84, 470, style="boxed")
+    assert ",3,12," in p.read_text()       # opaque box border style
+
+
+def test_on_screen_text_splits_parts_in_time(tmp_path):
+    p = tmp_path / "o.ass"
+    edit_ad.on_screen_ass([(0.0, 4.0, "First line / Second line"), (4.0, 6.0, "")], p, (1080, 1920), 70)
+    ev = [l for l in p.read_text().splitlines() if l.startswith("Dialogue")]
+    assert len(ev) == 2 and ev[0].endswith("First line") and "0:00:02.05" in ev[1]

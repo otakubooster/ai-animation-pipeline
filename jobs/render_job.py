@@ -26,7 +26,10 @@ def write(path: Path, data) -> None:
 
 
 def attempts_for(shot: dict, w: int, h: int) -> list[tuple[int, int, int]]:
-    """Full size and length first, then shorter, then 480p as the last resort."""
+    """Full size and length first, then shorter, then 480p as the last resort. A shot may set its own
+    render_size [w, h] (e.g. 3:4 picture-in-picture frames)."""
+    if shot.get("render_size"):
+        w, h = shot["render_size"]
     return [(h, w, shot["num_frames"]), (h, w, min(shot["num_frames"], 81)), (832, 480, 81)]
 
 

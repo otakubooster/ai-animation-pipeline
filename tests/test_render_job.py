@@ -52,3 +52,9 @@ def test_shot_that_always_fails_does_not_stop_the_batch(tmp_path):
     assert s["clips_failed"] == 2
     report = json.loads((tmp_path / "out_b" / "render.json").read_text())
     assert len(report["runs"][0]["attempts"]) == 3                   # full, shorter, 480p
+
+
+def test_shot_render_size_overrides_job_size():
+    import render_job
+    a = render_job.attempts_for({"num_frames": 97, "render_size": [720, 960]}, 720, 1280)
+    assert a[0] == (960, 720, 97)

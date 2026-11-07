@@ -51,9 +51,9 @@ def est_cost(o: dict, hours: float = EST_HOURS) -> float:
     return round((hours + dl_hours) * o["dph_total"] + dl_cost, 2)
 
 
-def search_offers() -> list[dict]:
+def search_offers(disk: int = DISK_GB) -> list[dict]:
     q = {"gpu_name": {"eq": "RTX 5090"}, "num_gpus": {"eq": 1}, "verified": {"eq": True},
-         "rentable": {"eq": True}, "cpu_ram": {"gte": 58000}, "disk_space": {"gte": DISK_GB},
+         "rentable": {"eq": True}, "cpu_ram": {"gte": 58000}, "disk_space": {"gte": disk},
          "reliability2": {"gte": 0.99}, "inet_down": {"gte": MIN_DOWN_MBPS}, "disk_bw": {"gte": MIN_DISK_MBPS}, "cuda_max_good": {"gte": 13.0}, "type": "on-demand",
          "order": [["dph_total", "asc"]], "limit": 60}
     offers = [o for o in call("POST", "/bundles/", q)["offers"] if not str(o.get("geolocation", "")).endswith("CN")]
@@ -80,7 +80,7 @@ def cmd_offers(_a) -> None:
 def cmd_create(a) -> None:
     if not a.yes:
         raise SystemExit("Refusing to rent without --yes (this costs money).")
-    offers = search_offers()
+    offers = search_offers(a.disk)
     offers = [o for o in offers if not any(x.lower() in str(o.get("geolocation", "")).lower() for x in a.avoid)]
     if a.offer:
         offers = [o for o in offers if o["id"] == a.offer]
@@ -100,7 +100,7 @@ def _create(a, offer: dict) -> None:
     run_id = time.strftime("%Y%m%d-%H%M%S", time.gmtime())
     max_seconds = int(min(a.max_hours, a.max_usd / offer["dph_total"]) * 3600) - 300  # box stops 5 min early
     body = {
-        "client_id": "me", "image": IMAGE, "disk": DISK_GB, "runtype": "ssh", "label": f"phase0-spike-{run_id}",
+        "client_id": "me", "image": IMAGE, "disk": a.disk, "runtype": "ssh", "label": f"phase0-spike-{run_id}",
         "onstart": (HERE / "onstart.sh").read_text(),
         "env": {"GH_REPO": a.repo, "RUN_ID": run_id, "SPIKE_DPH": str(offer["dph_total"]),
                 "SPIKE_MAX_SECONDS": str(max_seconds), "RUN_SCRIPT": a.script, **({"JOBS": " ".join(a.job)} if a.job else {})},
@@ -191,6 +191,7 @@ def main(argv=None) -> None:
     c.add_argument("--max-hours", type=float, default=2.5)
     c.add_argument("--repo", default="otakubooster/ai-animation-pipeline")
     c.add_argument("--yes", action="store_true")
+    c.add_argument("--disk", type=int, default=DISK_GB, help="GB of disk to rent (only what the batch needs)")
     c.add_argument("--avoid", nargs="*", default=["Nepal"], help="skip offers whose location contains any of these (slow hosts)")
     c.add_argument("--script", default="phase0/run_spike.sh", help="repo-relative script the box runs")
     c.add_argument("--job", nargs="*", default=[], help="job folder(s) for jobs/run_job.sh; several = one batch on one GPU")
