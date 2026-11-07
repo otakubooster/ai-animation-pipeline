@@ -2626,3 +2626,727 @@ PUSH done
 2026-11-07 22:55:56.191 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
 {"job": "mabel-on-screen-text-v1", "id": "s060", "file": "clips/s060.mp4", "ok": true, "seconds": 17.38, "usd": 0.0035, "size": [720, 1280], "num_frames": 49}
 2026-11-07T22:55:56Z === push (clips)
+PUSH ok
+PUSH done
+2026-11-07 22:56:18.210 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 2.443787 seconds
+2026-11-07 22:56:18.579 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.369091 seconds
+2026-11-07 22:56:18.585 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 2.860607 seconds
+2026-11-07 22:56:18.586 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-07 22:56:18.586 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-07 22:56:18.586 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000145 seconds
+2026-11-07 22:56:18.586 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-07 22:56:18.586 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000042 seconds
+2026-11-07 22:56:20.819 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.232510 seconds
+2026-11-07 22:56:20.819 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000216 seconds
+2026-11-07 22:56:20.819 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.233279 seconds
+2026-11-07 22:56:20.819 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-07 22:56:20.820 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000113 seconds
+2026-11-07 22:56:20.820 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-07 22:56:20.820 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000058 seconds
+2026-11-07 22:56:23.076 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.256713 seconds
+2026-11-07 22:56:23.077 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000221 seconds
+2026-11-07 22:56:23.077 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.257452 seconds
+2026-11-07 22:56:23.077 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-07 22:56:23.077 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000104 seconds
+2026-11-07 22:56:23.077 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-07 22:56:23.077 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000072 seconds
+2026-11-07 22:56:25.336 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.258761 seconds
+2026-11-07 22:56:25.336 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000144 seconds
+2026-11-07 22:56:25.336 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.259359 seconds
+2026-11-07 22:56:25.337 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-07 22:56:25.337 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000331 seconds
+2026-11-07 22:56:25.337 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-07 22:56:25.338 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000110 seconds
+2026-11-07 22:56:27.602 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.264474 seconds
+2026-11-07 22:56:27.602 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000204 seconds
+2026-11-07 22:56:27.602 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.265768 seconds
+2026-11-07 22:56:31.732 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 4.129487 seconds
+2026-11-07 22:56:31.732 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 13.146045 seconds
+2026-11-07 22:56:31.733 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001080 seconds
+2026-11-07 22:56:31.733 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-07 22:56:32.922 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/mabel-on-screen-text-v1/clips/s061.mp4 ✅
+2026-11-07 22:56:32.923 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.32 GiB, allocated=16.51 GiB, reserved=28.32 GiB, reclaimable=11.81 GiB, force=False
+2026-11-07 22:56:33.012 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 14.426475 seconds
+2026-11-07 22:56:33.012 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 17.287336 seconds
+2026-11-07 22:56:33.012 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "mabel-on-screen-text-v1", "id": "s061", "file": "clips/s061.mp4", "ok": true, "seconds": 17.29, "usd": 0.0035, "size": [720, 1280], "num_frames": 49}
+2026-11-07 22:56:35.876 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 2.830845 seconds
+2026-11-07 22:56:36.244 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.368454 seconds
+2026-11-07 22:56:36.250 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 3.236336 seconds
+2026-11-07 22:56:36.251 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-07 22:56:36.251 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-07 22:56:36.251 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000113 seconds
+2026-11-07 22:56:36.251 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-07 22:56:36.251 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000041 seconds
+2026-11-07 22:56:38.904 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.652852 seconds
+2026-11-07 22:56:38.904 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000167 seconds
+2026-11-07 22:56:38.904 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.653448 seconds
+2026-11-07 22:56:38.904 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-07 22:56:38.904 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000086 seconds
+2026-11-07 22:56:38.905 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-07 22:56:38.905 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000059 seconds
+2026-11-07 22:56:41.581 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.676885 seconds
+2026-11-07 22:56:41.582 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000158 seconds
+2026-11-07 22:56:41.582 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.677431 seconds
+2026-11-07 22:56:41.582 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-07 22:56:41.582 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000076 seconds
+2026-11-07 22:56:41.582 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-07 22:56:41.582 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000040 seconds
+2026-11-07 22:56:44.260 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.678510 seconds
+2026-11-07 22:56:44.261 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000162 seconds
+2026-11-07 22:56:44.261 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.679036 seconds
+2026-11-07 22:56:44.261 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-07 22:56:44.261 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000087 seconds
+2026-11-07 22:56:44.261 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-07 22:56:44.261 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000041 seconds
+2026-11-07 22:56:46.942 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.681023 seconds
+2026-11-07 22:56:46.942 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000136 seconds
+2026-11-07 22:56:46.942 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.681553 seconds
+2026-11-07 22:56:51.754 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 4.811724 seconds
+2026-11-07 22:56:51.754 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 15.503590 seconds
+2026-11-07 22:56:51.756 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001260 seconds
+2026-11-07 22:56:51.756 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-07 22:56:53.054 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/mabel-on-screen-text-v1/clips/s062.mp4 ✅
+2026-11-07 22:56:53.055 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.34 GiB, allocated=16.56 GiB, reserved=28.30 GiB, reclaimable=11.74 GiB, force=False
+2026-11-07 22:56:53.144 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 16.893457 seconds
+2026-11-07 22:56:53.144 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 20.130000 seconds
+2026-11-07 22:56:53.144 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "mabel-on-screen-text-v1", "id": "s062", "file": "clips/s062.mp4", "ok": true, "seconds": 20.13, "usd": 0.004, "size": [720, 1280], "num_frames": 57}
+2026-11-07 22:56:56.014 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 2.836888 seconds
+2026-11-07 22:56:56.382 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.368444 seconds
+2026-11-07 22:56:56.388 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 3.242023 seconds
+2026-11-07 22:56:56.388 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-07 22:56:56.388 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-07 22:56:56.388 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000106 seconds
+2026-11-07 22:56:56.388 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-07 22:56:56.388 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000040 seconds
+2026-11-07 22:56:59.052 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.663711 seconds
+2026-11-07 22:56:59.053 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000321 seconds
+2026-11-07 22:56:59.053 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.664580 seconds
+2026-11-07 22:56:59.053 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-07 22:56:59.053 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000104 seconds
+2026-11-07 22:56:59.053 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-07 22:56:59.053 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000046 seconds
+2026-11-07 22:57:01.743 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.690230 seconds
+2026-11-07 22:57:01.744 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000532 seconds
+2026-11-07 22:57:01.744 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.691445 seconds
+2026-11-07 22:57:01.744 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-07 22:57:01.745 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000179 seconds
+2026-11-07 22:57:01.745 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-07 22:57:01.745 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000044 seconds
+2026-11-07 22:57:04.436 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.691022 seconds
+2026-11-07 22:57:04.436 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000349 seconds
+2026-11-07 22:57:04.436 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.692087 seconds
+2026-11-07 22:57:04.436 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-07 22:57:04.437 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000168 seconds
+2026-11-07 22:57:04.437 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-07 22:57:04.437 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000071 seconds
+2026-11-07 22:57:07.129 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.692606 seconds
+2026-11-07 22:57:07.130 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000132 seconds
+2026-11-07 22:57:07.130 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.693329 seconds
+2026-11-07 22:57:11.950 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 4.820484 seconds
+2026-11-07 22:57:11.951 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 15.562454 seconds
+2026-11-07 22:57:11.952 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001363 seconds
+2026-11-07 22:57:11.952 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-07 22:57:13.230 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/mabel-on-screen-text-v1/clips/s063.mp4 ✅
+2026-11-07 22:57:13.230 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.01 GiB, allocated=16.56 GiB, reserved=28.63 GiB, reclaimable=12.07 GiB, force=False
+2026-11-07 22:57:13.564 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 17.175854 seconds
+2026-11-07 22:57:13.564 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 20.418192 seconds
+2026-11-07 22:57:13.564 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "mabel-on-screen-text-v1", "id": "s063", "file": "clips/s063.mp4", "ok": true, "seconds": 20.42, "usd": 0.0041, "size": [720, 1280], "num_frames": 57}
+2026-11-07 22:57:16.054 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 2.452173 seconds
+2026-11-07 22:57:16.423 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.369040 seconds
+2026-11-07 22:57:16.429 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 2.862554 seconds
+2026-11-07 22:57:16.429 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-07 22:57:16.429 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-07 22:57:16.430 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000109 seconds
+2026-11-07 22:57:16.430 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-07 22:57:16.430 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000058 seconds
+2026-11-07 22:57:18.685 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.255489 seconds
+2026-11-07 22:57:18.686 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000394 seconds
+2026-11-07 22:57:18.686 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.256490 seconds
+2026-11-07 22:57:18.686 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-07 22:57:18.686 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000133 seconds
+2026-11-07 22:57:18.686 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-07 22:57:18.686 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000066 seconds
+2026-11-07 22:57:20.968 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.282090 seconds
+2026-11-07 22:57:20.969 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000373 seconds
+2026-11-07 22:57:20.969 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.283095 seconds
+2026-11-07 22:57:20.969 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-07 22:57:20.969 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000260 seconds
+2026-11-07 22:57:20.970 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-07 22:57:20.970 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000058 seconds
+2026-11-07 22:57:23.251 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.281157 seconds
+2026-11-07 22:57:23.251 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000316 seconds
+2026-11-07 22:57:23.251 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.282178 seconds
+2026-11-07 22:57:23.251 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-07 22:57:23.252 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000122 seconds
+2026-11-07 22:57:23.252 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-07 22:57:23.252 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000043 seconds
+2026-11-07 22:57:25.534 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.282844 seconds
+2026-11-07 22:57:25.535 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000133 seconds
+2026-11-07 22:57:25.535 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.283464 seconds
+2026-11-07 22:57:29.681 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 4.145592 seconds
+2026-11-07 22:57:29.681 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 13.251330 seconds
+2026-11-07 22:57:29.682 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001152 seconds
+2026-11-07 22:57:29.682 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-07 22:57:30.895 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/mabel-on-screen-text-v1/clips/s064.mp4 ✅
+2026-11-07 22:57:30.896 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.87 GiB, allocated=16.51 GiB, reserved=27.77 GiB, reclaimable=11.26 GiB, force=False
+2026-11-07 22:57:30.980 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 14.551164 seconds
+2026-11-07 22:57:30.980 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 17.413918 seconds
+2026-11-07 22:57:30.980 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "mabel-on-screen-text-v1", "id": "s064", "file": "clips/s064.mp4", "ok": true, "seconds": 17.41, "usd": 0.0035, "size": [720, 1280], "num_frames": 49}
+2026-11-07 22:57:33.852 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 2.840850 seconds
+2026-11-07 22:57:34.220 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.368406 seconds
+2026-11-07 22:57:34.225 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 3.242794 seconds
+2026-11-07 22:57:34.225 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-07 22:57:34.225 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-07 22:57:34.225 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000101 seconds
+2026-11-07 22:57:34.225 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-07 22:57:34.225 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000051 seconds
+2026-11-07 22:57:36.897 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.671145 seconds
+2026-11-07 22:57:36.897 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000326 seconds
+2026-11-07 22:57:36.897 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.672004 seconds
+2026-11-07 22:57:36.897 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-07 22:57:36.897 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000145 seconds
+2026-11-07 22:57:36.898 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-07 22:57:36.898 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000044 seconds
+2026-11-07 22:57:39.595 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.697419 seconds
+2026-11-07 22:57:39.596 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000336 seconds
+2026-11-07 22:57:39.596 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.698354 seconds
+2026-11-07 22:57:39.596 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-07 22:57:39.596 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000112 seconds
+2026-11-07 22:57:39.596 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-07 22:57:39.596 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000053 seconds
+2026-11-07 22:57:42.294 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.698395 seconds
+2026-11-07 22:57:42.295 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000349 seconds
+2026-11-07 22:57:42.295 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.699301 seconds
+2026-11-07 22:57:42.295 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-07 22:57:42.295 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000122 seconds
+2026-11-07 22:57:42.295 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-07 22:57:42.295 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000062 seconds
+2026-11-07 22:57:44.994 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.699112 seconds
+2026-11-07 22:57:44.995 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000131 seconds
+2026-11-07 22:57:44.995 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.699704 seconds
+2026-11-07 22:57:49.819 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 4.824256 seconds
+2026-11-07 22:57:49.819 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 15.594025 seconds
+2026-11-07 22:57:49.821 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001269 seconds
+2026-11-07 22:57:49.821 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-07 22:57:51.250 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/mabel-on-screen-text-v1/clips/s065.mp4 ✅
+2026-11-07 22:57:51.251 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.23 GiB, allocated=16.56 GiB, reserved=28.42 GiB, reclaimable=11.86 GiB, force=False
+2026-11-07 22:57:51.387 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 17.162187 seconds
+2026-11-07 22:57:51.387 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 20.405337 seconds
+2026-11-07 22:57:51.387 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "mabel-on-screen-text-v1", "id": "s065", "file": "clips/s065.mp4", "ok": true, "seconds": 20.41, "usd": 0.0041, "size": [720, 1280], "num_frames": 57}
+2026-11-07 22:57:54.480 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 3.051194 seconds
+2026-11-07 22:57:54.848 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.368373 seconds
+2026-11-07 22:57:54.854 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 3.463203 seconds
+2026-11-07 22:57:54.855 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-07 22:57:54.855 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-07 22:57:54.855 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000144 seconds
+2026-11-07 22:57:54.855 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-07 22:57:54.855 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000089 seconds
+2026-11-07 22:57:57.741 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.885497 seconds
+2026-11-07 22:57:57.741 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000475 seconds
+2026-11-07 22:57:57.741 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.886745 seconds
+2026-11-07 22:57:57.742 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-07 22:57:57.742 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000170 seconds
+2026-11-07 22:57:57.742 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-07 22:57:57.742 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000087 seconds
+2026-11-07 22:58:00.651 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.909082 seconds
+2026-11-07 22:58:00.652 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000345 seconds
+2026-11-07 22:58:00.652 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.910119 seconds
+2026-11-07 22:58:00.652 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-07 22:58:00.652 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000109 seconds
+2026-11-07 22:58:00.652 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-07 22:58:00.652 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000043 seconds
+2026-11-07 22:58:03.564 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.912043 seconds
+2026-11-07 22:58:03.565 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000371 seconds
+2026-11-07 22:58:03.565 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.912961 seconds
+2026-11-07 22:58:03.565 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-07 22:58:03.565 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000118 seconds
+2026-11-07 22:58:03.565 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-07 22:58:03.565 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000048 seconds
+2026-11-07 22:58:06.479 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.913580 seconds
+2026-11-07 22:58:06.479 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000146 seconds
+2026-11-07 22:58:06.479 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.914204 seconds
+2026-11-07 22:58:11.644 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 5.164762 seconds
+2026-11-07 22:58:11.644 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 16.789255 seconds
+2026-11-07 22:58:11.645 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001339 seconds
+2026-11-07 22:58:11.645 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-07 22:58:13.065 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/mabel-on-screen-text-v1/clips/s066.mp4 ✅
+2026-11-07 22:58:13.066 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.58 GiB, allocated=16.59 GiB, reserved=28.07 GiB, reclaimable=11.48 GiB, force=False
+2026-11-07 22:58:13.155 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 18.300568 seconds
+2026-11-07 22:58:13.155 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 21.764024 seconds
+2026-11-07 22:58:13.155 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "mabel-on-screen-text-v1", "id": "s066", "file": "clips/s066.mp4", "ok": true, "seconds": 21.76, "usd": 0.0044, "size": [720, 1280], "num_frames": 61}
+2026-11-07 22:58:16.030 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 2.844253 seconds
+2026-11-07 22:58:16.398 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.368171 seconds
+2026-11-07 22:58:16.403 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 3.246626 seconds
+2026-11-07 22:58:16.404 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-07 22:58:16.404 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-07 22:58:16.404 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000094 seconds
+2026-11-07 22:58:16.404 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-07 22:58:16.404 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000047 seconds
+2026-11-07 22:58:19.083 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.679242 seconds
+2026-11-07 22:58:19.083 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000157 seconds
+2026-11-07 22:58:19.084 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.679808 seconds
+2026-11-07 22:58:19.084 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-07 22:58:19.084 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000078 seconds
+2026-11-07 22:58:19.084 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-07 22:58:19.084 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000043 seconds
+2026-11-07 22:58:21.788 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.704585 seconds
+2026-11-07 22:58:21.789 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000163 seconds
+2026-11-07 22:58:21.789 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.705117 seconds
+2026-11-07 22:58:21.789 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-07 22:58:21.789 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000093 seconds
+2026-11-07 22:58:21.789 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-07 22:58:21.789 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000041 seconds
+2026-11-07 22:58:24.494 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.705040 seconds
+2026-11-07 22:58:24.494 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000167 seconds
+2026-11-07 22:58:24.494 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.705624 seconds
+2026-11-07 22:58:24.494 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-07 22:58:24.495 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000302 seconds
+2026-11-07 22:58:24.495 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-07 22:58:24.495 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000102 seconds
+2026-11-07 22:58:27.201 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.706023 seconds
+2026-11-07 22:58:27.202 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000149 seconds
+2026-11-07 22:58:27.202 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.707264 seconds
+2026-11-07 22:58:32.029 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 4.827239 seconds
+2026-11-07 22:58:32.029 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 15.625517 seconds
+2026-11-07 22:58:32.031 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001301 seconds
+2026-11-07 22:58:32.031 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-07 22:58:33.434 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/mabel-on-screen-text-v1/clips/s067.mp4 ✅
+2026-11-07 22:58:33.435 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=1.82 GiB, allocated=16.56 GiB, reserved=28.83 GiB, reclaimable=12.27 GiB, force=False
+2026-11-07 22:58:33.536 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 17.132259 seconds
+2026-11-07 22:58:33.536 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 20.379156 seconds
+2026-11-07 22:58:33.536 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "mabel-on-screen-text-v1", "id": "s067", "file": "clips/s067.mp4", "ok": true, "seconds": 20.38, "usd": 0.0041, "size": [720, 1280], "num_frames": 57}
+2026-11-07 22:58:36.621 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 3.046248 seconds
+2026-11-07 22:58:36.990 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.368517 seconds
+2026-11-07 22:58:36.996 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 3.458070 seconds
+2026-11-07 22:58:36.996 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-07 22:58:36.996 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-07 22:58:36.997 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000086 seconds
+2026-11-07 22:58:36.997 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-07 22:58:36.997 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000042 seconds
+2026-11-07 22:58:39.885 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.888233 seconds
+2026-11-07 22:58:39.885 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000255 seconds
+2026-11-07 22:58:39.885 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.888966 seconds
+2026-11-07 22:58:39.886 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-07 22:58:39.886 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000110 seconds
+2026-11-07 22:58:39.886 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-07 22:58:39.886 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000066 seconds
+2026-11-07 22:58:42.799 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.913593 seconds
+2026-11-07 22:58:42.800 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000455 seconds
+2026-11-07 22:58:42.800 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.914776 seconds
+2026-11-07 22:58:42.800 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-07 22:58:42.801 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000179 seconds
+2026-11-07 22:58:42.801 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-07 22:58:42.801 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000096 seconds
+2026-11-07 22:58:45.717 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.916151 seconds
+2026-11-07 22:58:45.717 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000171 seconds
+2026-11-07 22:58:45.717 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.916936 seconds
+2026-11-07 22:58:45.717 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-07 22:58:45.718 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000080 seconds
+2026-11-07 22:58:45.718 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-07 22:58:45.718 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000044 seconds
+2026-11-07 22:58:48.634 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.916757 seconds
+2026-11-07 22:58:48.635 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000286 seconds
+2026-11-07 22:58:48.635 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.917557 seconds
+2026-11-07 22:58:53.802 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 5.167301 seconds
+2026-11-07 22:58:53.803 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 16.806114 seconds
+2026-11-07 22:58:53.804 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001411 seconds
+2026-11-07 22:58:53.804 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-07 22:58:55.115 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/mabel-on-screen-text-v1/clips/s068.mp4 ✅
+2026-11-07 22:58:55.116 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.34 GiB, allocated=16.59 GiB, reserved=28.30 GiB, reclaimable=11.71 GiB, force=False
+2026-11-07 22:58:55.229 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 18.232568 seconds
+2026-11-07 22:58:55.229 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 21.690964 seconds
+2026-11-07 22:58:55.229 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "mabel-on-screen-text-v1", "id": "s068", "file": "clips/s068.mp4", "ok": true, "seconds": 21.69, "usd": 0.0044, "size": [720, 1280], "num_frames": 61}
+{"job_done": "mabel-on-screen-text-v1", "clips_ok": 68, "clips_failed": 0, "render_s_total": 1632.2, "usd_total": 0.3275, "median_s_per_clip": 20.28}
+2026-11-07 22:58:58.699 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 3.422089 seconds
+2026-11-07 22:58:59.121 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.421281 seconds
+2026-11-07 22:58:59.227 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 3.987804 seconds
+2026-11-07 22:58:59.300 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-07 22:58:59.300 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-07 22:58:59.300 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000133 seconds
+2026-11-07 22:58:59.300 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-07 22:58:59.300 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000048 seconds
+2026-11-07 22:59:01.999 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.699349 seconds
+2026-11-07 22:59:02.001 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000991 seconds
+2026-11-07 22:59:02.002 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.702255 seconds
+2026-11-07 22:59:02.002 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-07 22:59:02.003 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000430 seconds
+2026-11-07 22:59:02.003 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-07 22:59:02.003 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000185 seconds
+2026-11-07 22:59:04.700 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.697215 seconds
+2026-11-07 22:59:04.701 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000417 seconds
+2026-11-07 22:59:04.705 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.703165 seconds
+2026-11-07 22:59:04.706 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-07 22:59:04.706 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000206 seconds
+2026-11-07 22:59:04.706 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-07 22:59:04.706 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000055 seconds
+[vost#0:0/libx264 @ 0x58d5b7c62600] [enc:libx264 @ 0x58d5b7c11e00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x58d5b7c0cd00] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5b922a2ae580] [enc:libx264 @ 0x5b922a273e00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5b922a26f3c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x58efb1372580] [enc:libx264 @ 0x58efb1328480] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x58efb1372c00] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x584aa4180d40] [enc:libx264 @ 0x584aa414bdc0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x584aa4181400] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5d1ed4173140] [enc:libx264 @ 0x5d1ed4157dc0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5d1ed4153340] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x616d9f3f26c0] [enc:libx264 @ 0x616d9f3d73c0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x616d9f3d2b40] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5ef04567d780] [enc:libx264 @ 0x5ef04564cdc0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5ef04567dec0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x59492e22f3c0] [enc:libx264 @ 0x59492e1f5180] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x59492e22fa40] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x58d5b7c0cd00] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x58d5b7c0cd00] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x58d5b7c62600] [enc:libx264 @ 0x58d5b7c11e00] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x58d5b7c62600] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x58d5b7c62600] Terminating thread with return code -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x62d9d82cc440] [enc:libx264 @ 0x62d9d8294e40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x62d9d828fd40] Error sending frames to consumers: Generic error in an external library
+[out#0/mp4 @ 0x58d5b7c0bd40] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x6136865001c0] [vost#0:0/libx264 @ 0x617886839300] [enc:libx264 @ 0x617886807e00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x6178868033c0] Error sending frames to consumers: Generic error in an external library
+[enc:libx264 @ 0x6136864dce40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x6136864d8440] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5b922a26f3c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5b922a26f3c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5b922a2ae580] [enc:libx264 @ 0x5b922a273e00] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5b922a2ae580] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5b922a2ae580] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5b922a26dd40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x584aa4181400] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x58efb1372c00] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x58efb1372c00] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x584aa4180d40] [enc:libx264 @ 0x584aa414bdc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x584aa4180d40] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x584aa4180d40] Terminating thread with return code -22 (Invalid argument)
+[vf#0:0 @ 0x584aa4181400] Terminating thread with return code -542398533 (Generic error in an external library)
+[out#0/mp4 @ 0x584aa4145d00] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x58efb1372580] [enc:libx264 @ 0x58efb1328480] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x58efb1372580] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x58efb1372580] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x58efb1372200] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5e8eaedebc40] [enc:libx264 @ 0x5e8eaeda1e00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5e8eaedd4800] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5f4d32877a40] [enc:libx264 @ 0x5f4d32846c40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5f4d32842040] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5d1026407300] [vost#0:0/libx264 @ 0x630e1f71c700] [enc:libx264 @ 0x630e1f6e9ec0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x630e1f6e5600] Error sending frames to consumers: Generic error in an external library
+[enc:libx264 @ 0x5d10263d0380] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5d1026407980] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x57274d4f2140] [enc:libx264 @ 0x57274d4d6dc0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x57274d4d2340] Error sending frames to consumers: Generic error in an external library
+[out#0/mp4 @ 0x6137fd59b480] pthread_create() failed: Resource temporarily unavailable
+[vf#0:0 @ 0x6137fd57e500] Error sending frames to consumers: Resource temporarily unavailable
+[vost#0:0/libx264 @ 0x5ea9e0c51540] [enc:libx264 @ 0x5ea9e0bfe1c0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5ea9e0bf90c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x639ad6ea6000] [enc:libx264 @ 0x639ad6e5ad40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x639ad6e8eb00] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5d1ed4153340] Task finished with error code: -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5d1ed4173140] [enc:libx264 @ 0x5d1ed4157dc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5d1ed4173140] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5d1ed4173140] Terminating thread with return code -22 (Invalid argument)
+[vf#0:0 @ 0x5d1ed4153340] Terminating thread with return code -542398533 (Generic error in an external library)
+[out#0/mp4 @ 0x5d1ed4151d00] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5d3f110ce140] [enc:libx264 @ 0x5d3f110b2e00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5d3f110ae3c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x60a40200bbc0] [enc:libx264 @ 0x60a401fd7e00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x60a40200c200] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5c03328ba300] [enc:libx264 @ 0x5c0332881100] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5c033287d0c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5e102395fdc0] [enc:libx264 @ 0x5e1023920940] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5e1023960400] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x55c609fa1b80] [enc:libx264 @ 0x55c609f64980] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x55c609f65680] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5d7718844c40] [enc:libx264 @ 0x5d771880fe00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5d771880b3c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5ec67a465180] [enc:libx264 @ 0x5ec67a42edc0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5ec67a429cc0] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x616d9f3d2b40] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x616d9f3d2b40] Terminating thread with return code -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5ef04567dec0] Task finished with error code: -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x616d9f3f26c0] [vf#0:0 @ 0x5ef04567dec0] Terminating thread with return code -542398533 (Generic error in an external library)
+[enc:libx264 @ 0x616d9f3d73c0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x616d9f3f26c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x616d9f3f26c0] Terminating thread with return code -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5ef04567d780] [enc:libx264 @ 0x5ef04564cdc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5ef04567d780] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5ef04567d780] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x616d9f3f2340] Nothing was written into output file, because at least one of its streams received no packets.
+[out#0/mp4 @ 0x5ef045646d00] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x59492e22fa40] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x59492e22fa40] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x59492e22f3c0] [enc:libx264 @ 0x59492e1f5180] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x59492e22f3c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x59492e22f3c0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x59492e22f040] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x62d9d828fd40] Task finished with error code: -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x62d9d82cc440] [enc:libx264 @ 0x62d9d8294e40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x62d9d82cc440] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x62d9d82cc440] Terminating thread with return code -22 (Invalid argument)
+[vf#0:0 @ 0x62d9d828fd40] Terminating thread with return code -542398533 (Generic error in an external library)
+[out#0/mp4 @ 0x62d9d828ed40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5f4d32842040] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5f4d32842040] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5f4d32877a40] [enc:libx264 @ 0x5f4d32846c40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5f4d32877a40] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5f4d32877a40] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5f4d32877540] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x6136864d8440] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x6136864d8440] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x6136865001c0] [enc:libx264 @ 0x6136864dce40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x6136865001c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x6136865001c0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x6136864ffcc0] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5e8eaedd4800] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5e8eaedd4800] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5e8eaedebc40] [enc:libx264 @ 0x5e8eaeda1e00] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5e8eaedebc40] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5e8eaedebc40] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5e8eaed9bd40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x6178868033c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x617886839300] [enc:libx264 @ 0x617886807e00] Could not open encoder before EOF
+[vf#0:0 @ 0x6178868033c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x617886839300] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x617886839300] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x617886801d40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x639ad6e8eb00] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x639ad6e8eb00] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x639ad6ea6000] [enc:libx264 @ 0x639ad6e5ad40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x639ad6ea6000] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x639ad6ea6000] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x639ad6e54f40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5d1026407980] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5d1026407980] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5d1026407300] [enc:libx264 @ 0x5d10263d0380] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5d1026407300] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5d1026407300] Terminating thread with return code -22 (Invalid argument)
+[vf#0:0 @ 0x630e1f6e5600] [out#0/mp4 @ 0x5d1026406f80] Nothing was written into output file, because at least one of its streams received no packets.
+Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x630e1f6e5600] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x630e1f71c700] [enc:libx264 @ 0x630e1f6e9ec0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x630e1f71c700] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x630e1f71c700] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x630e1f6e8f40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x6137fd57e500] Task finished with error code: -11 (Resource temporarily unavailable)
+[vf#0:0 @ 0x6137fd57e500] Terminating thread with return code -11 (Resource temporarily unavailable)
+[vf#0:0 @ 0x57274d4d2340] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x57274d4d2340] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x57274d4f2140] [enc:libx264 @ 0x57274d4d6dc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x57274d4f2140] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x57274d4f2140] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x57274d4d0d00] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x60a40200c200] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x60a40200c200] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x60a40200bbc0] [enc:libx264 @ 0x60a401fd7e00] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x60a40200bbc0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x60a40200bbc0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x60a401fd1d40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5ea9e0bf90c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5ea9e0bf90c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5ea9e0c51540] [enc:libx264 @ 0x5ea9e0bfe1c0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5ea9e0c51540] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5ea9e0c51540] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5ea9e0c511c0] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5c033287d0c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5c033287d0c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5c03328ba300] [enc:libx264 @ 0x5c0332881100] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5c03328ba300] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5c03328ba300] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5c03328b9e00] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5d3f110ae3c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5d3f110ae3c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5d3f110ce140] [enc:libx264 @ 0x5d3f110b2e00] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5d3f110ce140] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5d3f110ce140] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5d3f110acd40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x55c609f65680] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x55c609f65680] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x55c609fa1b80] [enc:libx264 @ 0x55c609f64980] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x55c609fa1b80] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x55c609fa1b80] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x55c609fbf400] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5e1023960400] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5e1023960400] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5e102395fdc0] [enc:libx264 @ 0x5e1023920940] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5e102395fdc0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5e102395fdc0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5e102395f8c0] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5ec67a429cc0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5ec67a429cc0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5ec67a465180] [enc:libx264 @ 0x5ec67a42edc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5ec67a465180] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5ec67a465180] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5ec67a428d00] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5d771880b3c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5d771880b3c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5d7718844c40] [enc:libx264 @ 0x5d771880fe00] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5d7718844c40] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5d7718844c40] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5d7718809d40] Nothing was written into output file, because at least one of its streams received no packets.
+2026-11-07 22:59:07.499 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.793370 seconds
+2026-11-07 22:59:07.500 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000568 seconds
+2026-11-07 22:59:07.501 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.795021 seconds
+2026-11-07 22:59:07.501 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-07 22:59:07.501 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000143 seconds
+2026-11-07 22:59:07.501 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-07 22:59:07.501 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000099 seconds
+2026-11-07 22:59:10.199 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.698230 seconds
+2026-11-07 22:59:10.201 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000504 seconds
+2026-11-07 22:59:10.201 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.700167 seconds
+[vost#0:0/libx264 @ 0x64ee355b7040] [enc:libx264 @ 0x64ee355864c0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x64ee355b7680] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x579e60c33700] [enc:libx264 @ 0x579e60c09180] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x579e60c33d80] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x634051db1280] [enc:libx264 @ 0x634051d8a180] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x634051d85700] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x64ee355b7680] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x64ee355b7680] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x64ee355b7040] [enc:libx264 @ 0x64ee355864c0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x64ee355b7040] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x64ee355b7040] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x64ee355b6b40] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5e41499899c0] [enc:libx264 @ 0x5e414996e4c0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5e4149969d00] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x634051d85700] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x634051d85700] Terminating thread with return code -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x579e60c33d80] Task finished with error code: -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x634051db1280] [enc:libx264 @ 0x634051d8a180] [vf#0:0 @ 0x579e60c33d80] Could not open encoder before EOF
+Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x634051db1280] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x634051db1280] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x634051db0f00] [vost#0:0/libx264 @ 0x579e60c33700] [enc:libx264 @ 0x579e60c09180] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x579e60c33700] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x579e60c33700] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x579e60c33380] Nothing was written into output file, because at least one of its streams received no packets.
+Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5a74362e1180] [enc:libx264 @ 0x5a743629e440] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5a74362cd8c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5ec016e58800] [enc:libx264 @ 0x5ec016dfa4c0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5ec016dfc380] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5b4472d784c0] [enc:libx264 @ 0x5b4472d4ae40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5b4472d46440] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5e4149969d00] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5e4149969d00] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5e41499899c0] [enc:libx264 @ 0x5e414996e4c0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5e41499899c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5e41499899c0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5e41499894c0] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5ec016dfc380] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5ec016dfc380] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5ec016e58800] [enc:libx264 @ 0x5ec016dfa4c0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5ec016e58800] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5ec016e58800] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5ec016e58480] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5a74362cd8c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5a74362cd8c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5a74362e1180] [enc:libx264 @ 0x5a743629e440] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5a74362e1180] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5a74362e1180] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5a74362e0c80] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5b4472d46440] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5b4472d46440] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5b4472d784c0] [enc:libx264 @ 0x5b4472d4ae40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5b4472d784c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5b4472d784c0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5b4472d77fc0] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x558efc49a2c0] [enc:libx264 @ 0x558efc46c500] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x558efc467d40] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x56e598dc0680] [enc:libx264 @ 0x56e598da5380] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x56e598dc0d00] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x56e598dc0d00] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x56e598dc0d00] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x56e598dc0680] [enc:libx264 @ 0x56e598da5380] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x56e598dc0680] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x56e598dc0680] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x56e598dc0300] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x558efc467d40] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x558efc467d40] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x558efc49a2c0] [enc:libx264 @ 0x558efc46c500] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x558efc49a2c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x558efc49a2c0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x558efc499dc0] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5c29d6a9c8c0] [enc:libx264 @ 0x5c29d6a6b180] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5c29d6a66080] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5c29d6a66080] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5c29d6a66080] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5c29d6a9c8c0] [enc:libx264 @ 0x5c29d6a6b180] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5c29d6a9c8c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5c29d6a9c8c0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5c29d6a9c540] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x6496660d7140] [enc:libx264 @ 0x6496660bbe00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x6496660b73c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x63675cf2e140] [enc:libx264 @ 0x63675cf12dc0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x63675cf0e340] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x6496660b73c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x6496660b73c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x6496660d7140] [enc:libx264 @ 0x6496660bbe00] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x6496660d7140] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x6496660d7140] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x6496660b5d40] Nothing was written into output file, because at least one of its streams received no packets.
+2026-11-07 22:59:15.199 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 4.998297 seconds
+2026-11-07 22:59:15.200 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 15.900044 seconds
+2026-11-07 22:59:15.201 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001383 seconds
+2026-11-07 22:59:15.201 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+[vf#0:0 @ 0x63675cf0e340] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x63675cf0e340] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x63675cf2e140] [enc:libx264 @ 0x63675cf12dc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x63675cf2e140] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x63675cf2e140] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x63675cf0cd00] Nothing was written into output file, because at least one of its streams received no packets.
+2026-11-07 22:59:20.716 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/vet-heart-stopped-hazel-v1/clips/s001.mp4 ✅
+2026-11-07 22:59:20.718 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.19 GiB, allocated=16.56 GiB, reserved=28.46 GiB, reclaimable=11.89 GiB, force=False
+2026-11-07 22:59:21.116 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 21.888772 seconds
+2026-11-07 22:59:21.116 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 25.877103 seconds
+2026-11-07 22:59:21.116 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "vet-heart-stopped-hazel-v1", "id": "s001", "file": "clips/s001.mp4", "ok": true, "seconds": 25.88, "usd": 0.0052, "size": [720, 1280], "num_frames": 57}
+2026-11-07 22:59:24.399 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 2.982121 seconds
+2026-11-07 22:59:24.800 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.400235 seconds
+2026-11-07 22:59:24.806 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 3.687979 seconds
+2026-11-07 22:59:24.808 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-07 22:59:24.808 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-07 22:59:24.808 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000198 seconds
+2026-11-07 22:59:24.808 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-07 22:59:24.808 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000063 seconds
+2026-11-07 22:59:27.299 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.491146 seconds
+2026-11-07 22:59:27.300 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000452 seconds
+2026-11-07 22:59:27.300 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.492429 seconds
+2026-11-07 22:59:27.300 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-07 22:59:27.300 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000148 seconds
+2026-11-07 22:59:27.301 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-07 22:59:27.301 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000053 seconds
+2026-11-07 22:59:29.799 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.498719 seconds
+2026-11-07 22:59:29.800 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000455 seconds
+2026-11-07 22:59:29.800 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.499972 seconds
+2026-11-07 22:59:29.800 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-07 22:59:29.801 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000149 seconds
+2026-11-07 22:59:29.801 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-07 22:59:29.801 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000067 seconds
+2026-11-07 22:59:32.299 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.498640 seconds
+2026-11-07 22:59:32.300 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000409 seconds
+2026-11-07 22:59:32.300 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.499837 seconds
+2026-11-07 22:59:32.300 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-07 22:59:32.300 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000149 seconds
+2026-11-07 22:59:32.301 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-07 22:59:32.301 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000065 seconds
+2026-11-07 22:59:34.799 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 2.498758 seconds
+2026-11-07 22:59:34.800 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000422 seconds
+2026-11-07 22:59:34.800 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 2.500138 seconds
+2026-11-07 22:59:39.299 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 4.498847 seconds
+2026-11-07 22:59:39.300 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 14.492025 seconds
+2026-11-07 22:59:39.301 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001300 seconds
+2026-11-07 22:59:39.301 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-07 22:59:45.219 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/vet-heart-stopped-hazel-v1/clips/s002.mp4 ✅
+2026-11-07 22:59:45.220 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=1.89 GiB, allocated=16.54 GiB, reserved=28.75 GiB, reclaimable=12.21 GiB, force=False
+2026-11-07 22:59:45.632 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 20.825504 seconds
+2026-11-07 22:59:45.700 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 24.581287 seconds
+2026-11-07 22:59:45.700 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "vet-heart-stopped-hazel-v1", "id": "s002", "file": "clips/s002.mp4", "ok": true, "seconds": 24.58, "usd": 0.0049, "size": [720, 1280], "num_frames": 53}
+2026-11-07T22:59:45Z === push (clips)
