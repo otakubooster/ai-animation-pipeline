@@ -26,7 +26,9 @@ def build_config(models: dict, base_cfg: Path, size: str, dst: Path) -> Path:
         cfg.pop("dit_original_ckpt", None)
     else:
         cfg.update(dit_original_ckpt=models["dit"], dit_quantized=False)
-        cfg.pop("dit_quantized_ckpt", None)
+        # LightX2V picks the matmul kernel from dit_quant_scheme even when dit_quantized is false.
+        for k in ("dit_quantized_ckpt", "dit_quant_scheme"):
+            cfg.pop(k, None)
     cfg["adapter_model_path"] = models["adapter"]
     cfg["adapter_quantized"] = bool(models.get("adapter_fp8"))
     if not cfg["adapter_quantized"]:
