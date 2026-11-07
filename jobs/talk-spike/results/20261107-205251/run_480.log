@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/repo/jobs/talk_render.py", line 91, in <module>
+    main()
+  File "/workspace/repo/jobs/talk_render.py", line 55, in main
+    cfg = build_config(models, Path(a.base_config), a.size, Path(f"/workspace/job/infinitetalk_{a.size}.json"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/repo/jobs/talk_render.py", line 28, in build_config
+    cfg.update(dit_original_ckpt=models["dit"], dit_quantized=False)
+                                 ~~~~~~^^^^^^^
+KeyError: 'dit'
