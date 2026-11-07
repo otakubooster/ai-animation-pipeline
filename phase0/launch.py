@@ -194,7 +194,7 @@ def main(argv=None) -> None:
     c.add_argument("--yes", action="store_true")
     c.add_argument("--env", nargs="*", default=[], help="extra KEY=VALUE for the box (e.g. SKIP_TALK=1 TALK_ONLY=1)")
     c.add_argument("--disk", type=int, default=DISK_GB, help="GB of disk to rent (only what the batch needs)")
-    c.add_argument("--avoid", nargs="*", default=["Nepal"], help="skip offers whose location contains any of these (slow hosts)")
+    c.add_argument("--avoid", nargs="*", default=["Nepal", "Japan", "Korea", "Taiwan", "Hong Kong", "China"], help="skip offers whose location contains any of these (slow hosts)")
     c.add_argument("--script", default="phase0/run_spike.sh", help="repo-relative script the box runs")
     c.add_argument("--job", nargs="*", default=[], help="job folder(s) for jobs/run_job.sh; several = one batch on one GPU")
     c.set_defaults(fn=cmd_create)
