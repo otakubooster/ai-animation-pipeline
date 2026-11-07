@@ -1,0 +1,222 @@
+2026-11-07 21:04:55.924 | INFO     | lightx2v_platform.base.base:init_ai_device:17 - Initialized AI_DEVICE: cuda
+2026-11-07 21:04:55.985 | INFO     | lightx2v_platform.base.base:check_ai_device:34 - AI device for platform 'cuda' is available.
+2026-11-07 21:04:56.620 | INFO     | lightx2v.utils.set_config:build_startup_config:72 - Loading some config from /workspace/job/infinitetalk_720.json
+2026-11-07 21:04:56.620 | DEBUG    | lightx2v.utils.utils:validate_config_paths:775 - ✓ Verified dit_quantized_ckpt: /workspace/models/talk/wan2.1_i2v_480p_scaled_fp8_e4m3_lightx2v_4step.safetensors
+2026-11-07 21:04:56.620 | DEBUG    | lightx2v.utils.utils:validate_config_paths:809 - ✓ Verified adapter_model_path: /workspace/models/talk/single/infinitetalk.safetensors
+2026-11-07 21:04:56.620 | INFO     | lightx2v.utils.utils:validate_config_paths:832 - ✓ Config checkpoint paths validated successfully
+/app/MagiAttention/magi_attention/__init__.py:46: UserWarning: You are using magi_attention without installing it. This may cause some unexpected errors.
+  warnings.warn(
+2026-11-07 21:04:57.670 | INFO     | lightx2v.common.ops.attn.dynamic_sparse_attn:<module>:30 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 21:04:57.907 | INFO     | lightx2v.common.ops.attn.sage_attn:<module>:17 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 21:04:57.929 | INFO     | lightx2v.common.ops.attn.sage_attn:<module>:56 - sageattn3_sparse not found, please install sageattention sparse first
+2026-11-07 21:04:57.944 | INFO     | lightx2v.common.ops.attn.sparse_operator:<module>:19 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 21:04:59.801 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:init_modules:252 - Initializing InfiniteTalk runner modules...
+2026-11-07 21:04:59.894 | INFO     | lightx2v.models.networks.base_model:_load_quant_ckpt:689 - Loading weights from /workspace/models/talk/wan2.1_i2v_480p_scaled_fp8_e4m3_lightx2v_4step.safetensors
+2026-11-07 21:04:59.986 | INFO     | lightx2v.models.networks.wan.infinitetalk_model:_load_adapter_ckpt:38 - Loading InfiniteTalk adapter weights from /workspace/models/talk/single/infinitetalk.safetensors
+2026-11-07 21:05:39.113 | INFO     | lightx2v.utils.utils:load_weights:532 - Loading weights from /workspace/models/Wan2.1-I2V-14B-480P/models_t5_umt5-xxl-enc-bf16.pth
+2026-11-07 21:05:54.394 | INFO     | lightx2v.utils.utils:load_weights:532 - Loading weights from /workspace/models/Wan2.1-I2V-14B-480P/models_clip_open-clip-xlm-roberta-large-vit-huge-14.pth
+2026-11-07 21:05:59.450 | INFO     | lightx2v.utils.utils:load_weights:532 - Loading weights from /workspace/models/Wan2.1-I2V-14B-480P/Wan2.1_VAE.pth
+Loading weights:   0%|          | 0/211 [00:00<?, ?it/s]Loading weights: 100%|██████████| 211/211 [00:00<00:00, 34453.15it/s]
+[transformers] [1mWav2Vec2Model LOAD REPORT[0m from: /workspace/models/chinese-wav2vec2-base
+Key                          | Status     |  | 
+-----------------------------+------------+--+-
+quantizer.weight_proj.bias   | UNEXPECTED |  | 
+project_q.bias               | UNEXPECTED |  | 
+project_hid.weight           | UNEXPECTED |  | 
+quantizer.codevectors        | UNEXPECTED |  | 
+project_q.weight             | UNEXPECTED |  | 
+project_hid.bias             | UNEXPECTED |  | 
+quantizer.weight_proj.weight | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+2026-11-07 21:06:00.639 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Load models cost 60.749053 seconds
+2026-11-07 21:06:00.639 | INFO     | lightx2v.pipeline:create_generator:166 - Initialized infinitetalk runner; supported tasks: s2v
+2026-11-07 21:06:00.639 | INFO     | lightx2v.pipeline:create_generator:167 - Model path: /workspace/models/Wan2.1-I2V-14B-480P
+2026-11-07 21:06:00.639 | INFO     | lightx2v.pipeline:create_generator:168 - LightGenerator initialized successfully!
+{'do_mm_calib': False, 'cpu_offload': True, 'cpu_offload_numa': False, 'shared_cpu_weights': False, 'shared_cpu_weight_scope': 'auto', 'shared_cpu_weight_strict_numa': True, 'shared_cpu_weight_register_chunk_mb': 128, 'max_area': False, 'vae_stride': (4, 8, 8), 'patch_size': (1, 2, 2), 'feature_caching': 'NoCaching', 'teacache_thresh': 0.26, 'use_ret_steps': False, 'use_bfloat16': True, 'lora_configs': None, 'lora_merge_force_fp32': False, 'parallel': False, 'seq_parallel': False, 'cfg_parallel': False, 'pipefusion_parallel': False, 'enable_cfg': False, 'warmup': False, 'use_image_encoder': True, '_class_name': 'WanModel', '_diffusers_version': '0.30.0', 'dim': 5120, 'eps': 1e-06, 'ffn_dim': 13824, 'freq_dim': 256, 'in_dim': 36, 'model_type': 'i2v', 'num_heads': 40, 'num_layers': 40, 'out_dim': 16, 'text_len': 512, 'task': 's2v', 'model_path': '/workspace/models/Wan2.1-I2V-14B-480P', 'model_cls': 'infinitetalk', 'config_json': '/workspace/job/infinitetalk_720.json', 'infer_steps': 4, 'num_frames': 81, 'motion_frame': 9, 'fps': 25, 'video_duration': 300, 'infinitetalk_mode': 'single', 'infinitetalk_size': 'infinitetalk-720', 'dit_quantized_ckpt': '/workspace/models/talk/wan2.1_i2v_480p_scaled_fp8_e4m3_lightx2v_4step.safetensors', 'dit_quantized': True, 'dit_quant_scheme': 'fp8-sgl', 'adapter_model_path': '/workspace/models/talk/single/infinitetalk.safetensors', 'adapter_quantized': False, 'audio_encoder_path': '/workspace/models/chinese-wav2vec2-base', 'clip_quantized': False, 't5_quantized': False, 'audio_sample_rate': 16000, 'sample_shift': 5, 'sample_text_guide_scale': 1.0, 'sample_audio_guide_scale': 1.0, 'enable_text_cfg': False, 'offload_granularity': 'block', 't5_cpu_offload': True, 'vae_cpu_offload': False, 'clip_cpu_offload': False, 'self_attn_1_type': 'sage_attn2', 'cross_attn_1_type': 'sage_attn2', 'cross_attn_2_type': 'sage_attn2', 'audio_cross_attn_type': 'sage_attn2', 'size': [720, 1280], 'audio_window': 5, 'infinitetalk_vae_scale': 4, 'infinitetalk_context_tokens': 32, 'infinitetalk_audio_output_dim': 768, 'norm_output_audio': True, 'mxfp8_fuse_enable': False, 'use_timestep_transform': True, 'async_vae_decode': False}
+{"talk_model_load_s": 65.5, "size": "720"}
+2026-11-07 21:06:01.046 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_prepare_input_data:926 - InfiniteTalk cond_video: /workspace/repo/phase0/talk/presenter.jpg
+[transformers] `use_return_dict` is deprecated! Use `return_dict` instead!
+2026-11-07 21:06:04.744 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Audio Encoder cost 3.685096 seconds
+2026-11-07 21:06:06.343 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 1.599659 seconds
+2026-11-07 21:06:06.344 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 5.285159 seconds
+2026-11-07 21:06:06.344 | WARNING  | lightx2v.models.runners.wan.wan_infinitetalk_runner:_resolve_expected_frames:1041 - Input video_duration is greater than actual audio duration, using audio duration instead: audio_duration=13.0, video_duration=300.0
+2026-11-07 21:06:06.345 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:init_run:1071 - InfiniteTalk seed: 42
+2026-11-07 21:06:06.345 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:init_run:1072 - InfiniteTalk expected_frames: 325, fps: 25, duration: 13.000s
+2026-11-07 21:06:06.399 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:get_video_segment_num:1084 - InfiniteTalk video segments: 5
+2026-11-07 21:06:06.399 | INFO     | lightx2v.utils.va_controller:init_base:40 - VAController init base with stream config: {}
+2026-11-07 21:06:06.399 | INFO     | lightx2v.utils.va_controller:init_recorder:90 - Rank 0 init recorder with: /workspace/job/out/talk-spike/sample_720.mp4
+2026-11-07 21:06:06.404 | INFO     | lightx2v.utils.va_recorder:__init__:39 - VARecorder audio port: 36235, video port: 36236, ffmpeg_log_level: error
+2026-11-07 21:06:06.404 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_init_stream_video_controller:1150 - init va_recorder: <lightx2v.utils.va_recorder.VARecorder object at 0x752f7bd44090> and va_reader: None
+2026-11-07 21:06:06.404 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:run_main:1234 - start InfiniteTalk segment 1/5
+2026-11-07 21:06:06.444 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Slice segment audio embeddings cost 0.039387 seconds
+2026-11-07 21:06:06.802 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Image Encoder cost 0.358110 seconds
+2026-11-07 21:06:10.820 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run condition VAE Encoder cost 4.018257 seconds
+2026-11-07 21:06:10.881 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run motion VAE Encoder cost 0.060961 seconds
+2026-11-07 21:06:10.972 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_build_ref_target_masks:915 - InfiniteTalk ref_target_masks built: human_num=1, mask_shape=(4, 160, 88)
+2026-11-07 21:06:10.976 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Init run segment cost 4.572254 seconds
+2026-11-07 21:06:10.976 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 1 / 4
+2026-11-07 21:06:10.977 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000066 seconds
+2026-11-07 21:06:47.666 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 36.688905 seconds
+2026-11-07 21:06:47.666 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000228 seconds
+2026-11-07 21:06:47.666 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 2 / 4
+2026-11-07 21:06:47.666 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000045 seconds
+2026-11-07 21:07:01.687 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.021063 seconds
+2026-11-07 21:07:01.688 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000186 seconds
+2026-11-07 21:07:01.688 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 3 / 4
+2026-11-07 21:07:01.688 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000059 seconds
+2026-11-07 21:07:15.701 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.013480 seconds
+2026-11-07 21:07:15.702 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000117 seconds
+2026-11-07 21:07:15.702 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 4 / 4
+2026-11-07 21:07:15.702 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000031 seconds
+2026-11-07 21:07:29.720 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.018392 seconds
+2026-11-07 21:07:29.720 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000119 seconds
+2026-11-07 21:07:29.720 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run segment DiT cost 78.743987 seconds
+2026-11-07 21:07:36.435 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 6.714857 seconds
+2026-11-07 21:07:36.961 | INFO     | lightx2v.utils.va_recorder:pub_livestream:406 - Publishing video [81x704x1280], audio: [51840]
+2026-11-07 21:07:36.964 | INFO     | lightx2v.utils.va_recorder:start_ffmpeg_process_local:225 - FFmpeg streaming started with PID: 1059
+2026-11-07 21:07:36.964 | INFO     | lightx2v.utils.va_recorder:start_ffmpeg_process_local:226 - FFmpeg command: ffmpeg -fflags nobuffer -analyzeduration 0 -probesize 32 -flush_packets 1 -f s16le -ar 16000 -ac 1 -i tcp://127.0.0.1:36235 -f rawvideo -pix_fmt rgb24 -color_range pc -colorspace rgb -color_primaries bt709 -color_trc iec61966-2-1 -r 25 -s 704x1280 -i tcp://127.0.0.1:36236 -ar 44100 -c:v libx264 -preset medium -tune zerolatency -g 25 -pix_fmt yuv420p -f mp4 /workspace/job/out/talk-spike/sample_720.mp4 -y -loglevel error
+2026-11-07 21:07:36.966 | INFO     | lightx2v.utils.va_recorder:audio_worker:89 - Waiting for ffmpeg to connect to audio socket...
+2026-11-07 21:07:36.966 | INFO     | lightx2v.utils.va_recorder:video_worker:125 - Waiting for ffmpeg to connect to video socket...
+2026-11-07 21:07:36.966 | INFO     | lightx2v.utils.va_recorder:pub_livestream:414 - Published 81 frames and 51840 audio samples
+2026-11-07 21:07:36.995 | INFO     | lightx2v.utils.va_recorder:audio_worker:91 - Audio connection established from ('127.0.0.1', 51268)
+2026-11-07 21:07:37.000 | INFO     | lightx2v.utils.va_recorder:video_worker:127 - Video connection established from ('127.0.0.1', 42948)
+2026-11-07 21:07:37.418 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log End run segment cost 7.697089 seconds
+2026-11-07 21:07:37.418 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/5 cost 91.013722 seconds
+2026-11-07 21:07:37.418 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:run_main:1234 - start InfiniteTalk segment 2/5
+2026-11-07 21:07:37.435 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Slice segment audio embeddings cost 0.017480 seconds
+2026-11-07 21:07:37.474 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Image Encoder cost 0.038697 seconds
+2026-11-07 21:07:41.458 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run condition VAE Encoder cost 3.971444 seconds
+2026-11-07 21:07:41.902 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run motion VAE Encoder cost 0.443025 seconds
+2026-11-07 21:07:41.914 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_build_ref_target_masks:915 - InfiniteTalk ref_target_masks built: human_num=1, mask_shape=(4, 160, 88)
+2026-11-07 21:07:41.918 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Init run segment cost 4.500544 seconds
+2026-11-07 21:07:41.919 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 1 / 4
+2026-11-07 21:07:41.919 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000037 seconds
+2026-11-07 21:07:55.953 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.034772 seconds
+2026-11-07 21:07:55.954 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000232 seconds
+2026-11-07 21:07:55.954 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 2 / 4
+2026-11-07 21:07:55.954 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000031 seconds
+2026-11-07 21:08:09.985 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.030756 seconds
+2026-11-07 21:08:09.985 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000213 seconds
+2026-11-07 21:08:09.985 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 3 / 4
+2026-11-07 21:08:09.985 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000031 seconds
+2026-11-07 21:08:24.027 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.041308 seconds
+2026-11-07 21:08:24.027 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000207 seconds
+2026-11-07 21:08:24.027 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 4 / 4
+2026-11-07 21:08:24.027 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000031 seconds
+2026-11-07 21:08:38.088 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.060518 seconds
+2026-11-07 21:08:38.088 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000336 seconds
+2026-11-07 21:08:38.088 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run segment DiT cost 56.169815 seconds
+2026-11-07 21:08:44.733 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 6.644050 seconds
+2026-11-07 21:08:45.060 | INFO     | lightx2v.utils.va_recorder:pub_livestream:406 - Publishing video [72x704x1280], audio: [46080]
+2026-11-07 21:08:45.060 | INFO     | lightx2v.utils.va_recorder:pub_livestream:414 - Published 72 frames and 46080 audio samples
+2026-11-07 21:08:45.412 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log End run segment cost 7.324014 seconds
+2026-11-07 21:08:45.413 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 2/5 cost 67.994759 seconds
+2026-11-07 21:08:45.413 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:run_main:1234 - start InfiniteTalk segment 3/5
+2026-11-07 21:08:45.427 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Slice segment audio embeddings cost 0.014047 seconds
+2026-11-07 21:08:45.445 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Image Encoder cost 0.018172 seconds
+2026-11-07 21:08:49.389 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run condition VAE Encoder cost 3.943722 seconds
+2026-11-07 21:08:49.832 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run motion VAE Encoder cost 0.442773 seconds
+2026-11-07 21:08:49.843 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_build_ref_target_masks:915 - InfiniteTalk ref_target_masks built: human_num=1, mask_shape=(4, 160, 88)
+2026-11-07 21:08:49.846 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Init run segment cost 4.433237 seconds
+2026-11-07 21:08:49.846 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 1 / 4
+2026-11-07 21:08:49.846 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000034 seconds
+2026-11-07 21:09:03.918 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.071951 seconds
+2026-11-07 21:09:03.919 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000255 seconds
+2026-11-07 21:09:03.919 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 2 / 4
+2026-11-07 21:09:03.919 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000029 seconds
+2026-11-07 21:09:17.970 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.051699 seconds
+2026-11-07 21:09:17.971 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000299 seconds
+2026-11-07 21:09:17.971 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 3 / 4
+2026-11-07 21:09:17.971 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000059 seconds
+2026-11-07 21:09:32.039 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.068139 seconds
+2026-11-07 21:09:32.040 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000235 seconds
+2026-11-07 21:09:32.040 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 4 / 4
+2026-11-07 21:09:32.040 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000030 seconds
+2026-11-07 21:09:46.097 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.057019 seconds
+2026-11-07 21:09:46.097 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000209 seconds
+2026-11-07 21:09:46.097 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run segment DiT cost 56.251325 seconds
+2026-11-07 21:09:52.743 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 6.645721 seconds
+2026-11-07 21:09:53.099 | INFO     | lightx2v.utils.va_recorder:pub_livestream:406 - Publishing video [72x704x1280], audio: [46080]
+2026-11-07 21:09:53.099 | INFO     | lightx2v.utils.va_recorder:pub_livestream:414 - Published 72 frames and 46080 audio samples
+2026-11-07 21:09:53.427 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log End run segment cost 7.329416 seconds
+2026-11-07 21:09:53.427 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 3/5 cost 68.014300 seconds
+2026-11-07 21:09:53.427 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:run_main:1234 - start InfiniteTalk segment 4/5
+2026-11-07 21:09:53.444 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Slice segment audio embeddings cost 0.017103 seconds
+2026-11-07 21:09:53.485 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Image Encoder cost 0.040418 seconds
+2026-11-07 21:09:57.432 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run condition VAE Encoder cost 3.947034 seconds
+2026-11-07 21:09:57.875 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run motion VAE Encoder cost 0.443039 seconds
+2026-11-07 21:09:57.885 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_build_ref_target_masks:915 - InfiniteTalk ref_target_masks built: human_num=1, mask_shape=(4, 160, 88)
+2026-11-07 21:09:57.888 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Init run segment cost 4.460774 seconds
+2026-11-07 21:09:57.888 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 1 / 4
+2026-11-07 21:09:57.888 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000034 seconds
+2026-11-07 21:10:11.967 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.079348 seconds
+2026-11-07 21:10:11.968 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000437 seconds
+2026-11-07 21:10:11.968 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 2 / 4
+2026-11-07 21:10:11.968 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000032 seconds
+2026-11-07 21:10:26.036 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.067201 seconds
+2026-11-07 21:10:26.036 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000203 seconds
+2026-11-07 21:10:26.036 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 3 / 4
+2026-11-07 21:10:26.036 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000029 seconds
+2026-11-07 21:10:40.094 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.057528 seconds
+2026-11-07 21:10:40.094 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000211 seconds
+2026-11-07 21:10:40.094 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 4 / 4
+2026-11-07 21:10:40.094 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000029 seconds
+2026-11-07 21:10:54.149 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.055115 seconds
+2026-11-07 21:10:54.150 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000356 seconds
+2026-11-07 21:10:54.150 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run segment DiT cost 56.261760 seconds
+2026-11-07 21:11:00.795 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 6.644640 seconds
+2026-11-07 21:11:01.243 | INFO     | lightx2v.utils.va_recorder:pub_livestream:406 - Publishing video [72x704x1280], audio: [46080]
+2026-11-07 21:11:01.244 | INFO     | lightx2v.utils.va_recorder:pub_livestream:414 - Published 72 frames and 46080 audio samples
+2026-11-07 21:11:01.769 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log End run segment cost 7.619596 seconds
+2026-11-07 21:11:01.770 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 4/5 cost 68.342511 seconds
+2026-11-07 21:11:01.770 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:run_main:1234 - start InfiniteTalk segment 5/5
+2026-11-07 21:11:01.807 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Slice segment audio embeddings cost 0.020351 seconds
+2026-11-07 21:11:01.858 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Image Encoder cost 0.050772 seconds
+2026-11-07 21:11:05.825 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run condition VAE Encoder cost 3.954942 seconds
+2026-11-07 21:11:06.269 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run motion VAE Encoder cost 0.443024 seconds
+2026-11-07 21:11:06.282 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_build_ref_target_masks:915 - InfiniteTalk ref_target_masks built: human_num=1, mask_shape=(4, 160, 88)
+2026-11-07 21:11:06.287 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Init run segment cost 4.516898 seconds
+2026-11-07 21:11:06.287 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 1 / 4
+2026-11-07 21:11:06.287 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000068 seconds
+2026-11-07 21:11:20.353 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.065914 seconds
+2026-11-07 21:11:20.353 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000211 seconds
+2026-11-07 21:11:20.353 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 2 / 4
+2026-11-07 21:11:20.353 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000029 seconds
+2026-11-07 21:11:34.420 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.066397 seconds
+2026-11-07 21:11:34.420 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000202 seconds
+2026-11-07 21:11:34.420 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 3 / 4
+2026-11-07 21:11:34.420 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000033 seconds
+2026-11-07 21:11:48.499 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.078190 seconds
+2026-11-07 21:11:48.499 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000400 seconds
+2026-11-07 21:11:48.499 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_run_dit_clip:992 - ==> step_index: 4 / 4
+2026-11-07 21:11:48.499 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000059 seconds
+2026-11-07 21:12:02.572 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log infer_main cost 14.072577 seconds
+2026-11-07 21:12:02.572 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000261 seconds
+2026-11-07 21:12:02.572 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run segment DiT cost 56.285570 seconds
+2026-11-07 21:12:09.219 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 6.646253 seconds
+2026-11-07 21:12:09.468 | INFO     | lightx2v.utils.va_recorder:pub_livestream:406 - Publishing video [28x704x1280], audio: [17920]
+2026-11-07 21:12:09.468 | INFO     | lightx2v.utils.va_recorder:pub_livestream:414 - Published 28 frames and 17920 audio samples
+2026-11-07 21:12:09.740 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log End run segment cost 7.167552 seconds
+2026-11-07 21:12:09.740 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 5/5 cost 67.970435 seconds
+2026-11-07 21:12:09.740 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:process_images_after_vae_decoder:1254 - Video saved to /workspace/job/out/talk-spike/sample_720.mp4
+2026-11-07 21:12:09.740 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Process after vae decoder cost 0.000042 seconds
+2026-11-07 21:12:09.740 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT + decode cost 363.396534 seconds
+2026-11-07 21:12:09.740 | INFO     | lightx2v.utils.va_recorder:audio_worker:99 - Audio thread received stop signal
+2026-11-07 21:12:09.740 | INFO     | lightx2v.utils.va_recorder:audio_worker:121 - Audio push worker thread stopped
+2026-11-07 21:12:09.993 | INFO     | lightx2v.utils.va_recorder:video_worker:136 - Video thread received stop signal
+2026-11-07 21:12:09.994 | INFO     | lightx2v.utils.va_recorder:video_worker:164 - Video push worker thread stopped
+2026-11-07 21:12:09.994 | INFO     | lightx2v.utils.va_recorder:stop:543 - Audio connection shutdown initiated
+2026-11-07 21:12:09.994 | INFO     | lightx2v.utils.va_recorder:stop:552 - Video connection shutdown initiated
+2026-11-07 21:12:09.994 | INFO     | lightx2v.utils.va_recorder:stop:561 - Waiting for FFmpeg to finalize file (timeout=30s, local_file=True)
+2026-11-07 21:12:09.994 | INFO     | lightx2v.utils.va_recorder:stop:562 - FFmpeg output: /workspace/job/out/talk-spike/sample_720.mp4
+2026-11-07 21:12:10.001 | INFO     | lightx2v.utils.va_recorder:stop:567 - FFmpeg process exited successfully (exit code: 0)
+2026-11-07 21:12:10.001 | INFO     | lightx2v.utils.va_recorder:stop:630 - VARecorder stopped and resources cleaned up
+2026-11-07 21:12:10.001 | INFO     | lightx2v.utils.va_recorder:stop:630 - VARecorder stopped and resources cleaned up
+2026-11-07 21:12:10.002 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:end_run:1381 - Muxing InfiniteTalk stream audio /workspace/job/sample.wav into /workspace/job/out/talk-spike/sample_720.mp4
+2026-11-07 21:12:10.079 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:_mux_audio:1357 - Muxed audio from /workspace/job/sample.wav
+2026-11-07 21:12:10.422 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 369.751854 seconds
+2026-11-07 21:12:10.627 | INFO     | lightx2v.models.runners.base_runner:_maybe_freeze_gc:185 - [GC] gc.collect() reclaimed 0 objects; gc.freeze() moved ~715018 live tracked objects out of future GC walks
+2026-11-07 21:12:10.627 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"id": "sample_720", "size": "720", "audio_s": 13.0, "ok": true, "seconds": 370.0, "s_per_video_s": 28.46, "usd": 0.075}
