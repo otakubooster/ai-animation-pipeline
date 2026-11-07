@@ -1,3 +1,40 @@
 2026-11-07T21:15:11Z [+0s] === setup
 NVIDIA GeForce RTX 5090, 32607 MiB, 580.173.02
 2026-11-07T21:15:11Z === push (box alive - upload test)
+PUSH done
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+diffusers 0.38.0 requires huggingface-hub<2.0,>=0.34.0, but you have huggingface-hub 2.4.0 which is incompatible.
+tokenizers 0.22.2 requires huggingface-hub<2.0,>=0.16.4, but you have huggingface-hub 2.4.0 which is incompatible.
+transformers 5.9.0 requires huggingface-hub<2.0,>=1.5.0, but you have huggingface-hub 2.4.0 which is incompatible.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+LightX2V 9fd3d98
+2026-11-07T21:15:29Z [+18s] === talk models
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 13 files:  31%|███       | 4/13 [00:00<00:00, 36.33it/s]Fetching 13 files:  62%|██████▏   | 8/13 [00:00<00:00, 22.64it/s]Fetching 13 files:  85%|████████▍ | 11/13 [00:08<00:02,  1.06s/it]Fetching 13 files:  85%|████████▍ | 11/13 [00:19<00:02,  1.06s/it]Fetching 13 files:  92%|█████████▏| 12/13 [00:55<00:08,  8.27s/it]Fetching 13 files: 100%|██████████| 13/13 [00:57<00:00,  7.16s/it]Fetching 13 files: 100%|██████████| 13/13 [00:57<00:00,  4.46s/it]
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files:  67%|██████▋   | 4/6 [00:00<00:00, 35.25it/s]Fetching 6 files: 100%|██████████| 6/6 [00:05<00:00,  1.13it/s]
+{"dit": "/workspace/models/talk/wan2.1_i2v_480p_lightx2v_4step.safetensors", "adapter": "/workspace/models/talk/single/infinitetalk.safetensors", "model_path": "/workspace/models/Wan2.1-I2V-14B-480P"}
+2026-11-07T21:19:03Z === push (talk models)
+To https://github.com/otakubooster/ai-animation-pipeline.git
+ ! [rejected]        HEAD -> job-results (non-fast-forward)
+error: failed to push some refs to 'https://github.com/otakubooster/ai-animation-pipeline.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+Committer identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'root@591cf94bd80a.(none)')
+PUSH done
+2026-11-07T21:19:04Z [+233s] === lip-sync tests
+2026-11-07T21:19:11Z === push (test 480)
