@@ -32,6 +32,12 @@ def build_config(models: dict, base_cfg: Path, size: str, dst: Path) -> Path:
     if not cfg["adapter_quantized"]:
         cfg.pop("adapter_quant_scheme", None)
     cfg["audio_encoder_path"] = models["audio_encoder"]
+    # Base Wan2.1 repo ships bf16 T5/CLIP only: no quantized encoders; keep T5 on the CPU to leave VRAM for the DiT.
+    cfg.update(t5_quantized=False, clip_quantized=False, t5_cpu_offload=True)
+    for k in ("t5_quant_scheme", "clip_quant_scheme"):
+        cfg.pop(k, None)
+    if models.get("dit_fallback"):
+        cfg["sample_shift"] = 5   # LightX2V's distilled Wan2.1 I2V setting
     cfg["video_duration"] = 300
     dst.write_text(json.dumps(cfg, indent=1))
     return dst

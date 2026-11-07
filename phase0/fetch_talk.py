@@ -63,6 +63,26 @@ def main() -> None:
                 score = (2 if "fp8" in fl else 1) + (1 if r.startswith("lightx2v") else 0)
                 if not adapter or score > adapter[2]:
                     adapter = (r, f, score)
+    # The 4-step InfiniteTalk DiT that LightX2V's 5090 config names is not public. Fallback: LightX2V's own
+    # 4-step distilled Wan2.1 I2V 480P DiT (the base InfiniteTalk is built on) + MeiGen's single-person adapter.
+    if not dit:
+        for r in ("lightx2v/Wan2.1-Distill-Models", "lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v"):
+            try:
+                fs = [f for f in api.list_repo_files(r) if f.endswith(".safetensors")]
+            except Exception as e:  # noqa: BLE001
+                m.setdefault("errors", []).append(f"files {r}: {e}")
+                continue
+            m["repo_files"][r] = fs
+            c = [f for f in fs if "i2v" in f.lower() and "480" in f.lower() and "lora" not in f.lower()] or \
+                [f for f in fs if "lora" not in f.lower()]
+            c.sort(key=lambda f: (0 if "fp8" in f.lower() else 1 if "bf16" in f.lower() else 2, len(f)))
+            if c:
+                dit = (r, c[0], 0)
+                m["dit_fallback"] = True
+                break
+    adapter_bf16 = "MeiGen-AI/InfiniteTalk" in m["repo_files"] and "single/infinitetalk.safetensors" in m["repo_files"]["MeiGen-AI/InfiniteTalk"]
+    if m.get("dit_fallback") and adapter_bf16:
+        adapter = ("MeiGen-AI/InfiniteTalk", "single/infinitetalk.safetensors", 0)
     save()
     if not dit or not adapter:
         m["error"] = f"missing dit={dit} adapter={adapter}"
@@ -79,7 +99,8 @@ def main() -> None:
     w2v = MODELS / "chinese-wav2vec2-base"
     timed("wav2vec", lambda: snapshot_download("TencentGameMate/chinese-wav2vec2-base", local_dir=w2v))
     m.update(model_path=str(base), dit=dp, dit_fp8="fp8" in dit[1].lower(), adapter=ap,
-             adapter_fp8="fp8" in adapter[1].lower(), audio_encoder=str(w2v))
+             adapter_fp8="fp8" in adapter[1].lower(), audio_encoder=str(w2v), dit_fallback=bool(m.get("dit_fallback")),
+             sizes_gb={k: round(Path(v).stat().st_size / 1e9, 2) for k, v in (("dit", dp), ("adapter", ap))})
     save()
     print(json.dumps({k: m[k] for k in ("dit", "adapter", "model_path")}))
 
