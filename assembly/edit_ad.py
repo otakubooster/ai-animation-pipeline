@@ -299,9 +299,19 @@ def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg
     img.save(path)
 
 
+def playable(p: Path) -> bool:
+    """A clip that exists and decodes (interpolation on the box can leave empty or truncated files)."""
+    if not p.exists() or p.stat().st_size < 1024:
+        return False
+    try:
+        return probe_duration(p) > 0.1
+    except (ValueError, subprocess.CalledProcessError):
+        return False
+
+
 def find_clip(clips: Path, sid: str) -> Path | None:
     return next((p for p in [clips / "clips_32fps" / f"{sid}.mp4", clips / "clips" / f"{sid}.mp4", clips / f"{sid}.mp4"]
-                 if p.exists() and p.stat().st_size > 0), None)     # an empty file = interpolation cut short
+                 if playable(p)), None)
 
 
 def clip_source(shot: dict) -> str:
