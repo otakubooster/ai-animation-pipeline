@@ -1,0 +1,71 @@
+2026-11-07 21:57:24.874 | INFO     | lightx2v_platform.base.base:init_ai_device:17 - Initialized AI_DEVICE: cuda
+2026-11-07 21:57:25.144 | INFO     | lightx2v_platform.base.base:check_ai_device:34 - AI device for platform 'cuda' is available.
+2026-11-07 21:57:26.493 | INFO     | lightx2v.utils.set_config:build_startup_config:72 - Loading some config from /workspace/job/infinitetalk_720.json
+2026-11-07 21:57:26.494 | DEBUG    | lightx2v.utils.utils:validate_config_paths:779 - ✓ Verified dit_original_ckpt: /workspace/models/talk/wan2.1_i2v_480p_lightx2v_4step.safetensors
+2026-11-07 21:57:26.494 | DEBUG    | lightx2v.utils.utils:validate_config_paths:809 - ✓ Verified adapter_model_path: /workspace/models/talk/single/infinitetalk.safetensors
+2026-11-07 21:57:26.494 | INFO     | lightx2v.utils.utils:validate_config_paths:832 - ✓ Config checkpoint paths validated successfully
+/app/MagiAttention/magi_attention/__init__.py:46: UserWarning: You are using magi_attention without installing it. This may cause some unexpected errors.
+  warnings.warn(
+2026-11-07 21:57:28.366 | INFO     | lightx2v.common.ops.attn.dynamic_sparse_attn:<module>:30 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 21:57:28.683 | INFO     | lightx2v.common.ops.attn.sage_attn:<module>:17 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 21:57:28.709 | INFO     | lightx2v.common.ops.attn.sage_attn:<module>:56 - sageattn3_sparse not found, please install sageattention sparse first
+2026-11-07 21:57:28.723 | INFO     | lightx2v.common.ops.attn.sparse_operator:<module>:19 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 21:57:32.154 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:init_modules:252 - Initializing InfiniteTalk runner modules...
+2026-11-07 21:57:32.316 | INFO     | lightx2v.models.networks.base_model:_load_ckpt:620 - Loading weights from /workspace/models/talk/wan2.1_i2v_480p_lightx2v_4step.safetensors
+2026-11-07 21:57:32.352 | INFO     | lightx2v.models.networks.wan.infinitetalk_model:_load_adapter_ckpt:38 - Loading InfiniteTalk adapter weights from /workspace/models/talk/single/infinitetalk.safetensors
+2026-11-07 21:57:35.398 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Load models cost 3.084094 seconds
+Traceback (most recent call last):
+  File "/workspace/repo/jobs/talk_render.py", line 97, in <module>
+    main()
+  File "/workspace/repo/jobs/talk_render.py", line 67, in main
+    pipe.create_generator(config_json=str(cfg))
+  File "/workspace/LightX2V/lightx2v/pipeline.py", line 164, in create_generator
+    self.runner = build_runner(config)
+                  ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/LightX2V/lightx2v/models/runners/runner_factory.py", line 76, in build_runner
+    runner.init_modules()
+  File "/workspace/LightX2V/lightx2v/models/runners/base_runner.py", line 63, in init_modules
+    result = init_modules_fn(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/LightX2V/lightx2v/models/runners/wan/wan_infinitetalk_runner.py", line 253, in init_modules
+    self.load_model()
+  File "/workspace/LightX2V/lightx2v/utils/profiler.py", line 214, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/LightX2V/lightx2v/models/runners/wan/wan_infinitetalk_runner.py", line 260, in load_model
+    self.model = self.load_transformer()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/LightX2V/lightx2v/models/runners/wan/wan_infinitetalk_runner.py", line 268, in load_transformer
+    return WanInfiniteTalkModel(self.config["model_path"], self.config, self.init_device)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/LightX2V/lightx2v/models/networks/wan/infinitetalk_model.py", line 22, in __init__
+    super().__init__(model_path, config, device, model_type="infinitetalk", lora_path=lora_path, lora_strength=lora_strength)
+  File "/workspace/LightX2V/lightx2v/models/networks/wan/model.py", line 75, in __init__
+    self._init_weights()
+  File "/workspace/LightX2V/lightx2v/models/networks/base_model.py", line 264, in _init_weights
+    self._init_weights_impl(weight_dict)
+  File "/workspace/LightX2V/lightx2v/models/networks/base_model.py", line 338, in _init_weights_impl
+    self._apply_weights()
+  File "/workspace/LightX2V/lightx2v/models/networks/wan/model.py", line 86, in _apply_weights
+    super()._apply_weights(weight_dict)
+  File "/workspace/LightX2V/lightx2v/models/networks/base_model.py", line 447, in _apply_weights
+    self.transformer_weights.load(self.original_weight_dict)
+  File "/workspace/LightX2V/lightx2v/common/modules/weight_module.py", line 34, in load
+    module.load(weight_dict)
+  File "/workspace/LightX2V/lightx2v/common/modules/weight_module.py", line 34, in load
+    module.load(weight_dict)
+  File "/workspace/LightX2V/lightx2v/common/modules/weight_module.py", line 34, in load
+    module.load(weight_dict)
+  [Previous line repeated 2 more times]
+  File "/workspace/LightX2V/lightx2v/common/ops/mm/mm_weight.py", line 524, in load
+    self.load_quantized(weight_dict)
+  File "/workspace/LightX2V/lightx2v/common/ops/mm/mm_weight.py", line 565, in load_quantized
+    result = create_cuda_buffers(self.base_attrs, weight_dict, self.lazy_load, self.lazy_load_file, scale_force_fp32=self.scale_force_fp32, bias_force_fp32=self.bias_force_fp32)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/LightX2V/lightx2v/common/ops/utils.py", line 145, in create_cuda_buffers
+    tensor = get_source_tensor(name, weight_dict, lazy_load, lazy_load_file, use_infer_dtype, scale_force_fp32, bias_force_fp32)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/LightX2V/lightx2v/common/ops/utils.py", line 73, in get_source_tensor
+    return weight_dict[source_name].to(torch.float32)
+           ~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'blocks.0.self_attn.q.weight_scale'
