@@ -1,0 +1,16 @@
+2026-11-07 22:44:52.837 | INFO     | lightx2v_platform.base.base:init_ai_device:17 - Initialized AI_DEVICE: cuda
+2026-11-07 22:44:52.952 | INFO     | lightx2v_platform.base.base:check_ai_device:34 - AI device for platform 'cuda' is available.
+2026-11-07 22:44:53.826 | INFO     | lightx2v.utils.set_config:build_startup_config:72 - Loading some config from /workspace/job/infinitetalk_480.json
+2026-11-07 22:44:53.826 | DEBUG    | lightx2v.utils.utils:validate_config_paths:779 - ✓ Verified dit_original_ckpt: /workspace/models/talk/wan2.1_i2v_480p_lightx2v_4step.safetensors
+2026-11-07 22:44:53.826 | DEBUG    | lightx2v.utils.utils:validate_config_paths:809 - ✓ Verified adapter_model_path: /workspace/models/talk/single/infinitetalk.safetensors
+2026-11-07 22:44:53.826 | INFO     | lightx2v.utils.utils:validate_config_paths:832 - ✓ Config checkpoint paths validated successfully
+/app/MagiAttention/magi_attention/__init__.py:46: UserWarning: You are using magi_attention without installing it. This may cause some unexpected errors.
+  warnings.warn(
+2026-11-07 22:44:55.179 | INFO     | lightx2v.common.ops.attn.dynamic_sparse_attn:<module>:30 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 22:44:55.490 | INFO     | lightx2v.common.ops.attn.sage_attn:<module>:17 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 22:44:55.517 | INFO     | lightx2v.common.ops.attn.sage_attn:<module>:56 - sageattn3_sparse not found, please install sageattention sparse first
+2026-11-07 22:44:55.533 | INFO     | lightx2v.common.ops.attn.sparse_operator:<module>:19 - sageattn3_sparse not found, please install sageattn3_sparse first
+2026-11-07 22:44:57.801 | INFO     | lightx2v.models.runners.wan.wan_infinitetalk_runner:init_modules:252 - Initializing InfiniteTalk runner modules...
+2026-11-07 22:44:57.886 | INFO     | lightx2v.models.networks.base_model:_load_ckpt:620 - Loading weights from /workspace/models/talk/wan2.1_i2v_480p_lightx2v_4step.safetensors
+2026-11-07 22:44:58.073 | INFO     | lightx2v.models.networks.wan.infinitetalk_model:_load_adapter_ckpt:38 - Loading InfiniteTalk adapter weights from /workspace/models/talk/single/infinitetalk.safetensors
+2026-11-07 22:45:54.938 | INFO     | lightx2v.utils.utils:load_weights:532 - Loading weights from /workspace/models/Wan2.1-I2V-14B-480P/models_t5_umt5-xxl-enc-bf16.pth
