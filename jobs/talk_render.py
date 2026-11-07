@@ -45,6 +45,17 @@ def build_config(models: dict, base_cfg: Path, size: str, dst: Path) -> Path:
     return dst
 
 
+def last_luma(path: Path) -> float | None:
+    """Mean luma of a frame near the end (16 = pure black in limited range)."""
+    try:
+        r = subprocess.run(["ffmpeg", "-v", "error", "-sseof", "-0.5", "-i", str(path), "-frames:v", "1", "-vf",
+                            "signalstats,metadata=print:file=-", "-f", "null", "-"], capture_output=True, text=True, timeout=60)
+        v = [l.split("=")[1] for l in r.stdout.splitlines() if "YAVG" in l]
+        return round(float(v[0]), 1) if v else None
+    except Exception:
+        return None
+
+
 def audio_seconds(path: str) -> float:
     return float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path],
                                 capture_output=True, text=True, check=True).stdout)
@@ -55,12 +66,19 @@ def main() -> None:
     ap.add_argument("--models", required=True)
     ap.add_argument("--base-config", required=True)
     ap.add_argument("--size", default="720", choices=list(SIZES))
+    ap.add_argument("--override", default="{}", help="JSON merged into the config last (spike variants)")
+    ap.add_argument("--dit", help="use this DiT file instead of the one in --models")
     ap.add_argument("items")
     a = ap.parse_args()
     dph = float(os.environ.get("SPIKE_DPH", "0") or 0)
     models = json.loads(Path(a.models).read_text())
+    if a.dit:
+        models.update(dit=a.dit, dit_fp8="fp8" in a.dit.lower())
     items = json.loads(Path(a.items).read_text())
     cfg = build_config(models, Path(a.base_config), a.size, Path(f"/workspace/job/infinitetalk_{a.size}.json"))
+    ov = json.loads(a.override)
+    if ov:
+        c = json.loads(cfg.read_text()); c.update(ov); cfg.write_text(json.dumps(c, indent=1))
 
     t0 = time.perf_counter()
     from lightx2v import LightX2VPipeline
@@ -81,7 +99,9 @@ def main() -> None:
                           image_path=it["image"], audio_path=it["audio"], save_result_path=str(out))
             secs = time.perf_counter() - t
             rec.update(ok=True, seconds=round(secs, 1), s_per_video_s=round(secs / max(rec["audio_s"], 0.1), 2),
-                       usd=round(secs * dph / 3600, 4))
+                       usd=round(secs * dph / 3600, 4), last_frame_luma=last_luma(out))
+            if rec["last_frame_luma"] is not None and rec["last_frame_luma"] < 18:
+                rec["ok"], rec["error"] = False, "black frames (model output NaN/zeros)"
         except Exception:
             rec.update(ok=False, seconds=round(time.perf_counter() - t, 1), error=traceback.format_exc()[-2000:])
             try:
