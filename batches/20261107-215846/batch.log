@@ -1,3 +1,17 @@
 2026-11-07T21:59:18Z [+1s] === setup
 NVIDIA GeForce RTX 5090, 32607 MiB, 595.99.02
 2026-11-07T21:59:18Z === push (box alive - upload test)
+PUSH done
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+diffusers 0.38.0 requires huggingface-hub<2.0,>=0.34.0, but you have huggingface-hub 2.4.0 which is incompatible.
+tokenizers 0.22.2 requires huggingface-hub<2.0,>=0.16.4, but you have huggingface-hub 2.4.0 which is incompatible.
+transformers 5.9.0 requires huggingface-hub<2.0,>=1.5.0, but you have huggingface-hub 2.4.0 which is incompatible.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+LightX2V 9fd3d98
+2026-11-07T21:59:52Z [+35s] === talk models
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 13 files:   8%|▊         | 1/13 [00:00<00:04,  2.51it/s]Fetching 13 files:  23%|██▎       | 3/13 [00:00<00:01,  6.30it/s]Fetching 13 files:  38%|███▊      | 5/13 [00:01<00:01,  4.77it/s]Fetching 13 files:  46%|████▌     | 6/13 [00:01<00:01,  3.65it/s]Fetching 13 files:  54%|█████▍    | 7/13 [00:01<00:01,  4.34it/s]Fetching 13 files:  62%|██████▏   | 8/13 [00:02<00:02,  2.20it/s]Fetching 13 files:  69%|██████▉   | 9/13 [00:11<00:11,  2.97s/it]Fetching 13 files:  77%|███████▋  | 10/13 [00:22<00:15,  5.23s/it]Fetching 13 files:  85%|████████▍ | 11/13 [00:36<00:15,  7.94s/it]Fetching 13 files:  92%|█████████▏| 12/13 [01:52<00:27, 27.91s/it]Fetching 13 files: 100%|██████████| 13/13 [02:14<00:00, 26.21s/it]Fetching 13 files: 100%|██████████| 13/13 [02:14<00:00, 10.35s/it]
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files:  17%|█▋        | 1/6 [00:00<00:00,  5.88it/s]Fetching 6 files:  67%|██████▋   | 4/6 [00:00<00:00, 15.74it/s]Fetching 6 files: 100%|██████████| 6/6 [00:13<00:00,  2.87s/it]Fetching 6 files: 100%|██████████| 6/6 [00:13<00:00,  2.22s/it]
+{"dit": "/workspace/models/talk/wan2.1_i2v_480p_lightx2v_4step.safetensors", "adapter": "/workspace/models/talk/single/infinitetalk.safetensors", "model_path": "/workspace/models/Wan2.1-I2V-14B-480P"}
+2026-11-07T22:08:08Z === push (talk models)
