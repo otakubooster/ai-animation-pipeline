@@ -25,10 +25,16 @@ for d in "$OUT_ROOT"/*/; do
 done
 mkdir -p "$dst/batches/$RUN_ID" && cp "$OUT_ROOT"/*.log "$OUT_ROOT"/*.jsonl "$OUT_ROOT"/*.txt "$dst/batches/$RUN_ID/" 2>/dev/null
 cd $dst && git add --sparse -A jobs batches && git -c user.name=vast-render -c user.email=render@localhost commit -qm "$RUN_ID: $1"
-# If the branch moved (a concurrent push), rebase once and retry.
-if ! out=$(timeout 300 git push -q origin HEAD:job-results 2>&1); then
-  echo "$out" | sed 's/x-access-token:[^@]*@/***@/'
-  timeout 120 git pull -q --rebase origin job-results && timeout 300 git push -q origin HEAD:job-results && echo "PUSH ok after rebase"
-fi
+# If the branch moved (another box pushed), rebuild our commit on top of the new tip: our files live only under
+# this run's own folders, so re-adding them on the fresh tip can never conflict. (A rebase on a shallow clone
+# got stuck on 2026-11-07 and blocked every later push.) Up to 3 tries.
+for try in 1 2 3; do
+  if out=$(timeout 300 git push -q origin HEAD:job-results 2>&1); then echo "PUSH ok"; break; fi
+  echo "$out" | sed 's/x-access-token:[^@]*@/***@/' | tail -2
+  rm -rf .git/rebase-merge .git/rebase-apply
+  timeout 120 git fetch -q --depth 1 origin job-results || continue
+  git reset -q --mixed FETCH_HEAD
+  git add --sparse -A jobs batches && git -c user.name=vast-render -c user.email=render@localhost commit -qm "$RUN_ID: $1" || true
+done
 echo "PUSH done"
 exit 0
