@@ -49,7 +49,13 @@ def render_job(pipe, job_json: Path, frames_dir: Path, out: Path, dph: float, ho
     done = {r["id"] for r in report["runs"] if r.get("ok")}
     w, h = job["render"]["width"], job["render"]["height"]
     for shot in job["shots"]:
-        if shot["id"] in done or shot.get("skip_render"):
+        if shot["id"] in done:
+            continue
+        if os.environ.get("ONLY_TALKING"):        # fallback pass: animate only the presenter's talking shots
+            if not shot.get("talking"):
+                continue
+            shot = dict(shot, motion_prompt=shot.get("talk_motion_prompt") or shot.get("motion_prompt", ""))
+        elif shot.get("skip_render"):
             continue
         run = {"id": shot["id"], "file": f"clips/{shot['id']}.mp4", "attempts": []}
         for (hh, ww, nf) in attempts_for(shot, w, h):
