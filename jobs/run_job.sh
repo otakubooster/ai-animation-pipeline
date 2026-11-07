@@ -72,10 +72,12 @@ if [ -z "$LX_DIR" ] || [ ! -d "$LX_DIR/configs" ]; then
 fi
 (cd $LX_DIR && echo "LightX2V $(git rev-parse --short HEAD 2>/dev/null)") | tee "$OUT_ROOT/versions.txt"
 export PYTHONPATH="$REPO_DIR/phase0:${PYTHONPATH:-}"
-timeout 2700 python $REPO_DIR/phase0/fetch_models.py engine_a
-cp /workspace/spike/results/models.json "$OUT_ROOT/models.json"
-A=$(python -c "import json;m=json.load(open('$OUT_ROOT/models.json'))['engine_a'];print(m['model_path'],m['high'],m['low'])")
-read -r A_BASE A_HIGH A_LOW <<<"$A"
+if [ -z "${TALK_ONLY:-}" ]; then
+  timeout 2700 python $REPO_DIR/phase0/fetch_models.py engine_a
+  cp /workspace/spike/results/models.json "$OUT_ROOT/models.json"
+  A=$(python -c "import json;m=json.load(open('$OUT_ROOT/models.json'))['engine_a'];print(m['model_path'],m['high'],m['low'])")
+  read -r A_BASE A_HIGH A_LOW <<<"$A"
+fi
 
 # Lip-sync (InfiniteTalk) for jobs with talking-presenter segments: runs before the b-roll so each job's READY
 # marker (set after its b-roll) covers both. A failure here never stops the b-roll render.
@@ -93,7 +95,7 @@ for J in jobs:
 json.dump(items, open(out, "w"), indent=1)
 print(f"{len(items)} lip-sync segments")
 PY
-if [ "$(python -c "import json;print(len(json.load(open('$TALK_ITEMS'))))")" -gt 0 ]; then
+if [ -z "${SKIP_TALK:-}" ] && [ "$(python -c "import json;print(len(json.load(open('$TALK_ITEMS'))))")" -gt 0 ]; then
   stage "lip-sync: models"
   timeout 3000 python $REPO_DIR/phase0/fetch_talk.py && cp /workspace/spike/results/talk_models.json "$OUT_ROOT/talk_models.json"
   stage "lip-sync: render $(python -c "import json;print(len(json.load(open('$TALK_ITEMS'))))") segments"
@@ -102,6 +104,7 @@ if [ "$(python -c "import json;print(len(json.load(open('$TALK_ITEMS'))))")" -gt
     --size "${TALK_SIZE:-720}" "$TALK_ITEMS" || echo "lip-sync stage failed (b-roll continues)"
 fi
 
+if [ -n "${TALK_ONLY:-}" ]; then stage "talk-only run: done"; exit 0; fi
 stage "render all jobs (model loaded once)"
 # After each job, ON_JOB_DONE interpolates it in the background (CPU) and pushes it, while the GPU continues.
 export ON_JOB_DONE="bash $REPO_DIR/jobs/finish_job.sh"

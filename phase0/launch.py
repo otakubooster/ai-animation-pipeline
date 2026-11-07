@@ -103,7 +103,8 @@ def _create(a, offer: dict) -> None:
         "client_id": "me", "image": IMAGE, "disk": a.disk, "runtype": "ssh", "label": f"phase0-spike-{run_id}",
         "onstart": (HERE / "onstart.sh").read_text(),
         "env": {"GH_REPO": a.repo, "RUN_ID": run_id, "SPIKE_DPH": str(offer["dph_total"]),
-                "SPIKE_MAX_SECONDS": str(max_seconds), "RUN_SCRIPT": a.script, **({"JOBS": " ".join(a.job)} if a.job else {})},
+                "SPIKE_MAX_SECONDS": str(max_seconds), "RUN_SCRIPT": a.script, **({"JOBS": " ".join(a.job)} if a.job else {}),
+                **dict(kv.split("=", 1) for kv in a.env)},
     }
     res = call("PUT", f"/asks/{offer['id']}/", body)
     iid = res.get("new_contract")
@@ -191,6 +192,7 @@ def main(argv=None) -> None:
     c.add_argument("--max-hours", type=float, default=2.5)
     c.add_argument("--repo", default="otakubooster/ai-animation-pipeline")
     c.add_argument("--yes", action="store_true")
+    c.add_argument("--env", nargs="*", default=[], help="extra KEY=VALUE for the box (e.g. SKIP_TALK=1 TALK_ONLY=1)")
     c.add_argument("--disk", type=int, default=DISK_GB, help="GB of disk to rent (only what the batch needs)")
     c.add_argument("--avoid", nargs="*", default=["Nepal"], help="skip offers whose location contains any of these (slow hosts)")
     c.add_argument("--script", default="phase0/run_spike.sh", help="repo-relative script the box runs")
