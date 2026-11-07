@@ -37,7 +37,9 @@ def build_config(models: dict, base_cfg: Path, size: str, dst: Path) -> Path:
     for k in ("t5_quant_scheme", "clip_quant_scheme"):
         cfg.pop(k, None)
     if models.get("dit_fallback"):
-        cfg["sample_shift"] = 5   # LightX2V's distilled Wan2.1 I2V setting
+        cfg["sample_shift"] = 5   # LightX2V's distilled Wan2.1 I2V settings
+        cfg["denoising_step_list"] = [1000, 750, 500, 250]
+        cfg["distill_method"] = "dmd2"
     cfg["video_duration"] = 300
     dst.write_text(json.dumps(cfg, indent=1))
     return dst

@@ -42,7 +42,7 @@ push "talk models"
 
 stage "lip-sync tests"
 ffmpeg -v error -y -i $REPO_DIR/phase0/talk/sample_en.mp3 -ac 1 -ar 16000 $WORK/sample.wav
-for SIZE in 720 480; do
+for SIZE in 480 720; do
   echo "[{\"id\": \"sample_$SIZE\", \"image\": \"$REPO_DIR/phase0/talk/presenter.jpg\", \"audio\": \"$WORK/sample.wav\", \"out\": \"$OUT/sample_$SIZE.mp4\", \"prompt\": \"A woman vet talks warmly and naturally to the camera at her desk.\"}]" > $WORK/items_$SIZE.json
   timeout 1500 python $REPO_DIR/jobs/talk_render.py --models $OUT/talk_models.json \
     --base-config $LX_DIR/configs/infinitetalk/5090/infinitetalk_single_distilled.json --size $SIZE $WORK/items_$SIZE.json \

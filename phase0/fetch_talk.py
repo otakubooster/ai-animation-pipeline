@@ -75,7 +75,9 @@ def main() -> None:
             m["repo_files"][r] = fs
             c = [f for f in fs if "i2v" in f.lower() and "480" in f.lower() and "lora" not in f.lower()] or \
                 [f for f in fs if "lora" not in f.lower()]
-            c.sort(key=lambda f: (0 if "fp8" in f.lower() else 1 if "bf16" in f.lower() else 2, len(f)))
+            # Unquantized first: the public InfiniteTalk adapter is bf16, and LightX2V needs the adapter in the same
+            # quant scheme as the DiT (fp8 DiT + bf16 adapter rendered black frames, 2026-11-07).
+            c.sort(key=lambda f: (1 if ("fp8" in f.lower() or "int8" in f.lower() or "comfyui" in f.lower()) else 0, len(f)))
             if c:
                 dit = (r, c[0], 0)
                 m["dit_fallback"] = True
