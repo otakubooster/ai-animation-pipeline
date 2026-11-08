@@ -387,9 +387,20 @@ def main() -> None:
                 return src, max(0.0, t["start"] - g["start"])
         return None
 
-    def full_slice(t: dict) -> tuple[Path, float] | None:
-        src = a.clips / "talk" / "full.mp4" if full else None
-        return (src, max(0.0, t["start"] - full["start"])) if src and src.exists() else None
+    def full_slice(t: dict) -> tuple[Path, float, bool] | None:
+        """Talker footage under a PiP box / inset: the full-length lip-sync clip, else (no lip-sync) the plain
+        Wan talking clip of the same presenter nearest in time, looped (third value = exact/in sync)."""
+        if not full:
+            return None
+        src = a.clips / "talk" / "full.mp4"
+        if src.exists() and src.stat().st_size > 0:
+            return src, max(0.0, t["start"] - full["start"]), True
+        near = sorted((abs(tt["start"] - t["start"]), sh["id"]) for tt, sh in zip(timeline, job["shots"])
+                      if sh.get("talking") and sh["frame"] == full["frame"])
+        for _, sid in near:
+            if (c := find_clip(a.clips, sid)):
+                return c, HEAD_TRIM, False
+        return None
 
     plan = {} if a.stills else share_plan([s_ for s_ in job["shots"] if not s_.get("skip_render")], timeline, lambda sid: find_clip(a.clips, sid))
     seg_files, report = [], []
@@ -405,7 +416,7 @@ def main() -> None:
             if shot.get("pip") == "box" and (fs := full_slice(t)) and src:
                 inner, base = tmp / f"{shot['id']}_in.mp4", tmp / f"{shot['id']}_base.mp4"
                 info = render_segment(src, t["dur"], inner, still=False, head=head, end=end)
-                render_segment(fs[0], t["dur"], base, still=False, head=fs[1], boomerang=False)
+                render_segment(fs[0], t["dur"], base, still=False, head=fs[1], boomerang=not fs[2])
                 overlay_box(base, inner, dst, t["dur"])
                 info |= {"pip": "box"}
             else:
@@ -414,7 +425,7 @@ def main() -> None:
                 if job.get("talk_inset") and not shot.get("talking") and (fs := full_slice(t)):
                     base, talker = dst.with_name(dst.stem + "_b.mp4"), tmp / f"{shot['id']}_talker.mp4"
                     dst.rename(base)
-                    render_segment(fs[0], t["dur"], talker, still=False, head=fs[1], boomerang=False)
+                    render_segment(fs[0], t["dur"], talker, still=False, head=fs[1], boomerang=not fs[2])
                     overlay_inset(base, talker, dst, t["dur"], tmp / "inset_mask.png")
                     info |= {"inset": True}
             if src_id != shot["id"]:
