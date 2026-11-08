@@ -19568,3 +19568,367 @@ PUSH done
 2026-11-08 01:29:10.415 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
 {"job": "japan-cat-islands-v1", "id": "s080", "file": "clips/s080.mp4", "ok": true, "seconds": 43.93, "usd": 0.0088, "size": [720, 1280], "num_frames": 117}
 2026-11-08T01:29:10Z === push (clips)
+PUSH ok
+PUSH done
+2026-11-08 01:29:36.302 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 3.205835 seconds
+2026-11-08 01:29:36.670 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.368146 seconds
+2026-11-08 01:29:36.677 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 3.626049 seconds
+2026-11-08 01:29:36.677 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-08 01:29:36.677 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-08 01:29:36.678 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000310 seconds
+2026-11-08 01:29:36.678 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-08 01:29:36.678 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000101 seconds
+2026-11-08 01:29:39.721 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.043092 seconds
+2026-11-08 01:29:39.721 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000173 seconds
+2026-11-08 01:29:39.721 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.044113 seconds
+2026-11-08 01:29:39.721 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-08 01:29:39.722 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000101 seconds
+2026-11-08 01:29:39.722 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-08 01:29:39.722 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000040 seconds
+2026-11-08 01:29:42.793 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.071146 seconds
+2026-11-08 01:29:42.793 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000151 seconds
+2026-11-08 01:29:42.793 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.071714 seconds
+2026-11-08 01:29:42.793 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-08 01:29:42.793 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000097 seconds
+2026-11-08 01:29:42.793 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-08 01:29:42.793 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000040 seconds
+2026-11-08 01:29:45.870 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.076216 seconds
+2026-11-08 01:29:45.870 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000163 seconds
+2026-11-08 01:29:45.870 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.076788 seconds
+2026-11-08 01:29:45.870 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-08 01:29:45.870 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000088 seconds
+2026-11-08 01:29:45.870 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-08 01:29:45.870 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000040 seconds
+2026-11-08 01:29:48.950 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.079900 seconds
+2026-11-08 01:29:48.950 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000154 seconds
+2026-11-08 01:29:48.950 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.080499 seconds
+2026-11-08 01:29:54.419 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 5.468657 seconds
+2026-11-08 01:29:54.419 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 17.742166 seconds
+2026-11-08 01:29:54.421 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001425 seconds
+2026-11-08 01:29:54.421 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-08 01:29:55.834 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/japan-cat-islands-v1/clips/s082.mp4 ✅
+2026-11-08 01:29:55.836 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=1.93 GiB, allocated=16.61 GiB, reserved=28.71 GiB, reclaimable=12.10 GiB, force=False
+2026-11-08 01:29:55.940 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 19.263226 seconds
+2026-11-08 01:29:55.940 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 22.889489 seconds
+2026-11-08 01:29:55.940 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "japan-cat-islands-v1", "id": "s082", "file": "clips/s082.mp4", "ok": true, "seconds": 22.89, "usd": 0.0046, "size": [720, 1280], "num_frames": 65}
+{"job_done": "japan-cat-islands-v1", "clips_ok": 69, "clips_failed": 0, "render_s_total": 1467.7, "usd_total": 0.2944, "median_s_per_clip": 18.85}
+[vost#0:0/libx264 @ 0x5784d948c800] [enc:libx264 @ 0x5784d945bd40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5784d9457300] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5710b3386080] [enc:libx264 @ 0x5710b334bdc0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5710b3386740] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5bbf8ba8c800] [enc:libx264 @ 0x5bbf8ba5bd80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5bbf8ba57380] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5e65ae254180] [enc:libx264 @ 0x5e65ae21cd00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5e65ae218280] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x610901df0100] [vost#0:0/libx264 @ 0x605495fd7280] [enc:libx264 @ 0x610901dd4d40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x610901dd0300] Error sending frames to consumers: Generic error in an external library
+[enc:libx264 @ 0x605495f9fd40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x605495f9b0c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x638fd78b1140] [enc:libx264 @ 0x638fd7895dc0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x638fd78b1800] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5844dbf39140] [enc:libx264 @ 0x5844dbf1dd80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5844dbf39780] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5e799e383240] [enc:libx264 @ 0x5e799e367dc0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5e799e383880] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5863e77e5980] [enc:libx264 @ 0x5863e77ca400] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5863e77e5fc0] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5710b3386740] Task finished with error code: -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5710b3386080] [enc:libx264 @ 0x5710b334bdc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5710b3386080] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5710b3386080] Terminating thread with return code -22 (Invalid argument)
+[vf#0:0 @ 0x5710b3386740] Terminating thread with return code -542398533 (Generic error in an external library)
+[out#0/mp4 @ 0x5710b3345cc0] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5ed5ed0fb440] [enc:libx264 @ 0x5ed5ed0e00c0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5ed5ed0fbac0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x57f226daa480] [enc:libx264 @ 0x57f226d66d40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x57f226d967c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x6280c1ceef80] [enc:libx264 @ 0x6280c1cb7d00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x6280c1cef640] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5784d9457300] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5784d9457300] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5784d948c800] [enc:libx264 @ 0x5784d945bd40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5784d948c800] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5784d948c800] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5784d9455c80] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5bbf8ba57380] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5bbf8ba57380] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5bbf8ba8c800] [enc:libx264 @ 0x5bbf8ba5bd80] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5bbf8ba8c800] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5bbf8ba8c800] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5bbf8ba8c300] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5922a999d140] [enc:libx264 @ 0x5922a9981d80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5922a999d7c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x586953f37240] [enc:libx264 @ 0x586953f1bd80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x586953f17380] Error sending frames to consumers: Generic error in an external library
+[out#0/mp4 @ 0x5581a6a6bc80] pthread_create() failed: Resource temporarily unavailable
+[vf#0:0 @ 0x5581a6aa2e40] Error sending frames to consumers: Resource temporarily unavailable
+[vf#0:0 @ 0x5e65ae218280] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5e65ae218280] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5e65ae254180] [enc:libx264 @ 0x5e65ae21cd00] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5e65ae254180] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5e65ae254180] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5e65ae216c40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5844dbf39780] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5844dbf39780] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5844dbf39140] [enc:libx264 @ 0x5844dbf1dd80] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5844dbf39140] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5844dbf39140] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5844dbf17cc0] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5d9151782240] [vost#0:0/libx264 @ 0x59980f600100] [enc:libx264 @ 0x59980f5e4d40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x59980f5e0300] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5e56b3f25c40] [enc:libx264 @ 0x5e56b3ef3d80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5e56b3eef380] Error sending frames to consumers: Generic error in an external library
+[enc:libx264 @ 0x5d9151766d80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5d9151762380] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x610901dd0300] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x610901dd0300] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x610901df0100] [enc:libx264 @ 0x610901dd4d40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x610901df0100] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x610901df0100] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x610901dcec80] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x55fe9368e2c0] [vost#0:0/libx264 @ 0x5c122d2aaf00] [enc:libx264 @ 0x55fe9364d3c0] [enc:libx264 @ 0x5c122d289440] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x55fe9364f900] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5c122d28b600] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x638fd78b1800] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x638fd78b1800] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x638fd78b1140] [enc:libx264 @ 0x638fd7895dc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x638fd78b1140] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x638fd78b1140] Terminating thread with return code -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x63fccf239140] [enc:libx264 @ 0x63fccf21dd80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x63fccf239780] Error sending frames to consumers: Generic error in an external library
+[out#0/mp4 @ 0x638fd788fcc0] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5e799e383880] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5e799e383880] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5e799e383240] [enc:libx264 @ 0x5e799e367dc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5e799e383240] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5e799e383240] Terminating thread with return code -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x61c1e0d43100] [vost#0:0/libx264 @ 0x5b8adb860100] [enc:libx264 @ 0x5b8adb844d40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5b8adb840300] Error sending frames to consumers: Generic error in an external library
+[enc:libx264 @ 0x61c1e0d27d40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x61c1e0d23300] Error sending frames to consumers: Generic error in an external library
+[out#0/mp4 @ 0x5e799e382d40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x605495f9b0c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x605495fd7280] [enc:libx264 @ 0x605495f9fd40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x605495fd7280] Task finished with error code: -22 (Invalid argument)
+[vf#0:0 @ 0x57f226d967c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x57f226d967c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x605495f9b0c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x57f226daa480] [enc:libx264 @ 0x57f226d66d40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x57f226daa480] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x57f226daa480] Terminating thread with return code -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x605495fd7280] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x605495f99c80] Nothing was written into output file, because at least one of its streams received no packets.
+[out#0/mp4 @ 0x57f226d60c80] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5ed5ed0fbac0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5ed5ed0fbac0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5ed5ed0fb440] [enc:libx264 @ 0x5ed5ed0e00c0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5ed5ed0fb440] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5ed5ed0fb440] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5ed5ed0fb0c0] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5863e77e5fc0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5863e77e5fc0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5863e77e5980] [enc:libx264 @ 0x5863e77ca400] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5863e77e5980] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5863e77e5980] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5863e77e5480] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x6280c1cef640] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x6280c1cef640] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x6280c1ceef80] [enc:libx264 @ 0x6280c1cb7d00] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x6280c1ceef80] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x6280c1ceef80] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x6280c1cb1c40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5581a6aa2e40] Task finished with error code: -11 (Resource temporarily unavailable)
+[vf#0:0 @ 0x5581a6aa2e40] Terminating thread with return code -11 (Resource temporarily unavailable)
+[vf#0:0 @ 0x59980f5e0300] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x59980f5e0300] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x59980f600100] [enc:libx264 @ 0x59980f5e4d40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x59980f600100] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x59980f600100] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x59980f5dec80] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x586953f17380] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x586953f17380] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x586953f37240] [enc:libx264 @ 0x586953f1bd80] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x586953f37240] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x586953f37240] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x586953f36d40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5d9151762380] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5d9151762380] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5d9151782240] [enc:libx264 @ 0x5d9151766d80] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5d9151782240] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5d9151782240] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5d9151781d40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x61c1e0d23300] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x61c1e0d23300] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x61c1e0d43100] [enc:libx264 @ 0x61c1e0d27d40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x61c1e0d43100] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x61c1e0d43100] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x61c1e0d21c80] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x63fccf239780] [vf#0:0 @ 0x5922a999d7c0] Task finished with error code: -542398533 (Generic error in an external library)
+Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x63fccf239780] [vf#0:0 @ 0x5922a999d7c0] Terminating thread with return code -542398533 (Generic error in an external library)
+Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x63fccf239140] [enc:libx264 @ 0x63fccf21dd80] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x63fccf239140] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x63fccf239140] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x63fccf217cc0] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5922a999d140] [enc:libx264 @ 0x5922a9981d80] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5922a999d140] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5922a999d140] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5922a997bc80] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5e56b3eef380] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5e56b3eef380] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5e56b3f25c40] [enc:libx264 @ 0x5e56b3ef3d80] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5e56b3f25c40] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5e56b3f25c40] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5e56b3f25740] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x5c122d28b600] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5c122d28b600] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5c122d2aaf00] [enc:libx264 @ 0x5c122d289440] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5c122d2aaf00] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5c122d2aaf00] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5c122d2aaa00] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x55fe9364f900] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x55fe9364f900] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x55fe9368e2c0] [enc:libx264 @ 0x55fe9364d3c0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x55fe9368e2c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x55fe9368e2c0] Terminating thread with return code -22 (Invalid argument)
+[vf#0:0 @ 0x5b8adb840300] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5b8adb840300] Terminating thread with return code -542398533 (Generic error in an external library)
+[out#0/mp4 @ 0x55fe9368df40] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5b8adb860100] [enc:libx264 @ 0x5b8adb844d40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5b8adb860100] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5b8adb860100] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5b8adb83ec80] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x5fa09c55e240] [enc:libx264 @ 0x5fa09c542d80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5fa09c53e380] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5fa09c53e380] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5fa09c53e380] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5fa09c55e240] [enc:libx264 @ 0x5fa09c542d80] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5fa09c55e240] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5fa09c55e240] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5fa09c55dd40] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x564fbe8581c0] [enc:libx264 @ 0x564fbe83c180] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x564fbe8380c0] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x564fbe8380c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x564fbe8380c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x564fbe8581c0] [enc:libx264 @ 0x564fbe83c180] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x564fbe8581c0] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x564fbe8581c0] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x564fbe857cc0] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x6527f366a100] [enc:libx264 @ 0x6527f364ed40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x6527f364a300] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5e632ff60600] [enc:libx264 @ 0x5e632ff2a980] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5e632ff28040] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5e632ff28040] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5e632ff28040] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5e632ff60600] [enc:libx264 @ 0x5e632ff2a980] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5e632ff60600] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5e632ff60600] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5e632ff60100] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x6527f364a300] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x6527f364a300] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x6527f366a100] [enc:libx264 @ 0x6527f364ed40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x6527f366a100] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x6527f366a100] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x6527f3648c80] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x62389cc8b100] [enc:libx264 @ 0x62389cc6fd00] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x62389cc6b280] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5c12511f6100] [enc:libx264 @ 0x5c12511dad40] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5c12511d62c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x58835ebbb240] [enc:libx264 @ 0x58835eb9fdc0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x58835ebbb880] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5c12511d62c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5c12511d62c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5c12511f6100] [enc:libx264 @ 0x5c12511dad40] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5c12511f6100] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5c12511f6100] Terminating thread with return code -22 (Invalid argument)
+[vf#0:0 @ 0x62389cc6b280] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x62389cc6b280] Terminating thread with return code -542398533 (Generic error in an external library)
+[out#0/mp4 @ 0x5c12511d4c40] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x62389cc8b100] [enc:libx264 @ 0x62389cc6fd00] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x62389cc8b100] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x62389cc8b100] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x62389cc69c40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x58835ebbb880] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x58835ebbb880] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x58835ebbb240] [enc:libx264 @ 0x58835eb9fdc0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x58835ebbb240] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x58835ebbb240] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x58835ebbad40] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x63882d4d5400] [enc:libx264 @ 0x63882d478640] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x63882d4b72c0] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x5a3ef2382340] [enc:libx264 @ 0x5a3ef2349080] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x5a3ef2382980] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x604c1d870480] [enc:libx264 @ 0x604c1d831400] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x604c1d870b80] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x63882d4b72c0] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x63882d4b72c0] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x63882d4d5400] [enc:libx264 @ 0x63882d478640] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x63882d4d5400] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x63882d4d5400] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x63882d4d4f00] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x57a7b4bc5240] [vost#0:0/libx264 @ 0x64f5fa982880] [enc:libx264 @ 0x64f5fa967380] [vost#0:0/libx264 @ 0x55cf0d5d8440] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[enc:libx264 @ 0x55cf0d5bd140] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x64f5fa962c00] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x55cf0d5d8b00] Error sending frames to consumers: Generic error in an external library
+[enc:libx264 @ 0x57a7b4b90380] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x57a7b4b8bb00] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x5a3ef2382980] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x5a3ef2382980] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x5a3ef2382340] [enc:libx264 @ 0x5a3ef2349080] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x5a3ef2382340] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x5a3ef2382340] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x5a3ef2381e40] Nothing was written into output file, because at least one of its streams received no packets.
+[vost#0:0/libx264 @ 0x581f6b73a380] [enc:libx264 @ 0x581f6b708d80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x581f6b704380] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x62c11da5e900] [enc:libx264 @ 0x62c11da26100] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x62c11da21680] Error sending frames to consumers: Generic error in an external library
+[vost#0:0/libx264 @ 0x6512c3f68900] [enc:libx264 @ 0x6512c3f35ec0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x6512c3f31440] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x604c1d870b80] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x604c1d870b80] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x604c1d870480] [enc:libx264 @ 0x604c1d831400] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x604c1d870480] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x604c1d870480] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x604c1d870100] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x57a7b4b8bb00] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x57a7b4b8bb00] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x57a7b4bc5240] [enc:libx264 @ 0x57a7b4b90380] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x57a7b4bc5240] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x57a7b4bc5240] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x57a7b4bc4d40] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x55cf0d5d8b00] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x55cf0d5d8b00] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x55cf0d5d8440] [enc:libx264 @ 0x55cf0d5bd140] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x55cf0d5d8440] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x55cf0d5d8440] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x55cf0d5d80c0] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x64f5fa962c00] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x64f5fa962c00] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x64f5fa982880] [enc:libx264 @ 0x64f5fa967380] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x64f5fa982880] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x64f5fa982880] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x64f5fa982380] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x581f6b704380] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x581f6b704380] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x581f6b73a380] [enc:libx264 @ 0x581f6b708d80] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x581f6b73a380] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x581f6b73a380] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x581f6b739e80] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x62c11da21680] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x62c11da21680] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x62c11da5e900] [enc:libx264 @ 0x62c11da26100] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x62c11da5e900] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x62c11da5e900] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x62c11da5e580] Nothing was written into output file, because at least one of its streams received no packets.
+[vf#0:0 @ 0x6512c3f31440] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x6512c3f31440] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/libx264 @ 0x6512c3f68900] [enc:libx264 @ 0x6512c3f35ec0] Could not open encoder before EOF
+[vost#0:0/libx264 @ 0x6512c3f68900] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/libx264 @ 0x6512c3f68900] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0x6512c3f806c0] Nothing was written into output file, because at least one of its streams received no packets.
+2026-11-08T01:30:31Z [+11057s] === waiting for every job's interpolation (READY markers)
+2026-11-08T01:32:28Z === push (japan-cat-islands-v1 ready)
+2026-11-08T01:32:31Z [+11177s] === done (0 jobs not ready)
