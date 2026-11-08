@@ -1,0 +1,122 @@
+{
+  "job_id": "japan-grandmother-nobody-does-it-v1",
+  "runs": [
+    {
+      "id": "s002",
+      "file": "clips/s002.mp4",
+      "attempts": [
+        {
+          "size": [
+            720,
+            1280
+          ],
+          "num_frames": 49,
+          "seconds": 21.72,
+          "error": "self.run_pipeline(input_info)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/base_runner.py\", line 48, in run_pipeline\n    result = run_pipeline_fn(self, *args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/utils/profiler.py\", line 214, in sync_wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/wan/wan_runner.py\", line 648, in run_pipeline\n    gen_video_final = self._run_pipeline_local()\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/wan/wan_runner.py\", line 598, in _run_pipeline_local\n    result = self.run_main()\n             ^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/utils/profiler.py\", line 214, in sync_wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/default_runner.py\", line 446, in run_main\n    gen_video_final = self.process_images_after_vae_decoder()\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/default_runner.py\", line 508, in process_images_after_vae_decoder\n    save_to_video(self.gen_video_final, out_path, fps=fps, method=\"ffmpeg\")\n  File \"/workspace/LightX2V/lightx2v/utils/utils.py\", line 339, in save_to_video\n    process.stdin.write(frame.tobytes())\nBrokenPipeError: [Errno 32] Broken pipe\n"
+        },
+        {
+          "size": [
+            720,
+            1280
+          ],
+          "num_frames": 49,
+          "seconds": 22.52,
+          "error": "self.run_pipeline(input_info)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/base_runner.py\", line 48, in run_pipeline\n    result = run_pipeline_fn(self, *args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/utils/profiler.py\", line 214, in sync_wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/wan/wan_runner.py\", line 648, in run_pipeline\n    gen_video_final = self._run_pipeline_local()\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/wan/wan_runner.py\", line 598, in _run_pipeline_local\n    result = self.run_main()\n             ^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/utils/profiler.py\", line 214, in sync_wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/default_runner.py\", line 446, in run_main\n    gen_video_final = self.process_images_after_vae_decoder()\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/LightX2V/lightx2v/models/runners/default_runner.py\", line 508, in process_images_after_vae_decoder\n    save_to_video(self.gen_video_final, out_path, fps=fps, method=\"ffmpeg\")\n  File \"/workspace/LightX2V/lightx2v/utils/utils.py\", line 339, in save_to_video\n    process.stdin.write(frame.tobytes())\nBrokenPipeError: [Errno 32] Broken pipe\n"
+        }
+      ],
+      "ok": true,
+      "seconds": 17.29,
+      "usd": 0.0035,
+      "size": [
+        480,
+        832
+      ],
+      "num_frames": 81
+    },
+    {
+      "id": "s003",
+      "file": "clips/s003.mp4",
+      "attempts": [],
+      "ok": true,
+      "seconds": 24.39,
+      "usd": 0.0049,
+      "size": [
+        720,
+        1280
+      ],
+      "num_frames": 49
+    },
+    {
+      "id": "s004",
+      "file": "clips/s004.mp4",
+      "attempts": [],
+      "ok": true,
+      "seconds": 24.89,
+      "usd": 0.005,
+      "size": [
+        720,
+        1280
+      ],
+      "num_frames": 49
+    },
+    {
+      "id": "s006",
+      "file": "clips/s006.mp4",
+      "attempts": [],
+      "ok": true,
+      "seconds": 42.6,
+      "usd": 0.0085,
+      "size": [
+        720,
+        1280
+      ],
+      "num_frames": 93
+    },
+    {
+      "id": "s008",
+      "file": "clips/s008.mp4",
+      "attempts": [],
+      "ok": true,
+      "seconds": 22.5,
+      "usd": 0.0045,
+      "size": [
+        720,
+        1280
+      ],
+      "num_frames": 49
+    },
+    {
+      "id": "s009",
+      "file": "clips/s009.mp4",
+      "attempts": [],
+      "ok": true,
+      "seconds": 20.12,
+      "usd": 0.004,
+      "size": [
+        720,
+        1280
+      ],
+      "num_frames": 49
+    },
+    {
+      "id": "s011",
+      "file": "clips/s011.mp4",
+      "attempts": [],
+      "ok": true,
+      "seconds": 20.77,
+      "usd": 0.0042,
+      "size": [
+        720,
+        1280
+      ],
+      "num_frames": 57
+    }
+  ],
+  "summary": {
+    "clips_ok": 7,
+    "clips_failed": 0,
+    "render_s_total": 172.6,
+    "usd_total": 0.0346,
+    "median_s_per_clip": 22.5
+  }
+}
