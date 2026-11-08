@@ -12270,3 +12270,19 @@ Error opening output files: Resource temporarily unavailable
 2026-11-08 00:21:05.304 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000141 seconds
 2026-11-08 00:21:05.304 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
 2026-11-08 00:21:05.304 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000042 seconds
+2026-11-08 00:21:09.873 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 4.569642 seconds
+2026-11-08 00:21:09.874 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000297 seconds
+2026-11-08 00:21:09.874 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 4.570523 seconds
+2026-11-08 00:21:17.603 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 7.729322 seconds
+2026-11-08 00:21:17.603 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 25.983469 seconds
+2026-11-08 00:21:17.606 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.002044 seconds
+2026-11-08 00:21:17.606 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-08 00:21:19.602 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/vet-sleeps-all-day-v1/clips/s001.mp4 ✅
+2026-11-08 00:21:19.603 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=3.26 GiB, allocated=16.77 GiB, reserved=27.38 GiB, reclaimable=10.61 GiB, force=False
+2026-11-08 00:21:19.697 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 28.077792 seconds
+2026-11-08 00:21:19.698 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 33.098006 seconds
+2026-11-08 00:21:19.698 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "vet-sleeps-all-day-v1", "id": "s001", "file": "clips/s001.mp4", "ok": true, "seconds": 33.1, "usd": 0.0066, "size": [720, 960], "num_frames": 121}
+PUSH ok
+PUSH done
+2026-11-08T00:21:34Z === push (clips)
