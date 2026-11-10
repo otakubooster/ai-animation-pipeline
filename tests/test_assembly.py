@@ -105,3 +105,36 @@ def test_on_screen_text_splits_parts_in_time(tmp_path):
     edit_ad.on_screen_ass([(0.0, 4.0, "First line / Second line"), (4.0, 6.0, "")], p, (1080, 1920), 70)
     ev = [l for l in p.read_text().splitlines() if l.startswith("Dialogue")]
     assert len(ev) == 2 and ev[0].endswith("First line") and "0:00:02.05" in ev[1]
+
+
+def test_norm_keeps_arabic_words_and_drops_diacritics_and_punctuation():
+    assert edit_ad.norm("الملين!") == "الملين"
+    assert edit_ad.norm("تهدّنّي،") == "تهدني"
+    assert edit_ad.norm("…") == ""
+    assert edit_ad.norm("Don't,") == "don't"
+
+
+def test_align_shots_matches_darija_lines():
+    shots = [{"id": "s001", "vo_line": "شوفو شنو كتصيفطو ليا… الملين!"}, {"id": "s002", "vo_line": "النخالة؟ كتزيد النفخة"}]
+    toks = "شوفو شنو كتصيفطو ليا… الملين! النخالة؟ كتزيد النفخة".split()
+    words = [W(t, i * 0.5, i * 0.5 + 0.4) for i, t in enumerate(toks)]
+    tl = edit_ad.align_shots(shots, words)
+    assert [len(t["words"]) for t in tl] == [5, 3]
+
+
+def test_arabic_caption_preset_is_rtl_bold_at_the_top(tmp_path):
+    p = tmp_path / "c.ass"
+    words = [W("شوفو", 0, 0.4), W("شنو", 0.4, 0.8), W("ليا…", 0.8, 1.2), W("الملين!", 1.3, 1.8)]
+    edit_ad.captions_ass(words, p, (1080, 1920), 84, 470, style="ar-key-yellow")
+    txt = p.read_text()
+    style = next(l for l in txt.splitlines() if l.startswith("Style: Cap"))
+    assert "Noto Kufi Arabic" in style and style.endswith(",-1")       # base direction auto (RTL)
+    assert ",8,80,80,211," in style                                       # top centre, 11% down
+    assert "ليا\\N" not in txt and "ليا…" not in txt                       # group ends at the ellipsis, stripped
+
+
+def test_banner_png_renders_arabic(tmp_path):
+    p = tmp_path / "b.png"
+    edit_ad.banner_png("شريو جوج وخودو وحدة فابور 🎁", p, 1080)
+    from PIL import Image
+    assert Image.open(p).width > 400

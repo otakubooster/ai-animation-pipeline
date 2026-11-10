@@ -25,6 +25,7 @@ FPS = 30
 W, H = 1080, 1920
 CAPTION_FONT = "Inter Display Black"
 BANNER_FONT = "/usr/share/fonts/opentype/inter/InterDisplay-Black.otf"
+BANNER_FONT_AR = "/usr/share/fonts/truetype/noto/NotoKufiArabic-Bold.ttf"
 EMOJI_FONT = "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf"
 HEAD_TRIM = 0.5
 MAX_SLOW = 1.5
@@ -40,8 +41,16 @@ def probe_duration(path: Path) -> float:
     return float(out.strip())
 
 
+AR_MARKS = re.compile(r"[\u0640\u064B-\u065F\u0670]")       # tatweel + Arabic diacritics
+
+
 def norm(tok: str) -> str:
-    return re.sub(r"[^a-z0-9']", "", tok.lower().replace("’", "'"))
+    """Comparable form of a word: lower case, letters/digits only (any script), Arabic diacritics dropped."""
+    return re.sub(r"[^\w']|_", "", AR_MARKS.sub("", tok.lower().replace("’", "'")))
+
+
+def is_arabic(text: str) -> bool:
+    return bool(re.search(r"[\u0600-\u06FF]", text))
 
 
 def spoken_words(words_json: Path) -> list[dict]:
@@ -177,7 +186,11 @@ CAPTION_PRESETS = {
     "phrase-key-red":  ("Inter Display Black", 0.85, False, None, 2, False, "&H2E10C8&", 5, "low"),
     "one-word":        ("Inter Display Black", 1.25, False, None, 2, False, None, 1, "low"),
     "boxed":           ("Inter Display Bold", 0.7, False, 0, 0, True, None, 5, "low"),
+    # Arabic (Darija) ads: right-to-left, shaped by libass; frames keep the top 20% free for captions
+    "ar-key-yellow":   ("Noto Kufi Arabic", 0.9, False, None, 2, False, "&H00E5FF&", 3, "top"),
+    "ar-plain-top":    ("Noto Kufi Arabic", 0.9, False, None, 2, False, None, 4, "top"),
 }
+PUNCT_END = r"[,.!?،؟…:]"
 
 
 def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int, margin_v: int, max_words: int = 3,
@@ -189,23 +202,25 @@ def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int,
     groups, cur = [], []
     for w in words:
         cur.append(w)
-        if len(cur) >= per or re.search(r"[,.!?]$", w["text"]):
+        if len(cur) >= per or re.search(PUNCT_END + "$", w["text"]):
             groups.append(cur)
             cur = []
     if cur:
         groups.append(cur)
-    clean = lambda t: re.sub(r"[,.!?]+$", "", t)
+    clean = lambda t: re.sub(PUNCT_END + "+$", "", t)
     up = (lambda t: t.upper()) if upper else (lambda t: t)
     fs = int(size * fac)
     ol = max(fs // 13, 4) if outline is None else outline
-    align, mv0 = (2, margin_v) if place == "low" else (5, 0)
+    align, mv0 = {"low": (2, margin_v), "top": (8, int(res[1] * (0.11 if res[1] > res[0] else 0.06)))}.get(place, (5, 0))
+    rtl = "Arabic" in font                 # bold Arabic face + libass base direction auto-detected (Encoding -1)
     border, back = (3, "&H96000000") if box else (1, "&H64000000")
     lines = ["[Script Info]", "ScriptType: v4.00+", f"PlayResX: {res[0]}", f"PlayResY: {res[1]}", "WrapStyle: 2", "",
              "[V4+ Styles]",
              "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
              "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
-             f"Style: Cap,{font},{fs},&H00FFFFFF,&H00FFFFFF,{'&H28000000' if style == 'subtitle' else '&H00000000'},{back},0,0,0,0,"
-             f"100,100,0,0,{border},{ol if not box else 12},{shadow},{align},80,80,{mv0},1", "", "[Events]",
+             f"Style: Cap,{font},{fs},&H00FFFFFF,&H00FFFFFF,{'&H28000000' if style == 'subtitle' else '&H00000000'},{back},"
+             f"{-1 if rtl else 0},0,0,0,100,100,0,0,{border},{ol if not box else 12},{shadow},{align},80,80,{mv0},{-1 if rtl else 1}",
+             "", "[Events]",
              "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
     for gi, g in enumerate(groups):
         g_end = groups[gi + 1][0]["start"] if gi + 1 < len(groups) else g[-1]["end"] + 0.6
@@ -247,7 +262,7 @@ def banner_png(text: str, path: Path, width: int) -> None:
     emoji = "".join(ch for ch in text if ord(ch) > 0x2000)
     label = text.replace(emoji, "").strip()
     fsize = int(width * 0.06)
-    font = ImageFont.truetype(BANNER_FONT, fsize)
+    font = ImageFont.truetype(BANNER_FONT_AR if is_arabic(label) else BANNER_FONT, fsize)
     tw = font.getbbox(label)[2]
     em = None
     if emoji:
@@ -469,7 +484,8 @@ def main() -> None:
         png = tmp / f"banner_{name}.png"
         if job.get("banner"):
             banner_png(job["banner"]["text"], png, f["banner_w"])
-            overlay = f"[base][1:v]overlay=(W-w)/2:{f['banner_y']}:enable='gte(t,{banner_t:.2f})'[b]"
+            by = int(f["res"][1] * job["banner"]["y_frac"]) if job["banner"].get("y_frac") else f["banner_y"]
+            overlay = f"[base][1:v]overlay=(W-w)/2:{by}:enable='gte(t,{banner_t:.2f})'[b]"
         else:
             Image.new("RGBA", (2, 2), (0, 0, 0, 0)).save(png)
             overlay = "[base]null[b]"
