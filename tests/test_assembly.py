@@ -138,3 +138,11 @@ def test_banner_png_renders_arabic(tmp_path):
     edit_ad.banner_png("شريو جوج وخودو وحدة فابور 🎁", p, 1080)
     from PIL import Image
     assert Image.open(p).width > 400
+
+
+def test_top_captions_drop_to_the_bottom_on_low_shots(tmp_path):
+    p = tmp_path / "c.ass"
+    words = [W("كبسولة", 0, 0.4), W("وحدة.", 0.4, 0.8), W("الملين", 5.0, 5.4)]
+    edit_ad.captions_ass(words, p, (1080, 1920), 84, 470, style="ar-plain-top", low_spans=[(4.5, 6.0)])
+    ev = [l for l in p.read_text().splitlines() if l.startswith("Dialogue")]
+    assert "{\\an2}" not in ev[0] and "{\\an2}" in ev[1] and ",0,0,192,," in ev[1]

@@ -194,7 +194,8 @@ PUNCT_END = r"[,.!?،؟…:]"
 
 
 def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int, margin_v: int, max_words: int = 3,
-                 high_spans: list[tuple[float, float]] = (), margin_high: int = 0, style: str = "word-highlight") -> None:
+                 high_spans: list[tuple[float, float]] = (), margin_high: int = 0, style: str = "word-highlight",
+                 low_spans: list[tuple[float, float]] = ()) -> None:
     """Captions timed to the VO words in one of CAPTION_PRESETS (word groups; the spoken word highlighted when the
     preset has a highlight colour). Inside `high_spans` (product shots) captions move up to `margin_high`."""
     font, fac, upper, outline, shadow, box, hl, per, place = CAPTION_PRESETS.get(style, CAPTION_PRESETS["word-highlight"])
@@ -226,14 +227,17 @@ def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int,
         g_end = groups[gi + 1][0]["start"] if gi + 1 < len(groups) else g[-1]["end"] + 0.6
         g_end = min(g_end, g[-1]["end"] + 0.6)
         mv = margin_high if place == "low" and any(a <= g[0]["start"] < b for a, b in high_spans) else 0
+        pre = ""
+        if place == "top" and any(a <= g[0]["start"] < b for a, b in low_spans):   # product at the top of the frame
+            pre, mv = "{\\an2}", int(res[1] * 0.10)
         if not hl:            # one event per group, plain text
             text = up(" ".join(x["text"] for x in g).rstrip(",")) if style == "subtitle" else up(" ".join(clean(x["text"]) for x in g))
-            lines.append(f"Dialogue: 0,{ass_time(g[0]['start'])},{ass_time(g_end)},Cap,,0,0,{mv},,{text}")
+            lines.append(f"Dialogue: 0,{ass_time(g[0]['start'])},{ass_time(g_end)},Cap,,0,0,{mv},,{pre}{text}")
             continue
         for wi, w in enumerate(g):
             end = g[wi + 1]["start"] if wi + 1 < len(g) else g_end
-            mv = margin_high if place == "low" and any(a <= w["start"] < b for a, b in high_spans) else 0
-            text = " ".join(("{\\c" + hl + "}" + up(clean(x["text"])) + "{\\c&HFFFFFF&}") if x is w else up(clean(x["text"])) for x in g)
+            mv = margin_high if place == "low" and any(a <= w["start"] < b for a, b in high_spans) else mv
+            text = pre + " ".join(("{\\c" + hl + "}" + up(clean(x["text"])) + "{\\c&HFFFFFF&}") if x is w else up(clean(x["text"])) for x in g)
             lines.append(f"Dialogue: 0,{ass_time(w['start'])},{ass_time(end)},Cap,,0,0,{mv},,{text}")
     path.write_text("\n".join(lines) + "\n")
 
@@ -471,13 +475,15 @@ def main() -> None:
     }
     high_ids = set(job.get("captions", {}).get("high_on_shots", []))
     high_spans = [(t["start"], t["end"]) for t in timeline if t["id"] in high_ids]
+    low_ids = set(job.get("captions", {}).get("low_on_shots", []))
+    low_spans = [(t["start"], t["end"]) for t in timeline if t["id"] in low_ids]
     outputs = []
     for name, f in formats.items():
         ass = tmp / f"captions_{name}.ass"
         cstyle = job.get("captions", {}).get("style", "word-highlight")
         if words:
             captions_ass(words, ass, f["res"], f["cap"][0], f["cap"][1], max_words=4 if cstyle == "subtitle" else 3,
-                         high_spans=high_spans, margin_high=f["cap_high"], style=cstyle)
+                         high_spans=high_spans, margin_high=f["cap_high"], style=cstyle, low_spans=low_spans)
         else:
             on_screen_ass([(t["start"], t["end"], sh.get("on_screen", "")) for t, sh in zip(timeline, job["shots"])],
                           ass, f["res"], int(f["cap"][0] * 0.8))
