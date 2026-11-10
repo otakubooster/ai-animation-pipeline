@@ -1879,3 +1879,51 @@ PUSH done
 2026-11-10 21:18:19.548 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
 {"job": "mizann-a6-captain-bifido-v1", "id": "s005", "file": "clips/s005.mp4", "ok": true, "seconds": 49.17, "usd": 0.0095, "size": [720, 1280], "num_frames": 121}
 2026-11-10T21:18:19Z === push (clips)
+PUSH ok
+PUSH done
+2026-11-10 21:18:27.781 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 3.564830 seconds
+2026-11-10 21:18:28.148 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.366132 seconds
+2026-11-10 21:18:28.148 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=3.63 GiB, allocated=16.96 GiB, reserved=27.01 GiB, reclaimable=10.05 GiB, force=False
+2026-11-10 21:18:28.201 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 4.019203 seconds
+2026-11-10 21:18:28.202 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-10 21:18:28.202 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-10 21:18:28.202 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000091 seconds
+2026-11-10 21:18:28.202 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-10 21:18:28.202 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000034 seconds
+2026-11-10 21:18:31.994 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.791797 seconds
+2026-11-10 21:18:31.994 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000263 seconds
+2026-11-10 21:18:31.995 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.792463 seconds
+2026-11-10 21:18:31.995 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-10 21:18:31.995 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000089 seconds
+2026-11-10 21:18:31.995 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-10 21:18:31.995 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000035 seconds
+2026-11-10 21:18:35.810 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.814992 seconds
+2026-11-10 21:18:35.810 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000193 seconds
+2026-11-10 21:18:35.810 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.815548 seconds
+2026-11-10 21:18:35.810 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-10 21:18:35.810 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000079 seconds
+2026-11-10 21:18:35.810 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-10 21:18:35.810 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000032 seconds
+2026-11-10 21:18:39.626 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.815656 seconds
+2026-11-10 21:18:39.626 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000116 seconds
+2026-11-10 21:18:39.626 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.816099 seconds
+2026-11-10 21:18:39.626 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-10 21:18:39.626 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000065 seconds
+2026-11-10 21:18:39.626 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-10 21:18:39.626 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000033 seconds
+2026-11-10 21:18:43.444 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.817633 seconds
+2026-11-10 21:18:43.444 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000218 seconds
+2026-11-10 21:18:43.444 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.818237 seconds
+2026-11-10 21:18:49.504 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 6.059227 seconds
+2026-11-10 21:18:49.504 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 21.301870 seconds
+2026-11-10 21:18:49.505 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001489 seconds
+2026-11-10 21:18:49.505 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-10 21:18:50.457 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/mizann-a6-captain-bifido-v1/clips/s006.mp4 ✅
+2026-11-10 21:18:50.458 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=1.77 GiB, allocated=16.63 GiB, reserved=28.87 GiB, reclaimable=12.24 GiB, force=False
+2026-11-10 21:18:50.519 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 22.317895 seconds
+2026-11-10 21:18:50.520 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 26.337403 seconds
+2026-11-10 21:18:50.520 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "mizann-a6-captain-bifido-v1", "id": "s006", "file": "clips/s006.mp4", "ok": true, "seconds": 26.34, "usd": 0.0051, "size": [720, 1280], "num_frames": 69}
+{"job_done": "mizann-a6-captain-bifido-v1", "clips_ok": 6, "clips_failed": 0, "render_s_total": 201.7, "usd_total": 0.039, "median_s_per_clip": 34.71}
+2026-11-10T21:18:55Z [+2364s] === waiting for every job's interpolation (READY markers)
+2026-11-10T21:19:41Z === push (mizann-a6-captain-bifido-v1 ready)
