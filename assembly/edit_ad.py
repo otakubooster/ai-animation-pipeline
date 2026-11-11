@@ -242,26 +242,42 @@ def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int,
     path.write_text("\n".join(lines) + "\n")
 
 
-def on_screen_ass(cards: list[tuple[float, float, str]], path: Path, res: tuple[int, int], size: int) -> None:
-    """Music-only ads: each shot's on-screen text (parts split by ' / ' shown one after the other), white sentence
-    case with a soft shadow, in the middle of the frame."""
+EMOJI_RE = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F\u200D\u2B50\u2B55\u2705\u274C]")
+
+
+def on_screen_ass(cards: list[tuple[float, float, str]], path: Path, res: tuple[int, int], size: int, box: str | None = None) -> None:
+    """Each shot's on-screen text (parts split by ' / ' shown one after the other). Default: white sentence case with
+    a soft shadow in the middle of the frame (music-only ads). box="RRGGBB": white bold text on an opaque box of that
+    colour in the top fifth (Arabic gets Noto Kufi + RTL); colour emoji are dropped (libass can't draw them)."""
+    style = f"Style: Txt,Inter Display Bold,{size},&H00FFFFFF,&H00FFFFFF,&H50000000,&H78000000,0,0,0,0,100,100,0,0,1,2.5,3,5,90,90,0,1"
+    if box:
+        bgr = f"&H00{box[4:6]}{box[2:4]}{box[0:2]}&"
+        ar = any(is_arabic(c[2]) for c in cards)
+        top = int(res[1] * (0.10 if res[1] > res[0] else 0.06))
+        style = (f"Style: Txt,{'Noto Kufi Arabic' if ar else 'Inter Display Bold'},{size},&H00FFFFFF,&H00FFFFFF,{bgr},{bgr},"
+                 f"-1,0,0,0,100,100,0,0,3,{max(size // 4, 10)},0,8,90,90,{top},{-1 if ar else 1}")
     lines = ["[Script Info]", "ScriptType: v4.00+", f"PlayResX: {res[0]}", f"PlayResY: {res[1]}", "WrapStyle: 0", "",
              "[V4+ Styles]",
              "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
              "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
-             f"Style: Txt,Inter Display Bold,{size},&H00FFFFFF,&H00FFFFFF,&H50000000,&H78000000,0,0,0,0,100,100,0,0,1,2.5,3,5,90,90,0,1",
-             "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
-    for a, b, text in cards:
+             style, "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
+    if box:
+        cards = [(c[0], c[1], ("{\\an2}" if len(c) > 3 and c[3] == "bottom" else "") + re.sub(r"\s{2,}", " ", EMOJI_RE.sub("", c[2])).strip(" ·"))
+                 for c in cards]
+    low_mv = int(res[1] * 0.10)
+    for a, b, text, *_ in cards:
+        pre = "{\\an2}" if text.startswith("{\\an2}") else ""
+        text = text[len(pre):]
         parts = [x.strip() for x in text.split(" / ") if x.strip()]
         if not parts:
             continue
         step = (b - a) / len(parts)
         for i, part in enumerate(parts):
-            lines.append(f"Dialogue: 0,{ass_time(a + i * step + 0.05)},{ass_time(a + (i + 1) * step - 0.05)},Txt,,0,0,0,,{part}")
+            lines.append(f"Dialogue: 0,{ass_time(a + i * step + 0.05)},{ass_time(a + (i + 1) * step - 0.05)},Txt,,0,0,{low_mv if pre else 0},,{pre}{part}")
     path.write_text("\n".join(lines) + "\n")
 
 
-def banner_png(text: str, path: Path, width: int) -> None:
+def banner_png(text: str, path: Path, width: int, bg=(255, 255, 255, 255), fg=(200, 16, 46, 255)) -> None:
     """Rounded white pill with bold dark text and a colour emoji (rendered separately, Noto is bitmap-only)."""
     emoji = "".join(ch for ch in text if ord(ch) > 0x2000)
     label = text.replace(emoji, "").strip()
@@ -280,12 +296,27 @@ def banner_png(text: str, path: Path, width: int) -> None:
     img = Image.new("RGBA", (bw + 12, bh + 12), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     d.rounded_rectangle([6, 10, bw + 6, bh + 10], radius=bh // 2, fill=(0, 0, 0, 70))       # soft shadow
-    d.rounded_rectangle([6, 6, bw + 6, bh + 6], radius=bh // 2, fill=(255, 255, 255, 255))
+    d.rounded_rectangle([6, 6, bw + 6, bh + 6], radius=bh // 2, fill=bg)
     ty = 6 + (bh - fsize) // 2 - int(fsize * 0.12)
-    d.text((6 + pad_x, ty), label, font=font, fill=(200, 16, 46, 255))
+    d.text((6 + pad_x, ty), label, font=font, fill=fg)
     if em:
         img.alpha_composite(em, (6 + pad_x + tw + int(fsize * 0.3), 6 + (bh - em.height) // 2))
     img.save(path)
+
+
+def end_overlay_png(lines: list[dict], path: Path, res: tuple[int, int]) -> None:
+    """Full-frame transparent PNG with offer pills, e.g. [{"text": "...", "y_frac": 0.08, "scale": 1.0,
+    "bg": "14532D", "fg": "FFFFFF"}]; each pill is centred at its y_frac of the frame height."""
+    canvas = Image.new("RGBA", res, (0, 0, 0, 0))
+    for ln in lines:
+        p = path.with_name(path.stem + f"_{len(ln['text'])}_{int(ln['y_frac'] * 1000)}.png")
+        hx = lambda c: tuple(int(c[i:i + 2], 16) for i in (0, 2, 4)) + (255,)
+        banner_png(ln["text"], p, int(min(res) * ln.get("scale", 1.0)), bg=hx(ln.get("bg", "FFFFFF")), fg=hx(ln.get("fg", "C8102E")))
+        pill = Image.open(p)
+        if pill.width > res[0] - 40:
+            pill = pill.resize((res[0] - 40, int(pill.height * (res[0] - 40) / pill.width)), Image.LANCZOS)
+        canvas.alpha_composite(pill, ((res[0] - pill.width) // 2, int(res[1] * ln["y_frac"]) - pill.height // 2))
+    canvas.save(path)
 
 
 def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg=(20, 20, 20)) -> None:
@@ -481,7 +512,10 @@ def main() -> None:
     for name, f in formats.items():
         ass = tmp / f"captions_{name}.ass"
         cstyle = job.get("captions", {}).get("style", "word-highlight")
-        if words:
+        if cstyle.startswith("on-screen-box"):        # e.g. "on-screen-box:14532D" = the shot's on_screen text on a box
+            on_screen_ass([(t["start"], t["end"], sh.get("on_screen", ""), sh.get("caption_pos", "top")) for t, sh in zip(timeline, job["shots"])],
+                          ass, f["res"], int(f["cap"][0] * 0.8), box=cstyle.split(":")[1] if ":" in cstyle else "14532D")
+        elif words:
             captions_ass(words, ass, f["res"], f["cap"][0], f["cap"][1], max_words=4 if cstyle == "subtitle" else 3,
                          high_spans=high_spans, margin_high=f["cap_high"], style=cstyle, low_spans=low_spans)
         else:
@@ -495,6 +529,11 @@ def main() -> None:
         else:
             Image.new("RGBA", (2, 2), (0, 0, 0, 0)).save(png)
             overlay = "[base]null[b]"
+        if job.get("end_lines"):
+            epng = tmp / f"end_{name}.png"
+            end_overlay_png(job["end_lines"], epng, f["res"])
+            e0 = next(t["start"] for t in timeline if t["id"] == job["end_card_shot"])
+            overlay = overlay.replace("[b]", "[b0]") + f";[4:v]format=rgba[eo];[b0][eo]overlay=0:0:enable='gte(t,{e0:.2f})'[b]"
         hook = job.get("hook_card")
         hpng = tmp / f"hook_{name}.png"
         if hook:
@@ -507,7 +546,8 @@ def main() -> None:
             overlay += ";[b]null[b2]"
         dst = out / f"{a.name}_{name}.mp4"
         fc = f"{f['vf']};{overlay};[b2]ass={ass}[v]"
-        run(["ffmpeg", "-v", "error", "-y", "-i", str(clean), "-i", str(png), "-i", str(vo), "-i", str(hpng), "-filter_complex", fc,
+        extra = ["-loop", "1", "-i", str(tmp / f"end_{name}.png")] if job.get("end_lines") else []
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(clean), "-i", str(png), "-i", str(vo), "-i", str(hpng), *extra, "-filter_complex", fc,
              "-map", "[v]", "-map", "2:a", "-c:v", "libx264", "-crf", str(a.crf), "-preset", "medium", "-pix_fmt", "yuv420p",
              "-c:a", "copy", "-t", f"{total:.2f}", "-movflags", "+faststart", str(dst)])
         outputs.append(str(dst))

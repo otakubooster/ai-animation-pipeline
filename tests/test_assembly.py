@@ -146,3 +146,22 @@ def test_top_captions_drop_to_the_bottom_on_low_shots(tmp_path):
     edit_ad.captions_ass(words, p, (1080, 1920), 84, 470, style="ar-plain-top", low_spans=[(4.5, 6.0)])
     ev = [l for l in p.read_text().splitlines() if l.startswith("Dialogue")]
     assert "{\\an2}" not in ev[0] and "{\\an2}" in ev[1] and ",0,0,192,," in ev[1]
+
+
+def test_on_screen_box_captions_bottom_option_and_no_emoji(tmp_path):
+    p = tmp_path / "c.ass"
+    edit_ad.on_screen_ass([(0, 4, "توازن كولون ديتوكس", "bottom"), (4, 8, "ماشي شحمة ❌", "top"), (8, 9, "", "top")],
+                          p, (1080, 1920), 67, box="14532D")
+    txt = p.read_text()
+    ev = [l for l in txt.splitlines() if l.startswith("Dialogue")]
+    assert len(ev) == 2 and "{\\an2}" in ev[0] and ",0,0,192,," in ev[0]
+    assert "❌" not in ev[1] and ev[1].endswith("ماشي شحمة")
+    assert "Noto Kufi Arabic" in txt and "&H002D5314&" in txt                 # dark green box (BGR)
+
+
+def test_end_overlay_png_is_full_frame(tmp_path):
+    p = tmp_path / "e.png"
+    edit_ad.end_overlay_png([{"text": "اطلبو دابا 👇", "y_frac": 0.9, "bg": "C8102E", "fg": "FFFFFF"}], p, (1080, 1920))
+    from PIL import Image
+    im = Image.open(p)
+    assert im.size == (1080, 1920) and im.getpixel((540, 20))[3] == 0
