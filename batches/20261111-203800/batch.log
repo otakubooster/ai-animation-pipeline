@@ -2360,3 +2360,376 @@ PUSH done
 2026-11-11 21:24:30.224 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
 2026-11-11 21:24:30.224 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000071 seconds
 2026-11-11T21:24:31Z === push (tawaazon-l4-nadia-one-problem-v1 ready)
+2026-11-11 21:24:35.480 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.255593 seconds
+2026-11-11 21:24:35.480 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000365 seconds
+2026-11-11 21:24:35.480 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.256945 seconds
+2026-11-11 21:24:35.480 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-11 21:24:35.481 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000166 seconds
+2026-11-11 21:24:35.481 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-11 21:24:35.481 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000073 seconds
+2026-11-11 21:24:40.740 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.258983 seconds
+2026-11-11 21:24:40.740 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000259 seconds
+2026-11-11 21:24:40.740 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.259892 seconds
+2026-11-11 21:24:40.740 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-11 21:24:40.741 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000151 seconds
+2026-11-11 21:24:40.741 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-11 21:24:40.741 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000070 seconds
+2026-11-11 21:24:46.000 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.259506 seconds
+2026-11-11 21:24:46.002 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000708 seconds
+2026-11-11 21:24:46.002 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.261783 seconds
+PUSH ok
+PUSH done
+2026-11-11 21:24:55.779 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 9.776192 seconds
+2026-11-11 21:24:55.779 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 30.810844 seconds
+2026-11-11 21:24:55.782 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.002380 seconds
+2026-11-11 21:24:55.782 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-11 21:24:57.130 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/tawaazon-l5-hasnaa-night-v1/clips/s002.mp4 ✅
+2026-11-11 21:24:57.132 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=1.41 GiB, allocated=16.87 GiB, reserved=29.24 GiB, reclaimable=12.37 GiB, force=False
+2026-11-11 21:24:57.223 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 32.255342 seconds
+2026-11-11 21:24:57.223 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 38.601110 seconds
+2026-11-11 21:24:57.223 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "tawaazon-l5-hasnaa-night-v1", "id": "s002", "file": "clips/s002.mp4", "ok": true, "seconds": 38.6, "usd": 0.0069, "size": [720, 1280], "num_frames": 109}
+2026-11-11 21:25:02.858 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 5.581874 seconds
+2026-11-11 21:25:03.548 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.690279 seconds
+2026-11-11 21:25:03.549 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=3.50 GiB, allocated=16.89 GiB, reserved=27.15 GiB, reclaimable=10.25 GiB, force=False
+2026-11-11 21:25:03.617 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 6.391367 seconds
+2026-11-11 21:25:03.618 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-11 21:25:03.618 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-11 21:25:03.618 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000125 seconds
+2026-11-11 21:25:03.618 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-11 21:25:03.618 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000059 seconds
+2026-11-11 21:25:08.664 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.046077 seconds
+2026-11-11 21:25:08.665 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000371 seconds
+2026-11-11 21:25:08.665 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.047049 seconds
+2026-11-11 21:25:08.665 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-11 21:25:08.665 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000153 seconds
+2026-11-11 21:25:08.665 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-11 21:25:08.665 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000042 seconds
+2026-11-11 21:25:13.695 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.029750 seconds
+2026-11-11 21:25:13.696 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000363 seconds
+2026-11-11 21:25:13.696 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.030847 seconds
+2026-11-11 21:25:13.696 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-11 21:25:13.696 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000178 seconds
+2026-11-11 21:25:13.696 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-11 21:25:13.696 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000058 seconds
+2026-11-11 21:25:18.729 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.032753 seconds
+2026-11-11 21:25:18.729 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000430 seconds
+2026-11-11 21:25:18.730 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.033857 seconds
+2026-11-11 21:25:18.730 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-11 21:25:18.730 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000189 seconds
+2026-11-11 21:25:18.730 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-11 21:25:18.730 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000047 seconds
+2026-11-11 21:25:23.763 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.032843 seconds
+2026-11-11 21:25:23.764 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000393 seconds
+2026-11-11 21:25:23.764 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.034086 seconds
+2026-11-11 21:25:33.180 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 9.415649 seconds
+2026-11-11 21:25:33.180 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 29.562442 seconds
+2026-11-11 21:25:33.183 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.002341 seconds
+2026-11-11 21:25:33.183 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-11 21:25:34.668 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/tawaazon-l5-hasnaa-night-v1/clips/s003.mp4 ✅
+2026-11-11 21:25:34.671 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=1.78 GiB, allocated=16.85 GiB, reserved=28.87 GiB, reclaimable=12.02 GiB, force=False
+2026-11-11 21:25:34.767 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 31.150145 seconds
+2026-11-11 21:25:34.767 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 37.541828 seconds
+2026-11-11 21:25:34.767 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "tawaazon-l5-hasnaa-night-v1", "id": "s003", "file": "clips/s003.mp4", "ok": true, "seconds": 37.54, "usd": 0.0067, "size": [720, 1280], "num_frames": 105}
+2026-11-11 21:25:38.917 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 4.099180 seconds
+2026-11-11 21:25:39.747 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.829551 seconds
+2026-11-11 21:25:39.748 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=3.98 GiB, allocated=16.87 GiB, reserved=26.66 GiB, reclaimable=9.79 GiB, force=False
+2026-11-11 21:25:39.829 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 5.058482 seconds
+2026-11-11 21:25:39.830 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-11 21:25:39.831 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-11 21:25:39.831 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000222 seconds
+2026-11-11 21:25:39.831 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-11 21:25:39.831 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000091 seconds
+2026-11-11 21:25:43.342 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.510774 seconds
+2026-11-11 21:25:43.342 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000402 seconds
+2026-11-11 21:25:43.342 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.511864 seconds
+2026-11-11 21:25:43.343 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-11 21:25:43.343 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000147 seconds
+2026-11-11 21:25:43.343 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-11 21:25:43.343 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000044 seconds
+2026-11-11 21:25:46.820 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.477070 seconds
+2026-11-11 21:25:46.821 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000711 seconds
+2026-11-11 21:25:46.821 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.478475 seconds
+2026-11-11 21:25:46.821 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-11 21:25:46.821 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000220 seconds
+2026-11-11 21:25:46.821 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-11 21:25:46.822 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000061 seconds
+2026-11-11 21:25:50.300 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.478901 seconds
+2026-11-11 21:25:50.301 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000294 seconds
+2026-11-11 21:25:50.301 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.479988 seconds
+2026-11-11 21:25:50.301 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-11 21:25:50.301 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000133 seconds
+2026-11-11 21:25:50.301 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-11 21:25:50.301 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000048 seconds
+2026-11-11 21:25:53.780 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 3.478762 seconds
+2026-11-11 21:25:53.781 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000352 seconds
+2026-11-11 21:25:53.781 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 3.479933 seconds
+2026-11-11 21:26:00.688 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 6.907099 seconds
+2026-11-11 21:26:00.689 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 20.858031 seconds
+2026-11-11 21:26:00.690 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001722 seconds
+2026-11-11 21:26:00.691 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-11 21:26:01.775 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/tawaazon-l5-hasnaa-night-v1/clips/s004.mp4 ✅
+2026-11-11 21:26:01.777 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.13 GiB, allocated=16.68 GiB, reserved=28.52 GiB, reclaimable=11.84 GiB, force=False
+2026-11-11 21:26:01.862 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 22.032646 seconds
+2026-11-11 21:26:01.862 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 27.091565 seconds
+2026-11-11 21:26:01.862 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "tawaazon-l5-hasnaa-night-v1", "id": "s004", "file": "clips/s004.mp4", "ok": true, "seconds": 27.09, "usd": 0.0048, "size": [720, 1280], "num_frames": 77}
+2026-11-11 21:26:08.312 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 6.408737 seconds
+2026-11-11 21:26:09.106 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.794059 seconds
+2026-11-11 21:26:09.107 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=3.95 GiB, allocated=16.71 GiB, reserved=26.70 GiB, reclaimable=9.99 GiB, force=False
+2026-11-11 21:26:09.174 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 7.308165 seconds
+2026-11-11 21:26:09.175 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-11 21:26:09.175 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-11 21:26:09.175 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000153 seconds
+2026-11-11 21:26:09.175 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-11 21:26:09.175 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000058 seconds
+2026-11-11 21:26:15.247 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 6.071354 seconds
+2026-11-11 21:26:15.248 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000748 seconds
+2026-11-11 21:26:15.248 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 6.072936 seconds
+2026-11-11 21:26:15.248 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-11 21:26:15.248 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000225 seconds
+2026-11-11 21:26:15.248 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-11 21:26:15.248 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000045 seconds
+2026-11-11 21:26:21.241 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.992850 seconds
+2026-11-11 21:26:21.243 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000799 seconds
+2026-11-11 21:26:21.243 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.995159 seconds
+2026-11-11 21:26:21.243 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-11 21:26:21.244 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000296 seconds
+2026-11-11 21:26:21.244 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-11 21:26:21.244 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000120 seconds
+2026-11-11 21:26:27.242 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.998008 seconds
+2026-11-11 21:26:27.243 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000736 seconds
+2026-11-11 21:26:27.243 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.999983 seconds
+2026-11-11 21:26:27.243 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-11 21:26:27.244 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000323 seconds
+2026-11-11 21:26:27.244 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-11 21:26:27.244 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000098 seconds
+2026-11-11 21:26:33.242 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.997842 seconds
+2026-11-11 21:26:33.243 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000532 seconds
+2026-11-11 21:26:33.243 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.999976 seconds
+2026-11-11 21:26:44.093 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 10.849372 seconds
+2026-11-11 21:26:44.093 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 34.918561 seconds
+2026-11-11 21:26:44.096 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.002659 seconds
+2026-11-11 21:26:44.096 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-11 21:26:45.430 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/tawaazon-l5-hasnaa-night-v1/clips/s005.mp4 ✅
+2026-11-11 21:26:45.432 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=0.86 GiB, allocated=16.94 GiB, reserved=29.79 GiB, reclaimable=12.84 GiB, force=False
+2026-11-11 21:26:45.526 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 36.352497 seconds
+2026-11-11 21:26:45.526 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 43.660953 seconds
+2026-11-11 21:26:45.526 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "tawaazon-l5-hasnaa-night-v1", "id": "s005", "file": "clips/s005.mp4", "ok": true, "seconds": 43.66, "usd": 0.0078, "size": [720, 1280], "num_frames": 121}
+2026-11-11 21:26:51.981 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 6.411338 seconds
+2026-11-11 21:26:52.719 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.737546 seconds
+2026-11-11 21:26:52.720 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=2.73 GiB, allocated=16.97 GiB, reserved=27.91 GiB, reclaimable=10.94 GiB, force=False
+2026-11-11 21:26:52.799 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 7.267971 seconds
+2026-11-11 21:26:52.800 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-11 21:26:52.800 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-11 21:26:52.800 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000139 seconds
+2026-11-11 21:26:52.800 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-11 21:26:52.800 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000086 seconds
+2026-11-11 21:26:58.825 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 6.025207 seconds
+2026-11-11 21:26:58.826 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000427 seconds
+2026-11-11 21:26:58.826 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 6.026244 seconds
+2026-11-11 21:26:58.826 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-11 21:26:58.827 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000403 seconds
+2026-11-11 21:26:58.827 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-11 21:26:58.827 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000059 seconds
+2026-11-11 21:27:04.820 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.993389 seconds
+2026-11-11 21:27:04.821 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000403 seconds
+2026-11-11 21:27:04.821 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.994923 seconds
+2026-11-11 21:27:04.821 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-11 21:27:04.821 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000222 seconds
+2026-11-11 21:27:04.822 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-11 21:27:04.822 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000088 seconds
+2026-11-11 21:27:10.817 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.995882 seconds
+2026-11-11 21:27:10.818 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000381 seconds
+2026-11-11 21:27:10.818 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.997312 seconds
+2026-11-11 21:27:10.819 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-11 21:27:10.819 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000144 seconds
+2026-11-11 21:27:10.819 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-11 21:27:10.819 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000097 seconds
+2026-11-11 21:27:16.817 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.997652 seconds
+2026-11-11 21:27:16.817 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000551 seconds
+2026-11-11 21:27:16.818 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.999085 seconds
+2026-11-11 21:27:27.671 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 10.852703 seconds
+2026-11-11 21:27:27.671 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 34.871421 seconds
+2026-11-11 21:27:27.674 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.002683 seconds
+2026-11-11 21:27:27.674 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-11 21:27:29.056 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/tawaazon-l5-hasnaa-night-v1/clips/s006.mp4 ✅
+2026-11-11 21:27:29.058 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=0.86 GiB, allocated=16.94 GiB, reserved=29.79 GiB, reclaimable=12.84 GiB, force=False
+2026-11-11 21:27:29.162 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 36.362840 seconds
+2026-11-11 21:27:29.162 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 43.631101 seconds
+2026-11-11 21:27:29.162 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "tawaazon-l5-hasnaa-night-v1", "id": "s006", "file": "clips/s006.mp4", "ok": true, "seconds": 43.63, "usd": 0.0078, "size": [720, 1280], "num_frames": 121}
+2026-11-11 21:27:34.349 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 5.147114 seconds
+2026-11-11 21:27:35.078 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.728919 seconds
+2026-11-11 21:27:35.078 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=3.69 GiB, allocated=16.96 GiB, reserved=26.95 GiB, reclaimable=9.99 GiB, force=False
+2026-11-11 21:27:35.148 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 5.983780 seconds
+2026-11-11 21:27:35.149 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-11 21:27:35.149 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-11 21:27:35.150 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000158 seconds
+2026-11-11 21:27:35.150 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-11 21:27:35.150 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000050 seconds
+2026-11-11 21:27:39.742 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 4.591990 seconds
+2026-11-11 21:27:39.742 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000326 seconds
+2026-11-11 21:27:39.742 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 4.592894 seconds
+2026-11-11 21:27:39.742 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-11 21:27:39.743 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000146 seconds
+2026-11-11 21:27:39.743 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-11 21:27:39.743 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000045 seconds
+2026-11-11 21:27:44.313 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 4.570648 seconds
+2026-11-11 21:27:44.314 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000365 seconds
+2026-11-11 21:27:44.314 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 4.571566 seconds
+2026-11-11 21:27:44.314 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-11 21:27:44.314 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000142 seconds
+2026-11-11 21:27:44.314 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-11 21:27:44.314 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000044 seconds
+2026-11-11 21:27:48.887 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 4.573099 seconds
+2026-11-11 21:27:48.889 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000585 seconds
+2026-11-11 21:27:48.889 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 4.574641 seconds
+2026-11-11 21:27:48.889 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-11 21:27:48.889 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000256 seconds
+2026-11-11 21:27:48.889 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-11 21:27:48.889 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000064 seconds
+2026-11-11 21:27:53.463 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 4.573678 seconds
+2026-11-11 21:27:53.464 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000496 seconds
+2026-11-11 21:27:53.464 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 4.575108 seconds
+2026-11-11 21:28:02.165 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 8.701019 seconds
+2026-11-11 21:28:02.166 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 27.016655 seconds
+2026-11-11 21:28:02.168 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.002198 seconds
+2026-11-11 21:28:02.169 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-11 21:28:03.621 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/tawaazon-l5-hasnaa-night-v1/clips/s007.mp4 ✅
+2026-11-11 21:28:03.623 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=1.66 GiB, allocated=16.80 GiB, reserved=28.98 GiB, reclaimable=12.19 GiB, force=False
+2026-11-11 21:28:03.735 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 28.586792 seconds
+2026-11-11 21:28:03.736 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 34.571060 seconds
+2026-11-11 21:28:03.736 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "tawaazon-l5-hasnaa-night-v1", "id": "s007", "file": "clips/s007.mp4", "ok": true, "seconds": 34.57, "usd": 0.0062, "size": [720, 1280], "num_frames": 97}
+2026-11-11 21:28:08.518 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 4.730600 seconds
+2026-11-11 21:28:09.262 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.743426 seconds
+2026-11-11 21:28:09.268 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 5.528556 seconds
+2026-11-11 21:28:09.269 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-11 21:28:09.269 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-11 21:28:09.270 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000226 seconds
+2026-11-11 21:28:09.270 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-11 21:28:09.270 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000059 seconds
+2026-11-11 21:28:13.395 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 4.125158 seconds
+2026-11-11 21:28:13.396 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000377 seconds
+2026-11-11 21:28:13.396 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 4.126461 seconds
+2026-11-11 21:28:13.396 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-11 21:28:13.396 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000158 seconds
+2026-11-11 21:28:13.396 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-11 21:28:13.396 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000050 seconds
+2026-11-11 21:28:17.522 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 4.125793 seconds
+2026-11-11 21:28:17.522 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000359 seconds
+2026-11-11 21:28:17.522 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 4.126708 seconds
+2026-11-11 21:28:17.523 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-11 21:28:17.523 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000125 seconds
+2026-11-11 21:28:17.523 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-11 21:28:17.523 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000042 seconds
+2026-11-11 21:28:21.650 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 4.127664 seconds
+2026-11-11 21:28:21.651 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000360 seconds
+2026-11-11 21:28:21.651 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 4.128650 seconds
+2026-11-11 21:28:21.651 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-11 21:28:21.651 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000163 seconds
+2026-11-11 21:28:21.651 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-11 21:28:21.652 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000057 seconds
+2026-11-11 21:28:25.780 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 4.128673 seconds
+2026-11-11 21:28:25.781 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000304 seconds
+2026-11-11 21:28:25.781 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 4.129634 seconds
+2026-11-11 21:28:33.762 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 7.981272 seconds
+2026-11-11 21:28:33.763 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 24.493510 seconds
+2026-11-11 21:28:33.765 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.001949 seconds
+2026-11-11 21:28:33.765 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-11 21:28:34.813 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/tawaazon-l5-hasnaa-night-v1/clips/s008.mp4 ✅
+2026-11-11 21:28:34.816 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=1.25 GiB, allocated=16.75 GiB, reserved=29.39 GiB, reclaimable=12.64 GiB, force=False
+2026-11-11 21:28:34.917 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 25.648153 seconds
+2026-11-11 21:28:34.917 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 31.177271 seconds
+2026-11-11 21:28:34.917 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "tawaazon-l5-hasnaa-night-v1", "id": "s008", "file": "clips/s008.mp4", "ok": true, "seconds": 31.18, "usd": 0.0056, "size": [720, 1280], "num_frames": 89}
+2026-11-11 21:28:41.155 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 6.201015 seconds
+2026-11-11 21:28:41.709 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.554351 seconds
+2026-11-11 21:28:41.710 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=3.73 GiB, allocated=16.78 GiB, reserved=26.91 GiB, reclaimable=10.14 GiB, force=False
+2026-11-11 21:28:41.779 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 6.859190 seconds
+2026-11-11 21:28:41.780 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-11 21:28:41.780 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-11 21:28:41.781 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000194 seconds
+2026-11-11 21:28:41.781 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-11 21:28:41.781 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000055 seconds
+2026-11-11 21:28:47.538 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.757088 seconds
+2026-11-11 21:28:47.539 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000493 seconds
+2026-11-11 21:28:47.539 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.758374 seconds
+2026-11-11 21:28:47.539 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-11 21:28:47.539 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000180 seconds
+2026-11-11 21:28:47.539 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-11 21:28:47.539 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000049 seconds
+2026-11-11 21:28:53.279 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.740005 seconds
+2026-11-11 21:28:53.280 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000417 seconds
+2026-11-11 21:28:53.280 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.741087 seconds
+2026-11-11 21:28:53.280 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-11 21:28:53.280 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000170 seconds
+2026-11-11 21:28:53.280 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-11 21:28:53.280 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000045 seconds
+2026-11-11 21:28:59.022 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.742064 seconds
+2026-11-11 21:28:59.023 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000406 seconds
+2026-11-11 21:28:59.023 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.743326 seconds
+2026-11-11 21:28:59.023 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-11 21:28:59.024 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000181 seconds
+2026-11-11 21:28:59.024 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-11 21:28:59.024 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000061 seconds
+2026-11-11 21:29:04.767 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.743462 seconds
+2026-11-11 21:29:04.768 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000500 seconds
+2026-11-11 21:29:04.768 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.744725 seconds
+2026-11-11 21:29:15.260 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 10.491399 seconds
+2026-11-11 21:29:15.260 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 33.479719 seconds
+2026-11-11 21:29:15.263 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.002569 seconds
+2026-11-11 21:29:15.263 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-11 21:29:16.526 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/tawaazon-l5-hasnaa-night-v1/clips/s009.mp4 ✅
+2026-11-11 21:29:16.529 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=0.78 GiB, allocated=16.92 GiB, reserved=29.86 GiB, reclaimable=12.94 GiB, force=False
+2026-11-11 21:29:16.637 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 34.858105 seconds
+2026-11-11 21:29:16.637 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 41.717583 seconds
+2026-11-11 21:29:16.638 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "tawaazon-l5-hasnaa-night-v1", "id": "s009", "file": "clips/s009.mp4", "ok": true, "seconds": 41.72, "usd": 0.0074, "size": [720, 1280], "num_frames": 117}
+2026-11-11 21:29:23.087 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Encoder cost 6.409969 seconds
+2026-11-11 21:29:23.821 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Text Encoder cost 0.733403 seconds
+2026-11-11 21:29:23.822 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=3.89 GiB, allocated=16.94 GiB, reserved=26.76 GiB, reclaimable=9.81 GiB, force=False
+2026-11-11 21:29:23.891 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run Encoders cost 7.250974 seconds
+2026-11-11 21:29:23.892 | INFO     | lightx2v.models.runners.default_runner:run_main:423 - 🔄 start segment 1/1
+2026-11-11 21:29:23.892 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 1 / 4
+2026-11-11 21:29:23.892 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000157 seconds
+2026-11-11 21:29:23.892 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 1
+2026-11-11 21:29:23.892 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000055 seconds
+2026-11-11 21:29:29.914 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 6.021282 seconds
+2026-11-11 21:29:29.914 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000489 seconds
+2026-11-11 21:29:29.914 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 6.022418 seconds
+2026-11-11 21:29:29.914 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 2 / 4
+2026-11-11 21:29:29.915 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000167 seconds
+2026-11-11 21:29:29.915 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1098 - using - HIGH - noise model at step_index 2
+2026-11-11 21:29:29.915 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000045 seconds
+2026-11-11 21:29:35.910 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.995462 seconds
+2026-11-11 21:29:35.911 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000428 seconds
+2026-11-11 21:29:35.911 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 5.996559 seconds
+2026-11-11 21:29:35.911 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 3 / 4
+2026-11-11 21:29:35.911 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000160 seconds
+2026-11-11 21:29:35.911 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 3
+2026-11-11 21:29:35.911 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000055 seconds
+2026-11-11 21:29:41.966 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 6.054799 seconds
+2026-11-11 21:29:41.967 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000416 seconds
+2026-11-11 21:29:41.967 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 6.056058 seconds
+2026-11-11 21:29:41.967 | INFO     | lightx2v.models.runners.default_runner:run_segment:246 - ==> step_index: 4 / 4
+2026-11-11 21:29:41.967 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_pre cost 0.000189 seconds
+2026-11-11 21:29:41.968 | INFO     | lightx2v.models.runners.wan.wan_runner:get_current_model_index:1109 - using - LOW - noise model at step_index 4
+2026-11-11 21:29:41.968 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Switch models in infer_main costs cost 0.000095 seconds
+2026-11-11 21:29:47.966 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log 🚀 infer_main cost 5.998927 seconds
+2026-11-11 21:29:47.967 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log step_post cost 0.000370 seconds
+2026-11-11 21:29:47.967 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run Dit every step cost 6.000009 seconds
+2026-11-11 21:29:58.817 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log Run VAE Decoder cost 10.849145 seconds
+2026-11-11 21:29:58.817 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log segment end2end 1/1 cost 34.925133 seconds
+2026-11-11 21:29:58.820 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log wan_vae_to_comfy cost 0.002654 seconds
+2026-11-11 21:29:58.820 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:506 - 🎬 Start to save video 🎬
+2026-11-11 21:30:00.240 | INFO     | lightx2v.models.runners.default_runner:process_images_after_vae_decoder:519 - ✅ Video saved successfully to: /workspace/job/out/tawaazon-l5-hasnaa-night-v1/clips/s010.mp4 ✅
+2026-11-11 21:30:00.243 | INFO     | lightx2v.models.runners.default_runner:maybe_empty_cache:299 - [Memory] Emptying cuda cache: free=0.62 GiB, allocated=16.94 GiB, reserved=30.02 GiB, reclaimable=13.08 GiB, force=False
+2026-11-11 21:30:00.338 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level2_Log Run DiT cost 36.446505 seconds
+2026-11-11 21:30:00.338 | INFO     | lightx2v.utils.profiler:__exit__:169 - [Profile] Single GPU - Level1_Log RUN pipeline cost 43.697793 seconds
+2026-11-11 21:30:00.338 | INFO     | lightx2v.pipeline:generate:451 - Generated successfully!
+{"job": "tawaazon-l5-hasnaa-night-v1", "id": "s010", "file": "clips/s010.mp4", "ok": true, "seconds": 43.7, "usd": 0.0078, "size": [720, 1280], "num_frames": 121}
+2026-11-11T21:30:00Z === push (clips)
