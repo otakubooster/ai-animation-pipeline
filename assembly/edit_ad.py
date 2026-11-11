@@ -242,6 +242,19 @@ def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int,
     path.write_text("\n".join(lines) + "\n")
 
 
+EMOJI_WORDS = {"🌿": "الأكاسيا", "🦠": "بروبيوتيك", "🌵": "الصبار", "🌱": "النعناع"}   # ingredient icons -> names
+
+
+def emoji_free(text: str) -> str:
+    """Caption text without colour emoji; a caption made only of ingredient icons gets their names instead."""
+    plain = re.sub(r"\s{2,}", " ", EMOJI_RE.sub("", text)).strip(" ·")
+    if not re.search(r"\w", plain) and any(k in text for k in EMOJI_WORDS):
+        named = "".join(f" {EMOJI_WORDS[ch]} " if ch in EMOJI_WORDS else ch for ch in text)
+        plain = re.sub(r"\s{2,}", " ", EMOJI_RE.sub("", named)).strip(" ·")
+        plain = re.sub(r"(?<=\w) (?=\w)", " · ", plain) if "+" not in plain else plain
+    return plain
+
+
 EMOJI_RE = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F\u200D\u2B50\u2B55\u2705\u274C]")
 
 
@@ -262,8 +275,7 @@ def on_screen_ass(cards: list[tuple[float, float, str]], path: Path, res: tuple[
              "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
              style, "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
     if box:
-        cards = [(c[0], c[1], ("{\\an2}" if len(c) > 3 and c[3] == "bottom" else "") + re.sub(r"\s{2,}", " ", EMOJI_RE.sub("", c[2])).strip(" ·"))
-                 for c in cards]
+        cards = [(c[0], c[1], ("{\\an2}" if len(c) > 3 and c[3] == "bottom" else "") + emoji_free(c[2])) for c in cards]
     low_mv = int(res[1] * 0.10)
     for a, b, text, *_ in cards:
         pre = "{\\an2}" if text.startswith("{\\an2}") else ""

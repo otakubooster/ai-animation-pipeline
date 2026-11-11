@@ -165,3 +165,10 @@ def test_end_overlay_png_is_full_frame(tmp_path):
     from PIL import Image
     im = Image.open(p)
     assert im.size == (1080, 1920) and im.getpixel((540, 20))[3] == 0
+
+
+def test_emoji_only_captions_get_ingredient_names():
+    assert edit_ad.emoji_free("🌵 + 🌱") == "الصبار + النعناع"
+    assert edit_ad.emoji_free("🌿 🦠 🌱 🌵") == "الأكاسيا · بروبيوتيك · النعناع · الصبار"
+    assert edit_ad.emoji_free("🌿 ألياف الأكاسيا") == "ألياف الأكاسيا"
+    assert edit_ad.emoji_free("😬") == ""
