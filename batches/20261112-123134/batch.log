@@ -24,3 +24,20 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 {'file': 'minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors', 'seconds': 5.5, 'gb': 1.96}
 {'file': 'minimax_h3_ref2v_turbo_4step_v0.1_comfyui_bf16.safetensors', 'seconds': 5.1, 'gb': 1.96}
 2026-11-12T12:43:56Z === push (models downloaded)
+PUSH ok
+PUSH done
+2026-11-12T12:43:57Z [+297s] === comfyui server
+{"system": {"os": "linux", "ram_total": 183328833536, "ram_free": 182434504704, "comfyui_version": "0.45.0", "required_frontend_version": "1.59.1", "installed_templates_version": "0.11.106", "required_templates_version": "0.11.106", "comfy_package_versions": [{"name": "comfyui-frontend-package", "installed": "1.59.1", "required": "1.59.1"}, {"name": "comfyui-workflow-templates", "installed": "0.11.106", "required": "0.11.106"}, {"name": "comfyui-embedded-docs", "installed": "0.5.16", "required": "0.5.16"}, {"name": "comfy-aimdo", "installed": "0.6.0", "required": "0.6.0"}, {"name": "comfy-kitchen", "installed": "0.2.41", "required": "0.2.41"}], "python_version": "3.11.15 | packaged by conda-forge | (main, Mar  5 2026, 16:45:40) [GCC 14.3.0]", "pytorch_version": "2.11.0+cu130", "embedded_python": false, "deploy_environment": "local-git", "argv": ["main.py", "--listen", "127.0.0.1", "--port", "8188", "--disable-auto-launch"]}, "devices": [{"name": "cuda:0 NVIDIA GeForce RTX 5090 : cudaMallocAsync", "type": "cuda", "index": 0, "vram_total": 33668726784, "vram_free": 33136836608, "torch_vram_total": 0, "torch_vram_free": 0}]}
+{"MiniMaxH3ImageToVideo": {"input": {"required": {"clip": ["CLIP", {}], "vae": ["VAE", {}], "prompt": ["STRING", {"multiline": true, "dynamicPrompts": true}], "width": ["INT", {"default": 1344, "min": 32, "max": 16384, "step": 32}], "height": ["INT", {"default": 768, "min": 32, "max": 16384, "step":
+2026-11-12T12:44:08Z [+308s] === render shots
+3 [(1200, 900), (1200, 1200), (1200, 900)]
+{"id": "h01_hook", "mode": "t2va", "size": [576, 1024], "seconds_video": 5, "turbo": true, "ok": true, "render_s": 192.2}
+{"id": "h02_problem", "mode": "t2va", "size": [576, 1024], "seconds_video": 5, "turbo": true, "ok": true, "render_s": 180.1}
+{"id": "h03_mechanism", "mode": "t2va", "size": [576, 1024], "seconds_video": 5, "turbo": true, "ok": true, "render_s": 180.1}
+{"id": "h04_product_ref", "mode": "ref2va", "size": [576, 1024], "seconds_video": 5, "turbo": true, "ok": true, "render_s": 117.1}
+{"id": "h05_apply_firstframe", "mode": "fl2va", "size": [576, 1024], "seconds_video": 5, "turbo": true, "ok": true, "render_s": 195.1}
+{"id": "h06_talking_de", "mode": "t2va", "size": [576, 1024], "seconds_video": 6, "turbo": true, "ok": true, "render_s": 216.1}
+{"id": "h07_talking_de_768p", "mode": "t2va", "size": [768, 1344], "seconds_video": 6, "turbo": true, "ok": true, "render_s": 429.3}
+{"id": "h08_hook_20steps", "mode": "t2va", "size": [576, 1024], "seconds_video": 5, "turbo": false, "ok": true, "render_s": 396.2}
+2026-11-12T13:15:56Z [+2216s] === done
+2026-11-12T13:15:56Z === push (final)
