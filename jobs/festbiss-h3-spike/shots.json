@@ -1,0 +1,76 @@
+{
+ "job_id": "festbiss-h3-spike-v1",
+ "note": "MiniMax H3 spike for the Festbiss (German) denture-reliner ad: 6 key beats in 9:16 at 576x1024 with the turbo LoRAs, plus one 768p and one 20-step comparison.",
+ "images": {
+  "product": "product_de.jpg",
+  "apply_ff": "apply_first_frame_9x16.jpg"
+ },
+ "shots": [
+  {
+   "id": "h01_hook",
+   "mode": "t2va",
+   "seconds": 5,
+   "seed": 101,
+   "prompt": "Realistic vertical smartphone video, natural bathroom light, handheld feel. A German woman in her late fifties with short silver-grey hair and a light grey patterned blouse stands at the bathroom mirror and smiles at herself; a small white blob of denture adhesive cream squeezes out at the corner of her mouth onto her lip. She notices it, her smile drops and she looks embarrassed. Quiet bathroom room tone, no music, no speech."
+  },
+  {
+   "id": "h02_problem",
+   "mode": "t2va",
+   "seconds": 5,
+   "seed": 102,
+   "prompt": "Realistic vertical video in a cosy German cafe at lunchtime. The same woman in her late fifties with short silver-grey hair and a light grey patterned blouse sits at a table with two friends; she discreetly presses her fingers against her lips, smiles awkwardly, then quietly stands up and walks towards the restroom. Soft cafe chatter and cutlery sounds, no music."
+  },
+  {
+   "id": "h03_mechanism",
+   "mode": "t2va",
+   "seconds": 5,
+   "seed": 103,
+   "prompt": "Clean 3D medical product visualisation on a soft light-grey studio background: a pink acrylic lower denture rests on a beige gum model; a layer of white adhesive cream lies only on top of the gap between denture and gum and slowly turns soft and mushy, sliding out at the edges. Slow orbit of the camera, sharp focus, studio lighting. Subtle soft sound design, no speech."
+  },
+  {
+   "id": "h04_product_ref",
+   "mode": "ref2va",
+   "seconds": 5,
+   "seed": 104,
+   "ref_images": [
+    "product"
+   ],
+   "prompt": "Realistic product shot. The white box and the white tube of the denture reliner from <Picture 1>, with their blue watercolour pattern and the German label EXTRA STARK PROTHESEN-UNTERFÜTTERUNG 20 g, stand side by side on a clean white bathroom counter next to a small green plant, soft morning light from a window. The camera slowly pushes in. The box and tube stay still, their labels sharp and unchanged. Calm room tone, no speech."
+  },
+  {
+   "id": "h05_apply_firstframe",
+   "mode": "fl2va",
+   "seconds": 5,
+   "seed": 105,
+   "first_frame": "apply_ff",
+   "prompt": "Realistic close-up in a bright bathroom. Older hands hold a pink lower denture and slowly squeeze a thin even line of white gel from the tube along the inside of the denture, then lower the tube. Smooth natural motion, shallow depth of field, the tube label stays sharp and unchanged. Soft bathroom room tone, no speech."
+  },
+  {
+   "id": "h06_talking_de",
+   "mode": "t2va",
+   "seconds": 6,
+   "seed": 106,
+   "prompt": "Realistic vertical video, warm kitchen in the morning. A German woman in her late fifties with short silver-grey hair and a light grey patterned blouse sits at her kitchen table holding a red apple, looks straight into the camera, smiles and says clearly in German with a warm, relieved voice: \"Endlich wieder herzhaft in einen Apfel beißen.\" Then she bites into the apple. Natural kitchen room tone, her voice only, no music."
+  },
+  {
+   "id": "h07_talking_de_768p",
+   "mode": "t2va",
+   "seconds": 6,
+   "seed": 106,
+   "size": [
+    768,
+    1344
+   ],
+   "prompt": "Realistic vertical video, warm kitchen in the morning. A German woman in her late fifties with short silver-grey hair and a light grey patterned blouse sits at her kitchen table holding a red apple, looks straight into the camera, smiles and says clearly in German with a warm, relieved voice: \"Endlich wieder herzhaft in einen Apfel beißen.\" Then she bites into the apple. Natural kitchen room tone, her voice only, no music."
+  },
+  {
+   "id": "h08_hook_20steps",
+   "mode": "t2va",
+   "seconds": 5,
+   "seed": 101,
+   "turbo": false,
+   "prompt": "Realistic vertical smartphone video, natural bathroom light, handheld feel. A German woman in her late fifties with short silver-grey hair and a light grey patterned blouse stands at the bathroom mirror and smiles at herself; a small white blob of denture adhesive cream squeezes out at the corner of her mouth onto her lip. She notices it, her smile drops and she looks embarrassed. Quiet bathroom room tone, no music, no speech."
+  }
+ ],
+ "image_source": "extracted on the box from https://artikel.festbiss.de/reasonsdental/ (embedded images 2 = packshot, 1 = application)"
+}

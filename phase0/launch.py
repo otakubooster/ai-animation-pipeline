@@ -51,6 +51,20 @@ def est_cost(o: dict, hours: float = EST_HOURS) -> float:
     return round((hours + dl_hours) * o["dph_total"] + dl_cost, 2)
 
 
+# MiniMax H3 Community License: no use, display or distribution of the model or its outputs in these territories.
+H3_EXCLUDED = {"AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU",
+               "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB", "UK", "US", "KR"}
+
+
+def country(o: dict) -> str:
+    """Country code from a Vast geolocation such as 'Sweden, SE' or 'Texas, US'."""
+    return str(o.get("geolocation") or "").rsplit(",", 1)[-1].strip().upper()
+
+
+def licence_ok(o: dict, territory: str | None) -> bool:
+    return territory != "h3" or (country(o) not in H3_EXCLUDED and country(o) != "")
+
+
 def search_offers(disk: int = DISK_GB) -> list[dict]:
     q = {"gpu_name": {"eq": "RTX 5090"}, "num_gpus": {"eq": 1}, "verified": {"eq": True},
          "rentable": {"eq": True}, "cpu_ram": {"gte": 58000}, "disk_space": {"gte": disk},
@@ -82,6 +96,7 @@ def cmd_create(a) -> None:
         raise SystemExit("Refusing to rent without --yes (this costs money).")
     offers = search_offers(a.disk)
     offers = [o for o in offers if not any(x.lower() in str(o.get("geolocation", "")).lower() for x in a.avoid)]
+    offers = [o for o in offers if licence_ok(o, a.territory)]
     if a.offer:
         offers = [o for o in offers if o["id"] == a.offer]
     else:  # --best: try the cheapest few by estimated total cost, skipping any over the cost cap
@@ -196,6 +211,7 @@ def main(argv=None) -> None:
     c.add_argument("--disk", type=int, default=DISK_GB, help="GB of disk to rent (only what the batch needs)")
     c.add_argument("--avoid", nargs="*", default=["Nepal", "Japan", "Korea", "Taiwan", "Hong Kong", "China"], help="skip offers whose location contains any of these (slow hosts)")
     c.add_argument("--script", default="phase0/run_spike.sh", help="repo-relative script the box runs")
+    c.add_argument("--territory", choices=["h3"], help="h3: only hosts the MiniMax H3 licence allows (no EU, UK, US, KR)")
     c.add_argument("--job", nargs="*", default=[], help="job folder(s) for jobs/run_job.sh; several = one batch on one GPU")
     c.set_defaults(fn=cmd_create)
     w = sub.add_parser("watch")

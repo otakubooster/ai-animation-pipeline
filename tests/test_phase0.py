@@ -83,3 +83,12 @@ def test_watch_drops_a_host_that_never_finishes_loading():
     assert launch.should_destroy("loading", None, 0, None, loading_s=200) is None
     assert "slow host" in launch.should_destroy("loading", None, 0, None, loading_s=901)
     assert launch.should_destroy("running", None, 0, None, loading_s=5000) is None
+
+
+def test_h3_licence_filter_drops_excluded_territories():
+    import launch
+    assert not launch.licence_ok({"geolocation": "Sweden, SE"}, "h3")
+    assert not launch.licence_ok({"geolocation": "Texas, US"}, "h3")
+    assert not launch.licence_ok({"geolocation": "England, GB"}, "h3")
+    assert launch.licence_ok({"geolocation": "British Columbia, CA"}, "h3")
+    assert launch.licence_ok({"geolocation": "Sweden, SE"}, None)
