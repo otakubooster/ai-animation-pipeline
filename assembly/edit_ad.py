@@ -186,6 +186,9 @@ CAPTION_PRESETS = {
     "phrase-key-red":  ("Inter Display Black", 0.85, False, None, 2, False, "&H2E10C8&", 5, "low"),
     "one-word":        ("Inter Display Black", 1.25, False, None, 2, False, None, 1, "low"),
     "boxed":           ("Inter Display Bold", 0.7, False, 0, 0, True, None, 5, "low"),
+    # plain white sentence-case phrases with a soft shadow (no highlight), low or centred
+    "sentence-low":    ("Inter Display Black", 0.88, False, None, 2, False, None, 4, "low"),
+    "sentence-mid":    ("Inter Display Black", 0.88, False, None, 2, False, None, 3, "middle"),
     # Arabic (Darija) ads: right-to-left, shaped by libass; frames keep the top 20% free for captions
     "ar-key-yellow":   ("Noto Kufi Arabic", 0.9, False, None, 2, False, "&H00E5FF&", 3, "top"),
     "ar-plain-top":    ("Noto Kufi Arabic", 0.9, False, None, 2, False, None, 4, "top"),
