@@ -47,8 +47,10 @@ for J in $JOBS; do
   [ "$(ls "$WORK/frames/$ID" | wc -l)" -gt 0 ] || { echo "FATAL: no frames for $ID"; exit 1; }
   SPECS+=("$REPO_DIR/$J/job.json:$WORK/frames/$ID:$OUT_ROOT/$ID")
 done
+push "shard $SHARD frames ok"   # each setup stage pushes its log, so a box that stalls shows where
 
 H3_FAMILIES=fl2va bash $REPO_DIR/jobs/h3_setup.sh "$OUT_ROOT" || exit 1
+push "shard $SHARD models ready"
 
 stage "render (shard $SHARD)"
 PUSH_HOOK="bash $REPO_DIR/jobs/push_results.sh" PUSH_EVERY=${PUSH_EVERY:-3} python3 $REPO_DIR/jobs/render_job_h3.py "${SPECS[@]}"
