@@ -31,6 +31,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "phase0"))
 from h3_render import COMFY, api_graph, frames_for, post, wait  # noqa: E402
 
 SOUND = " Sound: quiet natural ambient sound of the scene only; no speech, no voices, no music."
+SOUND_TALK = " Sound: only the character's voice and quiet room tone; no music."   # talking shots: real mouth movement
 DEFAULT_AREA = 576 * 1024
 
 
@@ -87,7 +88,7 @@ def render_shot(server: str, job: dict, shot: dict, frames_dir: Path, out: Path,
     images = {"first": stage_image(first, job["job_id"])}
     if shot.get("last_frame"):
         images["last"] = stage_image(frames_dir / shot["last_frame"], job["job_id"])
-    prompt = (shot.get("h3_prompt") or shot.get("motion_prompt", "")).strip() + job.get("h3_prompt_suffix", "") + SOUND
+    prompt = (shot.get("h3_prompt") or shot.get("motion_prompt", "")).strip() + job.get("h3_prompt_suffix", "") + (SOUND_TALK if shot.get("talking") else SOUND)
     run = {"id": shot["id"], "file": f"clips/{shot['id']}.mp4", "size": size, "attempts": []}
     seed = int(shot.get("seed") or 1)
     for k, (sd, s) in enumerate([(seed, secs), (seed + 1000, secs), (seed + 2000, min(secs, 6.0))]):

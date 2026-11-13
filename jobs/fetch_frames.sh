@@ -2,7 +2,8 @@
 # Put one job's first frames in DEST on the GPU box (used by run_job.sh and run_job_h3.sh).
 #   fetch_frames.sh JOB_JSON DEST       (needs GH_TOKEN, GH_REPO; WORK defaults to /workspace/job)
 # Source: job.json "frames_git" {branch, path} (staged by pipeline/stage_frames.py on branch frames-store), or
-# "frames_release" {repo, tag, asset} (a zip on a GitHub release; downloaded once per asset, flattened).
+# "frames_release" {repo, tag, asset, subdir?} (a zip on a GitHub release; downloaded once per asset, flattened;
+# subdir = only that folder of the zip, for zips holding several ads).
 set -uo pipefail
 JOB_JSON=$1 DEST=$2
 WORK=${WORK:-/workspace/job}
@@ -18,6 +19,7 @@ if [ "$SRC" = git ]; then
 else
   REL=$(python3 -c "import json;r=json.load(open('$JOB_JSON'))['frames_release'];print(r['repo'],r['tag'],r['asset'])")
   read -r REL_REPO REL_TAG REL_ASSET <<<"$REL"
+  SUBDIR=$(python3 -c "import json;print(json.load(open('$JOB_JSON'))['frames_release'].get('subdir',''))")
   ZIP="$WORK/releases/$REL_TAG/$REL_ASSET"
   if [ ! -s "$ZIP" ]; then
     mkdir -p "$(dirname "$ZIP")"
@@ -26,6 +28,6 @@ else
     curl -sSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" \
       "https://api.github.com/repos/$REL_REPO/releases/assets/$ASSET_ID" -o "$ZIP"
   fi
-  unzip -q -o -j "$ZIP" -d "$DEST"
+  if [ -n "$SUBDIR" ]; then unzip -q -o -j "$ZIP" "$SUBDIR/*" -d "$DEST"; else unzip -q -o -j "$ZIP" -d "$DEST"; fi
 fi
 echo "$(basename "$DEST"): $(ls "$DEST" | wc -l) frames"
