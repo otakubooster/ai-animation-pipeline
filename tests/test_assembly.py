@@ -189,4 +189,4 @@ def test_captions_drop_quote_marks(tmp_path):
     ass = tmp_path / "c.ass"
     edit_ad.captions_ass(words, ass, (1080, 1920), 84, 470, style="sentence-low")
     body = "\n".join(ln.rsplit(",,", 1)[1] for ln in ass.read_text().splitlines() if ln.startswith("Dialogue"))
-    assert '"' not in body and "go Right now" in body.replace("\n", " ") or "go" in body
+    assert '"' not in body and "Mommy" in body
