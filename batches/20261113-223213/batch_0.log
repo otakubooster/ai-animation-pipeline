@@ -4,3 +4,651 @@ Mem:             251          52          89           0         110         198
 CA
 
 2026-11-13T22:32:38Z === push (shard 0/2 alive)
+PUSH ok
+PUSH done
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+diffusers 0.38.0 requires huggingface-hub<2.0,>=0.34.0, but you have huggingface-hub 2.4.0 which is incompatible.
+tokenizers 0.22.2 requires huggingface-hub<2.0,>=0.16.4, but you have huggingface-hub 2.4.0 which is incompatible.
+transformers 5.9.0 requires huggingface-hub<2.0,>=1.5.0, but you have huggingface-hub 2.4.0 which is incompatible.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+2026-11-13T22:32:45Z [+8s] === frames
+halfstep-02-he-just-needed-the-right-signal-fix1: 36 frames
+halfstep-03-a-modern-diaper-in-the-1950s-fix1: 29 frames
+halfstep-04-inside-the-3-layers-fix1: 25 frames
+halfstep-06-here-s-why-i-m-not-potty-trained-fix1: 20 frames
+halfstep-09-the-1950s-potty-training-secret-v1: 26 frames
+halfstep-10-there-s-a-biological-reason-v1: 28 frames
+halfstep-11-diaper-vs-cloth-vs-halfstep-v1: 21 frames
+halfstep-12-our-pediatrician-explained-something-v1: 30 frames
+halfstep-13-watch-this-potty-training-x-ray-v1: 29 frames
+2026-11-13T22:32:55Z === push (shard 0/2 frames ok)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+=== h3 setup (fl2va)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+{'file': 'minimax_h3_fl2va_pruned_int8_convrot.safetensors', 'seconds': 106.6, 'gb': 20.97}
+{'file': 'qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors', 'seconds': 69.5, 'gb': 15.69}
+{'file': 'minimax_h3_video_vae_int8_convrot.safetensors', 'seconds': 16.7, 'gb': 2.81}
+{'file': 'minimax_h3_audio_vae_fp32.safetensors', 'seconds': 14.0, 'gb': 0.61}
+{'file': 'minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors', 'seconds': 7.2, 'gb': 1.96}
+=== h3 ready
+2026-11-13T22:37:11Z === push (shard 0/2 models ready)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33:  1679 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+2026-11-13T22:37:17Z [+280s] === render (shard 0/2)
+{"shard": "0/2", "shots": 56, "clip_seconds": 298.2}
+{"job": "halfstep-02-he-just-needed-the-right-signal-fix1", "id": "s017", "file": "clips/s017.mp4", "size": [576, 1024], "ok": true, "seconds": 168.3, "seed": 6717, "clip_s": 10.56, "num_frames": 260, "fps": 24, "usd": 0.035}
+{"job": "halfstep-02-he-just-needed-the-right-signal-fix1", "id": "s019", "file": "clips/s019.mp4", "size": [576, 1024], "ok": true, "seconds": 282.2, "seed": 6719, "clip_s": 15.0, "num_frames": 362, "fps": 24, "usd": 0.0587}
+{"job": "halfstep-02-he-just-needed-the-right-signal-fix1", "id": "s020", "file": "clips/s020.mp4", "size": [576, 1024], "ok": true, "seconds": 45.0, "seed": 6720, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0094}
+2026-11-13T22:45:32Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 13185 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+{"job": "halfstep-02-he-just-needed-the-right-signal-fix1", "id": "s021", "file": "clips/s021.mp4", "size": [576, 1024], "ok": true, "seconds": 162.1, "seed": 6721, "clip_s": 10.76, "num_frames": 260, "fps": 24, "usd": 0.0337}
+2026-11-13T22:48:22Z === push (halfstep-02-he-just-needed-the-right-signal-fix1 ready shard 0)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 17382 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+{"job": "halfstep-03-a-modern-diaper-in-the-1950s-fix1", "id": "s008", "file": "clips/s008.mp4", "size": [576, 1024], "ok": true, "seconds": 45.0, "seed": 6808, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0094}
+2026-11-13T22:49:14Z === push (halfstep-03-a-modern-diaper-in-the-1950s-fix1 ready shard 0)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 19237 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+{"job": "halfstep-04-inside-the-3-layers-fix1", "id": "s006", "file": "clips/s006.mp4", "size": [576, 1024], "ok": true, "seconds": 45.0, "seed": 6906, "clip_s": 4.4, "num_frames": 107, "fps": 24, "usd": 0.0094}
+2026-11-13T22:50:06Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 21092 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+2026-11-13T22:50:13Z === push (halfstep-04-inside-the-3-layers-fix1 ready shard 0)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 21281 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+2026-11-13T22:50:21Z === push (halfstep-06-here-s-why-i-m-not-potty-trained-fix1 ready shard 0)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 21423 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s001", "file": "clips/s001.mp4", "size": [576, 1024], "ok": true, "seconds": 63.0, "seed": 6901, "clip_s": 5.87, "num_frames": 141, "fps": 24, "usd": 0.0131}
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s002", "file": "clips/s002.mp4", "size": [576, 1024], "ok": true, "seconds": 45.0, "seed": 6902, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0094}
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s003", "file": "clips/s003.mp4", "size": [576, 1024], "ok": true, "seconds": 99.1, "seed": 6903, "clip_s": 8.0, "num_frames": 192, "fps": 24, "usd": 0.0206}
+2026-11-13T22:53:55Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 28536 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s005", "file": "clips/s005.mp4", "size": [576, 1024], "ok": true, "seconds": 42.3, "seed": 6905, "clip_s": 4.08, "num_frames": 107, "fps": 24, "usd": 0.0088}
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s006", "file": "clips/s006.mp4", "size": [576, 1024], "ok": true, "seconds": 87.1, "seed": 6906, "clip_s": 6.64, "num_frames": 175, "fps": 24, "usd": 0.0181}
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s009", "file": "clips/s009.mp4", "size": [576, 1024], "ok": true, "seconds": 87.1, "seed": 6909, "clip_s": 6.92, "num_frames": 175, "fps": 24, "usd": 0.0181}
+2026-11-13T22:57:41Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 35904 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s011", "file": "clips/s011.mp4", "size": [576, 1024], "ok": true, "seconds": 63.3, "seed": 6911, "clip_s": 5.84, "num_frames": 141, "fps": 24, "usd": 0.0132}
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s012", "file": "clips/s012.mp4", "size": [576, 1024], "ok": true, "seconds": 45.0, "seed": 6912, "clip_s": 4.16, "num_frames": 107, "fps": 24, "usd": 0.0094}
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s017", "file": "clips/s017.mp4", "size": [576, 1024], "ok": true, "seconds": 99.1, "seed": 6917, "clip_s": 7.36, "num_frames": 192, "fps": 24, "usd": 0.0206}
+2026-11-13T23:01:18Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 42970 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s018", "file": "clips/s018.mp4", "size": [576, 1024], "ok": true, "seconds": 75.1, "seed": 6918, "clip_s": 6.0, "num_frames": 158, "fps": 24, "usd": 0.0156}
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s019", "file": "clips/s019.mp4", "size": [576, 1024], "ok": true, "seconds": 54.0, "seed": 6919, "clip_s": 4.92, "num_frames": 124, "fps": 24, "usd": 0.0112}
+{"job": "halfstep-09-the-1950s-potty-training-secret-v1", "id": "s020", "file": "clips/s020.mp4", "size": [576, 1024], "ok": true, "seconds": 75.1, "seed": 6920, "clip_s": 6.29, "num_frames": 158, "fps": 24, "usd": 0.0156}
+2026-11-13T23:04:51Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 50036 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+2026-11-13T23:05:01Z === push (halfstep-09-the-1950s-potty-training-secret-v1 ready shard 0)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+/workspace/repo/jobs/push_results.sh: line 33: 50178 Segmentation fault      git reset -q --mixed FETCH_HEAD
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/workspace/results-repo/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+PUSH done
+2026-11-13T23:07:16Z [+0s] === setup shard 0/2 (9 jobs)
+NVIDIA GeForce RTX 5090, 32607 MiB, 595.91.07
+Mem:             251          59          48           0         144         191
+CA
+
+2026-11-13T23:07:17Z === push (shard 0/2 alive)
+PUSH ok
+PUSH done
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+diffusers 0.38.0 requires huggingface-hub<2.0,>=0.34.0, but you have huggingface-hub 2.4.0 which is incompatible.
+tokenizers 0.22.2 requires huggingface-hub<2.0,>=0.16.4, but you have huggingface-hub 2.4.0 which is incompatible.
+transformers 5.9.0 requires huggingface-hub<2.0,>=1.5.0, but you have huggingface-hub 2.4.0 which is incompatible.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+2026-11-13T23:07:51Z [+35s] === frames
+halfstep-02-he-just-needed-the-right-signal-fix1: 36 frames
+halfstep-03-a-modern-diaper-in-the-1950s-fix1: 29 frames
+halfstep-04-inside-the-3-layers-fix1: 25 frames
+halfstep-06-here-s-why-i-m-not-potty-trained-fix1: 20 frames
+halfstep-09-the-1950s-potty-training-secret-v1: 26 frames
+halfstep-10-there-s-a-biological-reason-v1: 28 frames
+halfstep-11-diaper-vs-cloth-vs-halfstep-v1: 21 frames
+halfstep-12-our-pediatrician-explained-something-v1: 30 frames
+halfstep-13-watch-this-potty-training-x-ray-v1: 29 frames
+2026-11-13T23:07:54Z === push (shard 0/2 frames ok)
+PUSH ok
+PUSH done
+=== h3 setup (fl2va)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+{'file': 'minimax_h3_fl2va_pruned_int8_convrot.safetensors', 'seconds': 0.2, 'gb': 20.97}
+{'file': 'qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors', 'seconds': 0.1, 'gb': 15.69}
+{'file': 'minimax_h3_video_vae_int8_convrot.safetensors', 'seconds': 0.1, 'gb': 2.81}
+{'file': 'minimax_h3_audio_vae_fp32.safetensors', 'seconds': 0.1, 'gb': 0.61}
+{'file': 'minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors', 'seconds': 0.1, 'gb': 1.96}
+=== h3 ready
+2026-11-13T23:08:16Z === push (shard 0/2 models ready)
+PUSH ok
+PUSH done
+2026-11-13T23:08:19Z [+63s] === render (shard 0/2)
+{"shard": "0/2", "shots": 56, "clip_seconds": 298.2}
+2026-11-13T23:08:19Z === push (halfstep-02-he-just-needed-the-right-signal-fix1 ready shard 0)
+PUSH ok
+PUSH done
+2026-11-13T23:08:23Z === push (halfstep-03-a-modern-diaper-in-the-1950s-fix1 ready shard 0)
+PUSH ok
+PUSH done
+2026-11-13T23:08:27Z === push (halfstep-04-inside-the-3-layers-fix1 ready shard 0)
+PUSH ok
+PUSH done
+2026-11-13T23:08:31Z === push (halfstep-06-here-s-why-i-m-not-potty-trained-fix1 ready shard 0)
+PUSH ok
+PUSH done
+2026-11-13T23:08:36Z === push (halfstep-09-the-1950s-potty-training-secret-v1 ready shard 0)
+PUSH ok
+PUSH done
+{"job": "halfstep-10-there-s-a-biological-reason-v1", "id": "s002", "file": "clips/s002.mp4", "size": [576, 1024], "ok": true, "seconds": 60.1, "seed": 7002, "clip_s": 4.88, "num_frames": 124, "fps": 24, "usd": 0.0125}
+{"job": "halfstep-10-there-s-a-biological-reason-v1", "id": "s004", "file": "clips/s004.mp4", "size": [576, 1024], "ok": true, "seconds": 45.0, "seed": 7004, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0094}
+{"job": "halfstep-10-there-s-a-biological-reason-v1", "id": "s006", "file": "clips/s006.mp4", "size": [576, 1024], "ok": true, "seconds": 42.0, "seed": 7006, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0087}
+2026-11-13T23:11:08Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+{"job": "halfstep-10-there-s-a-biological-reason-v1", "id": "s010", "file": "clips/s010.mp4", "size": [576, 1024], "ok": true, "seconds": 42.0, "seed": 7010, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0087}
+{"job": "halfstep-10-there-s-a-biological-reason-v1", "id": "s011", "file": "clips/s011.mp4", "size": [576, 1024], "ok": true, "seconds": 75.1, "seed": 7011, "clip_s": 6.08, "num_frames": 158, "fps": 24, "usd": 0.0156}
+{"job": "halfstep-10-there-s-a-biological-reason-v1", "id": "s013", "file": "clips/s013.mp4", "size": [576, 1024], "ok": true, "seconds": 63.0, "seed": 7013, "clip_s": 5.72, "num_frames": 141, "fps": 24, "usd": 0.0131}
+2026-11-13T23:14:31Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
