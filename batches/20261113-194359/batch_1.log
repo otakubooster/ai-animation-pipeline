@@ -4,3 +4,34 @@ Mem:            1007         161         348           4         510         846
 CA
 
 2026-11-13T19:48:18Z === push (shard 1/2 alive)
+PUSH ok
+PUSH done
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+diffusers 0.38.0 requires huggingface-hub<2.0,>=0.34.0, but you have huggingface-hub 2.4.0 which is incompatible.
+tokenizers 0.22.2 requires huggingface-hub<2.0,>=0.16.4, but you have huggingface-hub 2.4.0 which is incompatible.
+transformers 5.9.0 requires huggingface-hub<2.0,>=1.5.0, but you have huggingface-hub 2.4.0 which is incompatible.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+2026-11-13T19:48:27Z [+10s] === frames
+halfstep-01-the-exact-timeline-v1: 23 frames
+halfstep-02-he-just-needed-the-right-signal-v1: 36 frames
+halfstep-03-a-modern-diaper-in-the-1950s-v1: 29 frames
+halfstep-04-inside-the-3-layers-v1: 25 frames
+halfstep-05-nighttime-accidents-v1: 26 frames
+halfstep-06-here-s-why-i-m-not-potty-trained-v1: 20 frames
+halfstep-07-what-14-days-of-feeling-wet-can-do-v1: 22 frames
+halfstep-08-potty-training-at-1-really-works-v1: 20 frames
+=== h3 setup (fl2va)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+{'file': 'minimax_h3_fl2va_pruned_int8_convrot.safetensors', 'seconds': 67.0, 'gb': 20.97}
+{'file': 'qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors', 'seconds': 61.8, 'gb': 15.69}
+{'file': 'minimax_h3_video_vae_int8_convrot.safetensors', 'seconds': 15.7, 'gb': 2.81}
+{'file': 'minimax_h3_audio_vae_fp32.safetensors', 'seconds': 9.6, 'gb': 0.61}
+{'file': 'minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors', 'seconds': 8.5, 'gb': 1.96}
+=== h3 ready
+2026-11-13T19:53:48Z [+331s] === render (shard 1/2)
+{"shard": "1/2", "shots": 72, "clip_seconds": 366.6}
+{"job": "halfstep-01-the-exact-timeline-v1", "id": "s003", "file": "clips/s003.mp4", "size": [576, 1024], "ok": true, "seconds": 63.1, "seed": 6103, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0176}
+{"job": "halfstep-01-the-exact-timeline-v1", "id": "s004", "file": "clips/s004.mp4", "size": [576, 1024], "ok": true, "seconds": 72.1, "seed": 6104, "clip_s": 5.52, "num_frames": 141, "fps": 24, "usd": 0.0201}
+{"job": "halfstep-01-the-exact-timeline-v1", "id": "s005", "file": "clips/s005.mp4", "size": [576, 1024], "ok": true, "seconds": 48.1, "seed": 6105, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0134}
+2026-11-13T19:56:51Z === push (clips)
