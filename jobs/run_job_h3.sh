@@ -26,6 +26,10 @@ trap finish EXIT
 trap 'exit 1' TERM INT
 ( sleep "$MAX_SECONDS"; echo "HARD TIMEOUT after ${MAX_SECONDS}s"; pkill -f 'render_job_h3.py|main.py'; sleep 5; kill -TERM $$ ) &
 
+# Results can only come back through GitHub: without a working token, stop now (before any download is paid for).
+if [ "$(curl -s -o /dev/null -w '%{http_code}' -H "Authorization: Bearer ${GH_TOKEN:-}" "https://api.github.com/repos/$GH_REPO")" != 200 ]; then
+  echo "FATAL: GH_TOKEN rejected by GitHub - renew it in the Vast account environment variables"; exit 1
+fi
 stage "setup shard $SHARD ($(echo $JOBS | wc -w) jobs)"
 { nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader; free -g | sed -n 2p; curl -s https://ipinfo.io/country; echo; } \
   | tee "$OUT_ROOT/gpu_${SHARD%/*}.txt"
@@ -40,6 +44,7 @@ SPECS=()
 for J in $JOBS; do
   ID=$(job_id $J)
   bash $REPO_DIR/jobs/fetch_frames.sh "$REPO_DIR/$J/job.json" "$WORK/frames/$ID"
+  [ "$(ls "$WORK/frames/$ID" | wc -l)" -gt 0 ] || { echo "FATAL: no frames for $ID"; exit 1; }
   SPECS+=("$REPO_DIR/$J/job.json:$WORK/frames/$ID:$OUT_ROOT/$ID")
 done
 

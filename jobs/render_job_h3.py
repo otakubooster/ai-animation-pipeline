@@ -140,7 +140,10 @@ def main() -> None:
         for shot in job["shots"]:
             if shot.get("skip_render") or owner.get((job["job_id"], shot["id"])) != me or shot["id"] in done:
                 continue
-            run = render_shot(a.server, job, shot, frames_dir, out, area)
+            try:
+                run = render_shot(a.server, job, shot, frames_dir, out, area)
+            except Exception as e:          # e.g. a missing or unreadable frame: log it, keep the batch going
+                run = {"id": shot["id"], "file": f"clips/{shot['id']}.mp4", "ok": False, "error": repr(e)[:800], "seconds": 0}
             if run.get("ok"):
                 run["usd"] = round(run["seconds"] * dph / 3600, 4)
             report["runs"] = [r for r in report["runs"] if r["id"] != shot["id"]] + [run]

@@ -23,10 +23,12 @@ else
   ZIP="$WORK/releases/$REL_TAG/$REL_ASSET"
   if [ ! -s "$ZIP" ]; then
     mkdir -p "$(dirname "$ZIP")"
-    ASSET_ID=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$REL_REPO/releases/tags/$REL_TAG" \
-      | python3 -c "import sys,json;print(next(a['id'] for a in json.load(sys.stdin)['assets'] if a['name']=='$REL_ASSET'))")
-    curl -sSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" \
-      "https://api.github.com/repos/$REL_REPO/releases/assets/$ASSET_ID" -o "$ZIP"
+    # Public repo: the plain release URL needs no token; otherwise fall back to the API with GH_TOKEN.
+    curl -sSfL "https://github.com/$REL_REPO/releases/download/$REL_TAG/$REL_ASSET" -o "$ZIP" || {
+      ASSET_ID=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$REL_REPO/releases/tags/$REL_TAG" \
+        | python3 -c "import sys,json;print(next(a['id'] for a in json.load(sys.stdin)['assets'] if a['name']=='$REL_ASSET'))")
+      curl -sSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" \
+        "https://api.github.com/repos/$REL_REPO/releases/assets/$ASSET_ID" -o "$ZIP"; }
   fi
   if [ -n "$SUBDIR" ]; then unzip -q -o -j "$ZIP" "$SUBDIR/*" -d "$DEST"; else unzip -q -o -j "$ZIP" -d "$DEST"; fi
 fi
