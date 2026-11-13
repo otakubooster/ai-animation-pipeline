@@ -217,7 +217,8 @@ def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int,
             cur = []
     if cur:
         groups.append(cur)
-    clean = lambda t: re.sub(PUNCT_END + "+$", "", t)
+    # quote marks go: a quoted line split over two caption groups would otherwise show a lone stray quote
+    clean = lambda t: re.sub(PUNCT_END + "+$", "", re.sub(r'["\u201c\u201d]', "", t))
     up = (lambda t: t.upper()) if upper else (lambda t: t)
     fs = int(size * fac)
     ol = max(fs // 13, 4) if outline is None else outline

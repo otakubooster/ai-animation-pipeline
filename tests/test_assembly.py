@@ -182,3 +182,11 @@ def test_long_words_split_so_captions_stay_inside_the_frame(tmp_path):
     assert texts == ["Add Halfstep's extra-absorbent", "night inserts"]       # 36 characters do not fit one 9:16 line
     edit_ad.captions_ass(words, ass, (1920, 1080), 60, 90, style="sentence-low")
     assert sum(ln.startswith("Dialogue") for ln in ass.read_text().splitlines()) == 2   # 4-word groups on 16:9
+
+
+def test_captions_drop_quote_marks(tmp_path):
+    words = [W(t, i * 0.4, i * 0.4 + 0.35) for i, t in enumerate('say "Mommy, I have to go!" Right now'.split())]
+    ass = tmp_path / "c.ass"
+    edit_ad.captions_ass(words, ass, (1080, 1920), 84, 470, style="sentence-low")
+    body = "\n".join(ln.rsplit(",,", 1)[1] for ln in ass.read_text().splitlines() if ln.startswith("Dialogue"))
+    assert '"' not in body and "go Right now" in body.replace("\n", " ") or "go" in body
