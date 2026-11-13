@@ -203,8 +203,14 @@ def captions_ass(words: list[dict], path: Path, res: tuple[int, int], size: int,
     preset has a highlight colour). Inside `high_spans` (product shots) captions move up to `margin_high`."""
     font, fac, upper, outline, shadow, box, hl, per, place = CAPTION_PRESETS.get(style, CAPTION_PRESETS["word-highlight"])
     per = max_words if style == "word-highlight" else per
+    # Lines never wrap (WrapStyle 2): a group also ends before it gets wider than the frame (Inter Black measured on
+    # 1080-wide renders: ~0.41 em per lower-case character, ~0.53 em per capital), so long words cannot run off the edge.
+    max_chars = max(8, int((res[0] - 100) / (size * fac * (0.55 if upper else 0.42))))
     groups, cur = [], []
     for w in words:
+        if cur and len(" ".join(x["text"] for x in cur + [w])) > max_chars:
+            groups.append(cur)
+            cur = []
         cur.append(w)
         if len(cur) >= per or re.search(PUNCT_END + "$", w["text"]):
             groups.append(cur)

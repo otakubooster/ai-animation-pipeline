@@ -172,3 +172,13 @@ def test_emoji_only_captions_get_ingredient_names():
     assert edit_ad.emoji_free("🌿 🦠 🌱 🌵") == "الأكاسيا · بروبيوتيك · النعناع · الصبار"
     assert edit_ad.emoji_free("🌿 ألياف الأكاسيا") == "ألياف الأكاسيا"
     assert edit_ad.emoji_free("😬") == ""
+
+
+def test_long_words_split_so_captions_stay_inside_the_frame(tmp_path):
+    words = [W(t, i * 0.4, i * 0.4 + 0.35) for i, t in enumerate("Add Halfstep's extra-absorbent night inserts".split())]
+    ass = tmp_path / "c.ass"
+    edit_ad.captions_ass(words, ass, (1080, 1920), 84, 470, style="sentence-low")
+    texts = [ln.rsplit(",,", 1)[1] for ln in ass.read_text().splitlines() if ln.startswith("Dialogue")]
+    assert texts == ["Add Halfstep's extra-absorbent", "night inserts"]       # 36 characters do not fit one 9:16 line
+    edit_ad.captions_ass(words, ass, (1920, 1080), 60, 90, style="sentence-low")
+    assert sum(ln.startswith("Dialogue") for ln in ass.read_text().splitlines()) == 2   # 4-word groups on 16:9
