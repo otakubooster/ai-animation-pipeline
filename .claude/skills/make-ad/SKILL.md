@@ -46,21 +46,22 @@ avoid jumps/standing up (subjects leave the frame).
    `words_download_url` to `jobs/<slug>/vo/words.json`.
 5. `python pipeline/fit_to_vo.py jobs/<slug>/job.json jobs/<slug>/vo/words.json` (sizes every clip to the real VO).
 
-## 4. Render (cheapest 5090, unattended, ALL new jobs in ONE GPU session)
-Do steps 1-3 for every new job first, then render them together: the ~20 min GPU setup (image + model
-download) is paid once per batch, and the model loads once.
+## 4. Render with MiniMax H3 (user decision 2026-11-12; Wan worker jobs/run_job.sh is legacy)
+H3 = open weights, self-hosted ComfyUI, FL2VA: each shot's first frame (+ optional `last_frame`, e.g. the next
+shot's frame for one continuous scene) -> a 4-15 s, 24 fps clip as long as its VO line (vo_s + 0.9 s, or
+`h3_seconds`). ~3 min per 5-7 s clip at 576x1024 (8-step turbo), so split big batches over N boxes with SHARD.
+Licence: hosts only outside the EU/UK/US/KR (`--territory h3`); outputs must not be shown there.
 ```bash
 git add jobs/*/job.json && git commit -m "batch: shot lists" && git push origin main
-N=<number of jobs>
-python3 phase0/launch.py create --best --script jobs/run_job.sh --job jobs/<a> jobs/<b> ... \
-  --max-usd <min(3*N, 15 - spent today)> --max-hours <0.75 + 0.25*N> --yes
-python3 -u phase0/launch.py watch <instance> --every 60 > <scratch>/watch.log 2>&1   # run_in_background
+RUN=$(date -u +%Y%m%d-%H%M%S); N=<boxes: ceil(total clip seconds * 36 / 3600 / 1.5) so each box runs ~1.5 h, max 4>
+for i in $(seq 0 $((N-1))); do
+  python3 phase0/launch.py create --best --territory h3 --min-ram 120 --disk 150 --script jobs/run_job_h3.sh \
+    --job jobs/<a> jobs/<b> ... --env RUN_ID=$RUN SHARD=$i/$N --max-usd <cap per box> --max-hours 2.5 --yes
+done      # then one `launch.py watch <instance>` per box, run_in_background
 ```
-One 5090 renders ~29 short shots in ~13 min, so 10 ads of ~30 shots take ~2.5 h and ~$1.50 GPU in total.
-Record Vast credit before and after (`GET /api/v0/users/current/` -> `credit`); split the batch cost across ads
-by render seconds. The box pushes to branch `job-results` every 10 clips and a "<job_id> ready" commit as each
-job finishes interpolation (`jobs/<job_id>/results/<run>/READY`), then destroys itself after the last one.
-Start QA + edit of each job as soon as its READY push lands, while the GPU renders the next jobs.
+Setup per box ~15 min (ComfyUI + 45 GB of H3 files). Clips land in jobs/<job_id>/results/$RUN/clips/<id>.mp4
+(branch job-results); each box writes render_<i>.json and READY.<i> per job. A job is complete when every shard's
+READY.<i> is there. The editor drops H3's own audio (ElevenLabs VO + music only).
 
 ## 5. Automatic QA
 ```bash

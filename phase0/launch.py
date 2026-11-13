@@ -65,9 +65,9 @@ def licence_ok(o: dict, territory: str | None) -> bool:
     return territory != "h3" or (country(o) not in H3_EXCLUDED and country(o) != "")
 
 
-def search_offers(disk: int = DISK_GB) -> list[dict]:
+def search_offers(disk: int = DISK_GB, min_ram_gb: int = 58) -> list[dict]:
     q = {"gpu_name": {"eq": "RTX 5090"}, "num_gpus": {"eq": 1}, "verified": {"eq": True},
-         "rentable": {"eq": True}, "cpu_ram": {"gte": 58000}, "disk_space": {"gte": disk},
+         "rentable": {"eq": True}, "cpu_ram": {"gte": min_ram_gb * 1000}, "disk_space": {"gte": disk},
          "reliability2": {"gte": 0.99}, "inet_down": {"gte": MIN_DOWN_MBPS}, "disk_bw": {"gte": MIN_DISK_MBPS}, "cuda_max_good": {"gte": 13.0}, "type": "on-demand",
          "order": [["dph_total", "asc"]], "limit": 60}
     offers = [o for o in call("POST", "/bundles/", q)["offers"] if not str(o.get("geolocation", "")).endswith("CN")]
@@ -94,7 +94,7 @@ def cmd_offers(_a) -> None:
 def cmd_create(a) -> None:
     if not a.yes:
         raise SystemExit("Refusing to rent without --yes (this costs money).")
-    offers = search_offers(a.disk)
+    offers = search_offers(a.disk, a.min_ram)
     offers = [o for o in offers if not any(x.lower() in str(o.get("geolocation", "")).lower() for x in a.avoid)]
     offers = [o for o in offers if licence_ok(o, a.territory)]
     if a.offer:
@@ -208,6 +208,7 @@ def main(argv=None) -> None:
     c.add_argument("--repo", default="otakubooster/ai-animation-pipeline")
     c.add_argument("--yes", action="store_true")
     c.add_argument("--env", nargs="*", default=[], help="extra KEY=VALUE for the box (e.g. SKIP_TALK=1 TALK_ONLY=1)")
+    c.add_argument("--min-ram", type=int, default=58, help="GB of host RAM (MiniMax H3 needs ~120)")
     c.add_argument("--disk", type=int, default=DISK_GB, help="GB of disk to rent (only what the batch needs)")
     c.add_argument("--avoid", nargs="*", default=["Nepal", "Japan", "Korea", "Taiwan", "Hong Kong", "China"], help="skip offers whose location contains any of these (slow hosts)")
     c.add_argument("--script", default="phase0/run_spike.sh", help="repo-relative script the box runs")

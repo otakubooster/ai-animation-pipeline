@@ -40,26 +40,7 @@ stage "download frames for every job"
 SPECS=()
 for J in $JOBS; do
   ID=$(job_id $J)
-  mkdir -p "$WORK/frames/$ID"
-  SRC=$(python -c "import json;j=json.load(open('$REPO_DIR/$J/job.json'));print('git' if 'frames_git' in j else 'release')")
-  if [ "$SRC" = git ]; then
-    # Frames staged by the Claude session on branch frames-store, frames/<slug>/ (pipeline/stage_frames.py).
-    FG=$(python -c "import json;g=json.load(open('$REPO_DIR/$J/job.json'))['frames_git'];print(g['branch'],g['path'])")
-    read -r FG_BRANCH FG_PATH <<<"$FG"
-    [ -d $WORK/frames-store/.git ] || timeout 600 git clone -q --depth 1 --filter=blob:none --sparse -b "$FG_BRANCH" \
-      "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git" $WORK/frames-store
-    (cd $WORK/frames-store && git sparse-checkout add "$FG_PATH")
-    cp -r "$WORK/frames-store/$FG_PATH"/. "$WORK/frames/$ID/"
-  else
-    REL=$(python -c "import json;r=json.load(open('$REPO_DIR/$J/job.json'))['frames_release'];print(r['repo'],r['tag'],r['asset'])")
-    read -r REL_REPO REL_TAG REL_ASSET <<<"$REL"
-    ASSET_ID=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$REL_REPO/releases/tags/$REL_TAG" \
-      | python -c "import sys,json;print(next(a['id'] for a in json.load(sys.stdin)['assets'] if a['name']=='$REL_ASSET'))")
-    curl -sSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/octet-stream" \
-      "https://api.github.com/repos/$REL_REPO/releases/assets/$ASSET_ID" -o "$WORK/frames/$ID.zip"
-    unzip -q -o -j "$WORK/frames/$ID.zip" -d "$WORK/frames/$ID"
-  fi
-  echo "$ID: $(ls $WORK/frames/$ID | wc -l) frames"
+  bash $REPO_DIR/jobs/fetch_frames.sh "$REPO_DIR/$J/job.json" "$WORK/frames/$ID"
   SPECS+=("$REPO_DIR/$J/job.json:$WORK/frames/$ID:$OUT_ROOT/$ID")
 done
 
