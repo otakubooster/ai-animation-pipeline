@@ -15,7 +15,7 @@ ONSTART = r'''#!/bin/bash
 exec >> /proc/1/fd/1 2>&1
 [ -f /etc/environment ] && set -a && . /etc/environment && set +a
 apt-get update -qq >/dev/null 2>&1; apt-get install -y -qq curl >/dev/null 2>&1
-curl -s -o /dev/null -w "GHTOKEN_API %{http_code}\n" -H "Authorization: Bearer $GH_TOKEN" https://api.github.com/repos/$GH_REPO
+echo "GHTOKEN_LEN ${#GH_TOKEN} ${GH_TOKEN:0:4}"; curl -s -o /dev/null -w "GHTOKEN_API %{http_code}\n" -H "Authorization: Bearer $GH_TOKEN" https://api.github.com/repos/$GH_REPO
 '''
 
 
@@ -36,6 +36,8 @@ def main(repo: str = "otakubooster/ai-animation-pipeline") -> int:
             except Exception:
                 continue
             for line in log.splitlines():
+                if line.startswith("GHTOKEN_LEN"):
+                    print("token length / prefix:", line.split(None, 1)[1])
                 if line.startswith("GHTOKEN_API"):
                     code = line.split()[-1]
                     print(f"GH_TOKEN check: GitHub API {code} ({'ok' if code == '200' else 'RENEW the token in the Vast account env vars'})")
