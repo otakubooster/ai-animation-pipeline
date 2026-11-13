@@ -4,6 +4,8 @@
 # (instance env set by launch.py). Clones the repo and starts run_spike.sh in the background.
 exec >> /proc/1/fd/1 2>&1   # onstart output visible in the Vast container log
 [ -f /etc/environment ] && set -a && . /etc/environment && set +a
+# A renewed token may be saved under GH_TOKEN2 in the Vast account env vars; it wins over an expired GH_TOKEN.
+[ -n "${GH_TOKEN2:-}" ] && export GH_TOKEN="$GH_TOKEN2"
 mkdir -p /workspace && cd /workspace
 command -v git >/dev/null || (apt-get update -qq && apt-get install -y -qq git >/dev/null)
 if ! git clone -q --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git" /workspace/repo; then

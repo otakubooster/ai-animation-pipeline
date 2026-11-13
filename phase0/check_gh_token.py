@@ -14,6 +14,7 @@ import launch  # noqa: E402
 ONSTART = r'''#!/bin/bash
 exec >> /proc/1/fd/1 2>&1
 [ -f /etc/environment ] && set -a && . /etc/environment && set +a
+[ -n "${GH_TOKEN2:-}" ] && GH_TOKEN="$GH_TOKEN2"
 apt-get update -qq >/dev/null 2>&1; apt-get install -y -qq curl >/dev/null 2>&1
 echo "GHTOKEN_LEN ${#GH_TOKEN} ${GH_TOKEN:0:4}"; curl -s -o /dev/null -w "GHTOKEN_API %{http_code}\n" -H "Authorization: Bearer $GH_TOKEN" https://api.github.com/repos/$GH_REPO
 '''
