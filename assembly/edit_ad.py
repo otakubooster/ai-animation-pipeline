@@ -273,12 +273,15 @@ def on_screen_ass(cards: list[tuple[float, float, str]], path: Path, res: tuple[
     a soft shadow in the middle of the frame (music-only ads). box="RRGGBB": white bold text on an opaque box of that
     colour in the top fifth (Arabic gets Noto Kufi + RTL); colour emoji are dropped (libass can't draw them)."""
     style = f"Style: Txt,Inter Display Bold,{size},&H00FFFFFF,&H00FFFFFF,&H50000000,&H78000000,0,0,0,0,100,100,0,0,1,2.5,3,5,90,90,0,1"
-    if box:
-        bgr = f"&H00{box[4:6]}{box[2:4]}{box[0:2]}&"
+    if box:   # "RRGGBB" or "RRGGBB:TEXTRRGGBB:OPACITY%" (e.g. "23022E:EFF8E2:85" = plum box at 85 %, mint text)
+        bg, fg, op = (box.split(":") + ["FFFFFF", "100"])[:3]
+        alpha = f"{round(255 * (1 - int(op) / 100)):02X}"
+        bgr = f"&H{alpha}{bg[4:6]}{bg[2:4]}{bg[0:2]}&"
+        fgr = f"&H00{fg[4:6]}{fg[2:4]}{fg[0:2]}&"
         ar = any(is_arabic(c[2]) for c in cards)
         top = int(res[1] * (0.10 if res[1] > res[0] else 0.06))
-        style = (f"Style: Txt,{'Noto Kufi Arabic' if ar else 'Inter Display Bold'},{size},&H00FFFFFF,&H00FFFFFF,{bgr},{bgr},"
-                 f"-1,0,0,0,100,100,0,0,3,{max(size // 4, 10)},0,8,90,90,{top},{-1 if ar else 1}")
+        style = (f"Style: Txt,{'Noto Kufi Arabic' if ar else 'Inter Display Bold'},{size},{fgr},{fgr},{bgr},{bgr},"
+                 f"-1,0,0,0,100,100,0,0,4,{max(size // 4, 10)},0,8,90,90,{top},{-1 if ar else 1}")   # 4 = one box per line
     lines = ["[Script Info]", "ScriptType: v4.00+", f"PlayResX: {res[0]}", f"PlayResY: {res[1]}", "WrapStyle: 0", "",
              "[V4+ Styles]",
              "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
@@ -290,6 +293,7 @@ def on_screen_ass(cards: list[tuple[float, float, str]], path: Path, res: tuple[
     for a, b, text, *_ in cards:
         pre = "{\\an2}" if text.startswith("{\\an2}") else ""
         text = text[len(pre):]
+        text = re.sub(r"~~(.+?)~~", r"{\\s1}\1{\\s0}", text)          # ~~458~~ = old price, struck through
         parts = [x.strip() for x in text.split(" / ") if x.strip()]
         if not parts:
             continue
@@ -556,7 +560,7 @@ def main() -> None:
         cstyle = job.get("captions", {}).get("style", "word-highlight")
         if cstyle.startswith("on-screen-box"):        # e.g. "on-screen-box:14532D" = the shot's on_screen text on a box
             on_screen_ass([(t["start"], t["end"], sh.get("on_screen", ""), sh.get("caption_pos", "top")) for t, sh in zip(timeline, job["shots"])],
-                          ass, f["res"], int(f["cap"][0] * 0.8), box=cstyle.split(":")[1] if ":" in cstyle else "14532D")
+                          ass, f["res"], int(f["cap"][0] * 0.8), box=cstyle.split(":", 1)[1] if ":" in cstyle else "14532D")
         elif words:
             captions_ass(words, ass, f["res"], f["cap"][0], f["cap"][1], max_words=4 if cstyle == "subtitle" else 3,
                          high_spans=high_spans, margin_high=f["cap_high"], style=cstyle, low_spans=low_spans)

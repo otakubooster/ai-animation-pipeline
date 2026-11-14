@@ -62,6 +62,10 @@ def synth(out: Path, voice: str, instruction: str, line: str, model: str = DEFAU
             if e.code not in (429, 500, 502, 503, 504) or k == tries - 1:
                 raise RuntimeError(f"Gemini TTS HTTP {e.code}: {e.read()[:300]!r}") from None
             time.sleep(8 * (k + 1))
+        except (urllib.error.URLError, ConnectionError, TimeoutError) as e:   # dropped connection: retry
+            if k == tries - 1:
+                raise RuntimeError(f"Gemini TTS network error: {e}") from None
+            time.sleep(8 * (k + 1))
     raise RuntimeError("unreachable")
 
 

@@ -198,3 +198,11 @@ def test_hook_card_draws_emoji_in_colour(tmp_path):
     im = edit_ad.Image.open(p).convert("RGB")
     coloured = sum(1 for r, g, b in im.getdata() if max(r, g, b) - min(r, g, b) > 40)
     assert coloured > 200            # the emoji are colour bitmaps, not empty glyph boxes
+
+
+def test_on_screen_box_colours_opacity_and_struck_price(tmp_path):
+    p = tmp_path / "o.ass"
+    edit_ad.on_screen_ass([(0, 2, "الكريمة · 299 درهم ~~458~~", "top")], p, (1080, 1920), 67, box="23022E:EFF8E2:85")
+    txt = p.read_text()
+    assert "&H00E2F8EF&" in txt and "&H262E0223&" in txt          # mint text, plum box at 85 %
+    assert "{\\s1}458{\\s0}" in txt and "~~" not in txt
