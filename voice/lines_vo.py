@@ -36,7 +36,11 @@ def trim(src: Path, dst: Path) -> float:
     sil = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.06"
     run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-af", f"{sil},areverse,{sil},areverse", "-ac", "1",
          "-ar", str(SR), str(dst)])
-    return duration(dst)
+    try:
+        return duration(dst)
+    except ValueError:      # a silent beat (e.g. "… (silence)") trims to nothing: keep it as it is
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-ac", "1", "-ar", str(SR), str(dst)])
+        return duration(dst)
 
 
 def spread_words(text: str, t0: float, t1: float) -> list[dict]:
