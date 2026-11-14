@@ -190,3 +190,11 @@ def test_captions_drop_quote_marks(tmp_path):
     edit_ad.captions_ass(words, ass, (1080, 1920), 84, 470, style="sentence-low")
     body = "\n".join(ln.rsplit(",,", 1)[1] for ln in ass.read_text().splitlines() if ln.startswith("Dialogue"))
     assert '"' not in body and "Mommy" in body
+
+
+def test_hook_card_draws_emoji_in_colour(tmp_path):
+    p = tmp_path / "h.png"
+    edit_ad.hook_png("WATCH THIS X-RAY 💀🚽", "", p, 1080)
+    im = edit_ad.Image.open(p).convert("RGB")
+    coloured = sum(1 for r, g, b in im.getdata() if max(r, g, b) - min(r, g, b) > 40)
+    assert coloured > 200            # the emoji are colour bitmaps, not empty glyph boxes

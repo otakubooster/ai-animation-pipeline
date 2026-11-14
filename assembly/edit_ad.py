@@ -341,22 +341,39 @@ def end_overlay_png(lines: list[dict], path: Path, res: tuple[int, int]) -> None
     canvas.save(path)
 
 
+def emoji_img(chars: str, size: int) -> Image.Image:
+    """Colour emoji (Noto Color Emoji is bitmap-only at 109 px) scaled to about `size` px high."""
+    ef = ImageFont.truetype(EMOJI_FONT, 109)
+    em = Image.new("RGBA", (136 * max(1, len(chars)), 128), (0, 0, 0, 0))
+    ImageDraw.Draw(em).text((0, 0), chars, font=ef, embedded_color=True)
+    em = em.crop(em.getbbox())
+    return em.resize((max(1, int(em.width * size / em.height)), size), Image.LANCZOS)
+
+
 def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg=(20, 20, 20)) -> None:
-    """Hook title card: white rounded box with bold black text; the words of `red` are drawn in red."""
+    """Hook title card: white rounded box with bold black text; the words of `red` are drawn in red. Emoji words
+    are drawn in colour from the emoji font (the text font has no emoji glyphs and would show empty boxes)."""
     fsize = int(width * 0.068)
     font = ImageFont.truetype(BANNER_FONT, fsize)
     red_words = {norm(w) for w in red.split()}
+    is_em = lambda w: bool(EMOJI_RE.search(w)) and not EMOJI_RE.sub("", w).strip()
+    ems = {}
+    def wid(w):
+        if is_em(w):
+            ems.setdefault(w, emoji_img(EMOJI_RE.sub(lambda m: m.group(0) if m.group(0) not in "\ufe0f\u200d" else "", w), int(fsize * 1.05)))
+            return ems[w].width
+        return font.getbbox(w)[2]
     words, maxw, space = text.split(), int(width * 0.80), font.getbbox(" ")[2] or fsize // 3
+    lw_of = lambda l: sum(wid(w) for w in l) + space * (len(l) - 1)
     lines, cur = [], []
     for w in words:
-        trial = " ".join(cur + [w])
-        if cur and font.getbbox(trial)[2] > maxw:
+        if cur and lw_of(cur + [w]) > maxw:
             lines.append(cur); cur = [w]
         else:
             cur.append(w)
     lines.append(cur)
     lh = int(fsize * 1.22)
-    widths = [font.getbbox(" ".join(l))[2] for l in lines]
+    widths = [lw_of(l) for l in lines]
     pad_x, pad_y = int(fsize * 0.65), int(fsize * 0.5)
     bw, bh = max(widths) + 2 * pad_x, lh * len(lines) + 2 * pad_y
     img = Image.new("RGBA", (bw + 12, bh + 14), (0, 0, 0, 0))
@@ -366,8 +383,11 @@ def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg
     for i, (l, lw) in enumerate(zip(lines, widths)):
         x, y = 6 + (bw - lw) // 2, 6 + pad_y + i * lh - int(fsize * 0.1)
         for w in l:
-            d.text((x, y), w, font=font, fill=(200, 16, 46, 255) if norm(w) in red_words else tuple(fg) + (255,))
-            x += font.getbbox(w)[2] + space
+            if is_em(w):
+                img.alpha_composite(ems[w], (x, y + int(fsize * 0.12)))
+            else:
+                d.text((x, y), w, font=font, fill=(200, 16, 46, 255) if norm(w) in red_words else tuple(fg) + (255,))
+            x += wid(w) + space
     img.save(path)
 
 
