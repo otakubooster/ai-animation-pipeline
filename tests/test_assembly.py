@@ -206,3 +206,11 @@ def test_on_screen_box_colours_opacity_and_struck_price(tmp_path):
     txt = p.read_text()
     assert "&H00E2F8EF&" in txt and "&H262E0223&" in txt          # mint text, plum box at 85 %
     assert "{\\s1}458{\\s0}" in txt and "~~" not in txt
+
+
+def test_lines_vo_punctuation_tokens_ride_on_previous_word():
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "voice"))
+    from lines_vo import spread_words
+    w = spread_words("الشعيرة: «طلعت!» — الموس: «زززت!»", 0.0, 4.0)
+    assert [x["text"] for x in w] == ["الشعيرة:", "«طلعت!»—", "الموس:", "«زززت!»"]

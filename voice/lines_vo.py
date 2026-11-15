@@ -45,7 +45,12 @@ def trim(src: Path, dst: Path) -> float:
 
 def spread_words(text: str, t0: float, t1: float) -> list[dict]:
     """Word timings over [t0, t1], each word's share proportional to its letters (+1 for the space)."""
-    toks = text.split()
+    toks = []
+    for t in text.split():              # punctuation-only tokens ("—", "…") ride on the previous word
+        if re.sub(r"[^\w]", "", t) or not toks:
+            toks.append(t)
+        else:
+            toks[-1] += t
     weights = [len(re.sub(r"[^\w]", "", t)) + 1 for t in toks]
     total, t, out = sum(weights), t0, []
     for tok, w in zip(toks, weights):
