@@ -504,6 +504,8 @@ def main() -> None:
         dst = tmp / f"{shot['id']}.mp4"
         if a.stills:
             info = render_segment(a.stills / shot["frame"], t["dur"], dst, still=True)
+        elif shot.get("still"):     # QA: no clean stretch in any render -> slow zoom on the approved first frame
+            info = render_segment(a.job_dir / "frames" / shot["frame"], t["dur"], dst, still=True) | {"forced_still": True}
         elif shot.get("talking") and (ts := talk_slice(shot, t)):
             info = render_segment(ts[0], t["dur"], dst, still=False, head=ts[1], boomerang=False) | {"talk": ts[0].stem}
         else:
