@@ -15,6 +15,11 @@ import time
 import traceback
 from pathlib import Path
 
+import collections  # noqa: E402
+import inspect  # noqa: E402
+if not hasattr(inspect, "ArgSpec"):     # removed in Python 3.11; still used by an old dependency of InfiniteTalk
+    inspect.ArgSpec = collections.namedtuple("ArgSpec", "args varargs keywords defaults")
+    inspect.getargspec = lambda f: inspect.ArgSpec(*inspect.getfullargspec(f)[:4])
 sys.path.insert(0, os.environ.get("IT_SHIMS", ""))
 sys.path.insert(0, os.getcwd())
 import soundfile as sf  # noqa: E402
