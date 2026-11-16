@@ -378,8 +378,8 @@ def main() -> None:
     for t, sh in zip(timeline, shots):
         d = {"id": sh["id"], "start": t["start"], "end": t["end"], "dur": t["dur"]}
         ls = lips / f"{sh['id']}.mp4"
-        if sh.get("still"):
-            d |= {"mode": "still", "src": frames_dir / sh["frame"]}
+        if sh.get("still"):          # still_frame: another frame of the ad stands in (e.g. while a frame is redone)
+            d |= {"mode": "still", "src": frames_dir / (sh.get("still_frame") or sh["frame"])}
         elif sh.get("parts"):     # clean windows of several renders of this shot, played one after the other
             parts = [(find_clip(a.clips, q["clip"]), q["start"], q["end"]) for q in sh["parts"]]
             parts = [(src, st, min(en, probe_duration(src))) for src, st, en in parts if src]
