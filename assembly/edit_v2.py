@@ -615,6 +615,9 @@ def main() -> None:
         if hook:
             hs = [(t["start"], t["end"]) for t, sh in zip(timeline, shots) if sh["id"] in set(hook["shots"])]
             hook_span = (min(x for x, _ in hs), max(y for _, y in hs))
+            # a hook headline is a scroll stopper, not a caption: at most max_s (default 6 s), so it never sits over
+            # the speaker for a whole monologue
+            hook_span = (hook_span[0], min(hook_span[1], hook_span[0] + float(hook.get("max_s", 6.0))))
         for k, (t, sh, d) in enumerate(zip(timeline, shots, info)):
             boxes = fm.boxes(d["faces"])
             seg_end = t["end"]
