@@ -36,12 +36,19 @@ class FaceDetector:
     def __call__(self, frame):
         img = np.ascontiguousarray(frame[..., :3]).astype(np.uint8)
         h, w = img.shape[:2]
-        res = self.det.detect(self.mp.Image(image_format=self.mp.ImageFormat.SRGB, data=img))
-        if not res.face_landmarks:
+        faces = []
+        # full frame first; small faces in wide/full-body shots are often only found in a crop
+        for (x0, y0, x1, y1) in ((0, 0, w, h), (0, 0, w, h // 2), (w // 5, 0, w - w // 5, int(h * 0.6)), (0, h // 4, w, h * 3 // 4)):
+            crop = np.ascontiguousarray(img[y0:y1, x0:x1])
+            res = self.det.detect(self.mp.Image(image_format=self.mp.ImageFormat.SRGB, data=crop))
+            if res.face_landmarks:
+                cw, ch = x1 - x0, y1 - y0
+                faces = [np.array([[x0 + p.x * cw, y0 + p.y * ch] for p in lm]) for lm in res.face_landmarks]
+                break
+        if not faces:
             self.misses += 1
             return self.last
         # the largest face is the speaker
-        faces = [np.array([[p.x * w, p.y * h] for p in lm]) for lm in res.face_landmarks]
         pts = max(faces, key=lambda L: np.ptp(L[:, 0]) * np.ptp(L[:, 1]))
         a, b = pts[BROW_A].mean(0), pts[BROW_B].mean(0)
         left, right = (a, b) if a[0] < b[0] else (b, a)
