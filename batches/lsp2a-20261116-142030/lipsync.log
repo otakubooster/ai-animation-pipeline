@@ -7,3 +7,27 @@ debconf: delaying package configuration, since apt-utils is not installed
 2026-11-16T14:25:08Z [+17s] === inputs
 22 items
 2026-11-16T14:25:28Z === push (lipsync alive)
+PUSH ok
+PUSH done
+2026-11-16T14:25:31Z [+40s] === latentsync install
+
+[notice] A new release of pip is available: 24.0 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+torch 2.11.0+cu130 NVIDIA GeForce RTX 5090
+Fetching 2 files:  50%|█████     | 1/2 [00:49<00:49, 49.19s/it]Fetching 2 files: 100%|██████████| 2/2 [00:49<00:00, 24.59s/it]
+/workspace/LatentSync/checkpoints
+checkpoints:
+total 4953348
+drwxr-xr-x  5 root root         98 Nov 16 14:26 .
+drwxr-xr-x 12 root root       4096 Nov 16 14:26 ..
+drwxr-xr-x  3 root root         33 Nov 16 14:25 .cache
+drwxr-xr-x  2 root root         42 Nov 16 14:25 auxiliary
+-rw-r--r--  1 root root 5072222488 Nov 16 14:26 latentsync_unet.pt
+drwxr-xr-x  2 root root         29 Nov 16 14:25 whisper
+
+checkpoints/whisper:
+total 73804
+drwxr-xr-x 2 root root       29 Nov 16 14:25 .
+drwxr-xr-x 5 root root       98 Nov 16 14:26 ..
+-rw-r--r-- 1 root root 75572083 Nov 16 14:25 tiny.pt
+2026-11-16T14:26:40Z === push (lipsync models ready)
