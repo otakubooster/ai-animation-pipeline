@@ -281,8 +281,11 @@ def render_piece(src: Path, src_t: float, slow: float, frames: int, dst: Path, z
     return held
 
 
-def render_still(img: Path, frames: int, dst: Path) -> None:
-    zoom = f"zoompan=z='min(1+0.07*on/{frames},1.07)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={frames}:s={W}x{H}:fps={FPS}"
+def render_still(img: Path, frames: int, dst: Path, z0: float = 1.0, z1: float = 1.07, cx: float = 0.5, cy: float = 0.5) -> None:
+    """Slow push from zoom z0 to z1 on the point (cx, cy) of the image (normalised), clamped to the frame."""
+    z = f"({z0}+{z1 - z0:.4f}*on/{max(frames - 1, 1)})"
+    zoom = (f"zoompan=z='{z}':x='max(0,min(iw-iw/zoom,iw*{cx:.3f}-iw/zoom/2))':y='max(0,min(ih-ih/zoom,ih*{cy:.3f}-ih/zoom/2))'"
+            f":d={frames}:s={W}x{H}:fps={FPS}")
     run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-i", str(img), "-vf",
          f"scale={W * 2}:{H * 2}:force_original_aspect_ratio=increase:flags=lanczos,crop={W * 2}:{H * 2},{zoom},setsar=1",
          "-frames:v", str(frames), *enc(dst)])
@@ -465,15 +468,39 @@ def main() -> None:
         srcs = [q[0] for q in d.get("parts", [])] or [d["src"]]
         key = json.dumps([f0, f1, hpre, hpost, d["mode"], d.get("head"), d.get("end"), [(str(q), q.stat().st_mtime) for q in srcs],
                           [(str(q[0]), q[1], q[2]) for q in d.get("parts", [])], sh.get("freeze_region"), [w["start"] for w in t.get("words") or []],
-                          SEG_VERSION], default=str)
+                          SEG_VERSION] + (["still_pieces"] if d["mode"] == "still" else []), default=str)
         kf = seg.with_suffix(".key")
         if seg.exists() and kf.exists() and kf.read_text() == key and (tmp / f"seg_{sh['id']}.rep").exists():
             segs.append(seg)
             report.append(json.loads((tmp / f"seg_{sh['id']}.rep").read_text()))
             continue
         if d["mode"] == "still":
-            render_still(d["src"], f1 - f0 + hpre + hpost, seg)
-            rep["pieces"] = 1
+            # a long still is cut at word starts into pieces, each a slow push from another framing (face punch-in,
+            # off-centre drift), so it reads as edited footage rather than a frozen frame
+            pieces = plan_pieces(t, False)
+            bounds = [F(p[0]) for p in pieces] + [f1]
+            bounds[0] -= hpre
+            bounds[-1] += hpost
+            files = []
+            for j in range(len(pieces)):
+                if len(pieces) == 1:
+                    z0, z1, cx, cy = 1.0, 1.07, 0.5, 0.5
+                elif d["faces"]:
+                    z0 = (1.0, 1.16, 1.06, 1.2)[j % 4]
+                    r = layout.zoom_rect(z0 + 0.05, d["faces"])
+                    z1, cx, cy = z0 + 0.06, (r[0] + r[2]) / 2, (r[1] + r[3]) / 2
+                else:
+                    z0, z1, cx, cy = ((1.0, 1.06, 0.5, 0.5), (1.12, 1.18, 0.42, 0.46), (1.06, 1.12, 0.58, 0.54))[j % 3]
+                pf = tmp / f"seg_{sh['id']}_{j}.mp4"
+                render_still(d["src"], bounds[j + 1] - bounds[j], pf, z0, z1, cx, cy)
+                files.append(pf)
+            if len(files) == 1:
+                files[0].replace(seg)
+            else:
+                concat(files, seg)
+                for q in files:
+                    q.unlink(missing_ok=True)
+            rep["pieces"] = len(files)
         elif d["mode"] == "parts":
             parts = d["parts"]
             usable = sum(e - s_ for _, s_, e in parts)
