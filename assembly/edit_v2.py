@@ -443,7 +443,7 @@ def main() -> None:
                 cands.append((3, k, ("fadewhite", 0.26, "shutter")))
             seen_units.add(u)
         elif not nb["faces"] and sim < 0.6 and kinds[k + 1] in ("offer", "cta", None) and info[k]["faces"]:
-            cands.append((2, k, ("zoomin", 0.30, "whoosh_fast")))
+            cands.append((2, k, ("smoothup", 0.26, "whoosh_fast")))
         elif sim < 0.35:
             cands.append((1, k, ("slideleft", 0.22, "whoosh")))
     trans: dict[int, tuple[str, float, str]] = {}
