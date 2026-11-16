@@ -24,7 +24,46 @@ from latentsync.pipelines.lipsync_pipeline import LipsyncPipeline  # noqa: E402
 from latentsync.whisper.audio2feature import Audio2Feature  # noqa: E402
 
 STEPS = int(os.environ.get("LS_STEPS", 20))
-GUIDANCE = float(os.environ.get("LS_GUIDANCE", 1.5))
+GUIDANCE = float(os.environ.get("LS_GUIDANCE", 2.0))
+
+
+def neutral_reference(pipe) -> None:
+    """LatentSync conditions the UNet on each frame's own unmasked face, so a source clip whose mouth already moves
+    (H3 talking shots speak their own gibberish) leaks its mouth shapes into the result (measured 2026-11-16: the
+    output mouth followed the H3 mouth, not the voice). Here the UNet gets ONE reference for the whole clip, the face
+    with the most closed mouth; the per-frame faces are still pasted back around the mouth (eyes, brows, head motion)."""
+    import numpy as np
+    from latentsync.utils.face_detector import FaceDetector
+    det = FaceDetector()
+    orig_loop, orig_prep = pipe.loop_video, pipe.prepare_image_latents
+
+    def to_hwc(f):
+        a = f.cpu().numpy() if hasattr(f, "cpu") else np.asarray(f)
+        return a.transpose(1, 2, 0) if a.shape[0] == 3 else a
+
+    def loop_video(whisper_chunks, video_frames):
+        vf, faces, boxes, mats = orig_loop(whisper_chunks, video_frames)
+        best, best_open = 0, 1e9
+        mp, vision = det.mp, None
+        for k in range(0, len(faces), max(1, len(faces) // 60)):
+            img = np.ascontiguousarray(to_hwc(faces[k]).astype(np.uint8))
+            res = det.det.detect(mp.Image(image_format=mp.ImageFormat.SRGB, data=img))
+            if res.face_landmarks:
+                L = res.face_landmarks[0]
+                o = abs(L[14].y - L[13].y) / max(abs(L[152].y - L[10].y), 1e-3)
+                if o < best_open:
+                    best, best_open = k, o
+        ref, _, _ = pipe.image_processor.prepare_masks_and_masked_images(faces[best:best + 1], affine_transform=False)
+        pipe._neutral_ref = ref[0]
+        print(f"neutral reference: frame {best} (mouth open {best_open:.3f})", flush=True)
+        return vf, faces, boxes, mats
+
+    def prepare_image_latents(images, device, dtype, generator, cfg):
+        ref = pipe._neutral_ref.to(images.device, images.dtype)
+        return orig_prep(ref.unsqueeze(0).expand_as(images).contiguous(), device, dtype, generator, cfg)
+
+    pipe.loop_video = loop_video
+    pipe.prepare_image_latents = prepare_image_latents
 
 
 def main():
@@ -41,6 +80,7 @@ def main():
                                                    device="cpu")
     unet = unet.to(dtype=dtype)
     pipe = LipsyncPipeline(vae=vae, audio_encoder=audio_encoder, unet=unet, scheduler=scheduler).to("cuda")
+    neutral_reference(pipe)
     try:
         from DeepCache import DeepCacheSDHelper
         helper = DeepCacheSDHelper(pipe=pipe)
