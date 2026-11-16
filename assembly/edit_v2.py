@@ -768,7 +768,7 @@ def place_text(doc: Ass, fm: Fmt, text: str, t0: float, t1: float, t: dict, boxe
             sfx.append((t0, "pop", 0.35))
         return {"kind": kind, "y": round(y / RH, 3)}
     if kind == "cite":
-        size = int(s * 0.62)
+        size = int(s * 0.75)
         lines = doc.wrap(text, size, maxw * 0.9, bold=True, max_lines=3)
         h_px = len(lines) * size + size * 0.5
         y = slot(h_px, [0.86, 0.80] if fm.name == "1x1" else (fm.ov_c if not panel else [0.78]))
