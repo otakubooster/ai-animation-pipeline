@@ -380,6 +380,10 @@ def main() -> None:
         ls = lips / f"{sh['id']}.mp4"
         if sh.get("still"):
             d |= {"mode": "still", "src": frames_dir / sh["frame"]}
+        elif sh.get("parts"):     # clean windows of several renders of this shot, played one after the other
+            parts = [(find_clip(a.clips, q["clip"]), q["start"], q["end"]) for q in sh["parts"]]
+            parts = [(src, st, min(en, probe_duration(src))) for src, st, en in parts if src]
+            d |= {"mode": "parts", "parts": parts, "src": parts[0][0], "head": parts[0][1], "end": parts[0][2]}
         elif ls.exists() and ls.stat().st_size > 1024:
             hd = ls_handles.get(sh["id"], 0.4)       # the lip-synced window starts `handle` s before the shot
             d |= {"mode": "clip", "src": ls, "head": hd, "end": probe_duration(ls), "lipsync": True}
@@ -433,6 +437,33 @@ def main() -> None:
         if d["mode"] == "still":
             render_still(d["src"], f1 - f0 + hpre + hpost, seg)
             rep["pieces"] = 1
+        elif d["mode"] == "parts":
+            parts = d["parts"]
+            usable = sum(e - s_ for _, s_, e in parts)
+            slow = min(max((t["dur"] + (hpre + hpost) / FPS) / max(usable, 0.1), 1.0), MAX_SLOW)
+            bounds, cum = [f0 - hpre], f0 - hpre
+            for _, s_, e in parts[:-1]:
+                cum += int(round((e - s_) * slow * FPS))
+                bounds.append(cum)
+            bounds.append(f1 + hpost)
+            ws = [F(w["start"] - 0.04) for w in t.get("words") or []]
+            for i in range(1, len(bounds) - 1):          # cut between parts on the nearest word start
+                near = [x for x in ws if abs(x - bounds[i]) <= 12 and bounds[i - 1] + 15 < x < bounds[i + 1] - 15]
+                if near:
+                    bounds[i] = min(near, key=lambda x: abs(x - bounds[i]))
+            files, held = [], 0.0
+            for k2, (src, s_, e) in enumerate(parts):
+                z = (1.0, 1.15)[k2 % 2] if d["faces"] else (1.0, 1.1)[k2 % 2]
+                rect = layout.zoom_rect(z, d["faces"]) if z > 1 else [0, 0, 1, 1]
+                pf = tmp / f"seg_{sh['id']}_p{k2}.mp4"
+                held += render_piece(src, s_, slow, bounds[k2 + 1] - bounds[k2], pf, z, rect, e)
+                files.append(pf)
+            concat(files, seg)
+            for q in files:
+                q.unlink(missing_ok=True)
+            rep |= {"pieces": len(parts), "parts": [[q.stem, s_, e] for q, s_, e in parts], "slow": round(slow, 3), "held_s": round(held, 2)}
+            if held > 0.4:
+                rep["needs_rerender"] = "parts too short"
         else:
             no_split = bool(sh.get("freeze_region"))
             pieces = plan_pieces(t, no_split)
