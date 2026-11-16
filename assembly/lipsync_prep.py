@@ -44,19 +44,47 @@ def main() -> None:
             if src is None:
                 print("no clip", slug, sid)
                 continue
-            hd = min(HANDLE, head, t["start"])          # same handle on video and audio keeps them in sync
-            v0 = head - hd
-            vlen = t["dur"] + hd + HANDLE
-            vend = min(end or 1e9, probe_duration(src))
-            run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf",
-                 f"trim=start={v0:.3f}:end={vend:.3f},setpts=PTS-STARTPTS,fps=25", "-an", "-c:v", "libx264", "-crf", "16",
-                 "-pix_fmt", "yuv420p", str(out / f"{sid}.mp4")])
+            shot = next(s for s in job["shots"] if s["id"] == sid)
+            cuts = []
+            if shot.get("parts"):       # several renders of the shot: join their windows; the editor cuts at the joins
+                parts = [(find_clip(clips, q["clip"]), q["start"], q["end"]) for q in shot["parts"]]
+                head = parts[0][1]
+                hd = min(HANDLE, head, t["start"])
+                vlen = t["dur"] + hd + HANDLE
+                pieces, cum = [], 0.0
+                for k, (psrc, ps, pe) in enumerate(parts):
+                    pe = min(pe, probe_duration(psrc))
+                    ps0 = ps - hd if k == 0 else ps
+                    pf = out / f"{sid}_part{k}.mp4"
+                    run(["ffmpeg", "-v", "error", "-y", "-i", str(psrc), "-vf",
+                         f"trim=start={ps0:.3f}:end={pe:.3f},setpts=PTS-STARTPTS,fps=25,scale=576:1024:force_original_aspect_ratio=increase,crop=576:1024,setsar=1",
+                         "-an", "-c:v", "libx264", "-crf", "16", "-pix_fmt", "yuv420p", str(pf)])
+                    if k:
+                        cuts.append(round(cum - hd, 3))
+                    cum += pe - ps0
+                    pieces.append(pf)
+                lst = out / f"{sid}_parts.txt"
+                lst.write_text("".join(f"file '{q.resolve()}'\n" for q in pieces))
+                run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(lst), "-c", "copy", str(out / f"{sid}.mp4")])
+                for q in pieces:
+                    q.unlink()
+                lst.unlink()
+                src, v0, vend = parts[0][0], 0.0, cum
+            else:
+                hd = min(HANDLE, head, t["start"])          # same handle on video and audio keeps them in sync
+                v0 = head - hd
+                vlen = t["dur"] + hd + HANDLE
+                vend = min(end or 1e9, probe_duration(src))
+                run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf",
+                     f"trim=start={v0:.3f}:end={vend:.3f},setpts=PTS-STARTPTS,fps=25", "-an", "-c:v", "libx264", "-crf", "16",
+                     "-pix_fmt", "yuv420p", str(out / f"{sid}.mp4")])
             a0 = t["start"] - hd
             run(["ffmpeg", "-v", "error", "-y", "-ss", f"{a0:.3f}", "-t", f"{vlen:.3f}", "-i", str(jd / "vo" / "take.mp3"),
                  "-ac", "1", "-ar", "16000", str(out / f"{sid}.wav")])
             items.append({"job_id": job["job_id"], "slug": slug, "id": sid, "video": f"{job['job_id']}/{sid}.mp4",
                           "audio": f"{job['job_id']}/{sid}.wav", "src": str(src.name), "head": head,
-                          "video_s": round(min(vend - v0, 1e9), 2), "audio_s": round(vlen, 2), "handle": round(hd, 3)})
+                          "video_s": round(min(vend - v0, 1e9), 2), "audio_s": round(vlen, 2), "handle": round(hd, 3),
+                          **({"cuts": cuts} if cuts else {})})
     (a.out / "manifest.json").write_text(json.dumps({"items": items}, indent=1))
     print(len(items), "items")
 

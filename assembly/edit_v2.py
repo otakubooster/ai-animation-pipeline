@@ -220,8 +220,16 @@ class Fmt:
 
 # --------------------------------------------------------------------------------------------- shots, pieces, render
 
-def plan_pieces(t: dict, no_split: bool) -> list[tuple[float, float]]:
-    """Cut points inside a shot (absolute timeline seconds) at word starts, preferring sentence/comma breaks."""
+def plan_pieces(t: dict, no_split: bool, forced: list[float] = ()) -> list[tuple[float, float]]:
+    """Cut points inside a shot (absolute timeline seconds) at word starts, preferring sentence/comma breaks.
+    `forced` cuts (e.g. the join between two renders inside a lip-synced clip) are always cut points."""
+    forced = sorted(c for c in forced if t["start"] + 0.3 < c < t["end"] - 0.3)
+    if forced:
+        out, a = [], t["start"]
+        for c in forced + [t["end"]]:
+            out += plan_pieces({**t, "start": a, "end": c, "words": [w for w in t.get("words") or [] if a <= w["start"] < c]}, no_split)
+            a = c
+        return out
     a0, b0 = t["start"], t["end"]
     if no_split or b0 - a0 <= PIECE_MAX:
         return [(a0, b0)]
@@ -374,10 +382,11 @@ def main() -> None:
     plan = share_plan([s for s in shots if not s.get("skip_render") or find_clip(a.clips, s["id"])], timeline,
                       lambda sid: find_clip(a.clips, sid))
     lips = a.clips / "lipsync"
-    ls_handles = {}
+    ls_handles, ls_cuts = {}, {}
     if (lips / "manifest.json").exists():
-        ls_handles = {i["id"]: i["handle"] for i in json.loads((lips / "manifest.json").read_text())["items"]
-                      if i.get("slug") == job.get("slug")}
+        items = [i for i in json.loads((lips / "manifest.json").read_text())["items"] if i.get("slug") == job.get("slug")]
+        ls_handles = {i["id"]: i["handle"] for i in items}
+        ls_cuts = {i["id"]: i.get("cuts", []) for i in items}
 
     # ---- sources and faces per shot
     info = []
@@ -492,7 +501,7 @@ def main() -> None:
                 rep["needs_rerender"] = "parts too short"
         else:
             no_split = bool(sh.get("freeze_region"))
-            pieces = plan_pieces(t, no_split)
+            pieces = plan_pieces(t, no_split, [t["start"] + c for c in ls_cuts.get(sh["id"], [])] if d.get("lipsync") else [])
             usable = d["end"] - d["head"]
             slow = min(max((t["dur"] + hpost / FPS) / max(usable, 0.1), 1.0), MAX_SLOW)
             zooms = ZOOMS_FACE if d["faces"] else ZOOMS_BROLL
