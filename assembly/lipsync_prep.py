@@ -19,11 +19,41 @@ HANDLE = 0.4
 REPO = Path(__file__).resolve().parent.parent
 
 
+def it_prompt(shot: dict) -> str:
+    """The scene in two sentences from the shot's motion prompt + how she talks (InfiniteTalk prompts describe the
+    shot; the H3 negatives are dropped)."""
+    import re
+    sents = [x for x in re.split(r"(?<=[.!?])\s+", shot.get("h3_prompt", "")) if x and not x.startswith("No ")]
+    scene = " ".join(sents[:2])
+    return (scene + " The person talks naturally to the camera, lips moving clearly with the speech, relaxed natural "
+            "facial expression, subtle head movement and blinks; the camera stays still.").strip()
+
+
+def it_item(job: dict, jd: Path, shot: dict, t: dict, out: Path) -> dict:
+    """Image = first frame of the footage the edit shows for this shot (its own frame, or the frame of the shot whose
+    clip it borrows through parts); audio = the voiceover slice with the same handles as the LatentSync path."""
+    src_shot = shot
+    if shot.get("parts"):
+        owner = shot["parts"][0]["clip"].rstrip("abcdef")
+        src_shot = next((s for s in job["shots"] if s["id"] == owner), shot)
+    frame = src_shot.get("still_frame") or src_shot["frame"]
+    img = out / f"{shot['id']}.png"
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(jd / "frames" / frame), str(img)])
+    hd = min(HANDLE, t["start"])
+    alen = t["dur"] + hd + HANDLE
+    run(["ffmpeg", "-v", "error", "-y", "-ss", f"{t['start'] - hd:.3f}", "-t", f"{alen:.3f}", "-i", str(jd / "vo" / "take.mp3"),
+         "-ac", "1", "-ar", "16000", str(out / f"{shot['id']}.wav")])
+    return {"job_id": job["job_id"], "slug": job["slug"], "id": shot["id"], "image": f"{job['job_id']}/{shot['id']}.png",
+            "audio": f"{job['job_id']}/{shot['id']}.wav", "prompt": it_prompt(src_shot), "frame": frame,
+            "audio_s": round(alen, 2), "handle": round(hd, 3), "engine": "infinitetalk", "seed": int(shot.get("seed") or 42)}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("out", type=Path)
     ap.add_argument("--clips-root", type=Path, required=True, help="folder with <slug>/clips/<id>.mp4")
     ap.add_argument("--shots", nargs="+", required=True, help="SLUG:id,id,...")
+    ap.add_argument("--it", action="store_true", help="InfiniteTalk inputs: first frame image + audio + prompt (no video)")
     a = ap.parse_args()
     items = []
     for spec in a.shots:
@@ -45,6 +75,9 @@ def main() -> None:
                 print("no clip", slug, sid)
                 continue
             shot = next(s for s in job["shots"] if s["id"] == sid)
+            if a.it:
+                items.append(it_item(job, jd, shot, t, out))
+                continue
             cuts = []
             if shot.get("parts"):       # several renders of the shot: join their windows; the editor cuts at the joins
                 parts = [(find_clip(clips, q["clip"]), q["start"], q["end"]) for q in shot["parts"]]
