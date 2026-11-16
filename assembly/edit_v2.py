@@ -788,7 +788,7 @@ def place_text(doc: Ass, fm: Fmt, text: str, t0: float, t1: float, t: dict, boxe
             sfx.append((t0, "pop", 0.3))
         return {"kind": kind, "y": round(y / RH, 3)}
     # headline / offer / cta / alert
-    style = {"offer": (YELLOW, INK, -3.0, 1.08), "cta": ("FFFFFF", BLUE, 0.0, 1.08), "alert": (RED, "FFFFFF", 0.0, 1.1),
+    style = {"offer": (YELLOW, INK, -3.0, 1.08), "cta": ("FFFFFF", BLUE, 0.0, 1.3), "alert": (RED, "FFFFFF", 0.0, 1.1),
              "headline": ("FFFFFF", INK, 0.0, 1.0)}[kind]
     bg, fg, rot, scale = style
     size = int(s * scale)
