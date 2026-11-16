@@ -147,6 +147,34 @@ def render_segment(src: Path, dur: float, dst: Path, still: bool, head: float = 
             "held_s": round(held, 2)}
 
 
+def freeze_region(seg: Path, box: list[float], feather: int = 28) -> None:
+    """Hold one region of a cut shot still: the segment's first frame, cropped to box = [x0, y0, x1, y1] (fractions of
+    the frame), is laid over the whole segment with soft edges. Used where H3 adds props or text into an otherwise good
+    clip (e.g. products appearing on a counter while the speaker above keeps talking)."""
+    from PIL import ImageFilter
+    first, patch, tmp = seg.with_name(seg.stem + "_f0.png"), seg.with_name(seg.stem + "_patch.png"), seg.with_name(seg.stem + "_fz.mp4")
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(seg), "-frames:v", "1", str(first)])
+    im = Image.open(first).convert("RGBA")
+    W, H = im.size
+    x0, y0, x1, y1 = (int(round(v)) for v in (box[0] * W, box[1] * H, box[2] * W, box[3] * H))
+    crop = im.crop((x0, y0, x1, y1))
+    mask = Image.new("L", crop.size, 255)
+    edge = ImageDraw.Draw(mask)
+    for k in range(feather):          # fade only on the sides that are inside the frame
+        a = int(255 * k / feather)
+        if x0 > 0: edge.line([(k, 0), (k, crop.height)], fill=a)
+        if x1 < W: edge.line([(crop.width - 1 - k, 0), (crop.width - 1 - k, crop.height)], fill=a)
+        if y0 > 0: edge.line([(0, k), (crop.width, k)], fill=a)
+        if y1 < H: edge.line([(0, crop.height - 1 - k), (crop.width, crop.height - 1 - k)], fill=a)
+    mask = mask.filter(ImageFilter.GaussianBlur(feather / 4))
+    crop.putalpha(mask)
+    crop.save(patch)
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(seg), "-loop", "1", "-i", str(patch), "-filter_complex",
+         f"[0:v][1:v]overlay={x0}:{y0}:shortest=1[o]", "-map", "[o]", "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p",
+         "-an", str(tmp)])
+    tmp.replace(seg); first.unlink(); patch.unlink()
+
+
 def overlay_box(base: Path, inner: Path, dst: Path, dur: float) -> None:
     """Picture in picture: `inner` (already cut to dur) in a white-framed box over the middle of `base`."""
     bw = int(W * 0.74)
@@ -529,6 +557,9 @@ def main() -> None:
                     info |= {"inset": True}
             if src_id != shot["id"]:
                 info |= {"clip_of": src_id}
+        if shot.get("freeze_region") and not info.get("mode") == "still":
+            freeze_region(dst, shot["freeze_region"])
+            info |= {"freeze_region": shot["freeze_region"]}
         seg_files.append(dst)
         report.append({"id": shot["id"], "start": round(t["start"], 2), "dur": t["dur"], **info})
     (tmp / "concat.txt").write_text("".join(f"file '{p.resolve()}'\n" for p in seg_files))
