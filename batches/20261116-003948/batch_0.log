@@ -1,9 +1,9 @@
-2026-11-16T00:40:21Z [+1s] === setup shard 0/1 (4 jobs)
-NVIDIA GeForce RTX 5090, 32607 MiB, 580.173.02
-Mem:             503          40         127           0         337         462
+2026-11-16T00:40:23Z [+0s] === setup shard 0/1 (5 jobs)
+NVIDIA GeForce RTX 5090, 32607 MiB, 595.99.02
+Mem:            1007          69         285           0         657         938
 CA
 
-2026-11-16T00:40:21Z === push (shard 0/1 alive)
+2026-11-16T00:40:24Z === push (shard 0/1 alive)
 PUSH ok
 PUSH done
 ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
@@ -11,12 +11,13 @@ diffusers 0.38.0 requires huggingface-hub<2.0,>=0.34.0, but you have huggingface
 tokenizers 0.22.2 requires huggingface-hub<2.0,>=0.16.4, but you have huggingface-hub 2.4.0 which is incompatible.
 transformers 5.9.0 requires huggingface-hub<2.0,>=1.5.0, but you have huggingface-hub 2.4.0 which is incompatible.
 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
-2026-11-16T00:40:31Z [+11s] === frames
-festbiss-12-apothekerin-dialog-v1: 39 frames
-festbiss-09-kaufen-sie-das-nicht-v1: 18 frames
-festbiss-13-animation-in-wenigen-tagen-v1: 23 frames
-festbiss-03-haftcreme-zum-kotzen-v1: 22 frames
-2026-11-16T00:40:35Z === push (shard 0/1 frames ok)
+2026-11-16T00:40:33Z [+10s] === frames
+festbiss-04-renate-unterkiefer-v1: 27 frames
+festbiss-16-zwei-wochen-v1: 31 frames
+festbiss-14-drei-gruende-v1: 28 frames
+festbiss-08-gleicher-kiefer-zink-v1: 11 frames
+festbiss-02b-klebrig-faelschungen-v1: 29 frames
+2026-11-16T00:40:39Z === push (shard 0/1 frames ok)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
@@ -24,159 +25,119 @@ PUSH done
 === h3 setup (fl2va)
 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-{'file': 'minimax_h3_fl2va_pruned_int8_convrot.safetensors', 'seconds': 163.4, 'gb': 20.97}
-{'file': 'qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors', 'seconds': 120.4, 'gb': 15.69}
-{'file': 'minimax_h3_video_vae_int8_convrot.safetensors', 'seconds': 22.6, 'gb': 2.81}
-{'file': 'minimax_h3_audio_vae_fp32.safetensors', 'seconds': 5.2, 'gb': 0.61}
-{'file': 'minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors', 'seconds': 9.8, 'gb': 1.96}
+{'file': 'minimax_h3_fl2va_pruned_int8_convrot.safetensors', 'seconds': 178.2, 'gb': 20.97}
+{'file': 'qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors', 'seconds': 131.8, 'gb': 15.69}
+{'file': 'minimax_h3_video_vae_int8_convrot.safetensors', 'seconds': 25.6, 'gb': 2.81}
+{'file': 'minimax_h3_audio_vae_fp32.safetensors', 'seconds': 6.0, 'gb': 0.61}
+{'file': 'minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors', 'seconds': 11.5, 'gb': 1.96}
 === h3 ready
-2026-11-16T00:47:04Z === push (shard 0/1 models ready)
+2026-11-16T00:47:44Z === push (shard 0/1 models ready)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-2026-11-16T00:47:09Z [+409s] === render (shard 0/1)
-{"shard": "0/1", "shots": 103, "clip_seconds": 620.4}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s001", "file": "clips/s001.mp4", "size": [608, 992], "ok": true, "seconds": 48.3, "seed": 9201, "clip_s": 4.4, "num_frames": 107, "fps": 24, "usd": 0.0109}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s002", "file": "clips/s002.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9202, "clip_s": 4.4, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s003", "file": "clips/s003.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9203, "clip_s": 4.4, "num_frames": 107, "fps": 24, "usd": 0.0101}
-2026-11-16T00:49:28Z === push (clips)
+2026-11-16T00:47:50Z [+447s] === render (shard 0/1)
+{"shard": "0/1", "shots": 96, "clip_seconds": 608.1}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s001", "file": "clips/s001.mp4", "size": [608, 992], "ok": true, "seconds": 144.3, "seed": 8401, "clip_s": 6.84, "num_frames": 175, "fps": 24, "usd": 0.0348}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s002", "file": "clips/s002.mp4", "size": [608, 992], "ok": true, "seconds": 75.3, "seed": 8402, "clip_s": 5.65, "num_frames": 141, "fps": 24, "usd": 0.0182}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s003", "file": "clips/s003.mp4", "size": [608, 992], "ok": true, "seconds": 186.4, "seed": 8403, "clip_s": 10.53, "num_frames": 260, "fps": 24, "usd": 0.045}
+2026-11-16T00:54:36Z === push (clips)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s004", "file": "clips/s004.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9204, "clip_s": 4.4, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s005", "file": "clips/s005.mp4", "size": [608, 992], "ok": true, "seconds": 57.0, "seed": 9205, "clip_s": 4.84, "num_frames": 124, "fps": 24, "usd": 0.0128}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s006", "file": "clips/s006.mp4", "size": [608, 992], "ok": true, "seconds": 66.0, "seed": 9206, "clip_s": 5.2, "num_frames": 141, "fps": 24, "usd": 0.0149}
-2026-11-16T00:52:21Z === push (clips)
-PUSH ok
-PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s007", "file": "clips/s007.mp4", "size": [608, 992], "ok": true, "seconds": 66.0, "seed": 9207, "clip_s": 5.8, "num_frames": 141, "fps": 24, "usd": 0.0149}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s008", "file": "clips/s008.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9208, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s009", "file": "clips/s009.mp4", "size": [608, 992], "ok": true, "seconds": 303.1, "seed": 9209, "clip_s": 15.0, "num_frames": 362, "fps": 24, "usd": 0.0683}
-2026-11-16T00:59:18Z === push (clips)
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s004", "file": "clips/s004.mp4", "size": [608, 992], "ok": true, "seconds": 87.2, "seed": 8404, "clip_s": 6.22, "num_frames": 158, "fps": 24, "usd": 0.021}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s005", "file": "clips/s005.mp4", "size": [608, 992], "ok": true, "seconds": 132.2, "seed": 8405, "clip_s": 8.16, "num_frames": 209, "fps": 24, "usd": 0.0319}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s006", "file": "clips/s006.mp4", "size": [608, 992], "ok": true, "seconds": 75.3, "seed": 8406, "clip_s": 5.31, "num_frames": 141, "fps": 24, "usd": 0.0182}
+2026-11-16T00:59:40Z === push (clips)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s010", "file": "clips/s010.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9210, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s011", "file": "clips/s011.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9211, "clip_s": 4.1, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s012", "file": "clips/s012.mp4", "size": [608, 992], "ok": true, "seconds": 66.0, "seed": 9212, "clip_s": 5.8, "num_frames": 141, "fps": 24, "usd": 0.0149}
-2026-11-16T01:02:00Z === push (clips)
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s007", "file": "clips/s007.mp4", "size": [608, 992], "ok": true, "seconds": 270.4, "seed": 8407, "clip_s": 13.05, "num_frames": 328, "fps": 24, "usd": 0.0653}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s008", "file": "clips/s008.mp4", "size": [608, 992], "ok": true, "seconds": 267.8, "seed": 8408, "clip_s": 13.2, "num_frames": 328, "fps": 24, "usd": 0.0646}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s009", "file": "clips/s009.mp4", "size": [608, 992], "ok": true, "seconds": 102.2, "seed": 8409, "clip_s": 7.28, "num_frames": 175, "fps": 24, "usd": 0.0247}
+2026-11-16T01:10:31Z === push (clips)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s013", "file": "clips/s013.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9213, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s014", "file": "clips/s014.mp4", "size": [608, 992], "ok": true, "seconds": 120.0, "seed": 9214, "clip_s": 8.55, "num_frames": 209, "fps": 24, "usd": 0.027}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s015", "file": "clips/s015.mp4", "size": [608, 992], "ok": true, "seconds": 66.0, "seed": 9215, "clip_s": 5.32, "num_frames": 141, "fps": 24, "usd": 0.0149}
-2026-11-16T01:05:56Z === push (clips)
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s010", "file": "clips/s010.mp4", "size": [608, 992], "ok": true, "seconds": 132.3, "seed": 8410, "clip_s": 8.21, "num_frames": 209, "fps": 24, "usd": 0.0319}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s011", "file": "clips/s011.mp4", "size": [608, 992], "ok": true, "seconds": 165.3, "seed": 8411, "clip_s": 9.83, "num_frames": 243, "fps": 24, "usd": 0.0399}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s012", "file": "clips/s012.mp4", "size": [608, 992], "ok": true, "seconds": 183.2, "seed": 8412, "clip_s": 10.72, "num_frames": 260, "fps": 24, "usd": 0.0442}
+2026-11-16T01:18:45Z === push (clips)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s016", "file": "clips/s016.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9216, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s017", "file": "clips/s017.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9217, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s018", "file": "clips/s018.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9218, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-2026-11-16T01:08:17Z === push (clips)
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s013", "file": "clips/s013.mp4", "size": [608, 992], "ok": true, "seconds": 90.2, "seed": 8413, "clip_s": 6.56, "num_frames": 158, "fps": 24, "usd": 0.0218}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s014", "file": "clips/s014.mp4", "size": [608, 992], "ok": true, "seconds": 54.1, "seed": 8414, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0131}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s015", "file": "clips/s015.mp4", "size": [608, 992], "ok": true, "seconds": 168.2, "seed": 8415, "clip_s": 9.84, "num_frames": 243, "fps": 24, "usd": 0.0406}
+2026-11-16T01:24:12Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s019", "file": "clips/s019.mp4", "size": [608, 992], "ok": true, "seconds": 105.0, "seed": 9219, "clip_s": 7.79, "num_frames": 192, "fps": 24, "usd": 0.0237}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s020", "file": "clips/s020.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9220, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s021", "file": "clips/s021.mp4", "size": [608, 992], "ok": true, "seconds": 108.0, "seed": 9221, "clip_s": 7.95, "num_frames": 192, "fps": 24, "usd": 0.0243}
-2026-11-16T01:12:42Z === push (clips)
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s016", "file": "clips/s016.mp4", "size": [608, 992], "ok": true, "seconds": 147.6, "seed": 8416, "clip_s": 9.15, "num_frames": 226, "fps": 24, "usd": 0.0356}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s017", "file": "clips/s017.mp4", "size": [576, 1024], "ok": true, "seconds": 144.2, "seed": 8417, "clip_s": 8.97, "num_frames": 226, "fps": 24, "usd": 0.0348}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s018", "file": "clips/s018.mp4", "size": [576, 1024], "ok": true, "seconds": 72.3, "seed": 8418, "clip_s": 5.86, "num_frames": 141, "fps": 24, "usd": 0.0175}
+2026-11-16T01:30:51Z === push (clips)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s022", "file": "clips/s022.mp4", "size": [608, 992], "ok": true, "seconds": 138.1, "seed": 9222, "clip_s": 8.84, "num_frames": 226, "fps": 24, "usd": 0.0311}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s023", "file": "clips/s023.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9223, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s024", "file": "clips/s024.mp4", "size": [608, 992], "ok": true, "seconds": 156.1, "seed": 9224, "clip_s": 9.99, "num_frames": 243, "fps": 24, "usd": 0.0352}
-2026-11-16T01:18:30Z === push (clips)
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s019", "file": "clips/s019.mp4", "size": [608, 992], "ok": true, "seconds": 78.2, "seed": 8419, "clip_s": 5.86, "num_frames": 141, "fps": 24, "usd": 0.0189}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s020", "file": "clips/s020.mp4", "size": [608, 992], "ok": true, "seconds": 54.2, "seed": 8420, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0131}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s021", "file": "clips/s021.mp4", "size": [608, 992], "ok": true, "seconds": 54.1, "seed": 8421, "clip_s": 4.14, "num_frames": 107, "fps": 24, "usd": 0.0131}
+2026-11-16T01:34:12Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s025", "file": "clips/s025.mp4", "size": [608, 992], "ok": true, "seconds": 174.2, "seed": 9225, "clip_s": 10.21, "num_frames": 260, "fps": 24, "usd": 0.0392}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s026", "file": "clips/s026.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9226, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s027", "file": "clips/s027.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9227, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-2026-11-16T01:23:02Z === push (clips)
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s022", "file": "clips/s022.mp4", "size": [608, 992], "ok": true, "seconds": 63.8, "seed": 8422, "clip_s": 4.75, "num_frames": 124, "fps": 24, "usd": 0.0154}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s023", "file": "clips/s023.mp4", "size": [608, 992], "ok": true, "seconds": 75.1, "seed": 8423, "clip_s": 5.71, "num_frames": 141, "fps": 24, "usd": 0.0181}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s024", "file": "clips/s024.mp4", "size": [608, 992], "ok": true, "seconds": 75.1, "seed": 8424, "clip_s": 5.64, "num_frames": 141, "fps": 24, "usd": 0.0181}
+2026-11-16T01:38:53Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s028", "file": "clips/s028.mp4", "size": [608, 992], "ok": true, "seconds": 120.0, "seed": 9228, "clip_s": 8.72, "num_frames": 209, "fps": 24, "usd": 0.027}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s029", "file": "clips/s029.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9229, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s030", "file": "clips/s030.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9230, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-2026-11-16T01:26:40Z === push (clips)
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s025", "file": "clips/s025.mp4", "size": [608, 992], "ok": true, "seconds": 168.3, "seed": 8425, "clip_s": 9.98, "num_frames": 243, "fps": 24, "usd": 0.0406}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s026", "file": "clips/s026.mp4", "size": [608, 992], "ok": true, "seconds": 204.3, "seed": 8426, "clip_s": 11.52, "num_frames": 277, "fps": 24, "usd": 0.0493}
+{"job": "festbiss-04-renate-unterkiefer-v1", "id": "s027", "file": "clips/s027.mp4", "size": [608, 992], "ok": true, "seconds": 75.2, "seed": 8427, "clip_s": 5.78, "num_frames": 141, "fps": 24, "usd": 0.0182}
+2026-11-16T01:46:55Z === push (clips)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s031", "file": "clips/s031.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9231, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s032", "file": "clips/s032.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9232, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s033", "file": "clips/s033.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9233, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-2026-11-16T01:29:04Z === push (clips)
+2026-11-16T01:47:15Z === push (festbiss-04-renate-unterkiefer-v1 ready)
+PUSH ok
+PUSH done
+{"job": "festbiss-16-zwei-wochen-v1", "id": "s001", "file": "clips/s001.mp4", "size": [608, 992], "ok": true, "seconds": 102.2, "seed": 9601, "clip_s": 7.26, "num_frames": 175, "fps": 24, "usd": 0.0247}
+{"job": "festbiss-16-zwei-wochen-v1", "id": "s002", "file": "clips/s002.mp4", "size": [608, 992], "ok": true, "seconds": 54.2, "seed": 9602, "clip_s": 4.04, "num_frames": 107, "fps": 24, "usd": 0.0131}
+{"job": "festbiss-16-zwei-wochen-v1", "id": "s003", "file": "clips/s003.mp4", "size": [576, 1024], "ok": true, "seconds": 72.7, "seed": 9603, "clip_s": 5.45, "num_frames": 141, "fps": 24, "usd": 0.0175}
+2026-11-16T01:51:06Z === push (clips)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s034", "file": "clips/s034.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9234, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s035", "file": "clips/s035.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9235, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s036", "file": "clips/s036.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9236, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-2026-11-16T01:31:29Z === push (clips)
+{"job": "festbiss-16-zwei-wochen-v1", "id": "s004", "file": "clips/s004.mp4", "size": [608, 992], "ok": true, "seconds": 51.6, "seed": 9604, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0125}
+{"job": "festbiss-16-zwei-wochen-v1", "id": "s005", "file": "clips/s005.mp4", "size": [608, 992], "ok": true, "seconds": 225.6, "seed": 9605, "clip_s": 11.99, "num_frames": 294, "fps": 24, "usd": 0.0545}
+{"job": "festbiss-16-zwei-wochen-v1", "id": "s006", "file": "clips/s006.mp4", "size": [608, 992], "ok": true, "seconds": 102.3, "seed": 9606, "clip_s": 6.89, "num_frames": 175, "fps": 24, "usd": 0.0247}
+2026-11-16T01:57:47Z === push (clips)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 PUSH ok
 PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s037", "file": "clips/s037.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9237, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s038", "file": "clips/s038.mp4", "size": [608, 992], "ok": true, "seconds": 66.1, "seed": 9238, "clip_s": 5.49, "num_frames": 141, "fps": 24, "usd": 0.0149}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s039", "file": "clips/s039.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9239, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-2026-11-16T01:34:11Z === push (clips)
-hint: use 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-PUSH ok
-PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s040", "file": "clips/s040.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9240, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s041", "file": "clips/s041.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9241, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s042", "file": "clips/s042.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9242, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
-2026-11-16T01:36:33Z === push (clips)
-hint: use 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-PUSH ok
-PUSH done
-{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s043", "file": "clips/s043.mp4", "size": [608, 992], "ok": true, "seconds": 54.3, "seed": 9243, "clip_s": 4.66, "num_frames": 124, "fps": 24, "usd": 0.0122}
-2026-11-16T01:37:36Z === push (festbiss-12-apothekerin-dialog-v1 ready)
-PUSH ok
-PUSH done
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s001", "file": "clips/s001.mp4", "size": [608, 992], "ok": true, "seconds": 255.1, "seed": 8901, "clip_s": 13.14, "num_frames": 328, "fps": 24, "usd": 0.0575}
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s002", "file": "clips/s002.mp4", "size": [608, 992], "ok": true, "seconds": 276.1, "seed": 8902, "clip_s": 14.03, "num_frames": 345, "fps": 24, "usd": 0.0622}
-2026-11-16T01:46:29Z === push (clips)
-hint: use 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-PUSH ok
-PUSH done
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s003", "file": "clips/s003.mp4", "size": [608, 992], "ok": true, "seconds": 120.1, "seed": 8903, "clip_s": 8.35, "num_frames": 209, "fps": 24, "usd": 0.0271}
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s004", "file": "clips/s004.mp4", "size": [608, 992], "ok": true, "seconds": 66.0, "seed": 8904, "clip_s": 5.2, "num_frames": 141, "fps": 24, "usd": 0.0149}
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s005", "file": "clips/s005.mp4", "size": [608, 992], "ok": true, "seconds": 66.0, "seed": 8905, "clip_s": 5.45, "num_frames": 141, "fps": 24, "usd": 0.0149}
-2026-11-16T01:50:51Z === push (clips)
-hint: use 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-PUSH ok
-PUSH done
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s006", "file": "clips/s006.mp4", "size": [608, 992], "ok": true, "seconds": 48.0, "seed": 8906, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0108}
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s007", "file": "clips/s007.mp4", "size": [608, 992], "ok": true, "seconds": 93.0, "seed": 8907, "clip_s": 7.3, "num_frames": 175, "fps": 24, "usd": 0.021}
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s008", "file": "clips/s008.mp4", "size": [608, 992], "ok": true, "seconds": 93.0, "seed": 8908, "clip_s": 6.92, "num_frames": 175, "fps": 24, "usd": 0.021}
-2026-11-16T01:54:56Z === push (clips)
-hint: use 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-PUSH ok
-PUSH done
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s009", "file": "clips/s009.mp4", "size": [576, 1024], "ok": true, "seconds": 291.1, "seed": 8909, "clip_s": 15.0, "num_frames": 362, "fps": 24, "usd": 0.0656}
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s010", "file": "clips/s010.mp4", "size": [608, 992], "ok": true, "seconds": 78.0, "seed": 8910, "clip_s": 5.99, "num_frames": 158, "fps": 24, "usd": 0.0176}
-{"job": "festbiss-09-kaufen-sie-das-nicht-v1", "id": "s011", "file": "clips/s011.mp4", "size": [608, 992], "ok": true, "seconds": 93.0, "seed": 8911, "clip_s": 7.0, "num_frames": 175, "fps": 24, "usd": 0.021}
-2026-11-16T02:02:47Z === push (clips)
+{"job": "festbiss-16-zwei-wochen-v1", "id": "s007", "file": "clips/s007.mp4", "size": [608, 992], "ok": true, "seconds": 132.3, "seed": 9607, "clip_s": 8.16, "num_frames": 209, "fps": 24, "usd": 0.0319}
+{"job": "festbiss-16-zwei-wochen-v1", "id": "s008", "file": "clips/s008.mp4", "size": [576, 1024], "ok": true, "seconds": 84.2, "seed": 9608, "clip_s": 6.15, "num_frames": 158, "fps": 24, "usd": 0.0203}
+{"job": "festbiss-16-zwei-wochen-v1", "id": "s009", "file": "clips/s009.mp4", "size": [608, 992], "ok": true, "seconds": 117.2, "seed": 9609, "clip_s": 7.98, "num_frames": 192, "fps": 24, "usd": 0.0283}
+2026-11-16T02:03:43Z === push (clips)
 hint: use 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
