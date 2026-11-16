@@ -361,7 +361,10 @@ def main() -> None:
     total = timeline[-1]["end"]
     frames_dir = a.job_dir / "frames"
 
-    plan = share_plan([s for s in shots if not s.get("skip_render")], timeline, lambda sid: find_clip(a.clips, sid))
+    # shots rendered elsewhere (skip_render + a copied clip, e.g. a hook variant reusing another ad's clips) edit like
+    # their own clips, so their QA windows apply
+    plan = share_plan([s for s in shots if not s.get("skip_render") or find_clip(a.clips, s["id"])], timeline,
+                      lambda sid: find_clip(a.clips, sid))
     lips = a.clips / "lipsync"
     ls_handles = {}
     if (lips / "manifest.json").exists():
@@ -625,7 +628,7 @@ def place_text(doc: Ass, fm: Fmt, text: str, t0: float, t1: float, t: dict, boxe
         return y * RH
 
     if kind == "badge":
-        size = int(s * 0.95)
+        size = int(s * 1.25)
         label = text.upper()
         em = size / ASS_EM
         bw = doc.width(label, size) + 1.1 * em
