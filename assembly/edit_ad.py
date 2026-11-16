@@ -84,7 +84,7 @@ def align_shots(shots: list[dict], words: list[dict]) -> list[dict]:
     for s in shots:
         toks = [norm(t) for t in spoken_text(s["vo_line"]).split() if norm(t)]
         if not toks:
-            out.append({"id": s["id"], "words": [], "silent": True})
+            out.append({"id": s["id"], "words": [], "silent": True, "silent_s": s.get("silent_s")})
             continue
         seg = words[i:i + len(toks)]
         got = [norm(w["text"]) for w in seg]
@@ -101,7 +101,8 @@ def align_shots(shots: list[dict], words: list[dict]) -> list[dict]:
         if not o.get("silent"):
             continue
         prev = out[k - 1] if k else None
-        o["start"] = (prev["words"][-1]["end"] + 0.4) if prev and prev.get("words") else (prev["start"] + 1 if prev else 0.0)
+        o["start"] = (prev["words"][-1]["end"] + 0.4) if prev and prev.get("words") else \
+            (prev["start"] + (prev.get("silent_s") or 1) if prev else 0.0)
     for k, o in enumerate(out):
         if o.get("silent"):
             nxt = out[k + 1]["start"] if k + 1 < len(out) else None
@@ -592,8 +593,13 @@ def main() -> None:
         else:
             Image.new("RGBA", (2, 2), (0, 0, 0, 0)).save(hpng)
             overlay += ";[b]null[b2]"
+        # on-screen texts ("Einblendungen") on top of the spoken captions: shot["overlay"], parts split by " / "
+        ov_cards = [(t["start"], t["end"], sh["overlay"]) for t, sh in zip(timeline, job["shots"]) if sh.get("overlay")]
+        ovass = tmp / f"overlay_{name}.ass"
+        if ov_cards:
+            on_screen_ass(ov_cards, ovass, f["res"], int(f["cap"][0] * 0.72), box=job.get("overlay_box", "FFFFFF:111111:94"))
         dst = out / f"{a.name}_{name}.mp4"
-        fc = f"{f['vf']};{overlay};[b2]ass={ass}[v]"
+        fc = f"{f['vf']};{overlay};[b2]ass={ass}" + (f",ass={ovass}" if ov_cards else "") + "[v]"
         extra = ["-loop", "1", "-i", str(tmp / f"end_{name}.png")] if job.get("end_lines") else []
         run(["ffmpeg", "-v", "error", "-y", "-i", str(clean), "-i", str(png), "-i", str(vo), "-i", str(hpng), *extra, "-filter_complex", fc,
              "-map", "[v]", "-map", "2:a", "-c:v", "libx264", "-crf", str(a.crf), "-preset", "medium", "-pix_fmt", "yuv420p",

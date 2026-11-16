@@ -214,3 +214,10 @@ def test_lines_vo_punctuation_tokens_ride_on_previous_word():
     from lines_vo import spread_words
     w = spread_words("الشعيرة: «طلعت!» — الموس: «زززت!»", 0.0, 4.0)
     assert [x["text"] for x in w] == ["الشعيرة:", "«طلعت!»—", "الموس:", "«زززت!»"]
+
+
+def test_silent_intro_shots_take_their_silent_s():
+    shots = [{"id": "a", "vo_line": "", "silent_s": 3.5}, {"id": "b", "vo_line": "", "silent_s": 3.5}, {"id": "c", "vo_line": "Hallo du"}]
+    words = [{"text": "Hallo", "start": 7.0, "end": 7.4}, {"text": "du", "start": 7.5, "end": 7.8}]
+    tl = edit_ad.align_shots(shots, words)
+    assert [t["start"] for t in tl[:2]] == [0.0, 3.5] and abs(tl[1]["dur"] - 3.45) < 0.01
