@@ -1,9 +1,9 @@
-2026-11-16T01:22:13Z [+1s] === setup shard 0/1 (4 jobs)
-NVIDIA GeForce RTX 5090, 32607 MiB, 595.91.07
-Mem:             188          26          98           0          64         161
+2026-11-16T00:40:21Z [+1s] === setup shard 0/1 (4 jobs)
+NVIDIA GeForce RTX 5090, 32607 MiB, 580.173.02
+Mem:             503          40         127           0         337         462
 CA
 
-2026-11-16T01:22:13Z === push (shard 0/1 alive)
+2026-11-16T00:40:21Z === push (shard 0/1 alive)
 PUSH ok
 PUSH done
 ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
@@ -11,9 +11,97 @@ diffusers 0.38.0 requires huggingface-hub<2.0,>=0.34.0, but you have huggingface
 tokenizers 0.22.2 requires huggingface-hub<2.0,>=0.16.4, but you have huggingface-hub 2.4.0 which is incompatible.
 transformers 5.9.0 requires huggingface-hub<2.0,>=1.5.0, but you have huggingface-hub 2.4.0 which is incompatible.
 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
-2026-11-16T01:22:19Z [+7s] === frames
-festbiss-01-apothekerin-kassenbon-v1: 24 frames
-festbiss-06-zwei-frauen-v1: 28 frames
-festbiss-10-mit-64-walter-v1: 20 frames
-festbiss-02a-klebrig-faelschungen-v1: 29 frames
-2026-11-16T01:22:22Z === push (shard 0/1 frames ok)
+2026-11-16T00:40:31Z [+11s] === frames
+festbiss-12-apothekerin-dialog-v1: 39 frames
+festbiss-09-kaufen-sie-das-nicht-v1: 18 frames
+festbiss-13-animation-in-wenigen-tagen-v1: 23 frames
+festbiss-03-haftcreme-zum-kotzen-v1: 22 frames
+2026-11-16T00:40:35Z === push (shard 0/1 frames ok)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+=== h3 setup (fl2va)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+{'file': 'minimax_h3_fl2va_pruned_int8_convrot.safetensors', 'seconds': 163.4, 'gb': 20.97}
+{'file': 'qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors', 'seconds': 120.4, 'gb': 15.69}
+{'file': 'minimax_h3_video_vae_int8_convrot.safetensors', 'seconds': 22.6, 'gb': 2.81}
+{'file': 'minimax_h3_audio_vae_fp32.safetensors', 'seconds': 5.2, 'gb': 0.61}
+{'file': 'minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors', 'seconds': 9.8, 'gb': 1.96}
+=== h3 ready
+2026-11-16T00:47:04Z === push (shard 0/1 models ready)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+2026-11-16T00:47:09Z [+409s] === render (shard 0/1)
+{"shard": "0/1", "shots": 103, "clip_seconds": 620.4}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s001", "file": "clips/s001.mp4", "size": [608, 992], "ok": true, "seconds": 48.3, "seed": 9201, "clip_s": 4.4, "num_frames": 107, "fps": 24, "usd": 0.0109}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s002", "file": "clips/s002.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9202, "clip_s": 4.4, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s003", "file": "clips/s003.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9203, "clip_s": 4.4, "num_frames": 107, "fps": 24, "usd": 0.0101}
+2026-11-16T00:49:28Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s004", "file": "clips/s004.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9204, "clip_s": 4.4, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s005", "file": "clips/s005.mp4", "size": [608, 992], "ok": true, "seconds": 57.0, "seed": 9205, "clip_s": 4.84, "num_frames": 124, "fps": 24, "usd": 0.0128}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s006", "file": "clips/s006.mp4", "size": [608, 992], "ok": true, "seconds": 66.0, "seed": 9206, "clip_s": 5.2, "num_frames": 141, "fps": 24, "usd": 0.0149}
+2026-11-16T00:52:21Z === push (clips)
+PUSH ok
+PUSH done
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s007", "file": "clips/s007.mp4", "size": [608, 992], "ok": true, "seconds": 66.0, "seed": 9207, "clip_s": 5.8, "num_frames": 141, "fps": 24, "usd": 0.0149}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s008", "file": "clips/s008.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9208, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s009", "file": "clips/s009.mp4", "size": [608, 992], "ok": true, "seconds": 303.1, "seed": 9209, "clip_s": 15.0, "num_frames": 362, "fps": 24, "usd": 0.0683}
+2026-11-16T00:59:18Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s010", "file": "clips/s010.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9210, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s011", "file": "clips/s011.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9211, "clip_s": 4.1, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s012", "file": "clips/s012.mp4", "size": [608, 992], "ok": true, "seconds": 66.0, "seed": 9212, "clip_s": 5.8, "num_frames": 141, "fps": 24, "usd": 0.0149}
+2026-11-16T01:02:00Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s013", "file": "clips/s013.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9213, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s014", "file": "clips/s014.mp4", "size": [608, 992], "ok": true, "seconds": 120.0, "seed": 9214, "clip_s": 8.55, "num_frames": 209, "fps": 24, "usd": 0.027}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s015", "file": "clips/s015.mp4", "size": [608, 992], "ok": true, "seconds": 66.0, "seed": 9215, "clip_s": 5.32, "num_frames": 141, "fps": 24, "usd": 0.0149}
+2026-11-16T01:05:56Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s016", "file": "clips/s016.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9216, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s017", "file": "clips/s017.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9217, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s018", "file": "clips/s018.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9218, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
+2026-11-16T01:08:17Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s019", "file": "clips/s019.mp4", "size": [608, 992], "ok": true, "seconds": 105.0, "seed": 9219, "clip_s": 7.79, "num_frames": 192, "fps": 24, "usd": 0.0237}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s020", "file": "clips/s020.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9220, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s021", "file": "clips/s021.mp4", "size": [608, 992], "ok": true, "seconds": 108.0, "seed": 9221, "clip_s": 7.95, "num_frames": 192, "fps": 24, "usd": 0.0243}
+2026-11-16T01:12:42Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s022", "file": "clips/s022.mp4", "size": [608, 992], "ok": true, "seconds": 138.1, "seed": 9222, "clip_s": 8.84, "num_frames": 226, "fps": 24, "usd": 0.0311}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s023", "file": "clips/s023.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9223, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s024", "file": "clips/s024.mp4", "size": [608, 992], "ok": true, "seconds": 156.1, "seed": 9224, "clip_s": 9.99, "num_frames": 243, "fps": 24, "usd": 0.0352}
+2026-11-16T01:18:30Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH ok
+PUSH done
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s025", "file": "clips/s025.mp4", "size": [608, 992], "ok": true, "seconds": 174.2, "seed": 9225, "clip_s": 10.21, "num_frames": 260, "fps": 24, "usd": 0.0392}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s026", "file": "clips/s026.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9226, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
+{"job": "festbiss-12-apothekerin-dialog-v1", "id": "s027", "file": "clips/s027.mp4", "size": [608, 992], "ok": true, "seconds": 45.0, "seed": 9227, "clip_s": 4.0, "num_frames": 107, "fps": 24, "usd": 0.0101}
+2026-11-16T01:23:02Z === push (clips)
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
