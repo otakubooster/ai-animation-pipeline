@@ -398,14 +398,14 @@ def main() -> None:
         ls = lips / f"{sh['id']}.mp4"
         if sh.get("still"):          # still_frame: another frame of the ad stands in (e.g. while a frame is redone)
             d |= {"mode": "still", "src": frames_dir / (sh.get("still_frame") or sh["frame"])}
+        elif ls.exists() and ls.stat().st_size > 1024:
+            hd = ls_handles.get(sh["id"], 0.4)       # the lip-synced window starts `handle` s before the shot
+            d |= {"mode": "clip", "src": ls, "head": hd, "end": probe_duration(ls), "lipsync": True}
         elif sh.get("parts"):     # clean windows of several renders of this shot, played one after the other
             parts = [(find_clip(a.clips, q["clip"]), q["start"], q["end"]) for q in sh["parts"]]
             parts = [(src, st, min(en, probe_duration(src))) for src, st, en in parts if src]
             d["reverse"] = [bool(q.get("reverse")) for q in sh["parts"]]
             d |= {"mode": "parts", "parts": parts, "src": parts[0][0], "head": parts[0][1], "end": parts[0][2]}
-        elif ls.exists() and ls.stat().st_size > 1024:
-            hd = ls_handles.get(sh["id"], 0.4)       # the lip-synced window starts `handle` s before the shot
-            d |= {"mode": "clip", "src": ls, "head": hd, "end": probe_duration(ls), "lipsync": True}
         else:
             src_id, head, end = plan.get(sh["id"], (sh["id"], HEAD_TRIM, None))
             src = find_clip(a.clips, src_id)
