@@ -44,6 +44,7 @@ FONT_BOLD = "/usr/share/fonts/opentype/inter/InterDisplay-ExtraBold.otf"   # fon
 ASS_EM = 1.21            # ASS font size = ascent + descent; Inter's is 1.21 em
 MAX_SLOW = 1.15
 PIECE_MAX = 3.4          # longer shots get punch-in cuts
+TRANS_GAP = 7.0          # seconds between two transitions at least
 BLUE, YELLOW, RED, GREEN, INK = "0B5ED7", "FFD60A", "D7263D", "1A9E4B", "111111"
 SFX_PEAK = {"whoosh": 0.33, "whoosh_fast": 0.10, "shutter": 0.05, "pop": 0.0, "ching": 0.02, "swipe": 0.08}
 
@@ -107,6 +108,12 @@ class Ass:
         return f.getlength(re.sub(r"\{[^}]*\}", "", text))
 
     def wrap(self, text: str, size: float, max_w: float, bold: bool = False, max_lines: int = 3) -> list[str]:
+        if " · " in text and self.width(text, size, bold) > max_w:    # break at the separators first
+            out = []
+            for part in text.split(" · "):
+                out += self.wrap(part, size, max_w, bold, max_lines)
+            if len(out) <= max_lines:
+                return out
         lines, cur = [], ""
         for w in text.split():
             nxt = (cur + " " + w).strip()
@@ -405,25 +412,34 @@ def main() -> None:
         info.append(d)
     face_cache.write_text(json.dumps(fc))
 
-    # ---- transitions (boundary k = between shot k and k+1): (xfade name, seconds, sfx)
+    # ---- transitions (boundary k = between shot k and k+1): (xfade name, seconds, sfx). Accents, not every cut:
+    # candidates by priority (first jump of a new time unit: white flash; cut to a packshot: zoom; strong scene change:
+    # slide), then at most one every TRANS_GAP s. Other time-badge cuts stay hard cuts with a shutter click.
     kinds = [kind_of(sh["overlay"].split(" / ")[0]) if sh.get("overlay") else None for sh in shots]
-    trans: dict[int, tuple[str, float, str]] = {}
-    last = -10.0
+    unit = lambda sh: (re.search(r"(MINUTE|STUNDE|TAG|WOCHE|MONAT)", sh.get("overlay", "").upper()) or [None])[0]
+    cands = []
+    seen_units = set()
     for k in range(len(shots) - 1):
         c = timeline[k + 1]["start"]
-        if c < 2.5 or c - last < 1.8 or shots[k + 1].get("freeze_region") or shots[k].get("freeze_region"):
+        if c < 2.5 or shots[k + 1].get("freeze_region") or shots[k].get("freeze_region"):
             continue
         sim = similarity(frames_dir / shots[k]["frame"], frames_dir / shots[k + 1]["frame"])
         nb = info[k + 1]
         if kinds[k + 1] == "badge":
-            trans[k] = ("fadewhite", 0.26, "shutter")
-        elif sim < 0.45:
-            trans[k] = ("slideleft", 0.22, "whoosh")
-        elif not nb["faces"] and sim < 0.75 and kinds[k + 1] in ("offer", "cta", None):
-            trans[k] = ("zoomin", 0.30, "whoosh_fast")
-        else:
-            continue
-        last = c
+            u = unit(shots[k + 1])
+            if u not in seen_units:
+                cands.append((3, k, ("fadewhite", 0.26, "shutter")))
+            seen_units.add(u)
+        elif not nb["faces"] and sim < 0.6 and kinds[k + 1] in ("offer", "cta", None) and info[k]["faces"]:
+            cands.append((2, k, ("zoomin", 0.30, "whoosh_fast")))
+        elif sim < 0.35:
+            cands.append((1, k, ("slideleft", 0.22, "whoosh")))
+    trans: dict[int, tuple[str, float, str]] = {}
+    for pr, k, tr in sorted(cands, key=lambda x: (-x[0], x[1])):
+        c = timeline[k + 1]["start"]
+        if all(abs(c - timeline[j + 1]["start"]) >= TRANS_GAP for j in trans):
+            trans[k] = tr
+    badge_cuts = [k for k in range(len(shots) - 1) if kinds[k + 1] == "badge" and k not in trans]
 
     # ---- render segments (with handles for transitions) as punch-in pieces
     segs, report = [], []
@@ -532,6 +548,8 @@ def main() -> None:
     sfx_events = []
     for k, (name, sec, fx) in trans.items():
         sfx_events.append((timeline[k + 1]["start"] - SFX_PEAK[fx], fx, 0.45 if fx != "shutter" else 0.5))
+    for k in badge_cuts:                       # time jumps without a flash still get the camera click
+        sfx_events.append((timeline[k + 1]["start"] - SFX_PEAK["shutter"], "shutter", 0.4))
 
     # ---- text layers per format
     hook = job.get("hook_card")
@@ -557,10 +575,11 @@ def main() -> None:
                                       *((fm.panel) if fm.panel else (0.08, 0.92)))
                 taken.append((hy - 0.09, hy + 0.09))
                 d.setdefault("hook_y", {})[fname] = hy
-            # on-screen text
+            # on-screen text; with no face in the shot the middle is the product (packshot): keep it clear
+            ov_boxes = boxes if d["faces"] or fm.panel else boxes + [[0.15, 0.27, 0.85, 0.72] if fname == "9x16" else [0.15, 0.22, 0.85, 0.78]]
             if sh.get("overlay"):
                 for (p0, p1, part) in part_spans(sh["overlay"], t, seg_end):
-                    placed = place_text(doc, fm, part, p0, p1, t, boxes, taken, sfx_events if fname == "9x16" else None)
+                    placed = place_text(doc, fm, part, p0, p1, t, ov_boxes, taken, sfx_events if fname == "9x16" else None)
                     texts_report[fname].append({"shot": sh["id"], "text": part, **placed})
             # captions
             cap_h = fm.cap * 1.25 / RH
