@@ -71,7 +71,7 @@ TRUST = re.compile(r"Versand|Geld-zur|Garantie|risikofrei|testen", re.I)
 def kind_of(text: str) -> str:
     if "\\N" in text:
         return "list"
-    if "★" in text and re.search(r"[A-Z][a-z]+ [A-Z]\.", text):
+    if "★" in text and (re.search(r"[A-Z][a-z]+ [A-Z]\.", text) or "bewertung" in text.lower()):
         return "nametag"
     if CITE.search(text):
         return "cite"
@@ -775,7 +775,7 @@ def place_text(doc: Ass, fm: Fmt, text: str, t0: float, t1: float, t: dict, boxe
         doc.pill(t0, t1, cxp, y, lines, size, "FFFFFF", "000000", bg_alpha=0x50, bold=True, anim="fade", radius=10)
         return {"kind": kind, "y": round(y / RH, 3)}
     if kind == "nametag":
-        size = int(s * 0.85)
+        size = int(s * 1.05)
         stars = re.findall(r"★+", text)
         name = re.sub(r"★+", "", text).strip(" ,·")
         label = "{\\c&H0AD6FF&}" + (stars[0] if stars else "★★★★★") + "{\\c&HFFFFFF&}  " + name
