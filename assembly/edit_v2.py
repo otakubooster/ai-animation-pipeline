@@ -45,7 +45,7 @@ ASS_EM = 1.21            # ASS font size = ascent + descent; Inter's is 1.21 em
 MAX_SLOW = 1.15
 PIECE_MAX = 3.4          # longer shots get punch-in cuts
 TRANS_GAP = 7.0          # seconds between two transitions at least
-SEG_VERSION = 1          # bump when segment rendering changes (invalidates the segment cache)
+SEG_VERSION = 2          # bump when segment rendering changes (invalidates the segment cache)
 BLUE, YELLOW, RED, GREEN, INK = "0B5ED7", "FFD60A", "D7263D", "1A9E4B", "111111"
 SFX_PEAK = {"whoosh": 0.33, "whoosh_fast": 0.10, "shutter": 0.05, "pop": 0.0, "ching": 0.02, "swipe": 0.08}
 
@@ -267,14 +267,15 @@ def enc(dst: Path) -> list[str]:
 
 
 def render_piece(src: Path, src_t: float, slow: float, frames: int, dst: Path, zoom: float, rect: list[float],
-                 src_end: float) -> float:
+                 src_end: float, reverse: bool = False) -> float:
     """`frames` output frames of `src` from source time src_t, slowed by `slow`, punched in to `rect`; frames past
     src_end freeze. Returns the held seconds."""
     pre = max(0.0, -src_t)
     a = max(src_t, 0.0)
     need = frames / FPS / slow
     held = max(0.0, (a + need) - src_end) * slow
-    vf = (f"trim=start={a:.3f}:end={src_end:.3f},setpts=(PTS-STARTPTS)*{slow:.4f},fps={FPS},{piece_vf(zoom, rect)},"
+    rev = ",reverse" if reverse else ""         # a short object motion that runs the wrong way for the line
+    vf = (f"trim=start={a:.3f}:end={src_end:.3f},setpts=PTS-STARTPTS{rev},setpts=(PTS-STARTPTS)*{slow:.4f},fps={FPS},{piece_vf(zoom, rect)},"
           f"tpad=start_mode=clone:start_duration={pre * slow:.3f}:stop_mode=clone:stop_duration={frames / FPS + 1:.3f}")
     run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf", vf, "-frames:v", str(frames), *enc(dst)])
     return held
@@ -400,6 +401,7 @@ def main() -> None:
         elif sh.get("parts"):     # clean windows of several renders of this shot, played one after the other
             parts = [(find_clip(a.clips, q["clip"]), q["start"], q["end"]) for q in sh["parts"]]
             parts = [(src, st, min(en, probe_duration(src))) for src, st, en in parts if src]
+            d["reverse"] = [bool(q.get("reverse")) for q in sh["parts"]]
             d |= {"mode": "parts", "parts": parts, "src": parts[0][0], "head": parts[0][1], "end": parts[0][2]}
         elif ls.exists() and ls.stat().st_size > 1024:
             hd = ls_handles.get(sh["id"], 0.4)       # the lip-synced window starts `handle` s before the shot
@@ -491,7 +493,7 @@ def main() -> None:
                 z = (1.0, 1.15)[k2 % 2] if d["faces"] else (1.0, 1.1)[k2 % 2]
                 rect = layout.zoom_rect(z, d["faces"]) if z > 1 else [0, 0, 1, 1]
                 pf = tmp / f"seg_{sh['id']}_p{k2}.mp4"
-                held += render_piece(src, s_, slow, bounds[k2 + 1] - bounds[k2], pf, z, rect, e)
+                held += render_piece(src, s_, slow, bounds[k2 + 1] - bounds[k2], pf, z, rect, e, reverse=d["reverse"][k2])
                 files.append(pf)
             concat(files, seg)
             for q in files:
