@@ -5,3 +5,21 @@ NO
 
 debconf: delaying package configuration, since apt-utils is not installed
 2026-11-16T17:50:03Z === push (infinitetalk alive)
+PUSH ok
+PUSH done
+2026-11-16T17:50:07Z [+28s] === install
+
+[notice] A new release of pip is available: 24.0 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+torch 2.11.0+cu130 NVIDIA GeForce RTX 5090
+2026-11-16T17:50:32Z [+53s] === weights
+  path: /workspace/InfiniteTalk/weights/Wan2.1-I2V-14B-480P
+  path: /workspace/InfiniteTalk/weights/chinese-wav2vec2-base
+  path: /workspace/InfiniteTalk/weights/chinese-wav2vec2-base/model.safetensors
+  path: /workspace/InfiniteTalk/weights/InfiniteTalk
+19G	/workspace/InfiniteTalk/weights/InfiniteTalk
+16G	/workspace/InfiniteTalk/weights/Wan2.1-I2V-14B-480P
+1.8G	/workspace/InfiniteTalk/weights/chinese-wav2vec2-base
+infinitetalk_single_int8_lora.json
+infinitetalk_single_int8_lora.safetensors
+2026-11-16T17:57:15Z === push (infinitetalk models ready)
