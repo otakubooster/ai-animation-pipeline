@@ -23,3 +23,20 @@ torch 2.11.0+cu130 NVIDIA GeForce RTX 5090
 infinitetalk_single_int8_lora.json
 infinitetalk_single_int8_lora.safetensors
 2026-11-16T17:57:15Z === push (infinitetalk models ready)
+PUSH ok
+PUSH done
+2026-11-16T17:57:18Z [+459s] === generate
+Unable to import `torchao` Tensor objects. This may affect loading checkpoints serialized with `torchao`
+Traceback (most recent call last):
+  File "/workspace/repo/jobs/lipsync/it_driver.py", line 22, in <module>
+    import generate_infinitetalk as g  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/InfiniteTalk/generate_infinitetalk.py", line 19, in <module>
+    import wan
+  File "/workspace/InfiniteTalk/wan/__init__.py", line 6, in <module>
+    from .multitalk import InfiniteTalkPipeline
+  File "/workspace/InfiniteTalk/wan/multitalk.py", line 3, in <module>
+    from inspect import ArgSpec
+ImportError: cannot import name 'ArgSpec' from 'inspect' (/app/miniconda/lib/python3.11/inspect.py)
+2026-11-16T17:57:31Z [+472s] === done
+2026-11-16T17:57:31Z === push (infinitetalk final)
