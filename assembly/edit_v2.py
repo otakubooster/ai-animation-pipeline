@@ -40,7 +40,7 @@ W, H = 1080, 1920
 HERE = Path(__file__).resolve().parent
 SFX_DIR = HERE / "sfx"
 FONT_BLACK = "/usr/share/fonts/opentype/inter/InterDisplay-Black.otf"
-FONT_BOLD = "/usr/share/fonts/opentype/inter/InterDisplay-Bold.otf"
+FONT_BOLD = "/usr/share/fonts/opentype/inter/InterDisplay-ExtraBold.otf"   # fontconfig family "Inter Display ExtraBold" ("Inter Display Bold" is not a family: libass fell back to a wide font)
 ASS_EM = 1.21            # ASS font size = ascent + descent; Inter's is 1.21 em
 MAX_SLOW = 1.15
 PIECE_MAX = 3.4          # longer shots get punch-in cuts
@@ -162,7 +162,7 @@ class Ass:
                 f"Style: Cap,Inter Display Black,{cap_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H78000000,0,0,0,0,100,100,0,0,1,"
                 f"{max(cap_size // 13, 4)},2,5,0,0,0,1",
                 f"Style: Txt,Inter Display Black,{txt_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1",
-                f"Style: TxtB,Inter Display Bold,{txt_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1",
+                f"Style: TxtB,Inter Display ExtraBold,{txt_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1",
                 "Style: Shp,Inter Display Black,20,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,4,5,0,0,0,1",
                 "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
         path.write_text("\n".join(head + self.ev) + "\n")
@@ -522,7 +522,7 @@ def main() -> None:
             taken = []
             # hook card zone (top) is reserved while it shows
             if hook_span and hook_span[0] <= t["start"] < hook_span[1]:
-                hy = layout.free_slot([0.20, 0.27, 0.14, 0.34] if fname != "16x9" else [0.5], 0.17, boxes,
+                hy = layout.free_slot([0.20, 0.27, 0.14, 0.34, 0.46, 0.53] if fname == "9x16" else ([0.15, 0.24, 0.62] if fname == "1x1" else [0.5]), 0.17, boxes,
                                       *((fm.panel) if fm.panel else (0.08, 0.92)))
                 taken.append((hy - 0.09, hy + 0.09))
                 d.setdefault("hook_y", {})[fname] = hy
