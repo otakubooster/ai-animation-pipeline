@@ -45,6 +45,7 @@ ASS_EM = 1.21            # ASS font size = ascent + descent; Inter's is 1.21 em
 MAX_SLOW = 1.15
 PIECE_MAX = 3.4          # longer shots get punch-in cuts
 TRANS_GAP = 7.0          # seconds between two transitions at least
+SEG_VERSION = 1          # bump when segment rendering changes (invalidates the segment cache)
 BLUE, YELLOW, RED, GREEN, INK = "0B5ED7", "FFD60A", "D7263D", "1A9E4B", "111111"
 SFX_PEAK = {"whoosh": 0.33, "whoosh_fast": 0.10, "shutter": 0.05, "pop": 0.0, "ching": 0.02, "swipe": 0.08}
 
@@ -450,6 +451,15 @@ def main() -> None:
         seg = tmp / f"seg_{sh['id']}.mp4"
         rep = {"id": sh["id"], "start": round(t["start"], 2), "dur": round(t["dur"], 2), "mode": d["mode"],
                "trans_in": trans[k - 1][0] if k - 1 in trans else "cut", "faces": len(d["faces"])}
+        srcs = [q[0] for q in d.get("parts", [])] or [d["src"]]
+        key = json.dumps([f0, f1, hpre, hpost, d["mode"], d.get("head"), d.get("end"), [(str(q), q.stat().st_mtime) for q in srcs],
+                          [(str(q[0]), q[1], q[2]) for q in d.get("parts", [])], sh.get("freeze_region"), [w["start"] for w in t.get("words") or []],
+                          SEG_VERSION], default=str)
+        kf = seg.with_suffix(".key")
+        if seg.exists() and kf.exists() and kf.read_text() == key and (tmp / f"seg_{sh['id']}.rep").exists():
+            segs.append(seg)
+            report.append(json.loads((tmp / f"seg_{sh['id']}.rep").read_text()))
+            continue
         if d["mode"] == "still":
             render_still(d["src"], f1 - f0 + hpre + hpost, seg)
             rep["pieces"] = 1
@@ -510,6 +520,8 @@ def main() -> None:
             rep["freeze_region"] = sh["freeze_region"]
         segs.append(seg)
         report.append(rep)
+        kf.write_text(key)
+        (tmp / f"seg_{sh['id']}.rep").write_text(json.dumps(rep))
 
     # ---- join: runs of hard cuts are concatenated, runs are joined by xfade
     runs, cur = [], [segs[0]]
@@ -577,10 +589,14 @@ def main() -> None:
                 d.setdefault("hook_y", {})[fname] = hy
             # on-screen text; with no face in the shot the middle is the product (packshot): keep it clear
             ov_boxes = boxes if d["faces"] or fm.panel else boxes + [[0.15, 0.27, 0.85, 0.72] if fname == "9x16" else [0.15, 0.22, 0.85, 0.78]]
-            if sh.get("overlay"):
+            if sh.get("overlay"):       # parts show one after the other, so each may use the same free slot
+                part_slots = []
                 for (p0, p1, part) in part_spans(sh["overlay"], t, seg_end):
-                    placed = place_text(doc, fm, part, p0, p1, t, ov_boxes, taken, sfx_events if fname == "9x16" else None)
+                    tk = list(taken)
+                    placed = place_text(doc, fm, part, p0, p1, t, ov_boxes, tk, sfx_events if fname == "9x16" else None)
+                    part_slots += tk[len(taken):]
                     texts_report[fname].append({"shot": sh["id"], "text": part, **placed})
+                taken += part_slots
             # captions
             cap_h = fm.cap * 1.25 / RH
             if fm.panel:
