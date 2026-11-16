@@ -125,3 +125,34 @@ cp: cannot stat '/workspace/repo/jobs/festbiss-16-zwei-wochen/job.json': No such
 2026-11-16T00:21:11Z === push (shard 0/4 alive)
 rsync: [sender] change_dir "/workspace/job/out/*" failed: No such file or directory (2)
 rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1356) [sender=3.2.7]
+PUSH ok
+PUSH done
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+diffusers 0.38.0 requires huggingface-hub<2.0,>=0.34.0, but you have huggingface-hub 2.4.0 which is incompatible.
+tokenizers 0.22.2 requires huggingface-hub<2.0,>=0.16.4, but you have huggingface-hub 2.4.0 which is incompatible.
+transformers 5.9.0 requires huggingface-hub<2.0,>=1.5.0, but you have huggingface-hub 2.4.0 which is incompatible.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+2026-11-16T00:21:18Z [+8s] === frames
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/repo/jobs/festbiss-01-apothekerin-kassenbon/job.json'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/repo/jobs/festbiss-01-apothekerin-kassenbon/job.json'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/repo/jobs/festbiss-01-apothekerin-kassenbon/job.json'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/repo/jobs/festbiss-01-apothekerin-kassenbon/job.json'
+curl: (22) The requested URL returned error: 404
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+KeyError: 'assets'
+curl: (23) Failure writing output to destination
+unzip:  cannot find or open /workspace/job/releases//, /workspace/job/releases//.zip or /workspace/job/releases//.ZIP.
+frames: 0 frames
+FATAL: no frames for 
+2026-11-16T00:21:19Z === push (shard 0/4 final)
+rsync: [sender] change_dir "/workspace/job/out/*" failed: No such file or directory (2)
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1356) [sender=3.2.7]
