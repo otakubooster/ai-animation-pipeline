@@ -304,6 +304,22 @@ def render_piece(src: Path, src_t: float, slow: float, frames: int, dst: Path, z
     return held
 
 
+def zoom_seq(mode: str, n: int, faces: list, rot: int = 0) -> list[float]:
+    """Nominal punch-in zoom of each of a shot's n pieces; rot shifts the pattern by one step (used so a shot that
+    continues the previous shot's scene opens on another framing)."""
+    if mode == "still":
+        if n == 1:
+            return [1.0] if not rot else [1.14]
+        base = (1.0, 1.16, 1.06, 1.2) if faces else (1.0, 1.12, 1.06)
+    elif mode == "parts":
+        base = (1.0, 1.15) if faces else (1.0, 1.1)
+    else:
+        if n == 1 and not rot:
+            return [1.0]
+        base = ZOOMS_FACE if faces else ZOOMS_BROLL
+    return [base[(j + rot) % len(base)] for j in range(n)]
+
+
 def render_still(img: Path, frames: int, dst: Path, z0: float = 1.0, z1: float = 1.07, cx: float = 0.5, cy: float = 0.5) -> None:
     """Slow push from zoom z0 to z1 on the point (cx, cy) of the image (normalised), clamped to the frame."""
     z = f"({z0}+{z1 - z0:.4f}*on/{max(frames - 1, 1)})"
@@ -500,17 +516,37 @@ def main() -> None:
 
     # ---- render segments (with handles for transitions) as punch-in pieces
     segs, report = [], []
+    prev_zoom = None
     for k, (t, sh, d) in enumerate(zip(timeline, shots, info)):
         hpre = F(trans[k - 1][1] / 2) if k - 1 in trans else 0
         hpost = F(trans[k][1] / 2) if k in trans else 0
         f0, f1 = F(t["start"]), F(t["end"])
+        # framing plan: a hard cut between two renders of the same first frame restarts the characters' pose; when
+        # both sides would also share the framing it reads as a glitch (jump cut), so the new shot opens on another
+        # framing (wide <-> punch-in) and the cut reads as a cut-in
+        if d["mode"] == "still":
+            n_pieces = len(plan_pieces(t, False))
+        elif d["mode"] == "parts":
+            n_pieces = len(d["parts"])
+        else:
+            n_pieces = len(plan_pieces(t, bool(sh.get("freeze_region")),
+                                       [t["start"] + c for c in ls_cuts.get(sh["id"], [])] if d.get("lipsync") else []))
+        cap = lambda zs: [min(z, sh.get("max_zoom", 9.0)) for z in zs]  # noqa: E731
+        seq = cap(zoom_seq(d["mode"], n_pieces, d["faces"]))
+        rot = 0
+        same = k > 0 and shots[k - 1]["frame"] == sh["frame"] and (k - 1) not in trans
+        if same and prev_zoom is not None and abs(seq[0] - prev_zoom) < 0.08 and not sh.get("freeze_region"):
+            rot = 1
+            seq = cap(zoom_seq(d["mode"], n_pieces, d["faces"], 1))
+        prev_zoom = seq[-1]
         seg = tmp / f"seg_{sh['id']}.mp4"
         rep = {"id": sh["id"], "start": round(t["start"], 2), "dur": round(t["dur"], 2), "mode": d["mode"],
                "trans_in": trans[k - 1][0] if k - 1 in trans else "cut", "faces": len(d["faces"])}
         srcs = [q[0] for q in d.get("parts", [])] or [d["src"]]
         key = json.dumps([f0, f1, hpre, hpost, d["mode"], d.get("head"), d.get("end"), [(str(q), q.stat().st_mtime) for q in srcs],
                           [(str(q[0]), q[1], q[2]) for q in d.get("parts", [])], sh.get("freeze_region"), [w["start"] for w in t.get("words") or []],
-                          SEG_VERSION] + (["still_pieces"] if d["mode"] == "still" else []) + ([sh["max_zoom"]] if sh.get("max_zoom") else []), default=str)
+                          SEG_VERSION] + (["still_pieces"] if d["mode"] == "still" else []) + ([sh["max_zoom"]] if sh.get("max_zoom") else [])
+                         + ([f"rot{rot}"] if rot else []), default=str)
         kf = seg.with_suffix(".key")
         if seg.exists() and kf.exists() and kf.read_text() == key and (tmp / f"seg_{sh['id']}.rep").exists():
             segs.append(seg)
@@ -524,15 +560,20 @@ def main() -> None:
             bounds[0] -= hpre
             bounds[-1] += hpost
             files = []
+            zs = zoom_seq("still", len(pieces), d["faces"], rot)
             for j in range(len(pieces)):
+                z0 = zs[j]
                 if len(pieces) == 1:
-                    z0, z1, cx, cy = 1.0, 1.07, 0.5, 0.5
+                    z1, (cx, cy) = z0 + 0.07, ((0.5, 0.5) if not rot else (0.5, 0.46))
+                    if rot and d["faces"]:
+                        r = layout.zoom_rect(z0 + 0.05, d["faces"])
+                        cx, cy = (r[0] + r[2]) / 2, (r[1] + r[3]) / 2
                 elif d["faces"]:
-                    z0 = (1.0, 1.16, 1.06, 1.2)[j % 4]
                     r = layout.zoom_rect(z0 + 0.05, d["faces"])
                     z1, cx, cy = z0 + 0.06, (r[0] + r[2]) / 2, (r[1] + r[3]) / 2
                 else:
-                    z0, z1, cx, cy = ((1.0, 1.06, 0.5, 0.5), (1.12, 1.18, 0.42, 0.46), (1.06, 1.12, 0.58, 0.54))[j % 3]
+                    z1 = z0 + 0.06
+                    cx, cy = {1.0: (0.5, 0.5), 1.12: (0.42, 0.46), 1.06: (0.58, 0.54)}.get(z0, (0.5, 0.46))
                 if sh.get("max_zoom"):
                     z1 = min(z1, sh["max_zoom"])
                     z0 = min(z0, z1 - 0.03)
@@ -562,7 +603,7 @@ def main() -> None:
                     bounds[i] = min(near, key=lambda x: abs(x - bounds[i]))
             files, held = [], 0.0
             for k2, (src, s_, e) in enumerate(parts):
-                z = min((1.0, 1.15)[k2 % 2] if d["faces"] else (1.0, 1.1)[k2 % 2], sh.get("max_zoom", 9.0))
+                z = seq[k2]
                 rect = layout.zoom_rect(z, d["faces"]) if z > 1 else [0, 0, 1, 1]
                 pf = tmp / f"seg_{sh['id']}_p{k2}.mp4"
                 held += render_piece(src, s_, slow, bounds[k2 + 1] - bounds[k2], pf, z, rect, e, reverse=d["reverse"][k2])
@@ -584,7 +625,7 @@ def main() -> None:
             bounds[0] -= hpre
             bounds[-1] += hpost
             for j in range(len(pieces)):
-                z = min(zooms[j % len(zooms)] if len(pieces) > 1 else 1.0, sh.get("max_zoom", 9.0))
+                z = seq[j] if j < len(seq) else min(zooms[j % len(zooms)], sh.get("max_zoom", 9.0))
                 rect = layout.zoom_rect(z, d["faces"]) if z > 1 else [0, 0, 1, 1]
                 src_t = d["head"] + (bounds[j] - f0) / FPS / slow
                 pf = tmp / f"seg_{sh['id']}_{j}.mp4"
@@ -598,6 +639,8 @@ def main() -> None:
                 rep["needs_rerender"] = "clip too short"
             if d.get("lipsync"):
                 rep["lipsync"] = True
+        if rot:
+            rep["reframed"] = True
         if sh.get("freeze_region") and d["mode"] != "still":
             freeze_region(seg, sh["freeze_region"], source=frames_dir / sh["frame"])
             rep["freeze_region"] = sh["freeze_region"]
