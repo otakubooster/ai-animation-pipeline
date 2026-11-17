@@ -391,7 +391,10 @@ def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg
     """Hook title card: white rounded box with bold black text; the words of `red` are drawn in red. Emoji words
     are drawn in colour from the emoji font (the text font has no emoji glyphs and would show empty boxes)."""
     fsize = int(width * 0.068)
-    font = ImageFont.truetype(BANNER_FONT, fsize)
+    rtl = is_arabic(text)                       # Arabic: Kufi, words laid out right to left (raqm shapes each word)
+    if rtl:          # Noto Sans Arabic has the Latin dots Kufi lacks ("…" becomes "...")
+        text = text.replace("…", "...")
+    font = ImageFont.truetype("/usr/share/fonts/truetype/noto/NotoSansArabic-Bold.ttf" if rtl else BANNER_FONT, fsize)
     red_words = {norm(w) for w in red.split()}
     is_em = lambda w: bool(EMOJI_RE.search(w)) and not EMOJI_RE.sub("", w).strip()
     ems = {}
@@ -399,7 +402,7 @@ def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg
         if is_em(w):
             ems.setdefault(w, emoji_img(EMOJI_RE.sub(lambda m: m.group(0) if m.group(0) not in "\ufe0f\u200d" else "", w), int(fsize * 1.05)))
             return ems[w].width
-        return font.getbbox(w)[2]
+        return font.getbbox(w, **({"direction": "rtl"} if rtl else {}))[2]
     words, maxw, space = text.split(), int(width * 0.80), font.getbbox(" ")[2] or fsize // 3
     lw_of = lambda l: sum(wid(w) for w in l) + space * (len(l) - 1)
     lines, cur = [], []
@@ -418,12 +421,13 @@ def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg
     d.rounded_rectangle([6, 11, bw + 6, bh + 11], radius=int(fsize * 0.6), fill=(0, 0, 0, 70))
     d.rounded_rectangle([6, 6, bw + 6, bh + 6], radius=int(fsize * 0.6), fill=tuple(bg) + (255,))
     for i, (l, lw) in enumerate(zip(lines, widths)):
-        x, y = 6 + (bw - lw) // 2, 6 + pad_y + i * lh - int(fsize * 0.1)
-        for w in l:
+        x, y = 6 + (bw - lw) // 2, 6 + pad_y + i * lh - int(fsize * (0.35 if rtl else 0.1))
+        for w in (reversed(l) if rtl else l):
             if is_em(w):
                 img.alpha_composite(ems[w], (x, y + int(fsize * 0.12)))
             else:
-                d.text((x, y), w, font=font, fill=(200, 16, 46, 255) if norm(w) in red_words else tuple(fg) + (255,))
+                d.text((x, y), w, font=font, fill=(200, 16, 46, 255) if norm(w) in red_words else tuple(fg) + (255,),
+                       **({"direction": "rtl"} if rtl else {}))
             x += wid(w) + space
     img.save(path)
 

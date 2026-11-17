@@ -41,7 +41,19 @@ HERE = Path(__file__).resolve().parent
 SFX_DIR = HERE / "sfx"
 FONT_BLACK = "/usr/share/fonts/opentype/inter/InterDisplay-Black.otf"
 FONT_BOLD = "/usr/share/fonts/opentype/inter/InterDisplay-ExtraBold.otf"   # fontconfig family "Inter Display ExtraBold" ("Inter Display Bold" is not a family: libass fell back to a wide font)
+FAM_BLACK, FAM_BOLD, FONT_BOLD_FLAG, ENCODING = "Inter Display Black", "Inter Display ExtraBold", 0, 1
 ASS_EM = 1.21            # ASS font size = ascent + descent; Inter's is 1.21 em
+PUNCT = "[,.!?:;…،؟]"    # sentence/comma marks (Latin + Arabic)
+
+
+def use_arabic() -> None:
+    """Darija/Arabic jobs: Noto Kufi Arabic Bold everywhere (libass shapes it; Encoding -1 = base direction from the
+    text, so lines run right to left)."""
+    global FONT_BLACK, FONT_BOLD, FAM_BLACK, FAM_BOLD, FONT_BOLD_FLAG, ENCODING, ASS_EM
+    FONT_BLACK = FONT_BOLD = "/usr/share/fonts/truetype/noto/NotoKufiArabic-Bold.ttf"
+    FAM_BLACK = FAM_BOLD = "Noto Kufi Arabic"
+    FONT_BOLD_FLAG, ENCODING = -1, -1
+    ASS_EM = 1.6         # Kufi's ascent + descent is ~1.6 em
 MAX_SLOW = 1.15
 PIECE_MAX = 3.4          # longer shots get punch-in cuts
 TRANS_GAP = 7.0          # seconds between two transitions at least
@@ -68,7 +80,15 @@ VERSUS = re.compile(r"\bvs\.?\b|^links\b.*\brechts\b", re.I)
 TRUST = re.compile(r"Versand|Geld-zur|Garantie|risikofrei|testen", re.I)
 
 
+AR_OFFER = re.compile(r"درهم|التوصيل|الدفع|فابور|تخفيض|عرض")
+AR_CTA = re.compile(r"اطلب|اطلبي|كليكي|الرابط")
+
+
 def kind_of(text: str) -> str:
+    if AR_CTA.search(text):
+        return "cta"
+    if AR_OFFER.search(text):
+        return "offer"
     if "\\N" in text:
         return "list"
     if "★" in text and (re.search(r"[A-Z][a-z]+ [A-Z]\.", text) or "bewertung" in text.lower()):
@@ -109,7 +129,7 @@ class Ass:
         return f.getlength(re.sub(r"\{[^}]*\}", "", text))
 
     def wrap(self, text: str, size: float, max_w: float, bold: bool = False, max_lines: int = 3) -> list[str]:
-        if " · " in text and self.width(text, size, bold) > max_w:    # break at the separators first
+        if " · " in text and (ENCODING == -1 or self.width(text, size, bold) > max_w):    # break at the separators first (Arabic: always, Kufi has no "·")
             out = []
             for part in text.split(" · "):
                 out += self.wrap(part, size, max_w, bold, max_lines)
@@ -167,10 +187,10 @@ class Ass:
                 "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
                 "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, "
                 "MarginR, MarginV, Encoding",
-                f"Style: Cap,Inter Display Black,{cap_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H78000000,0,0,0,0,100,100,0,0,1,"
-                f"{max(cap_size // 13, 4)},2,5,0,0,0,1",
-                f"Style: Txt,Inter Display Black,{txt_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1",
-                f"Style: TxtB,Inter Display ExtraBold,{txt_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,1",
+                f"Style: Cap,{FAM_BLACK},{cap_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H78000000,{FONT_BOLD_FLAG},0,0,0,100,100,0,0,1,"
+                f"{max(cap_size // 13, 4)},2,5,0,0,0,{ENCODING}",
+                f"Style: Txt,{FAM_BLACK},{txt_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,{FONT_BOLD_FLAG},0,0,0,100,100,0,0,1,0,0,5,0,0,0,{ENCODING}",
+                f"Style: TxtB,{FAM_BOLD},{txt_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,{FONT_BOLD_FLAG},0,0,0,100,100,0,0,1,0,0,5,0,0,0,{ENCODING}",
                 "Style: Shp,Inter Display Black,20,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,4,5,0,0,0,1",
                 "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
         path.write_text("\n".join(head + self.ev) + "\n")
@@ -234,7 +254,7 @@ def plan_pieces(t: dict, no_split: bool, forced: list[float] = ()) -> list[tuple
     if no_split or b0 - a0 <= PIECE_MAX:
         return [(a0, b0)]
     ws = t.get("words") or []
-    starts = [(w["start"] - 0.04, bool(re.search(r"[,.!?:;…]$", p["text"]))) for p, w in zip(ws, ws[1:])]
+    starts = [(w["start"] - 0.04, bool(re.search(PUNCT + "$", p["text"]))) for p, w in zip(ws, ws[1:])]
     cuts, cur = [], a0
     while b0 - cur > PIECE_MAX:
         target = cur + 2.5
@@ -374,6 +394,8 @@ def main() -> None:
 
     job = json.loads((a.job_dir / "job.json").read_text())
     shots = job["shots"]
+    if str(job.get("language", "")).startswith("ar"):
+        use_arabic()
     tmp = a.out / "work"
     tmp.mkdir(parents=True, exist_ok=True)
     words = spoken_words(a.words)
@@ -449,10 +471,27 @@ def main() -> None:
             cands.append((2, k, ("smoothup", 0.26, "whoosh_fast")))
         elif sim < 0.35:
             cands.append((1, k, ("slideleft", 0.22, "whoosh")))
+    gap = TRANS_GAP
+    if job.get("transitions") == "scenes":
+        # every change of scene (first frame) gets a short transition: slides alternate, into the product world /
+        # offer cards it rises (smoothup), the turn to the happy ending flashes white
+        gap, cands, n = 2.0, [], 0
+        happy = set(job.get("transition_flash_shots", []))
+        for k in range(len(shots) - 1):
+            if timeline[k + 1]["start"] < 1.5 or shots[k]["frame"] == shots[k + 1]["frame"]:
+                continue
+            if shots[k + 1]["id"] in happy:
+                tr = ("fadewhite", 0.30, "shutter")
+            elif not info[k + 1]["faces"] and kinds[k + 1] in ("offer", "cta") or shots[k + 1]["frame"].startswith(("SH", "END")):
+                tr = ("smoothup", 0.30, "whoosh_fast")
+            else:
+                tr = (("slideleft", 0.28, "whoosh"), ("smoothleft", 0.30, "whoosh_fast"))[n % 2]
+                n += 1
+            cands.append((1, k, tr))
     trans: dict[int, tuple[str, float, str]] = {}
     for pr, k, tr in sorted(cands, key=lambda x: (-x[0], x[1])):
         c = timeline[k + 1]["start"]
-        if all(abs(c - timeline[j + 1]["start"]) >= TRANS_GAP for j in trans):
+        if all(abs(c - timeline[j + 1]["start"]) >= gap for j in trans):
             trans[k] = tr
     badge_cuts = [k for k in range(len(shots) - 1) if kinds[k + 1] == "badge" and k not in trans]
 
@@ -640,7 +679,9 @@ def main() -> None:
                 taken += part_slots
             # captions
             cap_h = fm.cap * 1.25 / RH
-            if fm.panel:
+            if job.get("captions_pos") == "bottom":     # fixed bottom band (no face search), above the UI safe zone
+                cy = {"9x16": 0.785, "1x1": 0.88, "16x9": 0.89}[fname]
+            elif fm.panel:
                 cy = layout.free_slot(fm.cap_c, cap_h, boxes, 0.05, 0.95, taken)
             else:
                 cy = layout.free_slot(fm.cap_c, cap_h, boxes, 0.08, 0.92, taken)
@@ -698,12 +739,12 @@ def add_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: float
             groups.append(cur)
             cur = []
         cur.append((w, txt))
-        if len(cur) >= 3 or re.search(r"[,.!?:;…]$", w["text"]):
+        if len(cur) >= 3 or re.search(PUNCT + "$", w["text"]):
             groups.append(cur)
             cur = []
     if cur:
         groups.append(cur)
-    clean = lambda s: re.sub(r"[,.!?:;…]+$", "", s)
+    clean = lambda s: re.sub(PUNCT + "+$", "", s)
     x = RW / 2
     y = cy * RH
     for gi, g in enumerate(groups):
@@ -826,6 +867,7 @@ def place_text(doc: Ass, fm: Fmt, text: str, t0: float, t1: float, t: dict, boxe
     label = label.upper() if kind in ("offer", "alert") else label
     label = re.sub(r"\s*·\s*", " · ", label)
     lines = doc.wrap(label, size, maxw, max_lines=3)
+    lines = [re.sub(r"~~(.+?)~~", r"{\\s1\\alpha&H60&\\fscx78\\fscy78}\1{\\s0\\alpha&H00&\\fscx100\\fscy100}", l) for l in lines]
     h_px = len(lines) * size + size * 0.75
     cands = None
     if kind == "cta" and not t.get("words"):

@@ -43,6 +43,18 @@ def trim(src: Path, dst: Path) -> float:
         return duration(dst)
 
 
+def level(src: Path, dst: Path, lufs: float, max_gain: float = 10.0) -> float:
+    """Bring one line to `lufs` integrated loudness (gain clamped to +-max_gain dB, peaks limited to -1 dBFS), so
+    characters recorded at different levels (whispers, shouts, quiet takes) sit at one level in the ad."""
+    out = subprocess.run(["ffmpeg", "-v", "info", "-i", str(src), "-af", "loudnorm=print_format=json", "-f", "null", "-"],
+                         capture_output=True, text=True).stderr
+    m = re.search(r'"input_i"\s*:\s*"(-?[\d.]+|-inf)"', out)
+    gain = 0.0 if not m or m.group(1) == "-inf" else max(-max_gain, min(max_gain, lufs - float(m.group(1))))
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-af", f"volume={gain:.2f}dB,alimiter=limit=0.89:level=false",
+         "-ac", "1", "-ar", str(SR), str(dst)])
+    return gain
+
+
 def spread_words(text: str, t0: float, t1: float) -> list[dict]:
     """Word timings over [t0, t1], each word's share proportional to its letters (+1 for the space)."""
     toks = []
@@ -60,7 +72,8 @@ def spread_words(text: str, t0: float, t1: float) -> list[dict]:
     return out
 
 
-def join(files: list[Path], texts: list[str], out_mp3: Path, out_words: Path, last_is_end: bool = True) -> list[tuple[float, float]]:
+def join(files: list[Path], texts: list[str], out_mp3: Path, out_words: Path, last_is_end: bool = True,
+         lufs: float | None = None) -> list[tuple[float, float]]:
     spans, words, parts, t = [], [], [], 0.0
     with tempfile.TemporaryDirectory() as td:
         td = Path(td)
@@ -73,6 +86,10 @@ def join(files: list[Path], texts: list[str], out_mp3: Path, out_words: Path, la
                 t += duration(g)
             w = td / f"line{i}.wav"
             d = trim(f, w)
+            if lufs is not None:          # job.vo_level_lufs: every line at one loudness
+                wl = td / f"line{i}_lvl.wav"
+                level(w, wl, lufs)
+                w = wl
             parts.append(w)
             spans.append((round(t, 3), round(t + d, 3)))
             words += spread_words(txt, t + 0.04, t + d - 0.04)
@@ -90,7 +107,7 @@ def main(job_dir: str) -> None:
     shots = job["shots"]
     (jd / "vo").mkdir(exist_ok=True)
     spans = join([Path(s["vo_file"]) for s in shots], [s["vo_line"] for s in shots], jd / "vo" / "take.mp3",
-                 jd / "vo" / "words.json", last_is_end=bool(job.get("end_card_shot")))
+                 jd / "vo" / "words.json", last_is_end=bool(job.get("end_card_shot")), lufs=job.get("vo_level_lufs"))
     for k, (s, (a, b)) in enumerate(zip(shots, spans)):
         nxt = spans[k + 1][0] if k + 1 < len(spans) else b + 0.6
         s["vo_span"] = [a, b]
