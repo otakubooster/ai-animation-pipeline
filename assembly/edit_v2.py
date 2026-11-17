@@ -740,7 +740,7 @@ def add_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: float
     max_w = RW * (0.84 if fm.name != "16x9" else 0.60)
     groups, cur = [], []
     for w in words:
-        txt = re.sub(r'["“”„„«»]', "", w["text"]).upper()
+        txt = re.sub(r'["“”„„«»]|\s*[—–]+\s*', "", w["text"]).upper()      # quotes and dashes never show in captions
         if cur and doc.width(" ".join(x[1] for x in cur + [(w, txt)]), size) > max_w:
             groups.append(cur)
             cur = []
