@@ -494,10 +494,15 @@ def main() -> None:
     if job.get("transitions") == "scenes":
         # every change of scene (first frame) gets a short transition: slides alternate, into the product world /
         # offer cards it rises (smoothup), the turn to the happy ending flashes white
-        gap, cands, n = 2.0, [], 0
+        gap, cands, n = 1.2, [], 0
         happy = set(job.get("transition_flash_shots", []))
         for k in range(len(shots) - 1):
-            if timeline[k + 1]["start"] < 1.5 or shots[k]["frame"] == shots[k + 1]["frame"]:
+            if timeline[k + 1]["start"] < 1.5:
+                continue
+            if shots[k]["frame"] == shots[k + 1]["frame"]:
+                # same scene, another render: the characters' pose restarts; a short dissolve (plus the new framing
+                # below) blends it instead of a visible snap. Lowest priority, silent.
+                cands.append((0, k, ("fade", 0.24, None)))
                 continue
             if shots[k + 1]["id"] in happy:
                 tr = ("fadewhite", 0.30, "shutter")
@@ -534,7 +539,7 @@ def main() -> None:
         cap = lambda zs: [min(z, sh.get("max_zoom", 9.0)) for z in zs]  # noqa: E731
         seq = cap(zoom_seq(d["mode"], n_pieces, d["faces"]))
         rot = 0
-        same = k > 0 and shots[k - 1]["frame"] == sh["frame"] and (k - 1) not in trans
+        same = k > 0 and shots[k - 1]["frame"] == sh["frame"]
         if same and prev_zoom is not None and abs(seq[0] - prev_zoom) < 0.08 and not sh.get("freeze_region"):
             rot = 1
             seq = cap(zoom_seq(d["mode"], n_pieces, d["faces"], 1))
@@ -685,6 +690,8 @@ def main() -> None:
     # ---- sound: VO + effects
     sfx_events = []
     for k, (name, sec, fx) in trans.items():
+        if fx is None:
+            continue
         sfx_events.append((timeline[k + 1]["start"] - SFX_PEAK[fx], fx, 0.45 if fx != "shutter" else 0.5))
     for k in badge_cuts:                       # time jumps without a flash still get the camera click
         sfx_events.append((timeline[k + 1]["start"] - SFX_PEAK["shutter"], "shutter", 0.4))
