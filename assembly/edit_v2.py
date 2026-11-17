@@ -494,7 +494,7 @@ def main() -> None:
     if job.get("transitions") == "scenes":
         # every change of scene (first frame) gets a short transition: slides alternate, into the product world /
         # offer cards it rises (smoothup), the turn to the happy ending flashes white
-        gap, cands, n = 1.2, [], 0
+        gap, cands, n = 0.75, [], 0
         happy = set(job.get("transition_flash_shots", []))
         for k in range(len(shots) - 1):
             if timeline[k + 1]["start"] < 1.5:
