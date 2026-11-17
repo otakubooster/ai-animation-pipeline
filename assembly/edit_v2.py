@@ -223,6 +223,9 @@ class Fmt:
                        "[b]scale=-2:1080[fg];[bg][fg]overlay=(W-w)/2:0[base]")
             self.panel = (0.03, 0.315)       # left panel x range (normalised) for on-screen texts
 
+        if ENCODING == -1:
+            self.cap, self.txt = int(self.cap * 1.35), int(self.txt * 1.45)
+
     def boxes(self, faces916: list[list[float]]) -> list[list[float]]:
         """Face boxes in this format's normalised coords."""
         out = []
@@ -507,7 +510,7 @@ def main() -> None:
         srcs = [q[0] for q in d.get("parts", [])] or [d["src"]]
         key = json.dumps([f0, f1, hpre, hpost, d["mode"], d.get("head"), d.get("end"), [(str(q), q.stat().st_mtime) for q in srcs],
                           [(str(q[0]), q[1], q[2]) for q in d.get("parts", [])], sh.get("freeze_region"), [w["start"] for w in t.get("words") or []],
-                          SEG_VERSION] + (["still_pieces"] if d["mode"] == "still" else []), default=str)
+                          SEG_VERSION] + (["still_pieces"] if d["mode"] == "still" else []) + ([sh["max_zoom"]] if sh.get("max_zoom") else []), default=str)
         kf = seg.with_suffix(".key")
         if seg.exists() and kf.exists() and kf.read_text() == key and (tmp / f"seg_{sh['id']}.rep").exists():
             segs.append(seg)
@@ -530,6 +533,9 @@ def main() -> None:
                     z1, cx, cy = z0 + 0.06, (r[0] + r[2]) / 2, (r[1] + r[3]) / 2
                 else:
                     z0, z1, cx, cy = ((1.0, 1.06, 0.5, 0.5), (1.12, 1.18, 0.42, 0.46), (1.06, 1.12, 0.58, 0.54))[j % 3]
+                if sh.get("max_zoom"):
+                    z1 = min(z1, sh["max_zoom"])
+                    z0 = min(z0, z1 - 0.03)
                 pf = tmp / f"seg_{sh['id']}_{j}.mp4"
                 render_still(d["src"], bounds[j + 1] - bounds[j], pf, z0, z1, cx, cy)
                 files.append(pf)
@@ -556,7 +562,7 @@ def main() -> None:
                     bounds[i] = min(near, key=lambda x: abs(x - bounds[i]))
             files, held = [], 0.0
             for k2, (src, s_, e) in enumerate(parts):
-                z = (1.0, 1.15)[k2 % 2] if d["faces"] else (1.0, 1.1)[k2 % 2]
+                z = min((1.0, 1.15)[k2 % 2] if d["faces"] else (1.0, 1.1)[k2 % 2], sh.get("max_zoom", 9.0))
                 rect = layout.zoom_rect(z, d["faces"]) if z > 1 else [0, 0, 1, 1]
                 pf = tmp / f"seg_{sh['id']}_p{k2}.mp4"
                 held += render_piece(src, s_, slow, bounds[k2 + 1] - bounds[k2], pf, z, rect, e, reverse=d["reverse"][k2])
@@ -578,7 +584,7 @@ def main() -> None:
             bounds[0] -= hpre
             bounds[-1] += hpost
             for j in range(len(pieces)):
-                z = zooms[j % len(zooms)] if len(pieces) > 1 else 1.0
+                z = min(zooms[j % len(zooms)] if len(pieces) > 1 else 1.0, sh.get("max_zoom", 9.0))
                 rect = layout.zoom_rect(z, d["faces"]) if z > 1 else [0, 0, 1, 1]
                 src_t = d["head"] + (bounds[j] - f0) / FPS / slow
                 pf = tmp / f"seg_{sh['id']}_{j}.mp4"
@@ -867,7 +873,7 @@ def place_text(doc: Ass, fm: Fmt, text: str, t0: float, t1: float, t: dict, boxe
     label = label.upper() if kind in ("offer", "alert") else label
     label = re.sub(r"\s*·\s*", " · ", label)
     lines = doc.wrap(label, size, maxw, max_lines=3)
-    lines = [re.sub(r"~~(.+?)~~", r"{\\s1\\alpha&H60&\\fscx78\\fscy78}\1{\\s0\\alpha&H00&\\fscx100\\fscy100}", l) for l in lines]
+    lines = [re.sub(r"~~(.+?)~~", r"{\\s1\\alpha&H28&\\fscx88\\fscy88}\1{\\s0\\alpha&H00&\\fscx100\\fscy100}", l) for l in lines]
     h_px = len(lines) * size + size * 0.75
     cands = None
     if kind == "cta" and not t.get("words"):
