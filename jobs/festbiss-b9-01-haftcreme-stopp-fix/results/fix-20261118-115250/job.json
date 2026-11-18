@@ -1,0 +1,68 @@
+{
+ "job_id": "festbiss-b9-01-haftcreme-stopp-fix",
+ "slug": "festbiss-b9-01-haftcreme-stopp-fix",
+ "batch": "batch-9",
+ "product": "Festbiss Prothesen-Unterfütterung",
+ "title": "„Hören Sie auf, Haftcreme zu kaufen“ – KI-Erklärvideo",
+ "aspect_ratio": "9:16",
+ "language": "de",
+ "engine": "minimax-h3",
+ "render": {
+  "width": 576,
+  "height": 1024,
+  "fps": 24
+ },
+ "frames_release": {
+  "repo": "otakubooster/ai-animation-pipeline",
+  "tag": "batch-9",
+  "asset": "Festbiss_DE_135_Startframes.1.zip",
+  "subdir": "Ad-1"
+ },
+ "format": "AI explainer: photoreal b-roll + 3D medical renders + flat graphics, one male documentary voice-over (calm, deep, authoritative).",
+ "voice_note": "Male VO, German, calm documentary tone. Address: Sie.",
+ "captions_note": "Every VO line as a caption: white rounded box, black semi-bold sans (Inter/SF-style), centered in the lower third, 1–2 lines.",
+ "reference": "`4e3f033f-media-00be9a849c65.mp4` · 1:55.5 · 42 scenes",
+ "vo_ready": true,
+ "caption_style": "box",
+ "captions_y": 0.71,
+ "transitions": "dtc",
+ "music": {
+  "style": "theo",
+  "level": -27
+ },
+ "fix_of": "festbiss-b9-01-haftcreme-stopp",
+ "shots": [
+  {
+   "id": "s01a",
+   "scene": "A1-S01",
+   "frame": "A1-S01.jpg",
+   "vo_line": "Hören Sie auf, Haftcreme zu kaufen.",
+   "ref_t": [
+    0.0,
+    2.0
+   ],
+   "vo_s": 2.42,
+   "seed": 9800,
+   "talking": false,
+   "h3_prompt": "High-angle point-of-view shot looking straight down into an open stainless-steel pedal bin with a black bin liner and the used tubes already inside. An older person's hand with light age spots holds the lid open at the top left and stays still. Slow, steady camera push-in toward the tubes in the bin; the lid stays open, plain brushed steel with no marks; the tubes inside stay still. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear: no tubes, boxes, packages, bottles or products that are not already in the first frame. No text, letters, numbers, labels, signs, captions or logos appear anywhere; anything plain stays plain and unbranded. Gentle natural motion, no morphing.",
+   "fix_of": "s01",
+   "why": "invented brand plate on the lid"
+  },
+  {
+   "id": "s01b",
+   "scene": "A1-S01",
+   "frame": "A1-S01.jpg",
+   "vo_line": "Hören Sie auf, Haftcreme zu kaufen.",
+   "ref_t": [
+    0.0,
+    2.0
+   ],
+   "vo_s": 2.42,
+   "seed": 10800,
+   "talking": false,
+   "h3_prompt": "High-angle point-of-view shot looking straight down into an open stainless-steel pedal bin with a black bin liner and the used tubes already inside. An older person's hand with light age spots holds the lid open at the top left and stays still. Slow, steady camera push-in toward the tubes in the bin; the lid stays open, plain brushed steel with no marks; the tubes inside stay still. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear: no tubes, boxes, packages, bottles or products that are not already in the first frame. No text, letters, numbers, labels, signs, captions or logos appear anywhere; anything plain stays plain and unbranded. Gentle natural motion, no morphing.",
+   "fix_of": "s01",
+   "why": "invented brand plate on the lid"
+  }
+ ]
+}
