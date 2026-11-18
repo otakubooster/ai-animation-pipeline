@@ -943,8 +943,8 @@ def add_comment_card(doc: Ass, fm: Fmt, card: dict, t0: float, t1: float) -> Non
     viewer's comment in black and a grey 'Antwort an @...' line."""
     RW, RH = fm.res
     x0n = fm.panel[0] if fm.panel else 0.05
-    wn = (fm.panel[1] - fm.panel[0]) if fm.panel else 0.74
-    size = int(fm.txt * 0.62)
+    wn = (fm.panel[1] - fm.panel[0]) if fm.panel else 0.72
+    size = int(fm.txt * (0.80 if not fm.panel else 0.62))
     fnt = ImageFont.truetype(FONT_SEMI, max(int(size / ASS_EM), 8))
     av = size * 1.5
     maxw = RW * wn - av - size * 1.6
