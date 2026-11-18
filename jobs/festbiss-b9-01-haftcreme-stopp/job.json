@@ -95,7 +95,8 @@
       "vo_s": 2.424,
       "seed": 9104,
       "talking": false,
-      "h3_prompt": "3D medical illustration: a lower full denture (pink acrylic base, white teeth) floating slightly above a separate cream-colored jaw bone ridge whose cut edge shows porous bone, with a dark empty gap and soft shadow between them. The denture hovers and sinks slowly toward the bone ridge without touching it, the dark gap staying open; slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear: no tubes, boxes, packages, bottles or products that are not already in the first frame. No text, letters, numbers, labels, signs, captions or logos appear anywhere; anything plain stays plain and unbranded. Dentures, gums and teeth stay realistic and clean. Gentle natural motion, no morphing."
+      "h3_prompt": "3D medical illustration: a lower full denture (pink acrylic base, white teeth) floating slightly above a separate cream-colored jaw bone ridge whose cut edge shows porous bone, with a dark empty gap and soft shadow between them. The denture hovers and sinks slowly toward the bone ridge without touching it, the dark gap staying open; slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear: no tubes, boxes, packages, bottles or products that are not already in the first frame. No text, letters, numbers, labels, signs, captions or logos appear anywhere; anything plain stays plain and unbranded. Dentures, gums and teeth stay realistic and clean. Gentle natural motion, no morphing.",
+      "trans_in": "whip"
     },
     {
       "id": "s06",
@@ -382,7 +383,8 @@
       "seed": 9123,
       "talking": false,
       "h3_prompt": "Softly blurred behind: a brushed-nickel faucet and white sink on the right, a small potted plant and a clear glass soap dispenser on the left, the bottom edge of a mirror at the top. The hand holds the tube steady on the counter with only a slight natural tremor; very slow push-in toward the tube. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear: no tubes, boxes, packages, bottles or products that are not already in the first frame. No text, letters, numbers, labels, signs, captions or logos appear anywhere; anything plain stays plain and unbranded. Dentures, gums and teeth stay realistic and clean. Gentle natural motion, no morphing.",
-      "product": true
+      "product": true,
+      "trans_in": "flash"
     },
     {
       "id": "s25",
@@ -565,7 +567,16 @@
       "seed": 9135,
       "talking": false,
       "h3_prompt": "A chrome faucet at the top left, the sink drain at the lower right. No red X in the image. The toothbrush scrubs back and forth over the sticky residue on the denture, smearing it; the hand holding the denture stays steady; static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear: no tubes, boxes, packages, bottles or products that are not already in the first frame. No text, letters, numbers, labels, signs, captions or logos appear anywhere; anything plain stays plain and unbranded. Dentures, gums and teeth stay realistic and clean. Gentle natural motion, no morphing.",
-      "overlay_spec": "Rotes X im Editor einblenden"
+      "overlay_spec": "Rotes X im Editor einblenden",
+      "marks": [
+        {
+          "type": "x",
+          "x": 0.45,
+          "y": 0.42,
+          "size": 0.42,
+          "at": 0.35
+        }
+      ]
     },
     {
       "id": "s37",
@@ -583,7 +594,19 @@
       "still": true,
       "skip_render": true,
       "still_why": "printed 'PROTHESENTRÄGER' text over a blurred grid (editor counts the number)",
-      "overlay_spec": "Zahl im Editor hochzählen lassen (bis zu Ihrer echten Kundenzahl)"
+      "overlay_spec": "Zahl im Editor hochzählen lassen (bis zu Ihrer echten Kundenzahl)",
+      "trans_in": "rise",
+      "marks": [
+        {
+          "type": "counter",
+          "to": 30000,
+          "suffix": "+",
+          "x": 0.5,
+          "y": 0.45,
+          "scale": 2.4,
+          "at": 0.1
+        }
+      ]
     },
     {
       "id": "s38",
@@ -620,7 +643,8 @@
       "skip_render": true,
       "still_why": "end frame with printed headline, badge and pack label text",
       "product": true,
-      "overlay_spec": "Grafik im Bild: „Testen Sie Festbiss risikofrei“ + „60 VOLLE TAGE“"
+      "overlay_spec": "Grafik im Bild: „Testen Sie Festbiss risikofrei“ + „60 VOLLE TAGE“",
+      "trans_in": "slide"
     },
     {
       "id": "s40",
@@ -667,7 +691,15 @@
       "skip_render": true,
       "still_why": "end card with printed headline, offer box and button text",
       "product": true,
-      "overlay_spec": "Endcard-Text im Bild (siehe Prompt)"
+      "overlay_spec": "Endcard-Text im Bild (siehe Prompt)",
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "caption_style": "box",
+  "captions_y": 0.71,
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  }
 }

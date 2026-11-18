@@ -158,17 +158,21 @@ class Ass:
                 f"l {r} {h} b 0 {h} 0 {h} 0 {h - r} l 0 {r} b 0 0 0 0 {r} 0")
 
     def pill(self, t0, t1, cx, cy, lines, size, fg, bg, bg_alpha=0, bold=False, pad=(0.55, 0.30), radius=None,
-             rot=0.0, anim="pop", layer=5, outline=False):
+             rot=0.0, anim="pop", layer=5, outline=False, style=None, font=None):
         """A rounded box with centred text lines; returns its (x0, y0, x1, y1) in pixels."""
         em = size / ASS_EM
-        tw = max(self.width(l, size, bold) for l in lines)
+        if font:
+            fnt = ImageFont.truetype(font, max(int(size / ASS_EM), 8))
+            tw = max(fnt.getlength(re.sub(r"\{[^}]*\}", "", l)) for l in lines)
+        else:
+            tw = max(self.width(l, size, bold) for l in lines)
         bw, bh = tw + 2 * pad[0] * em, len(lines) * size + 2 * pad[1] * em
         rad = radius if radius is not None else min(bh / 2, em * 0.55)
         a = self.anim(anim, cx, cy)
         r = f"\\frz{rot:.1f}" if rot else ""
         if bg:
             self.add(t0, t1, "Shp", f"{{\\an5{a}{r}\\c{bgr(bg)}\\1a&H{bg_alpha:02X}&\\p1}}{self.rrect(bw, bh, rad)}", layer)
-        style = "TxtB" if bold else "Txt"
+        style = style or ("TxtB" if bold else "Txt")
         ol = "\\bord5\\3c&H000000&" if outline else ""
         self.add(t0, t1, style, f"{{\\an5{a}{r}\\fs{size:.0f}\\c{bgr(fg)}{ol}}}" + "\\N".join(lines), layer + 1)
         return cx - bw / 2, cy - bh / 2, cx + bw / 2, cy + bh / 2
@@ -179,6 +183,10 @@ class Ass:
             return f"\\pos({cx:.0f},{cy:.0f})\\fscx55\\fscy55\\t(0,110,\\fscx108\\fscy108)\\t(110,190,\\fscx100\\fscy100)\\fad(40,120)"
         if kind == "slide":
             return f"\\move({cx - 70:.0f},{cy:.0f},{cx:.0f},{cy:.0f},0,170)\\fad(90,120)"
+        if kind == "soft":
+            return f"\\pos({cx:.0f},{cy:.0f})\\fscx92\\fscy92\\t(0,80,\\fscx100\\fscy100)\\fad(40,60)"
+        if kind == "none":
+            return f"\\pos({cx:.0f},{cy:.0f})"
         return f"\\pos({cx:.0f},{cy:.0f})\\fad(160,160)"
 
     def write(self, path: Path, cap_size: int, txt_size: int) -> None:
@@ -192,6 +200,9 @@ class Ass:
                 f"Style: Txt,{FAM_BLACK},{txt_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,{FONT_BOLD_FLAG},0,0,0,100,100,0,0,1,0,0,5,0,0,0,{ENCODING}",
                 f"Style: TxtB,{FAM_BOLD},{txt_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,{FONT_BOLD_FLAG},0,0,0,100,100,0,0,1,0,0,5,0,0,0,{ENCODING}",
                 "Style: Shp,Inter Display Black,20,&H00FFFFFF,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,0,0,1,0,4,5,0,0,0,1",
+                f"Style: CapBox,Inter Display SemiBold,{cap_size},&H00111111,&H00111111,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,0,0,0,{ENCODING}",
+                f"Style: Hdr,Inter Display SemiBold,{txt_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,0,3,5,0,0,0,{ENCODING}",
+                f"Style: Cmt,Inter Display SemiBold,{txt_size},&H00111111,&H00111111,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,{ENCODING}",
                 "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
         path.write_text("\n".join(head + self.ev) + "\n")
 
@@ -512,6 +523,22 @@ def main() -> None:
                 tr = (("slideleft", 0.28, "whoosh"), ("smoothleft", 0.30, "whoosh_fast"))[n % 2]
                 n += 1
             cands.append((1, k, tr))
+    if job.get("transitions") == "dtc":
+        # DTC references cut hard on the words almost everywhere; accents only where the story turns. Every cut
+        # between two renders of the same frame dissolves (no pose snap); a shot can ask for an accent with
+        # trans_in: flash | slide | whip | rise | dissolve.
+        TR = {"flash": ("fadewhite", 0.30, "shutter"), "slide": ("slideleft", 0.26, "whoosh"),
+              "whip": ("smoothleft", 0.22, "whoosh_fast"), "rise": ("smoothup", 0.30, "whoosh_fast"),
+              "dissolve": ("fade", 0.36, None), "zoom": ("zoomin", 0.30, "whoosh_fast")}
+        gap, cands = 0.6, []
+        for k in range(len(shots) - 1):
+            if timeline[k + 1]["start"] < 0.8:
+                continue
+            want = shots[k + 1].get("trans_in")
+            if want in TR:
+                cands.append((2, k, TR[want]))
+            elif shots[k]["frame"] == shots[k + 1]["frame"]:
+                cands.append((1, k, ("fade", 0.24, None)))
     trans: dict[int, tuple[str, float, str]] = {}
     for pr, k, tr in sorted(cands, key=lambda x: (-x[0], x[1])):
         c = timeline[k + 1]["start"]
@@ -713,10 +740,19 @@ def main() -> None:
             # a hook headline is a scroll stopper, not a caption: at most max_s (default 6 s), so it never sits over
             # the speaker for a whole monologue
             hook_span = (hook_span[0], min(hook_span[1], hook_span[0] + float(hook.get("max_s", 6.0))))
+        hdr_style = job.get("overlay_style")
+        card = job.get("comment_card")
+        if card:
+            cs = [(t["start"], t["end"]) for t, sh in zip(timeline, shots) if sh["id"] in set(card["shots"])]
+            add_comment_card(doc, fm, card, min(x for x, _ in cs), max(y for _, y in cs))
         for k, (t, sh, d) in enumerate(zip(timeline, shots, info)):
             boxes = fm.boxes(d["faces"])
             seg_end = t["end"]
             taken = []
+            if card and sh["id"] in set(card["shots"]):
+                taken.append((0.0, 0.2))
+            if sh.get("marks"):
+                add_marks(doc, fm, sh["marks"], t["start"], seg_end, sfx_events if fname == "9x16" else None, t.get("words"))
             # hook card zone (top) is reserved while it shows
             if hook_span and hook_span[0] <= t["start"] < hook_span[1]:
                 hy = layout.free_slot([0.20, 0.27, 0.14, 0.34, 0.46, 0.53] if fname == "9x16" else ([0.15, 0.24, 0.62] if fname == "1x1" else [0.5]), 0.17, boxes,
@@ -725,7 +761,17 @@ def main() -> None:
                 d.setdefault("hook_y", {})[fname] = hy
             # on-screen text; with no face in the shot the middle is the product (packshot): keep it clear
             ov_boxes = boxes if d["faces"] or fm.panel else boxes + [[0.15, 0.27, 0.85, 0.72] if fname == "9x16" else [0.15, 0.22, 0.85, 0.78]]
-            if sh.get("overlay"):       # parts show one after the other, so each may use the same free slot
+            if sh.get("overlay") and hdr_style in ("header-shadow", "header-box"):
+                # one header per run of shots with the same text (no re-pop at a cut inside the run)
+                same_prev = k > 0 and shots[k - 1].get("overlay") == sh["overlay"]
+                if not same_prev:
+                    k2 = k
+                    while k2 + 1 < len(shots) and shots[k2 + 1].get("overlay") == sh["overlay"]:
+                        k2 += 1
+                    hy = add_header(doc, fm, sh["overlay"], t["start"], timeline[k2]["end"], hdr_style)
+                    texts_report[fname].append({"shot": sh["id"], "text": sh["overlay"], "kind": hdr_style, "y": round(hy, 3)})
+                taken.append((0.0, 0.2))
+            elif sh.get("overlay"):       # parts show one after the other, so each may use the same free slot
                 part_slots = []
                 for (p0, p1, part) in part_spans(sh["overlay"], t, seg_end):
                     tk = list(taken)
@@ -735,13 +781,22 @@ def main() -> None:
                 taken += part_slots
             # captions
             cap_h = fm.cap * 1.25 / RH
-            if job.get("captions_pos") == "bottom":     # fixed bottom band (no face search), above the UI safe zone
+            if job.get("captions_y"):                   # fixed caption line for the whole ad (9:16 position)
+                y9 = float(job["captions_y"])
+                cy = {"9x16": y9, "1x1": min(max((y9 * 1920 - 380) / 1080, 0.12), 0.88), "16x9": 0.88}[fname]
+            elif job.get("captions_pos") == "bottom":     # fixed bottom band (no face search), above the UI safe zone
                 cy = {"9x16": 0.785, "1x1": 0.88, "16x9": 0.89}[fname]
             elif fm.panel:
                 cy = layout.free_slot(fm.cap_c, cap_h, boxes, 0.05, 0.95, taken)
             else:
                 cy = layout.free_slot(fm.cap_c, cap_h, boxes, 0.08, 0.92, taken)
-            add_captions(doc, fm, t.get("words") or [], cy, seg_end)
+            cstyle = job.get("caption_style", "karaoke")
+            if sh.get("no_captions"):
+                pass
+            elif cstyle in ("box", "box-small"):
+                add_box_captions(doc, fm, t.get("words") or [], cy, seg_end, small=cstyle == "box-small")
+            else:
+                add_captions(doc, fm, t.get("words") or [], cy, seg_end)
         ass = tmp / f"text_{fname}.ass"
         doc.write(ass, fm.cap, fm.txt)
 
@@ -783,6 +838,42 @@ def probe_frames(p: Path) -> int:
     return int(out.strip())
 
 
+FONT_SEMI = "/usr/share/fonts/opentype/inter/InterDisplay-SemiBold.otf"
+
+
+def add_box_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: float, small: bool = False) -> None:
+    """DTC 'box' captions (references: explainer + testimonial ads): sentence-case phrases of up to 4 words in black
+    semi-bold on a white rounded box, one box per phrase, a quick soft pop; no per-word highlight."""
+    RW, RH = fm.res
+    size = int(fm.cap * (0.62 if small else 0.74))
+    max_w = RW * (0.70 if fm.name != "16x9" else 0.50)
+    fnt = ImageFont.truetype(FONT_SEMI, max(int(size / ASS_EM), 8))
+    groups, cur = [], []
+    for w in words:
+        txt = re.sub(r'["“”„„«»]|\s*[—–]+\s*', "", w["text"])
+        if not txt:
+            continue
+        if cur and fnt.getlength(" ".join(x[1] for x in cur + [(w, txt)])) > max_w:
+            groups.append(cur)
+            cur = []
+        cur.append((w, txt))
+        if len(cur) >= 4 or re.search(PUNCT + "$", w["text"]):
+            groups.append(cur)
+            cur = []
+    if cur:
+        groups.append(cur)
+    for gi, g in enumerate(groups):
+        t0 = g[0][0]["start"]
+        t1 = groups[gi + 1][0][0]["start"] if gi + 1 < len(groups) else g[-1][0]["end"] + 0.4
+        t1 = min(t1, g[-1][0]["end"] + 0.45, seg_end)
+        if t1 - t0 < 0.08:
+            continue
+        line = re.sub(PUNCT + "+$", "", " ".join(x[1] for x in g))
+        em = size / ASS_EM
+        doc.pill(t0, t1, RW / 2, cy * RH, [line], size, "111111", "FFFFFF", pad=(0.42, 0.20), radius=em * 0.32,
+                 anim="soft", layer=20, style="CapBox", font=FONT_SEMI)
+
+
 def add_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: float) -> None:
     """Spoken words in groups of up to 3 (never wider than the frame), the current word in yellow, each group pops."""
     RW, RH = fm.res
@@ -813,6 +904,138 @@ def add_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: float
             body = " ".join(("{\\c&H00E1FF&}" + clean(tx) + "{\\c&HFFFFFF&}") if ww is w else clean(tx) for ww, tx in g)
             pop = "\\fscx82\\fscy82\\t(0,90,\\fscx100\\fscy100)" if wi == 0 else ""
             doc.add(w["start"], end, "Cap", f"{{\\an5\\pos({x:.0f},{y:.0f}){pop}}}{body}", 20)
+
+
+def add_header(doc: Ass, fm: Fmt, text: str, t0: float, t1: float, style: str, fade_in: bool = True) -> float:
+    """Top header of a shot. header-shadow (UGC creator ads): white semi-bold sentence with a soft shadow, no box;
+    header-box (testimonial ads): white bold capitals on a dark translucent box. Returns its centre y (normalised)."""
+    RW, RH = fm.res
+    text = EMOJI_RE.sub("", text).strip()
+    x0n, x1n = fm.panel if fm.panel else (0.06, 0.94)
+    cx = RW * (x0n + x1n) / 2
+    maxw = RW * (x1n - x0n) * 0.94
+    if style == "header-box":
+        size = int(fm.txt * 0.82)
+        lines = doc.wrap(text.upper(), size, maxw * 0.9, bold=True, max_lines=2)
+        y = RH * (0.115 if fm.name == "9x16" else 0.10)
+        doc.pill(t0, t1, cx, y, lines, size, "FFFFFF", "000000", bg_alpha=0x58, bold=True, pad=(0.5, 0.25),
+                 radius=size / ASS_EM * 0.25, anim="soft" if fade_in else "none")
+        return y / RH
+    size = int(fm.txt * 0.92)
+    fnt = ImageFont.truetype(FONT_SEMI, max(int(size / ASS_EM), 8))
+    words, lines, cur = text.split(), [], ""
+    for w in words:
+        nxt = (cur + " " + w).strip()
+        if cur and fnt.getlength(nxt) > maxw:
+            lines.append(cur)
+            cur = w
+        else:
+            cur = nxt
+    lines.append(cur)
+    y = RH * (0.105 if fm.name == "9x16" else 0.09) + (len(lines) - 1) * size * 0.5
+    fad = "\\fad(120,100)" if fade_in else "\\fad(0,100)"
+    doc.add(t0, t1, "Hdr", f"{{\\an5\\pos({cx:.0f},{y:.0f}){fad}\\bord0\\shad3\\4a&H70&}}" + "\\N".join(lines), 15)
+    return y / RH
+
+
+def add_comment_card(doc: Ass, fm: Fmt, card: dict, t0: float, t1: float) -> None:
+    """'Reply to comment' card (UGC reply ads): white rounded card at the top left with a grey avatar dot, the
+    viewer's comment in black and a grey 'Antwort an @...' line."""
+    RW, RH = fm.res
+    x0n = fm.panel[0] if fm.panel else 0.05
+    wn = (fm.panel[1] - fm.panel[0]) if fm.panel else 0.74
+    size = int(fm.txt * 0.62)
+    fnt = ImageFont.truetype(FONT_SEMI, max(int(size / ASS_EM), 8))
+    av = size * 1.5
+    maxw = RW * wn - av - size * 1.6
+    lines, cur = [], ""
+    for w in card["text"].split():
+        nxt = (cur + " " + w).strip()
+        if cur and fnt.getlength(nxt) > maxw:
+            lines.append(cur)
+            cur = w
+        else:
+            cur = nxt
+    lines.append(cur)
+    pad = size * 0.55
+    bh = len(lines) * size * 1.05 + size * 0.85 + 2 * pad
+    bw = RW * wn
+    x, y = RW * x0n, RH * (0.045 if fm.name == "9x16" else 0.05)
+    fade = "\\fad(150,120)"
+    doc.add(t0, t1, "Shp", f"{{\\an7\\pos({x:.0f},{y:.0f}){fade}\\c&HFFFFFF&\\shad5\\4a&HB0&\\p1}}{Ass.rrect(bw, bh, size * 0.6)}", 30)
+    r = av / 2
+    k = 0.5523 * r
+    circ = (f"m {r} 0 b {r + k} 0 {2 * r} {r - k} {2 * r} {r} b {2 * r} {r + k} {r + k} {2 * r} {r} {2 * r} "
+            f"b {r - k} {2 * r} 0 {r + k} 0 {r} b 0 {r - k} {r - k} 0 {r} 0")
+    doc.add(t0, t1, "Shp", f"{{\\an7\\pos({x + pad:.0f},{y + pad:.0f}){fade}\\c&HB4B4B4&\\shad0\\p1}}{circ}", 31)
+    tx = x + pad + av + size * 0.5
+    doc.add(t0, t1, "Cmt", f"{{\\an7\\pos({tx:.0f},{y + pad:.0f}){fade}\\fs{size}\\c&H111111&}}" + "\\N".join(lines), 32)
+    doc.add(t0, t1, "Cmt", f"{{\\an7\\pos({tx:.0f},{y + pad + len(lines) * size * 1.05 + size * 0.15:.0f}){fade}"
+                           f"\\fs{int(size * 0.72)}\\c&H8A8A8A&}}{card.get('reply', 'Antwort an @nutzerin')}", 32)
+
+
+def add_marks(doc: Ass, fm: Fmt, marks: list[dict], t0: float, t1: float, sfx, words=None) -> None:
+    """Editor graphics on a shot (9:16 coordinates, mapped into 1:1/16:9): red X, red circle, red arrow, coloured
+    labels, a number counting up. Each mark: {type, x, y, size?, at? (s after shot start), text?, color?, to?, angle?}."""
+    RW, RH = fm.res
+
+    def pt(x, y):
+        if fm.name == "1x1":
+            return x * RW, (y * 1920 - 380)
+        if fm.name == "16x9":
+            return RW * (0.342 + 0.316 * x), y * RH
+        return x * RW, y * RH
+
+    scale = 1.0 if fm.name == "9x16" else (1.0 if fm.name == "1x1" else 0.5625)
+    for m in marks:
+        a = t0 + float(m.get("at", 0.15))
+        if m.get("at_word"):                  # appear on a spoken word (first word of the shot starting with it)
+            key = norm(m["at_word"])
+            hit = next((w for w in (words or []) if norm(w["text"]).startswith(key)), None)
+            if hit:
+                a = max(t0, hit["start"] - 0.05)
+        b = t0 + float(m["until"]) if m.get("until") is not None else t1
+        if b - a < 0.15:
+            continue
+        cx, cy = pt(m["x"], m["y"])
+        sz = float(m.get("size", 0.3)) * 1080 * scale
+        col = bgr(m.get("color", "E0252F"))
+        pop = "\\fscx40\\fscy40\\t(0,120,\\fscx110\\fscy110)\\t(120,200,\\fscx100\\fscy100)\\fad(0,120)"
+        typ = m["type"]
+        if typ == "x":
+            bar_w, bar_h = sz, sz * 0.16
+            bar = Ass.rrect(bar_w, bar_h, bar_h / 2)
+            for rot in (45, -45):
+                doc.add(a, b, "Shp", f"{{\\an5\\pos({cx:.0f},{cy:.0f}){pop}\\frz{rot}\\c{col}\\bord3\\3c&HFFFFFF&\\shad2\\p1}}{bar}", 26)
+        elif typ == "circle":
+            r = sz / 2
+            k = 0.5523 * r
+            circ = (f"m {r} 0 b {r + k} 0 {2 * r} {r - k} {2 * r} {r} b {2 * r} {r + k} {r + k} {2 * r} {r} {2 * r} "
+                    f"b {r - k} {2 * r} 0 {r + k} 0 {r} b 0 {r - k} {r - k} 0 {r} 0")
+            doc.add(a, b, "Shp", f"{{\\an5\\pos({cx:.0f},{cy:.0f}){pop}\\1a&HFF&\\bord{max(sz * 0.045, 5):.0f}\\3c{col}\\shad0\\p1}}{circ}", 26)
+        elif typ == "arrow":
+            L, w = sz, sz * 0.13
+            arrow = (f"m 0 {-w / 2} l {L * 0.68} {-w / 2} l {L * 0.68} {-w * 1.6} l {L} 0 l {L * 0.68} {w * 1.6} "
+                     f"l {L * 0.68} {w / 2} l 0 {w / 2}")
+            ang = float(m.get("angle", 0))          # direction the arrow points (degrees, 0 = right, 90 = up)
+            mv = f"\\move({cx - L * 0.25:.0f},{cy:.0f},{cx:.0f},{cy:.0f},0,180)"
+            doc.add(a, b, "Shp", f"{{\\an6{mv}\\fad(80,120)\\frz{ang}\\org({cx:.0f},{cy:.0f})\\c{col}\\bord3\\3c&HFFFFFF&\\shad2\\p1}}{arrow}", 26)
+        elif typ == "label":
+            size = int(fm.txt * float(m.get("scale", 0.75)))
+            doc.pill(a, b, cx, cy, [m["text"]], size, "FFFFFF", m.get("color", "E0252F"), bold=True, pad=(0.45, 0.2),
+                     radius=size / ASS_EM * 0.3, anim="pop", layer=27)
+        elif typ == "counter":
+            to, dur = int(m["to"]), float(m.get("count_s", 1.2))
+            size = int(fm.txt * float(m.get("scale", 2.6)))
+            steps = 24
+            for i in range(steps + 1):
+                v = round(to * (1 - (1 - i / steps) ** 3))
+                ta = a + dur * i / steps
+                tb = a + dur * (i + 1) / steps if i < steps else b
+                txt = f"{v:,}".replace(",", ".") + m.get("suffix", "")
+                doc.add(ta, tb, "Txt", f"{{\\an5\\pos({cx:.0f},{cy:.0f})\\fs{size}\\c&HFFFFFF&\\bord0\\shad4\\4a&H80&}}{txt}", 26)
+        if sfx is not None and typ in ("x", "circle", "label"):
+            sfx.append((a, "pop", 0.3))
 
 
 def place_text(doc: Ass, fm: Fmt, text: str, t0: float, t1: float, t: dict, boxes, taken, sfx) -> dict:
