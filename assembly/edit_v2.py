@@ -841,10 +841,22 @@ def probe_frames(p: Path) -> int:
 FONT_SEMI = "/usr/share/fonts/opentype/inter/InterDisplay-SemiBold.otf"
 
 
+def glue_hyphens(words: list[dict]) -> list[dict]:
+    """A split compound written with a space ("Geld-zurück- Garantie") shows as one caption word."""
+    out = []
+    for w in words:
+        if out and re.search(r"\w-$", out[-1]["text"]):
+            out[-1] = {**out[-1], "text": out[-1]["text"] + w["text"].lstrip(), "end": w["end"]}
+        else:
+            out.append(w)
+    return out
+
+
 def add_box_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: float, small: bool = False) -> None:
     """DTC 'box' captions (references: explainer + testimonial ads): sentence-case phrases of up to 4 words in black
     semi-bold on a white rounded box, one box per phrase, a quick soft pop; no per-word highlight."""
     RW, RH = fm.res
+    words = glue_hyphens(words)
     size = int(fm.cap * (0.66 if small else 0.86))
     max_w = RW * (0.60 if fm.name != "16x9" else 0.46)      # per line; a phrase may take two lines
     fnt = ImageFont.truetype(FONT_SEMI, max(int(size / ASS_EM), 8))
@@ -890,6 +902,7 @@ def add_box_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: f
 def add_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: float) -> None:
     """Spoken words in groups of up to 3 (never wider than the frame), the current word in yellow, each group pops."""
     RW, RH = fm.res
+    words = glue_hyphens(words)
     size = fm.cap
     max_w = RW * (0.84 if fm.name != "16x9" else 0.60)
     groups, cur = [], []
