@@ -307,11 +307,16 @@ def render_piece(src: Path, src_t: float, slow: float, frames: int, dst: Path, z
     pre = max(0.0, -src_t)
     a = max(src_t, 0.0)
     need = frames / FPS / slow
-    held = max(0.0, (a + need) - src_end) * slow
+    held = min(max(0.0, (a + need) - src_end) * slow, frames / FPS)
+    a = min(a, max(0.0, src_end - 0.1))         # a piece starting past the usable end freezes its last frame
     rev = ",reverse" if reverse else ""         # a short object motion that runs the wrong way for the line
     vf = (f"trim=start={a:.3f}:end={src_end:.3f},setpts=PTS-STARTPTS{rev},setpts=(PTS-STARTPTS)*{slow:.4f},fps={FPS},{piece_vf(zoom, rect)},"
           f"tpad=start_mode=clone:start_duration={pre * slow:.3f}:stop_mode=clone:stop_duration={frames / FPS + 1:.3f}")
     run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf", vf, "-frames:v", str(frames), *enc(dst)])
+    got = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=nb_frames",
+                          "-of", "csv=p=0", str(dst)], capture_output=True, text=True).stdout.strip()
+    if got.isdigit() and int(got) < frames - 1:  # a short piece would shift every later shot off the voice
+        raise RuntimeError(f"{dst.name}: {got} of {frames} frames (src {src.name} t={src_t:.2f} end={src_end:.2f})")
     return held
 
 
