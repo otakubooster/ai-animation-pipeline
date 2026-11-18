@@ -796,12 +796,17 @@ def main() -> None:
             else:
                 cy = layout.free_slot(fm.cap_c, cap_h, boxes, 0.08, 0.92, taken)
             cstyle = job.get("caption_style", "karaoke")
+            cw = list(t.get("words") or [])
+            if k > 0 and cw and (pw := timeline[k - 1].get("words")) and re.search(r"\w-$", pw[-1]["text"]):
+                cw = cw[1:]                             # shown whole at the end of the previous shot
+            if cw and k + 1 < len(timeline) and re.search(r"\w-$", cw[-1]["text"]) and (nw := timeline[k + 1].get("words")):
+                cw[-1] = {**cw[-1], "text": cw[-1]["text"] + nw[0]["text"]}   # "Geld-zurück-" | "Garantie." across a cut
             if sh.get("no_captions"):
                 pass
             elif cstyle in ("box", "box-small"):
-                add_box_captions(doc, fm, t.get("words") or [], cy, seg_end, small=cstyle == "box-small")
+                add_box_captions(doc, fm, cw, cy, seg_end, small=cstyle == "box-small")
             else:
-                add_captions(doc, fm, t.get("words") or [], cy, seg_end)
+                add_captions(doc, fm, cw, cy, seg_end)
         ass = tmp / f"text_{fname}.ass"
         doc.write(ass, fm.cap, fm.txt)
 
