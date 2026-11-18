@@ -970,7 +970,13 @@ def add_header(doc: Ass, fm: Fmt, text: str, t0: float, t1: float, style: str, f
     lines.append(cur)
     y = RH * (0.105 if fm.name == "9x16" else 0.09) + (len(lines) - 1) * size * 0.5
     fad = "\\fad(120,100)" if fade_in else "\\fad(0,100)"
-    doc.add(t0, t1, "Hdr", f"{{\\an5\\pos({cx:.0f},{y:.0f}){fad}\\bord0\\shad3\\4a&H70&}}" + "\\N".join(lines), 15)
+    # soft dark scrim behind the sentence so white text reads on bright walls (blurred, no hard box edge)
+    em = size / ASS_EM
+    sw = max(fnt.getlength(ln) for ln in lines) + em * 1.6
+    sh_ = len(lines) * size * 1.18 + em * 0.9
+    doc.add(t0, t1, "Hdr", f"{{\\an5\\pos({cx:.0f},{y:.0f}){fad}\\p1\\bord0\\shad0\\1c&H000000&\\1a&HA8&\\blur{em * 0.9:.0f}}}"
+            f"m 0 0 l {sw:.0f} 0 {sw:.0f} {sh_:.0f} 0 {sh_:.0f}{{\\p0}}", 14)
+    doc.add(t0, t1, "Hdr", f"{{\\an5\\pos({cx:.0f},{y:.0f}){fad}\\bord1.2\\3c&H000000&\\3a&HB0&\\shad3\\4a&H60&}}" + "\\N".join(lines), 15)
     return y / RH
 
 
