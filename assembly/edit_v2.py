@@ -845,19 +845,19 @@ def add_box_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: f
     """DTC 'box' captions (references: explainer + testimonial ads): sentence-case phrases of up to 4 words in black
     semi-bold on a white rounded box, one box per phrase, a quick soft pop; no per-word highlight."""
     RW, RH = fm.res
-    size = int(fm.cap * (0.62 if small else 0.74))
-    max_w = RW * (0.70 if fm.name != "16x9" else 0.50)
+    size = int(fm.cap * (0.66 if small else 0.86))
+    max_w = RW * (0.60 if fm.name != "16x9" else 0.46)      # per line; a phrase may take two lines
     fnt = ImageFont.truetype(FONT_SEMI, max(int(size / ASS_EM), 8))
     groups, cur = [], []
     for w in words:
         txt = re.sub(r'["“”„„«»]|\s*[—–]+\s*', "", w["text"])
         if not txt:
             continue
-        if cur and fnt.getlength(" ".join(x[1] for x in cur + [(w, txt)])) > max_w:
+        if cur and fnt.getlength(" ".join(x[1] for x in cur + [(w, txt)])) > max_w * (1.0 if small else 1.9):
             groups.append(cur)
             cur = []
         cur.append((w, txt))
-        if len(cur) >= 4 or re.search(PUNCT + "$", w["text"]):
+        if len(cur) >= (4 if small else 6) or re.search(PUNCT + "$", w["text"]):
             groups.append(cur)
             cur = []
     if cur:
@@ -869,8 +869,21 @@ def add_box_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: f
         if t1 - t0 < 0.08:
             continue
         line = re.sub(PUNCT + "+$", "", " ".join(x[1] for x in g))
+        lines, cur2 = [], ""
+        for wd in line.split():                 # balanced wrap into at most two lines
+            nxt = (cur2 + " " + wd).strip()
+            if cur2 and fnt.getlength(nxt) > max_w:
+                lines.append(cur2)
+                cur2 = wd
+            else:
+                cur2 = nxt
+        lines.append(cur2)
+        if len(lines) == 2 and fnt.getlength(lines[1]) < fnt.getlength(lines[0]) * 0.45:
+            ws_ = line.split()
+            best = min(range(1, len(ws_)), key=lambda i: abs(fnt.getlength(" ".join(ws_[:i])) - fnt.getlength(" ".join(ws_[i:]))))
+            lines = [" ".join(ws_[:best]), " ".join(ws_[best:])]
         em = size / ASS_EM
-        doc.pill(t0, t1, RW / 2, cy * RH, [line], size, "111111", "FFFFFF", pad=(0.42, 0.20), radius=em * 0.32,
+        doc.pill(t0, t1, RW / 2, cy * RH, lines, size, "111111", "FFFFFF", pad=(0.42, 0.20), radius=em * 0.32,
                  anim="soft", layer=20, style="CapBox", font=FONT_SEMI)
 
 
