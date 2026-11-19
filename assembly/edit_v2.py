@@ -804,6 +804,11 @@ def main() -> None:
                     part_slots += tk[len(taken):]
                     texts_report[fname].append({"shot": sh["id"], "text": part, **placed})
                 taken += part_slots
+            # a green-screen expert cut-out (pip_inset --mode cutout, added after the edit) covers the bottom band on
+            # its shots: captions stay above it
+            pip = job.get("pip") or {}
+            if pip.get("mode") == "cutout" and sh["id"] in set(pip.get("shots", [])) and fname == "9x16":
+                taken.append((1.0 - float(pip.get("height", 0.46)) - 0.01, 1.0))
             # captions
             cap_h = fm.cap * 1.25 / RH
             if job.get("captions_y"):                   # preferred caption line for the whole ad (9:16 position)
