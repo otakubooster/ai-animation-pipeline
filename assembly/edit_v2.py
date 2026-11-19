@@ -809,7 +809,7 @@ def main() -> None:
             if job.get("captions_y"):                   # preferred caption line for the whole ad (9:16 position)
                 y9 = float(job["captions_y"])
                 cy = {"9x16": y9, "1x1": min(max((y9 * 1920 - 380) / 1080, 0.12), 0.88), "16x9": 0.88}[fname]
-                if fname == "9x16":
+                if fname == "9x16" and not job.get("captions_fixed"):
                     # the line moves off a face (box grown towards the chin: punch-ins enlarge faces) and, on product
                     # shots without a face, off the pack in the middle; nearest free line, lower ones first
                     fb = [[b[0], b[1], b[2], min(1.0, b[3] + 0.25 * (b[3] - b[1]))] for b in boxes]
