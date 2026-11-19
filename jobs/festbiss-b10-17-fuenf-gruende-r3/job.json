@@ -1,0 +1,306 @@
+{
+  "job_id": "festbiss-b10-17-fuenf-gruende-r3",
+  "slug": "festbiss-b10-17-fuenf-gruende",
+  "batch": "batch-10",
+  "product": "Festbiss Prothesen-Unterfütterung",
+  "title": "Festbiss – Video-Ad 17 (DE) · „5 Gründe, Festbiss nicht zu kaufen“ – ironischer Clay-Animationsfilm",
+  "aspect_ratio": "9:16",
+  "language": "de",
+  "engine": "minimax-h3",
+  "render": {
+    "width": 576,
+    "height": 1024,
+    "fps": 24
+  },
+  "frames_release": {
+    "repo": "otakubooster/ai-animation-pipeline",
+    "tag": "batch-10",
+    "asset": "Festbiss_DE_Ads_06-22.zip",
+    "subdir": "Ad-17"
+  },
+  "format": "Stylized 3D stop-motion clay animation: a charming clay grandma at her cozy kitchen table and in a bistro, clay props (adhesive tube in bag, pocket, car, cabinet), sad talking food, clay cross-section models of a denture with gel on light blue, and the clay Festbiss tube. Reverse-psychology list format.",
+  "voice_note": "Female VO (the grandma), German, warm, dry, ironic, a little cheeky. Address: Sie.",
+  "captions_note": "White bold sans with a soft black shadow, 2–4 words, centered in the lower middle. S01: red header box top „5 Gründe, Festbiss NICHT zu kaufen“. From S02: thin progress bar at the top with five pills „GRUND 1 … GRUND 5“, the active one red – Grund 1: S02–S05 · Grund 2: S05 („Sie lieben weiches Essen“)–S11 · Grund 3: S11 („…überallhin mitzunehmen“)–S17 · Grund 4: S17 („…kontrollieren“)–S21 · Grund 5: S22–S31. Green round 60-day badge in S45.",
+  "vo_ready": true,
+  "cycle_long": true,
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "shadow",
+  "captions_y": 0.72,
+  "overlay_style": "header-red",
+  "progress_pills": {
+    "labels": [
+      "GRUND 1",
+      "GRUND 2",
+      "GRUND 3",
+      "GRUND 4",
+      "GRUND 5"
+    ],
+    "starts": [
+      [
+        "s02",
+        null
+      ],
+      [
+        "s05",
+        "weiches"
+      ],
+      [
+        "s11",
+        "lieben"
+      ],
+      [
+        "s17",
+        "lieben"
+      ],
+      [
+        "s22",
+        null
+      ]
+    ],
+    "end": "s31"
+  },
+  "shots": [
+    {
+      "id": "s02",
+      "scene": "A17-S02",
+      "vo_line": "Sie lieben es, Ihre Prothese mitten beim Abendessen zu richten,",
+      "ref_t": [
+        3.5,
+        6.0
+      ],
+      "vo_s": 3.581,
+      "seed": 11701,
+      "note": "Style anchor – generate first; attach it to every scene marked Style: A17-S02.",
+      "frame": "A17-S02.jpg",
+      "talking": true,
+      "product": true,
+      "h3_prompt": "Clay figures move in small stop-motion steps: she talks to the camera with natural lip movement, knowing smiles and nods, now and then closing her eyes; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s03",
+      "scene": "A17-S03",
+      "vo_line": "aber sobald dieser Thermoplast",
+      "ref_t": [
+        6.0,
+        7.6
+      ],
+      "vo_s": 1.791,
+      "seed": 11702,
+      "frame": "A17-S03.jpg",
+      "talking": false,
+      "h3_prompt": "Clay figures move in small stop-motion steps: she sways her head dreamily on her hand, eyes half closed, a slow content smile; mouth closed; static camera, slight push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s08",
+      "scene": "A17-S08",
+      "vo_line": "weiche Nudeln.",
+      "ref_t": [
+        18.4,
+        19.2
+      ],
+      "vo_s": 1.562,
+      "seed": 11707,
+      "frame": "A17-S08.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "Close-up on the wooden table: a big blue-and-white bowl of soft macaroni in a creamy sauce, steam rising; a blue checked napkin at the lower right; the sunny window blurred behind. Clay figures move in small stop-motion steps: steam curls up from the macaroni bowl; slow push-in. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s09",
+      "scene": "A17-S09",
+      "vo_line": "Aber sobald Ihre Prothese sicherer sitzt, landen Steak, Sandwiches, knuspriges Brot",
+      "ref_t": [
+        19.2,
+        23.7
+      ],
+      "vo_s": 5.008,
+      "seed": 11708,
+      "frame": "A17-S09.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "She sits at the table holding a knife and fork, smiling with her eyes closed; a plate with a grilled steak and a big sandwich in front of her. Clay figures move in small stop-motion steps: she cuts a piece of steak, smiling blissfully with her eyes closed and swaying a little in delight; mouth closed; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.91
+    },
+    {
+      "id": "s10",
+      "scene": "A17-S10",
+      "vo_line": "und das Essen, auf das Sie wirklich Lust haben, wieder auf dem Teller.",
+      "ref_t": [
+        23.7,
+        26.9
+      ],
+      "vo_s": 4.676,
+      "seed": 11709,
+      "frame": "A17-S10.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "She cuts into a juicy steak with green beans on her plate, eyes closed in delight; a bowl of green beans at the lower left. Clay figures move in small stop-motion steps: she saws through the steak, lifts a piece on her fork and smiles with delight; mouth closed; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 6.01
+    },
+    {
+      "id": "s23",
+      "scene": "A17-S23",
+      "vo_line": "Steak weglassen,",
+      "ref_t": [
+        61.4,
+        62.4
+      ],
+      "vo_s": 0.951,
+      "seed": 11722,
+      "frame": "A17-S23.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at a bistro table holding an open menu and pointing at a picture of a steak with a sceptical look; red-and-white checkered tablecloth, a vase of flowers and salt and pepper shakers. Clay figures move in small stop-motion steps: she taps the steak picture on the menu and shakes her head sceptically; the menu stays still; static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s25",
+      "scene": "A17-S25",
+      "vo_line": "bestellen, was sich am sichersten anfühlt.",
+      "ref_t": [
+        63.5,
+        65.2
+      ],
+      "vo_s": 2.852,
+      "seed": 11724,
+      "frame": "A17-S25.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "She sits at the bistro table with her eyes closed and a resigned little smile; a bowl of clear soup in front of her, a waiter's clay hand withdrawing at the right edge. Clay figures move in small stop-motion steps: she sighs with eyes closed and a resigned little smile; the hand at the right edge withdraws out of frame; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s26",
+      "scene": "A17-S26",
+      "vo_line": "Aber sobald Sie nicht mehr bei jeder Mahlzeit gegen das Wackeln ankämpfen, können Sie Ihr Essen danach aussuchen, worauf Sie wirklich Lust haben.",
+      "ref_t": [
+        65.2,
+        71.2
+      ],
+      "vo_s": 7.931,
+      "seed": 11725,
+      "frame": "A17-S26.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at the bistro table holding an open menu with a picture of a grilled fish dish, pointing at it with a confident smile, eyes closed; a small vase of flowers and a candle on the table. Clay figures move in small stop-motion steps: she taps the menu with a confident smile, opens her eyes, nods happily and lowers the menu a little; static camera, slight push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s30",
+      "scene": "A17-S30",
+      "vo_line": "Essen gehen –",
+      "ref_t": [
+        73.4,
+        74.5
+      ],
+      "vo_s": 0.939,
+      "seed": 11729,
+      "frame": "A17-S30.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "She sits at a lavish bistro dinner between two clay friends – on the left a woman with dark curly hair, on the right a woman with curly ginger hair – all laughing; the table full of salads, bread and dishes, wine glasses and candles; warm hanging lamps above. Clay figures move in small stop-motion steps: all three laugh heartily, shoulders bobbing, glasses raised; the hanging lamps glow; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s35",
+      "scene": "A17-S35",
+      "vo_line": "wird der Thermoplast beim Anwärmen weich,",
+      "ref_t": [
+        88.2,
+        90.1
+      ],
+      "vo_s": 2.474,
+      "seed": 11734,
+      "frame": "A17-S35.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "Clay figures move in small stop-motion steps: gentle steam curls up from the hot water around the tube; slow push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s37",
+      "scene": "A17-S37",
+      "vo_line": "Sie kleben eine lockere Prothese also nicht einfach fester an,",
+      "ref_t": [
+        93.6,
+        96.4
+      ],
+      "vo_s": 3.338,
+      "seed": 11736,
+      "frame": "A17-S37.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "Clay figures move in small stop-motion steps: she slowly turns the denture in her hands, peering at it sceptically over her glasses, then raises one eyebrow; mouth closed; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.24
+    },
+    {
+      "id": "s38",
+      "scene": "A17-S38",
+      "vo_line": "sondern füllen den Raum, durch den sie überhaupt erst locker wurde.",
+      "ref_t": [
+        96.4,
+        99.8
+      ],
+      "vo_s": 3.955,
+      "seed": 11737,
+      "frame": "A17-S38.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "Front view of the clay-sculpted lower jaw model on a plain light-blue background: the arch of the lower denture (white clay teeth on a pink base) sits on the pink gum and sandy-beige porous bone, with a glossy layer of glossy translucent amber-gold gel (honey-colored, slightly see-through) filling the space between denture and gum along the whole arch. Clay figures move in small stop-motion steps: the amber gel glistens and settles evenly along the whole arch under the denture; static camera, very slow push-in. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.86
+    },
+    {
+      "id": "s42",
+      "scene": "A17-S42",
+      "vo_line": "Testen Sie es beim Mittagessen.",
+      "ref_t": [
+        110.2,
+        111.5
+      ],
+      "vo_s": 1.851,
+      "seed": 11741,
+      "frame": "A17-S42.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "Lunch in the bistro: she holds a sandwich with both hands, about to bite, a plate with salad and a cup of coffee in front of her, a jar of wildflowers at the lower left. Clay figures move in small stop-motion steps: she takes a big bite of the sandwich and chews happily; lips closed while chewing; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s43",
+      "scene": "A17-S43",
+      "vo_line": "Testen Sie es mit dem Steak, das Sie nicht mehr bestellt haben.",
+      "ref_t": [
+        111.5,
+        113.8
+      ],
+      "vo_s": 3.315,
+      "seed": 11742,
+      "frame": "A17-S43.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "Dinner in the bistro: she cuts into a big steak with grilled vegetables, smiling widely; a glass of red wine and a bowl of salad on the table. Clay figures move in small stop-motion steps: she cuts a piece of steak with a wide smile and lifts it on her fork; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.21
+    },
+    {
+      "id": "s46",
+      "scene": "A17-S46",
+      "vo_line": "Aber wenn Sie lieber essen wollen, worauf Sie Lust haben, statt Ihre Prothese alle paar Bissen zu managen,",
+      "ref_t": [
+        120.2,
+        124.9
+      ],
+      "vo_s": 6.289,
+      "seed": 11745,
+      "frame": "A17-S46.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "Clay figures move in small stop-motion steps: she chews the steak with a cheeky grin, winks at the camera again, then cuts another piece; lips closed while chewing; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    }
+  ]
+}

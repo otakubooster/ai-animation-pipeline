@@ -1,0 +1,406 @@
+{
+  "job_id": "festbiss-b10-16-unterfuettert-r3",
+  "slug": "festbiss-b10-16-unterfuettert",
+  "batch": "batch-10",
+  "product": "Festbiss Prothesen-Unterfütterung",
+  "title": "Festbiss – Video-Ad 16 (DE) · „Gerade unterfüttert – und kann immer noch nicht essen“ – Kommentar-Antwort",
+  "aspect_ratio": "9:16",
+  "language": "de",
+  "engine": "minimax-h3",
+  "render": {
+    "width": 576,
+    "height": 1024,
+    "fps": 24
+  },
+  "frames_release": {
+    "repo": "otakubooster/ai-animation-pipeline",
+    "tag": "batch-10",
+    "asset": "Festbiss_DE_Ads_06-22.zip",
+    "subdir": "Ad-16"
+  },
+  "format": "Green-screen reply video: a dentist (cut out, chest-up) stands in the lower middle and answers a viewer comment, over photoreal B-roll of the woman who asked (kitchen table, dental practice, reception, car), lab close-ups of a denture on a plaster model, 3D jaw-ridge models on slate-blue, how-to close-ups and product shots. Many shots run without the dentist overlay.",
+  "voice_note": "Male VO (the dentist), German, calm, clear, reassuring. Address: Sie.",
+  "captions_note": "White bold sans with a soft black shadow, 2–4 words, centered in the middle. S01: white comment bubble top right (reply to a viewer comment). Dentist cut-out (extra asset Greenscreen-Dentist) lower middle in the scenes marked „+ Dentist overlay“. Green round 60-day badge top right in S53.",
+  "vo_ready": true,
+  "cycle_long": true,
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "shadow",
+  "captions_y": 0.5,
+  "comment_card": {
+    "text": "Ich habe gerade erst eine weiche Unterfütterung bekommen und kann immer noch nicht essen. Meine Unterprothese wird ständig locker. Was mache ich jetzt?",
+    "reply": "Antwort an @renate.k56",
+    "shots": [
+      "s01"
+    ]
+  },
+  "pip": {
+    "src": "x01",
+    "mode": "cutout",
+    "height": 0.4,
+    "x": "center",
+    "shots": [
+      "s01",
+      "s02",
+      "s03",
+      "s04",
+      "s05",
+      "s11",
+      "s15",
+      "s16",
+      "s24",
+      "s25",
+      "s33",
+      "s34",
+      "s35",
+      "s37",
+      "s38",
+      "s39",
+      "s46",
+      "s47",
+      "s48",
+      "s49",
+      "s50",
+      "s51",
+      "s52",
+      "s54"
+    ]
+  },
+  "shots": [
+    {
+      "id": "x01",
+      "frame": "Greenscreen-Dentist.jpg",
+      "talking": true,
+      "h3_seconds": 12.0,
+      "h3_prompt": "The dentist stands still facing the camera and talks calmly and warmly to the viewer, natural lip movement, small relaxed hand gestures in front of his stomach, slight head nods. Static camera, locked off. The flat chroma-key green background stays perfectly even and unchanged, no shadows on it, nothing else appears. Clothes stay plain with no words or logos.",
+      "seed": 7
+    },
+    {
+      "id": "s01",
+      "scene": "A16-S01",
+      "vo_line": "Ich habe gerade erst eine weiche Unterfütterung bekommen und kann immer noch nicht essen. Meine Unterprothese wird ständig locker. Was mache ich jetzt?",
+      "ref_t": [
+        0.0,
+        5.0
+      ],
+      "vo_s": 8.416,
+      "seed": 11600,
+      "overlay_spec": "+ Dentist overlay (lower middle) + white comment bubble top right: „Antwort auf den Kommentar von @renate.k56 – Ich habe gerade erst eine weiche Unterfütterung bekommen und kann immer noch nicht essen. Meine Unterprothese wird ständig locker. Was mache ich jetzt?“",
+      "frame": "A16-S01.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at the round wooden table in front of a plate of roast chicken and potatoes, her right hand pressed to her cheek and jaw as if it aches, looking down sadly. She sighs, shoulders sinking, slowly rubs her cheek and jaw with her hand and looks down at the plate sadly; mouth closed; slight handheld, slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s03",
+      "scene": "A16-S03",
+      "vo_line": "sie wieder locker wird, würde ich nicht sofort zu mehr Haftcreme greifen – oder",
+      "ref_t": [
+        7.0,
+        10.4
+      ],
+      "vo_s": 3.994,
+      "seed": 11602,
+      "overlay_spec": "+ Dentist overlay (lower middle)",
+      "frame": "A16-S03.jpg",
+      "talking": false,
+      "h3_prompt": "Close shot: she sits at the kitchen table looking off to the left with a worried, uncertain face, her hand raised near her chin. She looks off to the left with a worried face, slowly rubs her chin with her fingers and lets out a small uncertain sigh; mouth closed; slight handheld, slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.89
+    },
+    {
+      "id": "s04",
+      "scene": "A16-S04",
+      "vo_line": "gleich die nächste Unterfütterung buchen.",
+      "ref_t": [
+        10.4,
+        11.4
+      ],
+      "vo_s": 2.432,
+      "seed": 11603,
+      "overlay_spec": "+ Dentist overlay (lower middle)",
+      "frame": "A16-S04.jpg",
+      "talking": false,
+      "h3_prompt": "She stands at the white reception counter of a dental practice and reaches across to hand a small appointment card back to a receptionist with dark hair (seen from behind at the right edge); a window and a plant behind her. She hands the small card across the desk to the receptionist, lets go and lowers her hand with a tired polite smile and a small nod; static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s06",
+      "scene": "A16-S06",
+      "vo_line": "Bei einer Unterfütterung kommt neues Material auf die Innenseite Ihrer Prothese, damit sie genauer zu Zahnfleisch und Kieferkamm passt, auf denen sie sitzt.",
+      "ref_t": [
+        14.2,
+        20.2
+      ],
+      "vo_s": 8.405,
+      "seed": 11605,
+      "frame": "A16-S06.jpg",
+      "talking": false,
+      "h3_prompt": "Close-up: a lower full denture sits on the white plaster model of a lower jaw on the grey stone counter; a hand in a blue nitrile glove enters from the upper left and rests two fingers on the denture teeth. The gloved hand gently rocks the denture on the plaster model with two fingers, then presses it down so it sits snugly again; static camera, slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s07",
+      "scene": "A16-S07",
+      "vo_line": "Stellen Sie sich die Innenseite der Prothese wie einen Abdruck dieses Kieferkamms vor.",
+      "ref_t": [
+        20.2,
+        23.6
+      ],
+      "vo_s": 4.774,
+      "seed": 11606,
+      "frame": "A16-S07.jpg",
+      "talking": false,
+      "h3_prompt": "Close-up: two hands in blue nitrile gloves lift the lower full denture straight up off the white plaster model, revealing the U-shaped ridge of the model underneath. The two gloved hands slowly lower the denture straight down onto the plaster model until it sits on the ridge; static camera, slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.67
+    },
+    {
+      "id": "s09",
+      "scene": "A16-S09",
+      "vo_line": "dieser Kieferkamm bleibt nicht für immer gleich. Mit der Zeit kann er weiter schrumpfen und seine Form verändern. Die Prothese verändert sich nicht mit. Selbst wenn eine Unterfütterung also für eine bessere Passform sorgt, kann sich der Kieferkamm darunter weiter verändern – und",
+      "ref_t": [
+        28.5,
+        38.8
+      ],
+      "vo_s": 14.856,
+      "seed": 11608,
+      "note": "Style anchor – generate first; attach it to every scene marked Style: A16-S09. In the clip the camera pushes in and a dark crescent gap opens under the denture.",
+      "frame": "A16-S09.jpg",
+      "talking": false,
+      "h3_prompt": "Slow camera push-in; the pink gum and bone slowly shrink downward and a dark crescent gap opens between the ridge and the denture saddle; the tooth and saddle stay still; nothing else appears. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s11",
+      "scene": "A16-S11",
+      "vo_line": "Und dann kommen die Probleme zurück.",
+      "ref_t": [
+        40.8,
+        42.8
+      ],
+      "vo_s": 2.346,
+      "seed": 11610,
+      "overlay_spec": "+ Dentist overlay (lower middle)",
+      "frame": "A16-S11.jpg",
+      "talking": false,
+      "h3_prompt": "In the evening she sits at the table with her hand on her cheek, looking down at a half-eaten plate with a troubled face; a table lamp glows behind her. She sighs and slowly shakes her head while looking down at the plate, her hand rubbing her cheek; mouth closed; static camera, slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s12",
+      "scene": "A16-S12",
+      "vo_line": "Sie beißen auf einer Seite in etwas hinein, und die Prothese hat darunter genug Platz, um zu kippen.",
+      "ref_t": [
+        42.8,
+        46.8
+      ],
+      "vo_s": 5.584,
+      "seed": 11611,
+      "frame": "A16-S12.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at the kitchen table holding a piece of bread in her right hand, her left hand pressed against her cheek, frowning in discomfort as she chews on one side; a plate of salad in front of her. She chews carefully on one side with a pained frown, pressing her hand to her cheek, then stops and pauses uncomfortably; lips closed while chewing; slight handheld. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 6.48
+    },
+    {
+      "id": "s13",
+      "scene": "A16-S13",
+      "vo_line": "Eine Seite drückt nach unten, die andere hebt sich. Dann kauen Sie wieder, und sie verrutscht.",
+      "ref_t": [
+        46.8,
+        50.8
+      ],
+      "vo_s": 5.257,
+      "seed": 11612,
+      "frame": "A16-S13.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at the table with a fork raised halfway, her mouth open in surprise and alarm as her denture shifts; a plate of salad with chicken and a glass of water in front of her. She freezes with the fork halfway, her open mouth slowly closing in alarm, then she lowers the fork onto the plate; jaw natural; slight handheld. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 6.16
+    },
+    {
+      "id": "s17",
+      "scene": "A16-S17",
+      "vo_line": "Sie rufen wieder in der Praxis an.",
+      "ref_t": [
+        55.9,
+        57.8
+      ],
+      "vo_s": 2.01,
+      "seed": 11616,
+      "frame": "A16-S17.jpg",
+      "talking": false,
+      "h3_prompt": "She also wears light-grey trousers. She listens with a tired, resigned look, slowly closes her eyes and lets her head sink a little, then opens them again; mouth closed; static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 6.76
+    },
+    {
+      "id": "s20",
+      "scene": "A16-S20",
+      "vo_line": "Sitzen noch eine Anprobe ab.",
+      "ref_t": [
+        59.0,
+        60.2
+      ],
+      "vo_s": 1.891,
+      "seed": 11619,
+      "frame": "A16-S20.jpg",
+      "talking": false,
+      "h3_prompt": "She sits in the dental chair looking ahead patiently; A dentist in a white coat, a blue surgical mask and blue nitrile gloves sits in the left foreground, seen from behind and the side, only his dark hair, mask and gloved hands visible, holding up a lower denture in front of her. The masked dentist slowly turns the denture in his gloved hands, examining it, while she watches patiently and blinks; her mouth stays closed; static camera, slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s22",
+      "scene": "A16-S22",
+      "vo_line": "Bezahlen die Behandlung noch einmal.",
+      "ref_t": [
+        62.5,
+        64.0
+      ],
+      "vo_s": 2.21,
+      "seed": 11621,
+      "frame": "A16-S22.jpg",
+      "talking": false,
+      "h3_prompt": "She stands at the white reception counter of the dental practice, a tan handbag on her shoulder, handing a bank card to a receptionist with dark hair (seen from behind at the right edge); a card terminal on the counter in the lower left. She hands the card over the desk to the receptionist with a resigned sigh and lets her hand drop; static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s23",
+      "scene": "A16-S23",
+      "vo_line": "Und dann gehen Sie nach Hause und finden heraus, ob sie beim Essen wirklich hält.",
+      "ref_t": [
+        64.0,
+        67.9
+      ],
+      "vo_s": 4.325,
+      "seed": 11622,
+      "frame": "A16-S23.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at the table with a fork in her hand over a plate of roasted potatoes, cherry tomatoes and green beans, eyes closed, bracing herself before the first bite. She takes a breath, opens her eyes and slowly brings a forkful of potato to her mouth, chewing cautiously; lips closed while chewing; slight handheld. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.23
+    },
+    {
+      "id": "s27",
+      "scene": "A16-S27",
+      "vo_line": "Sie wärmen das Material an, bis es weich wird.",
+      "ref_t": [
+        74.8,
+        77.2
+      ],
+      "vo_s": 2.703,
+      "seed": 11626,
+      "frame": "A16-S27.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "The hand slowly lowers the tube cap-first into the mug of hot water and lets go, the tube standing in the water; the other hand stays on the handle; static camera. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 6.21
+    },
+    {
+      "id": "s29",
+      "scene": "A16-S29",
+      "vo_line": "Wenn Sie zubeißen, drückt Ihr eigener Mund",
+      "ref_t": [
+        82.5,
+        84.5
+      ],
+      "vo_s": 2.232,
+      "seed": 11628,
+      "frame": "A16-S29.jpg",
+      "talking": false,
+      "h3_prompt": "She stands at a white bathroom sink in profile facing right, lips closed, biting down calmly with her eyes on the mirror; a towel and a window behind her. She bites down gently and holds, her jaw tensing slightly with lips closed, then gives a small satisfied nod; jaw natural; static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s30",
+      "scene": "A16-S30",
+      "vo_line": "das weiche thermoplastische Gel gegen den Kieferkamm darunter. Überall dort, wo die Prothese keinen engen Kontakt hat, kann sich das Material in diesen Raum formen. Und wenn es abkühlt, behält es genau die Form, die es gerade angenommen hat.",
+      "ref_t": [
+        84.5,
+        94.8
+      ],
+      "vo_s": 13.639,
+      "seed": 11629,
+      "note": "In the clip the gel fills the whole gap.",
+      "frame": "A16-S30.jpg",
+      "talking": false,
+      "h3_prompt": "The model: the tall block of jaw ridge with the denture segment on top and the dark crescent gap under it; a small amount of glossy translucent amber-gold gel (honey-colored, slightly see-through) has started to flow into the bottom of the gap. The amber gel slowly flows up and sideways into the dark gap, spreading along the curve of the ridge until it fills the whole space under the saddle, then settles smooth and glossy; slow push-in, nothing else appears. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s41",
+      "scene": "A16-S41",
+      "vo_line": "Kauen Sie das Steak. Essen Sie das",
+      "ref_t": [
+        122.2,
+        123.2
+      ],
+      "vo_s": 2.24,
+      "seed": 11640,
+      "frame": "A16-S41.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at the kitchen table raising a fork with a piece of steak to her mouth, smiling; a plate with a grilled steak, roasted potatoes and green asparagus in front of her. She puts the piece of steak into her mouth and chews with a happy smile; lips closed while chewing; slight handheld. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s43",
+      "scene": "A16-S43",
+      "vo_line": "Schauen Sie, ob sich Ihre Unterprothese noch hebt, wenn Sie auf einer Seite Druck ausüben.",
+      "ref_t": [
+        124.2,
+        128.2
+      ],
+      "vo_s": 4.625,
+      "seed": 11642,
+      "frame": "A16-S43.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at the kitchen table eating a forkful of leafy salad, chewing confidently with a relaxed smile; a big bowl of salad with vegetables and a glass of water in front of her. She chews the salad confidently with a relaxed smile, then takes another forkful from the bowl and eats it; lips closed while chewing; slight handheld. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.53
+    },
+    {
+      "id": "s44",
+      "scene": "A16-S44",
+      "vo_line": "Schauen Sie, ob Sie mitten im Abendessen noch aufhören müssen, um sie zurückzudrücken. Schauen Sie,",
+      "ref_t": [
+        128.2,
+        132.2
+      ],
+      "vo_s": 5.009,
+      "seed": 11643,
+      "frame": "A16-S44.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at a table in a cozy, warmly lit restaurant laughing happily over a plate of pasta, twirling her fork; a friend with dark hair sits in the left foreground seen from behind; a candle and a glass on the table. She laughs happily and twirls the pasta on her fork, then lifts it toward her mouth; the friend in the foreground barely moves; warm candlelight, slight handheld. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.91
+    },
+    {
+      "id": "s45",
+      "scene": "A16-S45",
+      "vo_line": "ob Sie noch vor Ende der Mahlzeit zur Haftcreme greifen. Denn",
+      "ref_t": [
+        132.2,
+        135.2
+      ],
+      "vo_s": 3.486,
+      "seed": 11644,
+      "frame": "A16-S45.jpg",
+      "talking": false,
+      "h3_prompt": "She also wears light-grey trousers. She stands at the kitchen counter and pulls open a drawer, glancing into it with a calm smile – she no longer needs anything from it. She pulls the drawer open a little further, glances into it with a calm smile, then slides it closed again; static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.39
+    },
+    {
+      "id": "s53",
+      "scene": "A16-S53",
+      "vo_line": "Festbiss kommt mit einer 60-Tage-Garantie – so haben Sie Zeit, es genau da zu testen, wo das Problem auftritt. Sie",
+      "ref_t": [
+        148.4,
+        153.2
+      ],
+      "vo_s": 6.966,
+      "seed": 11652,
+      "overlay_spec": "Green round badge top right: „60 TAGE GELD-ZURÜCK-GARANTIE“",
+      "frame": "A16-S53.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "She holds the tube steady and smiles warmly at the camera with small natural nods and blinks; mouth closed; slight handheld, slow push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    }
+  ]
+}

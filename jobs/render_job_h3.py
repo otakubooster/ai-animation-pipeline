@@ -118,6 +118,28 @@ def render_shot(server: str, job: dict, shot: dict, frames_dir: Path, out: Path,
     return run
 
 
+def restart_comfy(server: str, n: int) -> bool:
+    """Restart the ComfyUI server (same command as h3_setup.sh); its log so far is kept as comfy_crash_<n>.log in
+    OUT_ROOT. Batch 10: after ~170 good renders every prompt failed in 3 s ("cannot reshape array of size 1555200 into
+    shape (1920,1080,3)" - the frame decoded at half size) until the box ended; only a fresh process clears that."""
+    comfy_dir = COMFY
+    out_root = Path(os.environ.get("OUT_ROOT", "/workspace/job/out"))
+    try:
+        shutil.copy(comfy_dir / "comfy.log", out_root / f"comfy_crash_{n}.log")
+    except OSError:
+        pass
+    subprocess.run("pkill -f 'main.py --listen 127.0.0.1 --port 8188'", shell=True)
+    time.sleep(8)
+    subprocess.Popen("nohup python3 main.py --listen 127.0.0.1 --port 8188 --disable-auto-launch > comfy.log 2>&1 &",
+                     shell=True, cwd=str(comfy_dir))
+    for _ in range(120):
+        time.sleep(5)
+        if subprocess.run(f"curl -s {server}/system_stats", shell=True, capture_output=True).returncode == 0:
+            print(json.dumps({"comfy_restart": n}), flush=True)
+            return True
+    return False
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("specs", nargs="+", help="JOB_JSON:FRAMES_DIR:OUT_DIR")
@@ -137,7 +159,7 @@ def main() -> None:
     mine = sum(1 for v in owner.values() if v == me)
     print(json.dumps({"shard": f"{me}/{n}", "shots": mine, "clip_seconds": round(sum(s for (j, i, s) in todo if owner[(j, i)] == me), 1)}), flush=True)
 
-    counter = 0
+    counter = fails = restarts = 0
     for job, frames_dir, out in jobs:
         (out / "clips").mkdir(parents=True, exist_ok=True)
         rp = out / (f"render_{tag}.json" if tag else "render.json")
@@ -151,6 +173,15 @@ def main() -> None:
                 run = render_shot(a.server, job, shot, frames_dir, out, area)
             except Exception as e:          # e.g. a missing or unreadable frame: log it, keep the batch going
                 run = {"id": shot["id"], "file": f"clips/{shot['id']}.mp4", "ok": False, "error": repr(e)[:800], "seconds": 0}
+            fails = 0 if run.get("ok") else fails + 1
+            if fails >= 2 and restarts < 5:  # two shots in a row failed: a broken server, not two bad shots
+                restarts += 1
+                if restart_comfy(a.server, restarts):
+                    try:
+                        run = render_shot(a.server, job, shot, frames_dir, out, area)
+                    except Exception as e:
+                        run = {"id": shot["id"], "file": f"clips/{shot['id']}.mp4", "ok": False, "error": repr(e)[:800], "seconds": 0}
+                    fails = 0 if run.get("ok") else fails
             if run.get("ok"):
                 run["usd"] = round(run["seconds"] * dph / 3600, 4)
             report["runs"] = [r for r in report["runs"] if r["id"] != shot["id"]] + [run]
