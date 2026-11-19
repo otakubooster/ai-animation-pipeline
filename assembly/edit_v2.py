@@ -806,9 +806,17 @@ def main() -> None:
                 taken += part_slots
             # captions
             cap_h = fm.cap * 1.25 / RH
-            if job.get("captions_y"):                   # fixed caption line for the whole ad (9:16 position)
+            if job.get("captions_y"):                   # preferred caption line for the whole ad (9:16 position)
                 y9 = float(job["captions_y"])
                 cy = {"9x16": y9, "1x1": min(max((y9 * 1920 - 380) / 1080, 0.12), 0.88), "16x9": 0.88}[fname]
+                if fname == "9x16":
+                    # the line moves off a face (box grown towards the chin: punch-ins enlarge faces) and, on product
+                    # shots without a face, off the pack in the middle; nearest free line, lower ones first
+                    fb = [[b[0], b[1], b[2], min(1.0, b[3] + 0.25 * (b[3] - b[1]))] for b in boxes]
+                    if not d["faces"] and sh.get("product"):
+                        fb.append([0.15, 0.27, 0.85, 0.72])
+                    cands = [y9] + [min(max(y9 + dy, 0.14), 0.82) for dy in (0.06, 0.12, 0.18, 0.24, 0.30, -0.06, -0.12, -0.18, -0.24)]
+                    cy = layout.free_slot(cands, cap_h, fb, 0.08, 0.92, taken)
             elif job.get("captions_pos") == "bottom":     # fixed bottom band (no face search), above the UI safe zone
                 cy = {"9x16": 0.785, "1x1": 0.88, "16x9": 0.89}[fname]
             elif fm.panel:
