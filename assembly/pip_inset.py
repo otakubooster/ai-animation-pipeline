@@ -51,9 +51,12 @@ def main() -> None:
           f"color=c=white:s={ring}x{ring},format=yuva420p,geq=lum='255':cb='128':cr='128':"
           f"a='if(lte(hypot(X-{ring / 2},Y-{ring / 2}),{ring / 2 - 1}),255,0)'[ring];"
           f"[0:v][ring]overlay=x={x - 6}:y={y - 6}:enable='{en}'[b1];[b1][pip]overlay=x={x}:y={y}:enable='{fade}'[v]")
+    # the output is cut at the ad's own length: -shortest ended it ~0.7 s early (looped clip + endless colour source)
+    total = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(a.video)],
+                           capture_output=True, text=True, check=True).stdout.strip()
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(a.video), "-stream_loop", "-1", "-i", str(a.clip),
                     "-filter_complex", fc, "-map", "[v]", "-map", "0:a?", "-c:v", "libx264", "-preset", "medium", "-crf", "20",
-                    "-pix_fmt", "yuv420p", "-c:a", "copy", "-shortest", str(a.out)], check=True)
+                    "-pix_fmt", "yuv420p", "-c:a", "copy", "-t", total, str(a.out)], check=True)
     print("pip spans", len(spans), round(sum(e - s for s, e in spans), 1), "s")
 
 
