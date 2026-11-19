@@ -57,13 +57,20 @@ def size_for(frame: Path, area: int = DEFAULT_AREA) -> list[int]:
 
 
 def assign(items: list[tuple[str, str, float]], n: int) -> dict[tuple[str, str], int]:
-    """Longest-first greedy split of (job_id, shot_id, seconds) over n boxes; deterministic."""
-    load = [0.0] * n
+    """Longest-first greedy split of (job_id, shot_id, seconds) over n boxes, PER JOB; deterministic.
+
+    Each job is split on its own (fresh loads, ties rotated by a hash of the job id so box 0 is not favoured), so a
+    change to one job.json can only move that job's shots. A batch-wide split let one edited job reshuffle every
+    other job between boxes that had cloned different versions: shots were rendered twice or never (batch 10)."""
+    import zlib
+
     out = {}
-    for job_id, sid, s in sorted(items, key=lambda x: (-x[2], x[0], x[1])):
-        i = min(range(n), key=lambda b: (load[b], b))
-        load[i] += s
-        out[(job_id, sid)] = i
+    for job_id in sorted({x[0] for x in items}):
+        load, off = [0.0] * n, zlib.crc32(job_id.encode()) % n
+        for _, sid, s in sorted((x for x in items if x[0] == job_id), key=lambda x: (-x[2], x[1])):
+            i = min(range(n), key=lambda b: (load[b], (b - off) % n))
+            load[i] += s
+            out[(job_id, sid)] = i
     return out
 
 

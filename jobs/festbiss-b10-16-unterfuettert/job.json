@@ -425,7 +425,8 @@
       "talking": true,
       "product": true,
       "h3_prompt": "Holding the tube steady at chest height, he talks to the camera with natural lip movement, a confident smile, small nods and slight head tilts; static camera. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "trans_in": "flash"
     },
     {
       "id": "s27",
@@ -584,7 +585,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "packshot: the label is the point and nothing should move (reused S54)"
+      "still_why": "packshot: the label is the point and nothing should move (reused S54)",
+      "max_zoom": 1.04
     },
     {
       "id": "s37",
@@ -851,7 +853,17 @@
       "talking": false,
       "product": true,
       "h3_prompt": "She holds the tube steady and smiles warmly at the camera with small natural nods and blinks; mouth closed; slight handheld, slow push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 7.0
+      "h3_seconds": 7.0,
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.8,
+          "y": 0.17,
+          "size": 0.26,
+          "color": "1A9E4B",
+          "at": 0.2
+        }
+      ]
     },
     {
       "id": "s54",
@@ -868,7 +880,52 @@
       "skip_render": true,
       "talking": false,
       "still": true,
-      "still_why": "owner is a still: packshot: the label is the point and nothing should move (reused S54)"
+      "still_why": "owner is a still: packshot: the label is the point and nothing should move (reused S54)",
+      "max_zoom": 1.04,
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "shadow",
+  "captions_y": 0.5,
+  "comment_card": {
+    "text": "Ich habe gerade erst eine weiche Unterfütterung bekommen und kann immer noch nicht essen. Meine Unterprothese wird ständig locker. Was mache ich jetzt?",
+    "reply": "Antwort an @renate.k56",
+    "shots": [
+      "s01"
+    ]
+  },
+  "pip": {
+    "src": "s01",
+    "shots": [
+      "s01",
+      "s02",
+      "s03",
+      "s04",
+      "s05",
+      "s11",
+      "s15",
+      "s16",
+      "s24",
+      "s25",
+      "s33",
+      "s34",
+      "s35",
+      "s37",
+      "s38",
+      "s39",
+      "s46",
+      "s47",
+      "s48",
+      "s49",
+      "s50",
+      "s51",
+      "s52",
+      "s54"
+    ]
+  }
 }

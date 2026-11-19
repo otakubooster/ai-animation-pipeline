@@ -458,7 +458,8 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "handheld screen showing a forum page with comment bubbles (screenshot-like); any motion would scroll/garble it"
+      "still_why": "handheld screen showing a forum page with comment bubbles (screenshot-like); any motion would scroll/garble it",
+      "max_zoom": 1.04
     },
     {
       "id": "s30",
@@ -778,7 +779,8 @@
       "talking": false,
       "product": true,
       "h3_prompt": "She wears an olive-green knit sweater and jeans. She looks at the tube thoughtfully and gives a small hopeful nod, holding it steady; static camera, slow push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "trans_in": "flash"
     },
     {
       "id": "s51",
@@ -795,7 +797,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "tube packshot on the counter: label is the point, nothing should move; also covers reuse S65 + S75 (~5.8 s) with editor pushes"
+      "still_why": "tube packshot on the counter: label is the point, nothing should move; also covers reuse S65 + S75 (~5.8 s) with editor pushes",
+      "max_zoom": 1.04
     },
     {
       "id": "s52",
@@ -812,7 +815,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "tube packshot by the window: label is the point, nothing should move"
+      "still_why": "tube packshot by the window: label is the point, nothing should move",
+      "max_zoom": 1.04
     },
     {
       "id": "s53",
@@ -1010,7 +1014,8 @@
       "skip_render": true,
       "talking": false,
       "still": true,
-      "still_why": "owner is a still: tube packshot on the counter: label is the point, nothing should move; also covers reuse S65 + S75 (~5.8 s) with editor pushes"
+      "still_why": "owner is a still: tube packshot on the counter: label is the point, nothing should move; also covers reuse S65 + S75 (~5.8 s) with editor pushes",
+      "max_zoom": 1.04
     },
     {
       "id": "s66",
@@ -1162,7 +1167,8 @@
       "skip_render": true,
       "talking": false,
       "still": true,
-      "still_why": "owner is a still: tube packshot on the counter: label is the point, nothing should move; also covers reuse S65 + S75 (~5.8 s) with editor pushes"
+      "still_why": "owner is a still: tube packshot on the counter: label is the point, nothing should move; also covers reuse S65 + S75 (~5.8 s) with editor pushes",
+      "max_zoom": 1.04
     },
     {
       "id": "s76",
@@ -1194,7 +1200,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "porch packshot: the box label is the point, nothing should move"
+      "still_why": "porch packshot: the box label is the point, nothing should move",
+      "max_zoom": 1.04
     },
     {
       "id": "s78",
@@ -1242,7 +1249,34 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "end card with printed headline and claim line"
+      "still_why": "end card with printed headline and claim line",
+      "max_zoom": 1.04,
+      "no_captions": true,
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.76,
+          "y": 0.3,
+          "size": 0.28,
+          "color": "E0252F",
+          "at": 1.2
+        },
+        {
+          "type": "button",
+          "text": "JETZT FESTBISS SICHERN →",
+          "x": 0.5,
+          "y": 0.86,
+          "at": 1.6
+        }
+      ],
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "redbox",
+  "captions_y": 0.5
 }

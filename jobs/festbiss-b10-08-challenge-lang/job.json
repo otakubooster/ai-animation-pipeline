@@ -39,7 +39,8 @@
       "talking": true,
       "product": true,
       "h3_prompt": "He talks to the camera with natural lip movement, a confident expression and a small nod, holding the tube steady at chest height. Static camera. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 5.04
+      "h3_seconds": 5.04,
+      "overlay": "Testen Sie es an Ihrer lockeren Prothese. Behalten Sie es gratis, wenn es nicht hilft."
     },
     {
       "id": "s02",
@@ -55,7 +56,8 @@
       "frame": "A08-S02.jpg",
       "talking": false,
       "h3_prompt": "She taps her finger on her cheek and tilts her head with a doubtful frown, then glances down at the steak, mouth closed. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
-      "h3_seconds": 6.58
+      "h3_seconds": 6.58,
+      "overlay": "Testen Sie es an Ihrer lockeren Prothese. Behalten Sie es gratis, wenn es nicht hilft."
     },
     {
       "id": "s03",
@@ -71,7 +73,18 @@
       "frame": "A08-S01.jpg",
       "skip_render": true,
       "clip_from": "s01",
-      "talking": true
+      "talking": true,
+      "overlay": "Testen Sie es an Ihrer lockeren Prothese. Behalten Sie es gratis, wenn es nicht hilft.",
+      "marks": [
+        {
+          "type": "big",
+          "text": "SIE ZAHLEN NICHTS DAFÜR",
+          "x": 0.5,
+          "y": 0.64,
+          "scale": 1.15,
+          "at": 0.25
+        }
+      ]
     },
     {
       "id": "s04",
@@ -240,7 +253,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "packshot of the tube in a hand on white: the label is the point and nothing should move; covers S58"
+      "still_why": "packshot of the tube in a hand on white: the label is the point and nothing should move; covers S58",
+      "max_zoom": 1.04
     },
     {
       "id": "s15",
@@ -334,7 +348,8 @@
       "talking": false,
       "product": true,
       "h3_prompt": "Light steam rises gently from the mug while the hand rests still on the wooden worktop. Static camera, very slow push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "trans_in": "flash"
     },
     {
       "id": "s21",
@@ -942,7 +957,8 @@
       "skip_render": true,
       "talking": false,
       "still": true,
-      "still_why": "owner is a still: packshot of the tube in a hand on white: the label is the point and nothing should move; covers S58"
+      "still_why": "owner is a still: packshot of the tube in a hand on white: the label is the point and nothing should move; covers S58",
+      "max_zoom": 1.04
     },
     {
       "id": "s59",
@@ -960,7 +976,63 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "product end card: box front text and tube label are the point, nothing should move"
+      "still_why": "product end card: box front text and tube label are the point, nothing should move",
+      "max_zoom": 1.04,
+      "no_captions": true,
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.8,
+          "y": 0.17,
+          "size": 0.26,
+          "color": "1A9E4B",
+          "at": 0.2
+        }
+      ],
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "box-small",
+  "captions_y": 0.6,
+  "overlay_style": "header-red",
+  "pip": {
+    "src": "s01",
+    "shots": [
+      "s25",
+      "s26",
+      "s27",
+      "s28",
+      "s29",
+      "s30",
+      "s31",
+      "s32",
+      "s33",
+      "s34",
+      "s35",
+      "s36",
+      "s37",
+      "s38",
+      "s40",
+      "s41",
+      "s42",
+      "s43",
+      "s44",
+      "s46",
+      "s47",
+      "s48",
+      "s49",
+      "s50",
+      "s52",
+      "s54",
+      "s55",
+      "s56",
+      "s57",
+      "s58"
+    ]
+  }
 }

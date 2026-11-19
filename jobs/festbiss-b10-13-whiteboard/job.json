@@ -38,7 +38,8 @@
       "frame": "A13-S01.jpg",
       "talking": true,
       "h3_prompt": "9:16. He talks to the camera with natural lip movement, calm nods and a small gesture of the marker toward the board, holding the denture steady; static camera, slight slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
-      "h3_seconds": 6.26
+      "h3_seconds": 6.26,
+      "overlay": "Was unter Ihrer Prothese passiert – bei jedem Bissen"
     },
     {
       "id": "s02",
@@ -70,7 +71,9 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)",
+      "max_zoom": 1.04,
+      "no_captions": true
     },
     {
       "id": "s04",
@@ -86,7 +89,9 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)",
+      "max_zoom": 1.04,
+      "no_captions": true
     },
     {
       "id": "s05",
@@ -103,7 +108,9 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)",
+      "max_zoom": 1.04,
+      "no_captions": true
     },
     {
       "id": "s06",
@@ -119,7 +126,8 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "FRAME PROBLEM: start frame is a full infographic with ENGLISH labels (THERMOPLAST GEL, DENTURE (SECURE FIT), JAW RIDGE, NO HOT WATER, NO BOILING); 'NO HOT WATER' contradicts the warm-water use of the gel. 0.8 s: drop it or regenerate (prompt wanted only THERMOPLAST being written)"
+      "still_why": "FRAME PROBLEM: start frame is a full infographic with ENGLISH labels (THERMOPLAST GEL, DENTURE (SECURE FIT), JAW RIDGE, NO HOT WATER, NO BOILING); 'NO HOT WATER' contradicts the warm-water use of the gel. 0.8 s: drop it or regenerate (prompt wanted only THERMOPLAST being written)",
+      "max_zoom": 1.04
     },
     {
       "id": "s07",
@@ -136,7 +144,9 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)",
+      "max_zoom": 1.04,
+      "no_captions": true
     },
     {
       "id": "s08",
@@ -168,7 +178,9 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)",
+      "max_zoom": 1.04,
+      "no_captions": true
     },
     {
       "id": "s10",
@@ -185,7 +197,9 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)",
+      "max_zoom": 1.04,
+      "no_captions": true
     },
     {
       "id": "s11",
@@ -201,7 +215,8 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "FRAME PROBLEM: start frame is text-heavy with ENGLISH labels (DENTURE, JAW RIDGE, DENTURE ADHESIVE GEL, DON'T USE TOO MUCH!); 1.0 s, not reused: still, or regenerate with only the mirror being drawn"
+      "still_why": "FRAME PROBLEM: start frame is text-heavy with ENGLISH labels (DENTURE, JAW RIDGE, DENTURE ADHESIVE GEL, DON'T USE TOO MUCH!); 1.0 s, not reused: still, or regenerate with only the mirror being drawn",
+      "max_zoom": 1.04
     },
     {
       "id": "s12",
@@ -218,7 +233,9 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)",
+      "max_zoom": 1.04,
+      "no_captions": true
     },
     {
       "id": "s13",
@@ -235,7 +252,17 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "hand mid-word on the board (FUELL...): any writing motion would add invented letters"
+      "still_why": "hand mid-word on the board (FUELL...): any writing motion would add invented letters",
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.8,
+          "y": 0.17,
+          "size": 0.26,
+          "color": "1A9E4B",
+          "at": 0.2
+        }
+      ]
     },
     {
       "id": "s14",
@@ -253,7 +280,27 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "tube packshot on the counter: label is the point, nothing should move"
+      "still_why": "tube packshot on the counter: label is the point, nothing should move",
+      "max_zoom": 1.04,
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.8,
+          "y": 0.17,
+          "size": 0.26,
+          "color": "1A9E4B",
+          "at": 0.2
+        }
+      ],
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "shadow",
+  "captions_y": 0.72,
+  "overlay_style": "header-red"
 }

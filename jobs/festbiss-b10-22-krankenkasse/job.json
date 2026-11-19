@@ -38,7 +38,8 @@
       "frame": "A22-S01.jpg",
       "talking": true,
       "h3_prompt": "He talks into the camera with natural lip movement, a relaxed smile, small nods and head tilts, now and then turning serious; handheld selfie at arm's length, slight natural sway. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
-      "h3_seconds": 7.0
+      "h3_seconds": 7.0,
+      "overlay": "Wenn Ihre Krankenkasse keine harte Unterfütterung zahlt, gibt es vielleicht eine andere Möglichkeit."
     },
     {
       "id": "s02",
@@ -54,7 +55,8 @@
       "frame": "A22-S02.jpg",
       "talking": false,
       "h3_prompt": "She sits at the table with a fork raised halfway, her mouth open in surprise and alarm as her denture shifts; a plate of salad with chicken and a glass of water in front of her. She freezes with the fork halfway up, her eyes widening in alarm, then slowly lowers the fork to the plate and closes her lips; static camera, slight handheld sway. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "overlay": "Wenn Ihre Krankenkasse keine harte Unterfütterung zahlt, gibt es vielleicht eine andere Möglichkeit."
     },
     {
       "id": "s03",
@@ -404,7 +406,8 @@
       "talking": false,
       "product": true,
       "h3_prompt": "The hand slowly lowers the tube cap-first a little deeper into the hot water while the other hand holds the mug steady; the water ripples gently. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "trans_in": "flash"
     },
     {
       "id": "s26",
@@ -771,7 +774,35 @@
       "frame": "A22-S35.jpg",
       "skip_render": true,
       "clip_from": "s35",
-      "talking": true
+      "talking": true,
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.8,
+          "y": 0.17,
+          "size": 0.26,
+          "color": "1A9E4B",
+          "at": 0.2
+        }
+      ],
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "shadow",
+  "captions_y": 0.72,
+  "overlay_style": "header-red",
+  "comment_card": {
+    "text": "Leider zahlt meine Krankenkasse keine harte Unterfütterung. Was soll ich tun?",
+    "reply": "Antwort an @carola.r1957",
+    "shots": [
+      "s01",
+      "s02"
+    ],
+    "y": 0.175
+  }
 }

@@ -38,7 +38,8 @@
       "frame": "A10-S01.jpg",
       "talking": true,
       "h3_prompt": "He talks to the camera with natural lip movement, calm small nods and slight head tilts, holding the small microphone steady at chin height; handheld selfie camera with slight natural sway. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
-      "h3_seconds": 7.0
+      "h3_seconds": 7.0,
+      "overlay": "Ich habe einen Prothesen-Profi gebeten, jede Methode für eine lockere Unterprothese zu bewerten"
     },
     {
       "id": "s02",
@@ -55,7 +56,8 @@
       "frame": "A10-S01.jpg",
       "skip_render": true,
       "clip_from": "s01",
-      "talking": true
+      "talking": true,
+      "no_captions": false
     },
     {
       "id": "s03",
@@ -88,7 +90,8 @@
       "frame": "A10-S01.jpg",
       "skip_render": true,
       "clip_from": "s01",
-      "talking": true
+      "talking": true,
+      "no_captions": false
     },
     {
       "id": "s05",
@@ -119,7 +122,8 @@
       "frame": "A10-S01.jpg",
       "skip_render": true,
       "clip_from": "s01",
-      "talking": true
+      "talking": true,
+      "no_captions": false
     },
     {
       "id": "s07",
@@ -195,7 +199,8 @@
       "talking": false,
       "product": true,
       "h3_prompt": "He wears a navy pajama shirt. He keeps looking at his reflection, his smile widening into a relaxed grin with a small nod, the reflection moving with him; static camera, slow subtle push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "trans_in": "flash"
     },
     {
       "id": "s12",
@@ -258,7 +263,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "packshot of box + tube: the label text is the point and nothing should move"
+      "still_why": "packshot of box + tube: the label text is the point and nothing should move",
+      "max_zoom": 1.04
     },
     {
       "id": "s16",
@@ -334,7 +340,17 @@
       "frame": "A10-S14.jpg",
       "skip_render": true,
       "clip_from": "s14",
-      "talking": true
+      "talking": true,
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.8,
+          "y": 0.17,
+          "size": 0.26,
+          "color": "1A9E4B",
+          "at_word": "Geld"
+        }
+      ]
     },
     {
       "id": "s21",
@@ -351,7 +367,63 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "end card with printed headline and offer line"
+      "still_why": "end card with printed headline and offer line",
+      "max_zoom": 1.04,
+      "no_captions": true,
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "redbox",
+  "captions_y": 0.47,
+  "overlay_style": "header-white",
+  "tier_list": {
+    "shots": {
+      "s02": [
+        {
+          "row": "D",
+          "text": "Haftcreme",
+          "at_word": "Haftcreme"
+        }
+      ],
+      "s04": [
+        {
+          "row": "D",
+          "text": "Haftpulver",
+          "at_word": "Haftpulver"
+        },
+        {
+          "row": "C",
+          "text": "Haftstreifen",
+          "at_word": "Haftstreifen"
+        },
+        {
+          "row": "D",
+          "text": "Creme + Streifen",
+          "at_word": "gleichzeitig"
+        },
+        {
+          "row": "D",
+          "text": "Damit leben",
+          "at_word": "leben"
+        },
+        {
+          "row": "B",
+          "text": "Polster-Gel",
+          "at_word": "Polster"
+        }
+      ],
+      "s06": [
+        {
+          "row": "S",
+          "text": "Festbiss",
+          "at_word": "9"
+        }
+      ]
+    }
+  }
 }

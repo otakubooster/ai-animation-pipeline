@@ -39,7 +39,8 @@
       "frame": "A20-S01.jpg",
       "talking": true,
       "h3_prompt": "She talks to the camera with natural lip movement, small nods, lively eyebrows and now and then a warm, moved smile; handheld selfie camera, slight natural sway. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
-      "h3_seconds": 7.0
+      "h3_seconds": 7.0,
+      "overlay": "WARUM ITALIENISCHE PROTHESENTRÄGER KAUM HAFTCREME BRAUCHEN"
     },
     {
       "id": "s02",
@@ -583,7 +584,8 @@
       "talking": false,
       "product": true,
       "h3_prompt": "She wears a light-blue chambray button-down shirt. She slowly lowers the tube a little deeper into the mug of hot water and holds it there, watching it; steam drifts from the kettle; static camera. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "trans_in": "flash"
     },
     {
       "id": "s38",
@@ -1376,7 +1378,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "Box + tube packshot where the label text (incl. small box lines) is the point and nothing should move; also reused by the CTA S91."
+      "still_why": "Box + tube packshot where the label text (incl. small box lines) is the point and nothing should move; also reused by the CTA S91.",
+      "max_zoom": 1.04
     },
     {
       "id": "s90",
@@ -1407,7 +1410,8 @@
       "skip_render": true,
       "talking": false,
       "still": true,
-      "still_why": "owner is a still: Box + tube packshot where the label text (incl. small box lines) is the point and nothing should move; also reused by the CTA S91."
+      "still_why": "owner is a still: Box + tube packshot where the label text (incl. small box lines) is the point and nothing should move; also reused by the CTA S91.",
+      "max_zoom": 1.04
     },
     {
       "id": "s92",
@@ -1422,7 +1426,16 @@
       "frame": "A20-S01.jpg",
       "skip_render": true,
       "clip_from": "s01",
-      "talking": true
+      "talking": true,
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "box-small",
+  "captions_y": 0.7,
+  "overlay_style": "header-white-caps"
 }

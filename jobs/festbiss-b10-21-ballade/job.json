@@ -420,7 +420,8 @@
       "talking": false,
       "product": true,
       "h3_prompt": "The two sit at the round kitchen table with cups of tea and the floral teapot on a lace doily; June sips her tea, the hero rests her chin on her hand, listening dreamily. Smooth animated character motion: the woman on the right sips her tea; the hero rests her chin on her hand and listens with a dreamy smile; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "trans_in": "flash"
     },
     {
       "id": "s26",
@@ -1056,7 +1057,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "Tube-only packshot where the label is the point and nothing should move; also reused by S69."
+      "still_why": "Tube-only packshot where the label is the point and nothing should move; also reused by S69.",
+      "max_zoom": 1.04
     },
     {
       "id": "s66",
@@ -1104,7 +1106,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "Box + tube packshot (label is the point, nothing should move); also reused by S72."
+      "still_why": "Box + tube packshot (label is the point, nothing should move); also reused by S72.",
+      "max_zoom": 1.04
     },
     {
       "id": "s69",
@@ -1120,7 +1123,8 @@
       "skip_render": true,
       "talking": false,
       "still": true,
-      "still_why": "owner is a still: Tube-only packshot where the label is the point and nothing should move; also reused by S69."
+      "still_why": "owner is a still: Tube-only packshot where the label is the point and nothing should move; also reused by S69.",
+      "max_zoom": 1.04
     },
     {
       "id": "s70",
@@ -1168,7 +1172,8 @@
       "skip_render": true,
       "talking": false,
       "still": true,
-      "still_why": "owner is a still: Box + tube packshot (label is the point, nothing should move); also reused by S72."
+      "still_why": "owner is a still: Box + tube packshot (label is the point, nothing should move); also reused by S72.",
+      "max_zoom": 1.04
     },
     {
       "id": "s73",
@@ -1202,7 +1207,33 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "End card with printed headline, offer line and products; the model would garble the text."
+      "still_why": "End card with printed headline, offer line and products; the model would garble the text.",
+      "max_zoom": 1.04,
+      "no_captions": true,
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.76,
+          "y": 0.3,
+          "size": 0.28,
+          "color": "E0252F",
+          "at": 1.2
+        },
+        {
+          "type": "button",
+          "text": "UNTEN TIPPEN UND SICHERN →",
+          "x": 0.5,
+          "y": 0.86,
+          "at": 1.6
+        }
+      ],
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "none"
+  },
+  "caption_style": "redbox",
+  "captions_y": 0.7
 }

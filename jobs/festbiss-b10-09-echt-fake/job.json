@@ -40,7 +40,46 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "split screen of two panels with the real and the fake tube; H3 would merge the halves and garble the labels"
+      "still_why": "split screen of two panels with the real and the fake tube; H3 would merge the halves and garble the labels",
+      "max_zoom": 1.04,
+      "marks": [
+        {
+          "type": "label",
+          "text": "ECHT",
+          "x": 0.16,
+          "y": 0.09,
+          "color": "1A9E4B",
+          "at": 0.1
+        },
+        {
+          "type": "label",
+          "text": "vs",
+          "x": 0.31,
+          "y": 0.09,
+          "color": "111111",
+          "at": 0.3,
+          "scale": 0.6
+        },
+        {
+          "type": "label",
+          "text": "FAKE",
+          "x": 0.45,
+          "y": 0.09,
+          "color": "E0252F",
+          "at": 0.5
+        },
+        {
+          "type": "label",
+          "text": "Kaufen Sie kein gefälschtes Festbiss!",
+          "x": 0.5,
+          "y": 0.74,
+          "color": "FFFFFF",
+          "fg": "111111",
+          "at": 0.6,
+          "scale": 0.72
+        }
+      ],
+      "no_captions": true
     },
     {
       "id": "s02",
@@ -71,7 +110,8 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "packshot of the counterfeit tube and box: the printed look-alike packaging is the point and nothing should move"
+      "still_why": "packshot of the counterfeit tube and box: the printed look-alike packaging is the point and nothing should move",
+      "max_zoom": 1.04
     },
     {
       "id": "s04",
@@ -179,7 +219,8 @@
       "talking": false,
       "still": true,
       "skip_render": true,
-      "still_why": "comparison infographic with printed words, check/cross marks and a packshot"
+      "still_why": "comparison infographic with printed words, check/cross marks and a packshot",
+      "max_zoom": 1.04
     },
     {
       "id": "s11",
@@ -226,7 +267,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "static packshot on the counter: the label is the point and nothing should move"
+      "still_why": "static packshot on the counter: the label is the point and nothing should move",
+      "max_zoom": 1.04
     },
     {
       "id": "s14",
@@ -484,7 +526,8 @@
       "frame": "A09-S30.jpg",
       "still": true,
       "skip_render": true,
-      "still_why": "editor card (text) - Screen recording of your product page on festbiss.de on a phone, slowly scrollin"
+      "still_why": "editor card (text) - Screen recording of your product page on festbiss.de on a phone, slowly scrollin",
+      "max_zoom": 1.04
     },
     {
       "id": "s31",
@@ -517,7 +560,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "packshot of the tube held in a hand: the label is the point and nothing should move"
+      "still_why": "packshot of the tube held in a hand: the label is the point and nothing should move",
+      "max_zoom": 1.04
     },
     {
       "id": "s33",
@@ -534,7 +578,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "packshot of box and tube with printed box text"
+      "still_why": "packshot of box and tube with printed box text",
+      "max_zoom": 1.04
     },
     {
       "id": "s34",
@@ -551,7 +596,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "static shelf packshot: the label is the point and nothing should move"
+      "still_why": "static shelf packshot: the label is the point and nothing should move",
+      "max_zoom": 1.04
     },
     {
       "id": "s35",
@@ -581,7 +627,15 @@
       "frame": "A09-S02.jpg",
       "skip_render": true,
       "clip_from": "s02",
-      "talking": true
+      "talking": true,
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "box-small",
+  "captions_y": 0.52
 }

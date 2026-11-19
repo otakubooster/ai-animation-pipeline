@@ -55,7 +55,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "still life of the labelled tube, mug and denture: label is the point, no action implied"
+      "still_why": "still life of the labelled tube, mug and denture: label is the point, no action implied",
+      "max_zoom": 1.04
     },
     {
       "id": "s03",
@@ -147,7 +148,8 @@
       "talking": true,
       "product": true,
       "h3_prompt": "She wears a light-blue fleece quarter-zip pullover. She talks to the camera with natural lip movement and a confident smile, small nods, holding the tube steady; handheld selfie camera with slight natural sway. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "trans_in": "flash"
     },
     {
       "id": "s09",
@@ -164,7 +166,17 @@
       "talking": false,
       "product": true,
       "h3_prompt": "The hand slowly lowers the tube a little deeper into the hot water, gentle steam rising; static camera. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "marks": [
+        {
+          "type": "arrow",
+          "x": 0.52,
+          "y": 0.52,
+          "size": 0.22,
+          "angle": -90,
+          "at": 0.2
+        }
+      ]
     },
     {
       "id": "s10",
@@ -181,7 +193,17 @@
       "talking": false,
       "product": true,
       "h3_prompt": "The hand slowly draws the tube along the inside of the denture, laying a thin even line of amber gel while the other hand holds the denture still; static close-up camera. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "marks": [
+        {
+          "type": "arrow",
+          "x": 0.42,
+          "y": 0.58,
+          "size": 0.22,
+          "angle": -45,
+          "at": 0.2
+        }
+      ]
     },
     {
       "id": "s11",
@@ -289,7 +311,18 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "packshot of box + tube: the label text is the point and nothing should move"
+      "still_why": "packshot of box + tube: the label text is the point and nothing should move",
+      "max_zoom": 1.04,
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.8,
+          "y": 0.17,
+          "size": 0.26,
+          "color": "1A9E4B",
+          "at": 0.2
+        }
+      ]
     },
     {
       "id": "s18",
@@ -322,7 +355,17 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "end card with printed headline and offer line"
+      "still_why": "end card with printed headline and offer line",
+      "max_zoom": 1.04,
+      "no_captions": true,
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "redbox",
+  "captions_y": 0.5
 }

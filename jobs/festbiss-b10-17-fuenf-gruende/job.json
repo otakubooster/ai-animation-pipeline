@@ -39,7 +39,8 @@
       "talking": true,
       "product": true,
       "h3_prompt": "Clay figures move in small stop-motion steps: she talks to the camera with natural lip movement, cheeky smiles and small nods, holding the tube still beside her face; static camera. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 7.0
+      "h3_seconds": 7.0,
+      "overlay": "5 Gründe, Festbiss NICHT zu kaufen"
     },
     {
       "id": "s02",
@@ -249,7 +250,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "product-only 0.8 s cut-in, nothing needs to move, big label. FLAG: frame shows the product in the cup holder, script means the old adhesive"
+      "still_why": "product-only 0.8 s cut-in, nothing needs to move, big label. FLAG: frame shows the product in the cup holder, script means the old adhesive",
+      "max_zoom": 1.04
     },
     {
       "id": "s15",
@@ -266,7 +268,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "product-only 1.0 s cut-in, nothing needs to move, big labels. FLAG: frame shows the product box+tube, script means the old adhesive"
+      "still_why": "product-only 1.0 s cut-in, nothing needs to move, big labels. FLAG: frame shows the product box+tube, script means the old adhesive",
+      "max_zoom": 1.04
     },
     {
       "id": "s16",
@@ -314,7 +317,8 @@
       "talking": false,
       "product": true,
       "h3_prompt": "She sits at the table holding a piece of toast in one hand and touching her chin with the other finger, chewing carefully and glancing sideways with a suspicious look; plates and a mug on the table. Clay figures move in small stop-motion steps: she chews carefully, pauses with a suspicious sideways glance, then takes another small bite of toast; lips closed while chewing; static camera. The tube and box keep their exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 5.5
+      "h3_seconds": 5.5,
+      "trans_in": "flash"
     },
     {
       "id": "s19",
@@ -658,7 +662,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "desk calendar grid with red X marks the model would garble, plus the tube label"
+      "still_why": "desk calendar grid with red X marks the model would garble, plus the tube label",
+      "max_zoom": 1.04
     },
     {
       "id": "s41",
@@ -740,7 +745,18 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "packshot with the guarantee badge beside it: label is the point, nothing should move"
+      "still_why": "packshot with the guarantee badge beside it: label is the point, nothing should move",
+      "max_zoom": 1.04,
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.74,
+          "y": 0.4,
+          "size": 0.26,
+          "color": "1A9E4B",
+          "at": 0.2
+        }
+      ]
     },
     {
       "id": "s46",
@@ -771,7 +787,48 @@
       "frame": "A17-S01.jpg",
       "skip_render": true,
       "clip_from": "s01",
-      "talking": true
+      "talking": true,
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "shadow",
+  "captions_y": 0.72,
+  "overlay_style": "header-red",
+  "progress_pills": {
+    "labels": [
+      "GRUND 1",
+      "GRUND 2",
+      "GRUND 3",
+      "GRUND 4",
+      "GRUND 5"
+    ],
+    "starts": [
+      [
+        "s02",
+        null
+      ],
+      [
+        "s05",
+        "weiches"
+      ],
+      [
+        "s11",
+        "lieben"
+      ],
+      [
+        "s17",
+        "lieben"
+      ],
+      [
+        "s22",
+        null
+      ]
+    ],
+    "end": "s31"
+  }
 }

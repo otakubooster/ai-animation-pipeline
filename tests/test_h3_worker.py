@@ -30,6 +30,15 @@ def test_assign_balances_and_is_deterministic():
     assert set(rj.assign(items, 1).values()) == {0}
 
 
+def test_assign_is_per_job():
+    """Editing one job (other shot lengths) must not move any other job's shots between boxes."""
+    a = [("a", f"s{i}", 4 + i % 5) for i in range(20)]
+    b = [("b", f"s{i}", 5 + i % 3) for i in range(9)]
+    one = rj.assign(a + b, 4)
+    two = rj.assign([(j, i, 7.0) for j, i, _ in a] + b, 4)
+    assert all(one[k] == two[k] for k in one if k[0] == "b")
+
+
 def test_size_keeps_frame_aspect(tmp_path):
     for (w, h), want in [((1080, 1920), [576, 1024]), ((1024, 1024), [768, 768]), ((1920, 1080), [1024, 576])]:
         p = tmp_path / f"{w}x{h}.png"

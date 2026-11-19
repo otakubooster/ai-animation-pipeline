@@ -452,7 +452,7 @@ def clip_source(shot: dict) -> str:
     return shot.get("fill_from") or shot.get("clip_from") or shot["id"]
 
 
-def share_plan(shots: list[dict], timeline: list[dict], locate, length=None) -> dict:
+def share_plan(shots: list[dict], timeline: list[dict], locate, length=None, cycle: bool = False) -> dict:
     """{shot id: (source clip id, head, end)}. Shots that share one clip get consecutive pieces of it, in timeline
     order; when the clip is too short for all of them, each gets a piece proportional to its duration (the editor
     then slows it, up to MAX_SLOW, and holds the last frame)."""
@@ -474,6 +474,19 @@ def share_plan(shots: list[dict], timeline: list[dict], locate, length=None) -> 
             continue
         need = sum(dur[m["id"]] for m in members)
         usable = max(stop - start, 0.1)
+        if cycle and need > usable * 1.15:       # long reuse groups: each member plays its own length, wrapping to
+            cur = start                           # the clip start (framing changes hide the repeat) - no slow-mo
+            for m in members:
+                dd = dur[m["id"]]
+                if dd >= usable:
+                    plan[m["id"]] = (src_id, round(start, 3), round(stop, 3))
+                    cur = start
+                    continue
+                if cur + dd > stop:
+                    cur = start
+                plan[m["id"]] = (src_id, round(cur, 3), round(cur + dd, 3))
+                cur += dd
+            continue
         scale = min(1.0, usable / need)
         cur = start
         for m in members:

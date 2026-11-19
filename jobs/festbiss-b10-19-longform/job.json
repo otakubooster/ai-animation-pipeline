@@ -38,7 +38,8 @@
       "frame": "A19-S01.jpg",
       "talking": true,
       "h3_prompt": "He talks to the camera with natural lip movement and a serious, knowing look, slowly turning the denture in his hands at chest height; static camera with a very slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.48
+      "h3_seconds": 4.48,
+      "overlay": "Warum jede Lösung für eine lockere Unterprothese irgendwann versagt"
     },
     {
       "id": "s02",
@@ -211,7 +212,8 @@
       "frame": "A19-S12.jpg",
       "still": true,
       "skip_render": true,
-      "still_why": "editor card (text) - Title card made in the editor: deep-red background, big white bold „#1“ and abov"
+      "still_why": "editor card (text) - Title card made in the editor: deep-red background, big white bold „#1“ and abov",
+      "max_zoom": 1.04
     },
     {
       "id": "s13",
@@ -553,7 +555,8 @@
       "frame": "A19-S34.jpg",
       "still": true,
       "skip_render": true,
-      "still_why": "editor card (text) - Title card made in the editor: deep-red background, big white bold „#2“ and abov"
+      "still_why": "editor card (text) - Title card made in the editor: deep-red background, big white bold „#2“ and abov",
+      "max_zoom": 1.04
     },
     {
       "id": "s35",
@@ -709,7 +712,8 @@
       "frame": "A19-S44.jpg",
       "still": true,
       "skip_render": true,
-      "still_why": "editor card (text) - Title card made in the editor: deep-red background, big white bold „#3“ and abov"
+      "still_why": "editor card (text) - Title card made in the editor: deep-red background, big white bold „#3“ and abov",
+      "max_zoom": 1.04
     },
     {
       "id": "s45",
@@ -864,7 +868,8 @@
       "frame": "A19-S54.jpg",
       "still": true,
       "skip_render": true,
-      "still_why": "editor card (text) - Title card made in the editor: deep-red background, big white bold „#4“ and abov"
+      "still_why": "editor card (text) - Title card made in the editor: deep-red background, big white bold „#4“ and abov",
+      "max_zoom": 1.04
     },
     {
       "id": "s55",
@@ -1227,7 +1232,8 @@
       "talking": true,
       "product": true,
       "h3_prompt": "He talks to the camera with natural lip movement, calm nods and small open gestures of his free hand, holding the tube steady at the right; static camera, very slow push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 7.0
+      "h3_seconds": 7.0,
+      "trans_in": "flash"
     },
     {
       "id": "s78",
@@ -1549,7 +1555,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "packshot: box + tube labels are the point, nothing should move"
+      "still_why": "packshot: box + tube labels are the point, nothing should move",
+      "max_zoom": 1.04
     },
     {
       "id": "s98",
@@ -1583,7 +1590,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "product still-life with the readable tube label as the point, nothing should move"
+      "still_why": "product still-life with the readable tube label as the point, nothing should move",
+      "max_zoom": 1.04
     },
     {
       "id": "s100",
@@ -1680,7 +1688,17 @@
       "frame": "A19-S77.jpg",
       "skip_render": true,
       "clip_from": "s77",
-      "talking": true
+      "talking": true,
+      "marks": [
+        {
+          "type": "badge",
+          "x": 0.8,
+          "y": 0.17,
+          "size": 0.26,
+          "color": "1A9E4B",
+          "at_word": "Geld"
+        }
+      ]
     },
     {
       "id": "s106",
@@ -1698,7 +1716,91 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "end card with printed headline and offer line"
+      "still_why": "end card with printed headline and offer line",
+      "max_zoom": 1.04,
+      "no_captions": true,
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "redbox",
+  "captions_y": 0.5,
+  "overlay_style": "header-white",
+  "pip": {
+    "src": "s09",
+    "shots": [
+      "s02",
+      "s04",
+      "s05",
+      "s06",
+      "s07",
+      "s08",
+      "s10",
+      "s14",
+      "s15",
+      "s20",
+      "s21",
+      "s23",
+      "s24",
+      "s29",
+      "s30",
+      "s31",
+      "s32",
+      "s33",
+      "s37",
+      "s38",
+      "s39",
+      "s42",
+      "s43",
+      "s48",
+      "s49",
+      "s50",
+      "s51",
+      "s52",
+      "s55",
+      "s56",
+      "s57",
+      "s58",
+      "s59",
+      "s60",
+      "s63",
+      "s65",
+      "s66",
+      "s67",
+      "s68",
+      "s69",
+      "s70",
+      "s71",
+      "s72",
+      "s73",
+      "s74",
+      "s78",
+      "s79",
+      "s80",
+      "s81",
+      "s82",
+      "s83",
+      "s84",
+      "s85",
+      "s86",
+      "s87",
+      "s88",
+      "s89",
+      "s90",
+      "s91",
+      "s96",
+      "s97",
+      "s98",
+      "s99",
+      "s100",
+      "s101",
+      "s102",
+      "s103",
+      "s104"
+    ]
+  }
 }

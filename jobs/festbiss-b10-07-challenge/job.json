@@ -39,7 +39,8 @@
       "talking": false,
       "product": true,
       "h3_prompt": "Background: a worn butcher-block wooden counter. The nozzle moves slowly along the inside of the denture, laying a continuous bead of amber-gold gel around the arch; both hands stay steady. Static camera. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
-      "h3_seconds": 7.0
+      "h3_seconds": 7.0,
+      "overlay": "Testen Sie es an Ihrer lockeren Prothese. Behalten Sie es gratis, wenn es nicht hilft."
     },
     {
       "id": "s02",
@@ -55,7 +56,8 @@
       "frame": "A07-S02.jpg",
       "talking": false,
       "h3_prompt": "She sits at a busy steakhouse table with friends, looking down at her plate with a small hopeful smile; on the wooden table in front of her a plate with a grilled steak, another steak plate on the right, small bowls of mashed potatoes and a cup of soup; laughing friends cropped at the left and right edges. She smiles and starts cutting into the steak with knife and fork, mouth closed; the friends at the edges laugh softly. Slight handheld camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "overlay": "Testen Sie es an Ihrer lockeren Prothese. Behalten Sie es gratis, wenn es nicht hilft."
     },
     {
       "id": "s03",
@@ -71,7 +73,18 @@
       "frame": "A07-S03.jpg",
       "talking": true,
       "h3_prompt": "He speaks to the camera with natural lip movement, a serious expression and a small nod, hands relaxed at his sides. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "overlay": "Testen Sie es an Ihrer lockeren Prothese. Behalten Sie es gratis, wenn es nicht hilft.",
+      "marks": [
+        {
+          "type": "big",
+          "text": "SIE ZAHLEN NICHTS DAFÜR",
+          "x": 0.5,
+          "y": 0.64,
+          "scale": 1.15,
+          "at": 0.25
+        }
+      ]
     },
     {
       "id": "s04",
@@ -239,7 +252,8 @@
       "product": true,
       "still": true,
       "skip_render": true,
-      "still_why": "packshot of the tube in a hand on white: the label is the point and nothing should move"
+      "still_why": "packshot of the tube in a hand on white: the label is the point and nothing should move",
+      "max_zoom": 1.04
     },
     {
       "id": "s15",
@@ -333,7 +347,8 @@
       "talking": false,
       "product": true,
       "h3_prompt": "Light steam rises gently from the mug while the hand rests still on the wooden worktop. Static camera, very slow push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
-      "h3_seconds": 4.0
+      "h3_seconds": 4.0,
+      "trans_in": "flash"
     },
     {
       "id": "s21",
@@ -410,7 +425,22 @@
       "frame": "A07-S25.jpg",
       "talking": false,
       "h3_prompt": "A bald man in his late 60s with a short white beard, wearing a navy quarter-zip sweater over a grey t-shirt, sits in a warm kitchen with honey-oak cabinets and a window, holding a piece of toast topped with crispy bacon in both hands at chest height, about to bite, smiling with pleasure; a plate with fried eggs, bacon and toast in front of him. He takes a crunchy bite of the bacon toast and chews with pleasure, smiling. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
-      "h3_seconds": 7.0
+      "h3_seconds": 7.0,
+      "trans_in": "rise"
     }
-  ]
+  ],
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "box-small",
+  "captions_y": 0.6,
+  "overlay_style": "header-red",
+  "pip": {
+    "src": "s01",
+    "shots": [
+      "s25"
+    ]
+  }
 }
