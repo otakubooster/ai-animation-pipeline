@@ -12,8 +12,12 @@ SRC=$(python3 -c "import json;j=json.load(open('$JOB_JSON'));print('git' if 'fra
 if [ "$SRC" = git ]; then
   FG=$(python3 -c "import json;g=json.load(open('$JOB_JSON'))['frames_git'];print(g['branch'],g['path'])")
   read -r FG_BRANCH FG_PATH <<<"$FG"
-  [ -d $WORK/frames-store/.git ] || timeout 600 git clone -q --depth 1 --filter=blob:none --sparse -b "$FG_BRANCH" \
-    "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git" $WORK/frames-store
+  if [ -d $WORK/frames-store/.git ]; then   # a keep-alive box: frames pushed after it booted need a fresh fetch
+    (cd $WORK/frames-store && timeout 600 git fetch -q --depth 1 origin "$FG_BRANCH" && git reset -q --hard FETCH_HEAD)
+  else
+    timeout 600 git clone -q --depth 1 --filter=blob:none --sparse -b "$FG_BRANCH" \
+      "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git" $WORK/frames-store
+  fi
   (cd $WORK/frames-store && git sparse-checkout add "$FG_PATH")
   cp -r "$WORK/frames-store/$FG_PATH"/. "$DEST/"
 else

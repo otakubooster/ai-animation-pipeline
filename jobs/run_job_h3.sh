@@ -2,6 +2,7 @@
 # Render one or many ad jobs with MiniMax H3 on one rented RTX 5090 (started by phase0/onstart.sh with
 # RUN_SCRIPT=jobs/run_job_h3.sh; host outside the EU/UK/US/KR - H3 licence, launch.py --territory h3).
 #   JOBS="jobs/a jobs/b ..."   SHARD="i/N" when N boxes split the batch (same RUN_ID on every box)
+#   KEEP_ALIVE_MIN=N: after the batch, keep rendering jobs added to jobs/h3_queue.txt until N idle minutes (see end)
 # Order: push test -> frames -> ComfyUI + H3 FL2VA files (~45 GB) -> render (model loaded once, push every few
 # clips) -> final push -> self-destroy. No interpolation: H3 renders 24 fps.
 # Output per job: branch job-results, jobs/<job_id>/results/<RUN_ID>/{clips/<id>.mp4, render[_i].json, READY[.i]}.
@@ -55,3 +56,43 @@ push "shard $SHARD models ready"
 stage "render (shard $SHARD)"
 PUSH_HOOK="bash $REPO_DIR/jobs/push_results.sh" PUSH_EVERY=${PUSH_EVERY:-3} python3 $REPO_DIR/jobs/render_job_h3.py "${SPECS[@]}"
 stage "done"
+
+# KEEP_ALIVE_MIN=N: stay up after the batch and render job folders listed in jobs/h3_queue.txt on main (polled every
+# minute through a separate clone, so this running script's own file never changes under bash) until N minutes pass
+# with nothing to do. ComfyUI and the models stay loaded: a new batch starts rendering about a minute after its
+# job.json files and queue line are pushed. Caps still apply (SPIKE_MAX_SECONDS, launch.py watch, credit guard).
+if [ -n "${KEEP_ALIVE_MIN:-}" ]; then
+  QR=$WORK/queue-repo
+  declare -A DONE
+  for J in $JOBS; do DONE[$J]=1; done
+  IDLE_SINCE=$(date +%s)
+  push "shard $SHARD idle (keep-alive ${KEEP_ALIVE_MIN} min)"
+  while [ $(( $(date +%s) - IDLE_SINCE )) -lt $(( KEEP_ALIVE_MIN * 60 )) ]; do
+    sleep 60
+    if [ -d $QR/.git ]; then
+      git -C $QR fetch -q --depth 1 origin HEAD && git -C $QR reset -q --hard FETCH_HEAD || continue
+    else
+      timeout 300 git clone -q --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git" $QR || continue
+    fi
+    NEW=()
+    for J in $(grep -v '^#' $QR/jobs/h3_queue.txt 2>/dev/null); do
+      [ -z "${DONE[$J]:-}" ] && [ -f "$QR/$J/job.json" ] && NEW+=("$J")
+    done
+    [ ${#NEW[@]} -eq 0 ] && continue
+    stage "queue: ${NEW[*]}"
+    SPECS=()
+    for J in "${NEW[@]}"; do
+      DONE[$J]=1
+      ID=$(python3 -c "import json;print(json.load(open('$QR/$J/job.json'))['job_id'])")
+      mkdir -p "$OUT_ROOT/$ID" && cp "$QR/$J/job.json" "$OUT_ROOT/$ID/job.json"
+      bash $REPO_DIR/jobs/fetch_frames.sh "$QR/$J/job.json" "$WORK/frames/$ID"
+      [ "$(ls "$WORK/frames/$ID" | wc -l)" -gt 0 ] && SPECS+=("$OUT_ROOT/$ID/job.json:$WORK/frames/$ID:$OUT_ROOT/$ID")
+    done
+    push "shard $SHARD queue frames ok"
+    [ ${#SPECS[@]} -gt 0 ] && PUSH_HOOK="bash $REPO_DIR/jobs/push_results.sh" PUSH_EVERY=${PUSH_EVERY:-3} \
+      python3 $REPO_DIR/jobs/render_job_h3.py "${SPECS[@]}"
+    push "shard $SHARD queue done"
+    IDLE_SINCE=$(date +%s)
+  done
+  stage "keep-alive: idle ${KEEP_ALIVE_MIN} min - shutting down"
+fi
