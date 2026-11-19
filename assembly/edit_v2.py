@@ -14,6 +14,9 @@ What it adds over edit_ad.py (same inputs: job.json, clips, VO, word timings):
   * Sound design: whoosh / shutter / pop / ching / swipe effects (assembly/sfx, ElevenLabs SFX) under the VO.
   * No reverse (boomerang) or heavy slow-motion: a short clip is slowed at most x1.15, then held (flagged in the
     report as needing a re-render).
+  * job.trim_idle (true | "report"): a clip that performs its action and then just holds the pose (assembly/activity.py,
+    camera motion compensated) ends where the action ends instead of playing the frozen tail; "report" only lists the
+    idle tails (report idle_tail_s). Talking shots and shots with no_trim_idle are left alone.
 
   python assembly/edit_v2.py JOB_DIR --clips DIR --vo VO --words WORDS --out OUT --name NAME
 """
@@ -31,6 +34,7 @@ from pathlib import Path
 from PIL import Image, ImageFont
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import activity  # noqa: E402
 import layout  # noqa: E402
 from edit_ad import (HEAD_TRIM, EMOJI_RE, align_shots, ass_time, find_clip, freeze_region, hook_png, norm,  # noqa: E402
                      probe_duration, run, share_plan, spoken_words)
@@ -472,7 +476,14 @@ def main() -> None:
             if src is None:
                 d |= {"mode": "still", "src": frames_dir / sh["frame"], "missing_clip": True}
             else:
-                d |= {"mode": "clip", "src": src, "head": head, "end": min(end or 1e9, probe_duration(src))}
+                e = min(end or 1e9, probe_duration(src))
+                if job.get("trim_idle") and not sh.get("talking") and not sh.get("no_trim_idle"):
+                    ae = activity.active_end(src, tmp / "activity.json")
+                    if ae is not None and head + 1.0 < ae < e:
+                        d["idle_tail_s"] = round(e - ae, 2)
+                        if job["trim_idle"] is True:
+                            e = ae
+                d |= {"mode": "clip", "src": src, "head": head, "end": e}
         key = f"{d['src']}:{d.get('head')}:{d.get('end')}"
         if key not in fc:
             if d["mode"] == "still":
