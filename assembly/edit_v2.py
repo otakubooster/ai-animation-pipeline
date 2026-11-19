@@ -1113,8 +1113,10 @@ def add_progress_pills(doc: Ass, fm: Fmt, spec: dict, timeline: list, shots: lis
     x0n, x1n = fm.panel if fm.panel else (0.04, 0.96)
     gap = RW * 0.012
     pw = (RW * (x1n - x0n) - gap * (n - 1)) / n
-    size = int(fm.txt * (0.40 if fm.name == "9x16" else 0.34))
-    y = RH * (0.045 if fm.name == "9x16" else 0.05)
+    size = int(fm.txt * (0.56 if fm.name == "9x16" else 0.34))
+    y = RH * (0.055 if fm.name == "9x16" else 0.05)
+    while size > 10 and max(doc.width(lab, size, True) for lab in spec["labels"]) > pw * 0.9:
+        size -= 2                                   # labels stay inside their pill
     for i in range(n):
         a, b = starts[i], (starts[i + 1] if i + 1 < n else end)
         if b - a < 0.1:
