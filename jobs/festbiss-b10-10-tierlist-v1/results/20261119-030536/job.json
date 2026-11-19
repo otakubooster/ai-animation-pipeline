@@ -1,0 +1,357 @@
+{
+  "job_id": "festbiss-b10-10-tierlist-v1",
+  "slug": "festbiss-b10-10-tierlist",
+  "batch": "batch-10",
+  "product": "Festbiss Prothesen-Unterfütterung",
+  "title": "Festbiss – Video-Ad 10 (DE) · „Ich bewerte jede Methode“ – Prothetiker-Tier-List",
+  "aspect_ratio": "9:16",
+  "language": "de",
+  "engine": "minimax-h3",
+  "render": {
+    "width": 576,
+    "height": 1024,
+    "fps": 24
+  },
+  "frames_release": {
+    "repo": "otakubooster/ai-animation-pipeline",
+    "tag": "batch-10",
+    "asset": "Festbiss_DE_Ads_06-22.zip",
+    "subdir": "Ad-10"
+  },
+  "format": "Photoreal UGC talking head: a grey-haired denture specialist in his lab holds a small handheld microphone and rates every way to keep a lower denture in, with an S–D tier list built up in the lower half (editor), cut with sky-blue 3D renders, B-roll of wearers, black-and-white flashbacks, a product shot and a dark-green end card.",
+  "voice_note": "Male VO (the specialist), German, calm, experienced, matter-of-fact. Address: Sie in the call to action.",
+  "captions_note": "Karaoke captions in the middle of the frame: white lowercase bold sans, the active word on a red rounded box. S01: white caption box with black text at the top. Tier list (S red, A orange, B yellow, C green, D teal) on a dark panel in the lower half in S02, S04, S06.",
+  "vo_ready": true,
+  "cycle_long": true,
+  "shots": [
+    {
+      "id": "s01",
+      "scene": "A10-S01",
+      "vo_line": "Ich wurde gebeten, jede Methode zu bewerten, mit der Leute ihre Unterkieferprothese festhalten. Also, hier ist alles, was ich gesehen habe –",
+      "ref_t": [
+        0.0,
+        5.5
+      ],
+      "vo_s": 8.38,
+      "seed": 11000,
+      "overlay_spec": "Caption box top (white, black text): „Ich habe einen Prothesen-Profi gebeten, jede Methode für eine lockere Unterprothese zu bewerten“",
+      "frame": "A10-S01.jpg",
+      "talking": true,
+      "h3_prompt": "He talks to the camera with natural lip movement, calm small nods and slight head tilts, holding the small microphone steady at chin height; handheld selfie camera with slight natural sway. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s02",
+      "scene": "A10-S02",
+      "vo_line": "auf einer Skala von 0 bis 10. Haftcreme: 2 von 10. Die Leute kommen mit Prothesen zu mir, die komplett damit eingeschmiert sind. Sie hält, wenn sie aus dem Haus gehen, und am Nachmittag spüren sie schon, wie sie wackelt. Haftcreme ist Kleber.",
+      "ref_t": [
+        5.5,
+        16.0
+      ],
+      "vo_s": 15.316,
+      "seed": 11001,
+      "overlay_spec": "Tier list on a dark panel in the lower half (rows S red, A orange, B yellow, C green, D teal); icons land row by row: D – Haftcreme (tube icon).",
+      "note": "10.5 s – generate two clips from this frame.",
+      "frame": "A10-S01.jpg",
+      "skip_render": true,
+      "clip_from": "s01",
+      "talking": true
+    },
+    {
+      "id": "s03",
+      "scene": "A10-S03",
+      "vo_line": "Und Kleber kann keinen Spalt füllen.",
+      "ref_t": [
+        16.0,
+        17.6
+      ],
+      "vo_s": 2.592,
+      "seed": 11002,
+      "note": "Style anchor – generate first; attach it to every scene marked Style: A10-S03.",
+      "frame": "A10-S03.jpg",
+      "talking": false,
+      "h3_prompt": "A lower full denture floats just above a U-shaped section of the lower jaw ridge (porous cream bone core under a pink gum layer); between them a thin, patchy white layer of adhesive cream with clear air gaps. The denture fills the upper half, the ridge section the lower middle. The denture slowly lowers onto the patchy white layer and rocks gently from side to side, the air gaps staying open beneath it; slow push-in, nothing else appears. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s04",
+      "scene": "A10-S04",
+      "vo_line": "Haftpulver: 2 von 10. Gleiches Prinzip, nur mehr Sauerei. Haftstreifen: 3 von 10. Etwas sauberer, aber immer noch nur eine dünne Schicht – und der Spalt ist immer noch da. Ich habe Leute gesehen, die Creme und Streifen gleichzeitig benutzen. 1 von 10. Das ist einfach noch mehr Schmiere über demselben Spalt. Und einfach damit leben, Essen gehen absagen: 0 von 10 – und das ist nicht ihre Schuld. Niemand hat ihnen je von dem Spalt erzählt. Das Polster-Gel aus der Drogerie: 5 von 10. Bessere Idee. Das Problem: Manche brauchen trotzdem noch Creme obendrauf. Implantate bewerte ich nicht. Das ist eine Operation, und für viele sind sie großartig. Das Problem: Sie fangen bei rund 16.000 Euro an. Also, für alles, was man zu Hause machen kann – das Beste, was ich gesehen habe:",
+      "ref_t": [
+        17.6,
+        55.0
+      ],
+      "vo_s": 51.348,
+      "seed": 11003,
+      "overlay_spec": "Tier list on a dark panel in the lower half (rows S red, A orange, B yellow, C green, D teal); icons land row by row: D – Haftpulver (bottle), C – Haftstreifen, D – Creme + Streifen, D – „Damit leben“, B – Polster-Gel; Implantate: icon shown big in the middle, then removed (no score).",
+      "note": "37 s single take – generate several 6–8 s clips from this frame; the tier list carries the scene.",
+      "frame": "A10-S01.jpg",
+      "skip_render": true,
+      "clip_from": "s01",
+      "talking": true
+    },
+    {
+      "id": "s05",
+      "scene": "A10-S05",
+      "vo_line": "ein Gel, das den Spalt füllt.",
+      "ref_t": [
+        55.0,
+        56.4
+      ],
+      "vo_s": 1.956,
+      "seed": 11004,
+      "frame": "A10-S05.jpg",
+      "talking": false,
+      "h3_prompt": "The thin amber gel stream keeps pouring into the center of the denture and slowly spreads into a glossy pool across its fitting surface; the denture stays still; slow push-in, nothing else appears. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s06",
+      "scene": "A10-S06",
+      "vo_line": "9 von 10. Es wird durch Wärme weich,",
+      "ref_t": [
+        56.4,
+        58.7
+      ],
+      "vo_s": 2.706,
+      "seed": 11005,
+      "overlay_spec": "Tier list on a dark panel in the lower half (rows S red, A orange, B yellow, C green, D teal); icons land row by row: S – Festbiss gel (icon: denture with amber-gold gel), shown big first, then dropped into row S.",
+      "frame": "A10-S01.jpg",
+      "skip_render": true,
+      "clip_from": "s01",
+      "talking": true
+    },
+    {
+      "id": "s07",
+      "scene": "A10-S07",
+      "vo_line": "sinkt in den Raum unter der Prothese und nimmt die Form des Zahnfleischs an.",
+      "ref_t": [
+        58.7,
+        61.5
+      ],
+      "vo_s": 4.62,
+      "seed": 11006,
+      "frame": "A10-S07.jpg",
+      "talking": false,
+      "h3_prompt": "The lower full denture floats just above the U-shaped jaw ridge section, and a smooth, glossy layer of glossy translucent amber-gold gel (honey-colored, slightly see-through) sinks into the gap between them and takes the exact shape of the gum. The denture in the upper half, the ridge section in the lower middle. The amber gel slowly sinks into the gap and spreads evenly along the gum, settling into its exact shape while the denture lowers gently onto it; slow push-in, nothing else appears. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.52
+    },
+    {
+      "id": "s08",
+      "scene": "A10-S08",
+      "vo_line": "Was die Leute zuerst merken, ist klein. Eine Frau schrieb, sie hat sich mitten in",
+      "ref_t": [
+        61.5,
+        66.2
+      ],
+      "vo_s": 4.252,
+      "seed": 11007,
+      "frame": "A10-S01.jpg",
+      "skip_render": true,
+      "clip_from": "s01",
+      "talking": true
+    },
+    {
+      "id": "s09",
+      "scene": "A10-S09",
+      "vo_line": "einem Telefonat dabei ertappt, überhaupt nicht an ihren Mund zu denken.",
+      "ref_t": [
+        66.2,
+        68.5
+      ],
+      "vo_s": 3.626,
+      "seed": 11008,
+      "frame": "A10-S09.jpg",
+      "talking": false,
+      "h3_prompt": "She laughs softly mid-conversation, relaxed, with small head movements and a slight shift of her weight; static camera with a slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.53
+    },
+    {
+      "id": "s10",
+      "scene": "A10-S10",
+      "vo_line": "Ein Mann hat es eingesetzt –",
+      "ref_t": [
+        68.5,
+        69.4
+      ],
+      "vo_s": 1.465,
+      "seed": 11009,
+      "frame": "A10-S01.jpg",
+      "skip_render": true,
+      "clip_from": "s01",
+      "talking": true
+    },
+    {
+      "id": "s11",
+      "scene": "A10-S11",
+      "vo_line": "an einem Sonntagabend, und am",
+      "ref_t": [
+        69.4,
+        70.8
+      ],
+      "vo_s": 1.518,
+      "seed": 11010,
+      "frame": "A10-S11.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "He wears a navy pajama shirt. He keeps looking at his reflection, his smile widening into a relaxed grin with a small nod, the reflection moving with him; static camera, slow subtle push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s12",
+      "scene": "A10-S12",
+      "vo_line": "Mittwoch hat er gemerkt, dass er sie kein einziges Mal angefasst hat.",
+      "ref_t": [
+        70.8,
+        73.4
+      ],
+      "vo_s": 4.318,
+      "seed": 11011,
+      "frame": "A10-S12.jpg",
+      "talking": false,
+      "h3_prompt": "He wears a blue-and-grey plaid flannel shirt. He sits in a busy diner booth laughing, holding half of a club sandwich in his right hand; a plate of club sandwich and fries and a glass of iced tea with lemon on the table; a person's shoulder blurred in the right foreground, diners and booths behind. He laughs, then takes a confident bite of the sandwich and chews happily with his mouth closed; diners move softly in the blurred background; slight handheld camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.22
+    },
+    {
+      "id": "s13",
+      "scene": "A10-S13",
+      "vo_line": "Welche Marke ich empfehle?",
+      "ref_t": [
+        73.4,
+        75.0
+      ],
+      "vo_s": 1.681,
+      "seed": 11012,
+      "frame": "A10-S01.jpg",
+      "skip_render": true,
+      "clip_from": "s01",
+      "talking": true
+    },
+    {
+      "id": "s14",
+      "scene": "A10-S14",
+      "vo_line": "Ehrlich gesagt: Die, zu der ich Leuten rate, ist Festbiss. Es kommt aus Italien, funktioniert bei der Unterprothese und hält tagelang. Und",
+      "ref_t": [
+        75.0,
+        81.6
+      ],
+      "vo_s": 8.111,
+      "seed": 11013,
+      "frame": "A10-S14.jpg",
+      "talking": true,
+      "product": true,
+      "h3_prompt": "He talks to the camera with natural lip movement and calm nods, holding the tube steady beside his face and the microphone at chin height; handheld selfie camera with slight natural sway. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s15",
+      "scene": "A10-S15",
+      "vo_line": "eine Tube reicht vier bis sechs Wochen.",
+      "ref_t": [
+        81.6,
+        83.7
+      ],
+      "vo_s": 2.338,
+      "seed": 11014,
+      "frame": "A10-S15.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "packshot of box + tube: the label text is the point and nothing should move"
+    },
+    {
+      "id": "s16",
+      "scene": "A10-S16",
+      "vo_line": "Eine Unterprothese, die",
+      "ref_t": [
+        83.7,
+        84.5
+      ],
+      "vo_s": 1.148,
+      "seed": 11015,
+      "frame": "A10-S14.jpg",
+      "skip_render": true,
+      "clip_from": "s14",
+      "talking": true
+    },
+    {
+      "id": "s17",
+      "scene": "A10-S17",
+      "vo_line": "heute Abend beim Essen rutscht,",
+      "ref_t": [
+        84.5,
+        85.5
+      ],
+      "vo_s": 1.548,
+      "seed": 11016,
+      "frame": "A10-S17.jpg",
+      "talking": false,
+      "h3_prompt": "Black-and-white photo look (fully desaturated, soft contrast, slight film grain) – a gloomy flashback. A woman in her mid-60s with a chin-length blonde bob and a fine-knit sweater sits at a restaurant table with a salad plate, looking sideways at someone with a tense, uneasy expression, lips pressed together; another diner's shoulder blurred in the right foreground. She glances down and presses her lips together more tightly, swallowing uneasily; static camera, very slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s18",
+      "scene": "A10-S18",
+      "vo_line": "rutscht morgen wieder.",
+      "ref_t": [
+        85.5,
+        86.9
+      ],
+      "vo_s": 1.475,
+      "seed": 11017,
+      "frame": "A10-S18.jpg",
+      "talking": false,
+      "h3_prompt": "Black-and-white photo look (fully desaturated, soft contrast, slight film grain) – a gloomy flashback. Close-up over a bathroom sink: older hands squeeze a tube of denture adhesive onto the fitting surface of an upper denture; a towel and a small plant blurred behind. The hands squeeze the tube and a line of white paste runs out onto the fitting surface of the denture; static close-up camera. The tube stays plain and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s19",
+      "scene": "A10-S19",
+      "vo_line": "Bis sich etwas ändert.",
+      "ref_t": [
+        86.9,
+        88.2
+      ],
+      "vo_s": 1.432,
+      "seed": 11018,
+      "frame": "A10-S19.jpg",
+      "talking": false,
+      "h3_prompt": "Black-and-white photo look (fully desaturated, soft contrast, slight film grain) – a gloomy flashback. Close-up from above: a hand pulls open a white bathroom drawer full of toiletries – cotton swabs, small jars, a hairbrush and a tube of denture adhesive. The hand slowly pulls the drawer open a little further, its contents staying in place; static top-down camera, nothing else moves. The tube stays plain and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s20",
+      "scene": "A10-S20",
+      "vo_line": "Ich sage den Leuten immer, sie sollen ihm ein paar Tage geben. Und wenn es nicht so hält wie versprochen, gibt es eine 60-Tage-Geld-zurück-Garantie.",
+      "ref_t": [
+        88.2,
+        94.5
+      ],
+      "vo_s": 7.855,
+      "seed": 11019,
+      "overlay_spec": "Green round badge top right from „Geld-zurück“: „60 TAGE GELD-ZURÜCK-GARANTIE“",
+      "frame": "A10-S14.jpg",
+      "skip_render": true,
+      "clip_from": "s14",
+      "talking": true
+    },
+    {
+      "id": "s21",
+      "scene": "A10-S21",
+      "vo_line": "Tippen Sie auf den Link unten, um eine Tube zu bestellen.",
+      "ref_t": [
+        94.5,
+        98.1
+      ],
+      "vo_s": 3.011,
+      "seed": 11020,
+      "frame": "A10-S21.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "end card with printed headline and offer line"
+    }
+  ]
+}

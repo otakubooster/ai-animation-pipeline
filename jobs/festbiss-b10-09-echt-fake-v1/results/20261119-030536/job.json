@@ -1,0 +1,587 @@
+{
+  "job_id": "festbiss-b10-09-echt-fake-v1",
+  "slug": "festbiss-b10-09-echt-fake",
+  "batch": "batch-10",
+  "product": "Festbiss Prothesen-Unterfütterung",
+  "title": "Festbiss – Video-Ad 9 (DE) · „Echt vs. Fake“ – Warnung vor Fälschungen",
+  "aspect_ratio": "9:16",
+  "language": "de",
+  "engine": "minimax-h3",
+  "render": {
+    "width": 576,
+    "height": 1024,
+    "fps": 24
+  },
+  "frames_release": {
+    "repo": "otakubooster/ai-animation-pipeline",
+    "tag": "batch-10",
+    "asset": "Festbiss_DE_Ads_06-22.zip",
+    "subdir": "Ad-09"
+  },
+  "format": "Photoreal UGC: a brunette host in a white blouse sits on a stool and talks to camera (main thread), cut with denture-wearer B-roll, product shots, one comparison infographic, one 3D jaw illustration, three selfie video messages from customers and one screen recording of the shop page.",
+  "voice_note": "Female VO (the host), German, confident, slightly indignant, then warm. Address: Sie.",
+  "captions_note": "Small white rounded boxes with black bold text, 2–5 words, centered in the middle of the frame. S01: header „ECHT vs. FAKE“ top left (green „ECHT“, red „FAKE“) and a white caption bar.",
+  "vo_ready": true,
+  "cycle_long": true,
+  "shots": [
+    {
+      "id": "s01",
+      "scene": "A09-S01",
+      "vo_line": "Wenn Sie Festbiss gekauft haben und Ihr Paket so aussieht, wurden Sie betrogen.",
+      "ref_t": [
+        0.0,
+        4.0
+      ],
+      "vo_s": 4.912,
+      "seed": 10900,
+      "overlay_spec": "Header top left: „ECHT“ (green box) „vs“ „FAKE“ (red box); white caption bar lower third: „Kaufen Sie kein gefälschtes Festbiss!“",
+      "frame": "A09-S01.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "split screen of two panels with the real and the fake tube; H3 would merge the halves and garble the labels"
+    },
+    {
+      "id": "s02",
+      "scene": "A09-S02",
+      "vo_line": "Das ist überhaupt nicht die echte Unterfütterung.",
+      "ref_t": [
+        4.0,
+        6.2
+      ],
+      "vo_s": 2.47,
+      "seed": 10901,
+      "frame": "A09-S02.jpg",
+      "talking": true,
+      "h3_prompt": "She frowns slightly in disapproval, her hands loosely clasped in front of her waist, about to speak. She talks to the camera with natural lip movement, her disapproving frown softening, opening one hand toward the camera, later raising her index finger; static camera at chest height. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s03",
+      "scene": "A09-S03",
+      "vo_line": "Sie kopieren die Tube, sie kopieren den Namen.",
+      "ref_t": [
+        6.2,
+        9.2
+      ],
+      "vo_s": 2.753,
+      "seed": 10902,
+      "frame": "A09-S03.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "packshot of the counterfeit tube and box: the printed look-alike packaging is the point and nothing should move"
+    },
+    {
+      "id": "s04",
+      "scene": "A09-S04",
+      "vo_line": "Manche sehen von außen perfekt aus, aber",
+      "ref_t": [
+        9.2,
+        12.2
+      ],
+      "vo_s": 2.232,
+      "seed": 10903,
+      "frame": "A09-S04.jpg",
+      "talking": true,
+      "h3_prompt": "She talks to the camera with natural lip movement and expressive gestures of her curved hands, then opens her arms wide with a big smile and briefly closes her eyes as she smiles; static camera at chest height. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s05",
+      "scene": "A09-S05",
+      "vo_line": "innen ist billige, klebrige Füllmasse,",
+      "ref_t": [
+        12.2,
+        15.0
+      ],
+      "vo_s": 2.064,
+      "seed": 10904,
+      "frame": "A09-S04.jpg",
+      "skip_render": true,
+      "clip_from": "s04",
+      "talking": true
+    },
+    {
+      "id": "s06",
+      "scene": "A09-S06",
+      "vo_line": "die sich genauso verhält wie die Haftcreme, die Sie längst satthaben.",
+      "ref_t": [
+        15.0,
+        18.2
+      ],
+      "vo_s": 4.096,
+      "seed": 10905,
+      "frame": "A09-S06.jpg",
+      "talking": false,
+      "h3_prompt": "Close-up in her kitchen: she pulls at her loose lower denture with her thumb and index finger, lips drawn back, grimacing with frustration, looking down. She wiggles the loose denture slightly with her fingers, grimacing in frustration, then lets go and shakes her head, lips closing. Static camera, slow subtle push-in. Mouth, jaw and fingers stay anatomically natural. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.0
+    },
+    {
+      "id": "s07",
+      "scene": "A09-S07",
+      "vo_line": "Außen eine Kopie, innen Müll.",
+      "ref_t": [
+        18.2,
+        21.7
+      ],
+      "vo_s": 2.582,
+      "seed": 10906,
+      "note": "She opens one hand toward the camera.",
+      "frame": "A09-S02.jpg",
+      "skip_render": true,
+      "clip_from": "s02",
+      "talking": true
+    },
+    {
+      "id": "s08",
+      "scene": "A09-S08",
+      "vo_line": "Das echte Festbiss ist eine weiche, thermoplastische Unterfütterung.",
+      "ref_t": [
+        21.7,
+        25.5
+      ],
+      "vo_s": 4.19,
+      "seed": 10907,
+      "frame": "A09-S08.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "In the mirror the blurred reflection of the woman presses her denture in and smiles; the tube in the foreground stays still. Static camera, very slow push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.09
+    },
+    {
+      "id": "s09",
+      "scene": "A09-S09",
+      "vo_line": "Statt wie eine Paste auf Ihrem Zahnfleisch zu liegen,",
+      "ref_t": [
+        25.5,
+        28.8
+      ],
+      "vo_s": 2.682,
+      "seed": 10908,
+      "frame": "A09-S09.jpg",
+      "talking": false,
+      "h3_prompt": "Close-up: a hand in a light-blue nitrile glove presses a lower denture down onto a beige stone dental model of a lower jaw standing on a white lab counter; dental lab equipment blurred behind. The gloved hand presses the denture firmly down onto the stone model until it seats snugly, holds it, then lifts slightly away. Static macro camera, slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s10",
+      "scene": "A09-S10",
+      "vo_line": "füllt es den Spalt unter Ihrer Prothese,",
+      "ref_t": [
+        28.8,
+        31.4
+      ],
+      "vo_s": 2.024,
+      "seed": 10909,
+      "frame": "A09-S10.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "comparison infographic with printed words, check/cross marks and a packshot"
+    },
+    {
+      "id": "s11",
+      "scene": "A09-S11",
+      "vo_line": "passt sich exakt an die Form an",
+      "ref_t": [
+        31.4,
+        33.5
+      ],
+      "vo_s": 1.619,
+      "seed": 10910,
+      "frame": "A09-S11.jpg",
+      "talking": false,
+      "h3_prompt": "3D medical illustration: a cream-colored lower jaw bone (mandible) seen from the front-left, with a lower denture (white teeth, pink base) sitting on the ridge; a glossy strand of glossy translucent amber-gold gel (honey-colored, slightly see-through) flows from a small nozzle at the right under the denture base, filling the space between denture and ridge. Warm beige gradient background. Amber-gold gel flows steadily from the nozzle under the denture base and spreads along the ridge until the space is filled. Slow push-in; nothing else appears. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s12",
+      "scene": "A09-S12",
+      "vo_line": "und wird fest, damit die Prothese nicht mehr wackeln kann.",
+      "ref_t": [
+        33.5,
+        36.0
+      ],
+      "vo_s": 3.229,
+      "seed": 10911,
+      "frame": "A09-S12.jpg",
+      "talking": false,
+      "h3_prompt": "Close-up over a white bathroom sink: a hand holds an upper denture with a fresh lining of glossy translucent amber-gold gel (honey-colored, slightly see-through) on its fitting surface; another hand tilts a clear plastic cup above it, about to pour cold water over it; the drain at the bottom. The cup tilts and cold water pours gently over the gel lining and runs off into the sink; the gel layer stays smooth and firm. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.13
+    },
+    {
+      "id": "s13",
+      "scene": "A09-S13",
+      "vo_line": "Das ist der ganze Unterschied.",
+      "ref_t": [
+        36.0,
+        37.8
+      ],
+      "vo_s": 1.814,
+      "seed": 10912,
+      "frame": "A09-S13.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "static packshot on the counter: the label is the point and nothing should move"
+    },
+    {
+      "id": "s14",
+      "scene": "A09-S14",
+      "vo_line": "Die Fälschungen liegen nur obendrauf",
+      "ref_t": [
+        37.8,
+        39.5
+      ],
+      "vo_s": 1.788,
+      "seed": 10913,
+      "frame": "A09-S14.jpg",
+      "talking": false,
+      "h3_prompt": "She presses her fingertips against her upper lip to push the loose denture up, worried, then lowers her hands with a frustrated sigh; the tube on the table stays still. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s15",
+      "scene": "A09-S15",
+      "vo_line": "und sind bis mittags ausgewaschen.",
+      "ref_t": [
+        39.5,
+        41.2
+      ],
+      "vo_s": 1.959,
+      "seed": 10914,
+      "frame": "A09-S15.jpg",
+      "talking": false,
+      "h3_prompt": "Over-the-shoulder shot past another woman's shoulder at the lower right edge: she sits at a kitchen table at lunchtime, covering her mouth with her hand, embarrassed; a plate with a half-eaten sandwich and a glass of iced tea in front of her; a white wall clock and a window behind her. She keeps her hand over her mouth, looks away embarrassed and slowly shakes her head. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s16",
+      "scene": "A09-S16",
+      "vo_line": "Das echte füllt den Spalt und hält tagelang.",
+      "ref_t": [
+        41.2,
+        44.5
+      ],
+      "vo_s": 3.165,
+      "seed": 10915,
+      "frame": "A09-S16.jpg",
+      "talking": false,
+      "h3_prompt": "She chews the bite of burger with her eyes squeezed shut in pleasure, then opens her eyes and smiles while chewing; the diner behind moves softly. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.07
+    },
+    {
+      "id": "s17",
+      "scene": "A09-S17",
+      "vo_line": "Also haben wir ihr das Original empfohlen – festbiss.de, der einzige Ort, an dem es echt ist – und ihr gesagt, sie soll es richtig testen.",
+      "ref_t": [
+        44.5,
+        53.2
+      ],
+      "vo_s": 8.105,
+      "seed": 10916,
+      "frame": "A09-S04.jpg",
+      "skip_render": true,
+      "clip_from": "s04",
+      "talking": true
+    },
+    {
+      "id": "s18",
+      "scene": "A09-S18",
+      "vo_line": "Heute kam diese Nachricht zurück:",
+      "ref_t": [
+        53.2,
+        55.8
+      ],
+      "vo_s": 2.096,
+      "seed": 10917,
+      "note": "She opens both arms wide with a big smile.",
+      "frame": "A09-S04.jpg",
+      "skip_render": true,
+      "clip_from": "s04",
+      "talking": true
+    },
+    {
+      "id": "s19",
+      "scene": "A09-S19",
+      "vo_line": "„Oh mein Gott, davon haben also alle geredet. Ich habe zum ersten Mal seit Jahren in einen Apfel gebissen.“",
+      "ref_t": [
+        55.8,
+        65.2
+      ],
+      "vo_s": 6.517,
+      "seed": 10918,
+      "note": "In the clip she takes another big bite.",
+      "frame": "A09-S19.jpg",
+      "talking": true,
+      "h3_prompt": "Selfie video message: a woman in her mid-60s with a platinum-blonde chin-length bob, fair skin and blue eyes, wearing a mauve cardigan over a cream top, holds a red apple with a fresh bite taken out of it up next to her face, mouth open in delighted surprise. Bright kitchen with a window blurred behind. She exclaims to the camera with natural lip movement and delighted surprise, then takes another big crunchy bite of the apple and chews happily; handheld selfie camera, slight natural sway. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s20",
+      "scene": "A09-S20",
+      "vo_line": "Eine andere Frau schrieb uns:",
+      "ref_t": [
+        65.2,
+        66.6
+      ],
+      "vo_s": 1.72,
+      "seed": 10919,
+      "frame": "A09-S02.jpg",
+      "skip_render": true,
+      "clip_from": "s02",
+      "talking": true
+    },
+    {
+      "id": "s21",
+      "scene": "A09-S21",
+      "vo_line": "„Ich habe meine Haftcreme seit einem Monat nicht angerührt. Sie hält einfach. Ich gehe wieder aus, statt mich zu Hause zu verstecken.“",
+      "ref_t": [
+        66.6,
+        74.0
+      ],
+      "vo_s": 6.924,
+      "seed": 10920,
+      "frame": "A09-S21.jpg",
+      "talking": true,
+      "h3_prompt": "She talks animatedly to the camera with natural lip movement, laughing, with small nods and expressive eyes; handheld selfie camera, slight natural sway. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s22",
+      "scene": "A09-S22",
+      "vo_line": "Und noch eine:",
+      "ref_t": [
+        74.0,
+        75.2
+      ],
+      "vo_s": 1.11,
+      "seed": 10921,
+      "note": "She raises her index finger.",
+      "frame": "A09-S02.jpg",
+      "skip_render": true,
+      "clip_from": "s02",
+      "talking": true
+    },
+    {
+      "id": "s23",
+      "scene": "A09-S23",
+      "vo_line": "„Ich verstecke beim Lachen nicht mehr meinen Mund. Mir war gar nicht klar, dass ich das gemacht habe.“",
+      "ref_t": [
+        75.2,
+        82.2
+      ],
+      "vo_s": 4.81,
+      "seed": 10922,
+      "frame": "A09-S23.jpg",
+      "talking": true,
+      "h3_prompt": "She talks to the camera with natural lip movement and a warm smile, laughing openly at one point; handheld selfie camera, slight natural sway. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.71
+    },
+    {
+      "id": "s24",
+      "scene": "A09-S24",
+      "vo_line": "Und das Beste?",
+      "ref_t": [
+        82.2,
+        83.5
+      ],
+      "vo_s": 1.024,
+      "seed": 10923,
+      "frame": "A09-S02.jpg",
+      "skip_render": true,
+      "clip_from": "s02",
+      "talking": true
+    },
+    {
+      "id": "s25",
+      "scene": "A09-S25",
+      "vo_line": "Kein Kleben mehr, dreimal am Tag.",
+      "ref_t": [
+        83.5,
+        86.0
+      ],
+      "vo_s": 2.482,
+      "seed": 10924,
+      "frame": "A09-S25.jpg",
+      "talking": false,
+      "h3_prompt": "A woman in her mid-60s with a blonde bob and a blue floral blouse stands in a dim public restroom with green-tiled walls, fluorescent ceiling lights and grey stall doors, holding her upper denture in her open palm and a tube of denture adhesive in her other hand, looking tired; another person's hand enters from the right, holding out a second adhesive tube. She looks wearily at the denture in her palm and sighs; the hand at the right holds the second tube out toward her and she glances at it, tired, mouth closed. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s26",
+      "scene": "A09-S26",
+      "vo_line": "Kein kreidiger Geschmack mehr.",
+      "ref_t": [
+        86.0,
+        87.8
+      ],
+      "vo_s": 1.769,
+      "seed": 10925,
+      "frame": "A09-S26.jpg",
+      "talking": false,
+      "h3_prompt": "A woman in her mid-60s with straight shoulder-length silver hair and a navy top sits at a dinner table with a plate of steak and vegetables, grimacing with pursed lips at an unpleasant chalky taste, a knife in her hand; a man's shoulder blurred in the right foreground. She chews slowly with a grimace, lips pursed at the unpleasant taste, and lowers the knife. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s27",
+      "scene": "A09-S27",
+      "vo_line": "Kein Mund-Verdecken mehr beim Abendessen.",
+      "ref_t": [
+        87.8,
+        90.2
+      ],
+      "vo_s": 2.273,
+      "seed": 10926,
+      "frame": "A09-S04.jpg",
+      "skip_render": true,
+      "clip_from": "s04",
+      "talking": true
+    },
+    {
+      "id": "s28",
+      "scene": "A09-S28",
+      "vo_line": "Einfach eine Prothese, die endlich hält.",
+      "ref_t": [
+        90.2,
+        93.4
+      ],
+      "vo_s": 2.606,
+      "seed": 10927,
+      "frame": "A09-S28.jpg",
+      "talking": false,
+      "h3_prompt": "Seen from behind a bathroom mirror's point of view: a woman in her late 60s with wavy grey hair, thin glasses and pearl earrings, wearing a red-and-cream floral blouse, leans over a white sink toward the mirror and presses her upper denture into place with both index fingers, lips pulled back, with a small satisfied smile. She presses the denture firmly into place with both index fingers, then lowers her hands and smiles with closed lips, satisfied. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s29",
+      "scene": "A09-S29",
+      "vo_line": "Machen Sie also nicht ihren Fehler. Wenn es nicht",
+      "ref_t": [
+        93.4,
+        96.2
+      ],
+      "vo_s": 2.719,
+      "seed": 10928,
+      "frame": "A09-S04.jpg",
+      "skip_render": true,
+      "clip_from": "s04",
+      "talking": true
+    },
+    {
+      "id": "s30",
+      "scene": "A09-S30",
+      "vo_line": "von festbiss.de kommt,",
+      "ref_t": [
+        96.2,
+        98.5
+      ],
+      "vo_s": 1.255,
+      "seed": 10929,
+      "frame": "A09-S30.jpg",
+      "still": true,
+      "skip_render": true,
+      "still_why": "editor card (text) - Screen recording of your product page on festbiss.de on a phone, slowly scrollin"
+    },
+    {
+      "id": "s31",
+      "scene": "A09-S31",
+      "vo_line": "ist es kein Festbiss.",
+      "ref_t": [
+        98.5,
+        100.1
+      ],
+      "vo_s": 1.615,
+      "seed": 10930,
+      "note": "She smiles with her eyes briefly closed.",
+      "frame": "A09-S04.jpg",
+      "skip_render": true,
+      "clip_from": "s04",
+      "talking": true
+    },
+    {
+      "id": "s32",
+      "scene": "A09-S32",
+      "vo_line": "Das Original gibt es gerade mit: 2 kaufen, 2 gratis –",
+      "ref_t": [
+        100.1,
+        103.2
+      ],
+      "vo_s": 3.111,
+      "seed": 10931,
+      "frame": "A09-S32.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "packshot of the tube held in a hand: the label is the point and nothing should move"
+    },
+    {
+      "id": "s33",
+      "scene": "A09-S33",
+      "vo_line": "Sie sparen 50 %,",
+      "ref_t": [
+        103.2,
+        105.7
+      ],
+      "vo_s": 0.968,
+      "seed": 10932,
+      "frame": "A09-S33.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "packshot of box and tube with printed box text"
+    },
+    {
+      "id": "s34",
+      "scene": "A09-S34",
+      "vo_line": "mit kostenlosem Versand und 60 Tagen Geld-zurück-Garantie,",
+      "ref_t": [
+        105.7,
+        109.2
+      ],
+      "vo_s": 3.614,
+      "seed": 10933,
+      "frame": "A09-S34.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "static shelf packshot: the label is the point and nothing should move"
+    },
+    {
+      "id": "s35",
+      "scene": "A09-S35",
+      "vo_line": "nur auf festbiss.de. Klicken Sie auf den Link unten",
+      "ref_t": [
+        109.2,
+        113.0
+      ],
+      "vo_s": 3.735,
+      "seed": 10934,
+      "frame": "A09-S04.jpg",
+      "skip_render": true,
+      "clip_from": "s04",
+      "talking": true
+    },
+    {
+      "id": "s36",
+      "scene": "A09-S36",
+      "vo_line": "und holen Sie sich das Original.",
+      "ref_t": [
+        113.0,
+        114.3
+      ],
+      "vo_s": 2.967,
+      "seed": 10935,
+      "frame": "A09-S02.jpg",
+      "skip_render": true,
+      "clip_from": "s02",
+      "talking": true
+    }
+  ]
+}
