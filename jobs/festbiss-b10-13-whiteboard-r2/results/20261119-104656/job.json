@@ -1,0 +1,53 @@
+{
+  "job_id": "festbiss-b10-13-whiteboard-r2",
+  "slug": "festbiss-b10-13-whiteboard",
+  "batch": "batch-10",
+  "product": "Festbiss Prothesen-Unterfütterung",
+  "title": "Festbiss – Video-Ad 13 (DE) · „Was unter Ihrer Prothese passiert“ – Whiteboard-Erklärvideo",
+  "aspect_ratio": "9:16",
+  "language": "de",
+  "engine": "minimax-h3",
+  "render": {
+    "width": 576,
+    "height": 1024,
+    "fps": 24
+  },
+  "frames_release": {
+    "repo": "otakubooster/ai-animation-pipeline",
+    "tag": "batch-10",
+    "asset": "Festbiss_DE_Ads_06-22.zip",
+    "subdir": "Ad-13"
+  },
+  "format": "Whiteboard explainer: one opening shot of the Italian prosthodontist at a whiteboard, then a close-up of his hand (navy scrubs sleeve) drawing simple marker diagrams – denture, ridge, gap, adhesive, gel – with German hand-lettered labels; product shot at the end. Long scenes (8–25 s) with the drawing building up.",
+  "voice_note": "Male VO (the prosthodontist), German with a light Italian accent, calm, clear, teacher-like. Address: Sie.",
+  "captions_note": "White bold sans with a soft black shadow, 2–4 words, centered in the lower middle. S01: red header box with white text at the top. Green round 60-day badge top right in S13–S14.",
+  "vo_ready": true,
+  "cycle_long": true,
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "box",
+  "captions_y": 0.8,
+  "captions_fixed": true,
+  "overlay_style": "header-red",
+  "shots": [
+    {
+      "id": "s01",
+      "scene": "A13-S01",
+      "vo_line": "Wenn Ihre Prothese anfängt zu wackeln, sobald Sie kauen – lassen Sie mich Ihnen zeigen, warum.",
+      "ref_t": [
+        0.0,
+        4.0
+      ],
+      "vo_s": 5.356,
+      "seed": 11300,
+      "overlay_spec": "Red header box top (white text): „Was unter Ihrer Prothese passiert – bei jedem Bissen“",
+      "frame": "A13-S01.jpg",
+      "talking": true,
+      "h3_prompt": "9:16. He talks to the camera with natural lip movement, calm nods and a small gesture of the marker toward the board, holding the denture steady; static camera, slight slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 6.26
+    }
+  ]
+}

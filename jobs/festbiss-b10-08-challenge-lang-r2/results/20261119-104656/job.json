@@ -1,0 +1,103 @@
+{
+  "job_id": "festbiss-b10-08-challenge-lang-r2",
+  "slug": "festbiss-b10-08-challenge-lang",
+  "batch": "batch-10",
+  "product": "Festbiss Prothesen-Unterfütterung",
+  "title": "Festbiss – Video-Ad 8 (DE) · „Die 60-Tage-Challenge“ – Langfassung mit Alltagsszenen",
+  "aspect_ratio": "9:16",
+  "language": "de",
+  "engine": "minimax-h3",
+  "render": {
+    "width": 576,
+    "height": 1024,
+    "fps": 24
+  },
+  "frames_release": {
+    "repo": "otakubooster/ai-animation-pipeline",
+    "tag": "batch-10",
+    "asset": "Festbiss_DE_Ads_06-22.zip",
+    "subdir": "Ad-08"
+  },
+  "format": "Long cut of Ad 7: same doctor, same restaurant/home scenes and 3D jaw-ridge models up to 0:58, then a fast montage of denture wearers eating everything (breakfast, park, restaurants, family dinners) with the doctor as a small cut-out picture-in-picture in the lower left; product end frame.",
+  "voice_note": "Male VO (the doctor), German, calm, confident, direct. Address: Sie.",
+  "captions_note": "Small white rounded boxes with black bold text, 2–4 words, centered just below the middle. Red header box with white text at the top in S01–S03; big white capitals in S03; doctor picture-in-picture lower left from S25 to the end; green round 60-day badge in S59.",
+  "vo_ready": true,
+  "cycle_long": true,
+  "transitions": "dtc",
+  "music": {
+    "style": "theo",
+    "level": -27
+  },
+  "caption_style": "box-small",
+  "captions_y": 0.6,
+  "overlay_style": "header-red",
+  "pip": {
+    "src": "s01",
+    "shots": [
+      "s25",
+      "s26",
+      "s27",
+      "s28",
+      "s29",
+      "s30",
+      "s31",
+      "s32",
+      "s33",
+      "s34",
+      "s35",
+      "s36",
+      "s37",
+      "s38",
+      "s40",
+      "s41",
+      "s42",
+      "s43",
+      "s44",
+      "s46",
+      "s47",
+      "s48",
+      "s49",
+      "s50",
+      "s52",
+      "s54",
+      "s55",
+      "s56",
+      "s57",
+      "s58"
+    ]
+  },
+  "shots": [
+    {
+      "id": "s32",
+      "scene": "A08-S32",
+      "vo_line": "Und Sie kommen durch die ganze Mahlzeit, ohne sie zwischendurch richten zu müssen.",
+      "ref_t": [
+        77.2,
+        79.9
+      ],
+      "vo_s": 4.229,
+      "seed": 10831,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S32.jpg",
+      "talking": false,
+      "h3_prompt": "She straightens up a little and smiles warmly at the camera with a small nod, her hand still on the table. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.13
+    },
+    {
+      "id": "s40",
+      "scene": "A08-S40",
+      "vo_line": "Das Abendessen mit der Familie fühlt sich nicht mehr an wie etwas, das man durchstehen muss.",
+      "ref_t": [
+        94.0,
+        97.2
+      ],
+      "vo_s": 4.846,
+      "seed": 10839,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S40.jpg",
+      "talking": false,
+      "h3_prompt": "A big family dinner in a bright dining room: a long table with a white tablecloth, white flowers and plates of food; at the far end in the center a grandmother in her late 70s with short white hair and a navy top smiles warmly; family members of all ages sit along both sides, a little girl with a flower crown on the right. The family chats and laughs around the table with small natural movements; the grandmother at the far end smiles warmly and nods. Static camera with a very slow push-in down the table. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.75
+    }
+  ]
+}
