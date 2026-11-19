@@ -1,0 +1,966 @@
+{
+  "job_id": "festbiss-b10-08-challenge-lang-v1",
+  "slug": "festbiss-b10-08-challenge-lang",
+  "batch": "batch-10",
+  "product": "Festbiss Prothesen-Unterfütterung",
+  "title": "Festbiss – Video-Ad 8 (DE) · „Die 60-Tage-Challenge“ – Langfassung mit Alltagsszenen",
+  "aspect_ratio": "9:16",
+  "language": "de",
+  "engine": "minimax-h3",
+  "render": {
+    "width": 576,
+    "height": 1024,
+    "fps": 24
+  },
+  "frames_release": {
+    "repo": "otakubooster/ai-animation-pipeline",
+    "tag": "batch-10",
+    "asset": "Festbiss_DE_Ads_06-22.zip",
+    "subdir": "Ad-08"
+  },
+  "format": "Long cut of Ad 7: same doctor, same restaurant/home scenes and 3D jaw-ridge models up to 0:58, then a fast montage of denture wearers eating everything (breakfast, park, restaurants, family dinners) with the doctor as a small cut-out picture-in-picture in the lower left; product end frame.",
+  "voice_note": "Male VO (the doctor), German, calm, confident, direct. Address: Sie.",
+  "captions_note": "Small white rounded boxes with black bold text, 2–4 words, centered just below the middle. Red header box with white text at the top in S01–S03; big white capitals in S03; doctor picture-in-picture lower left from S25 to the end; green round 60-day badge in S59.",
+  "vo_ready": true,
+  "cycle_long": true,
+  "shots": [
+    {
+      "id": "s01",
+      "scene": "A08-S01",
+      "vo_line": "Wenn dieses italienische thermoplastische",
+      "ref_t": [
+        0.0,
+        1.8
+      ],
+      "vo_s": 2.323,
+      "seed": 10800,
+      "overlay_spec": "Red header box (white text), top: „Testen Sie es an Ihrer lockeren Prothese. Behalten Sie es gratis, wenn es nicht hilft.“",
+      "frame": "A08-S01.jpg",
+      "talking": true,
+      "product": true,
+      "h3_prompt": "He talks to the camera with natural lip movement, a confident expression and a small nod, holding the tube steady at chest height. Static camera. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.04
+    },
+    {
+      "id": "s02",
+      "scene": "A08-S02",
+      "vo_line": "Gel Ihre Prothese nicht besser sitzen lässt,",
+      "ref_t": [
+        1.8,
+        3.6
+      ],
+      "vo_s": 2.434,
+      "seed": 10801,
+      "overlay_spec": "Red header box (white text), top: „Testen Sie es an Ihrer lockeren Prothese. Behalten Sie es gratis, wenn es nicht hilft.“",
+      "frame": "A08-S02.jpg",
+      "talking": false,
+      "h3_prompt": "She taps her finger on her cheek and tilts her head with a doubtful frown, then glances down at the steak, mouth closed. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 6.58
+    },
+    {
+      "id": "s03",
+      "scene": "A08-S03",
+      "vo_line": "zahlen Sie nichts dafür.",
+      "ref_t": [
+        3.6,
+        4.5
+      ],
+      "vo_s": 1.82,
+      "seed": 10802,
+      "overlay_spec": "Red header box (white text), top: „Testen Sie es an Ihrer lockeren Prothese. Behalten Sie es gratis, wenn es nicht hilft.“ + big white capitals, lower middle: „SIE ZAHLEN NICHTS DAFÜR“",
+      "frame": "A08-S01.jpg",
+      "skip_render": true,
+      "clip_from": "s01",
+      "talking": true
+    },
+    {
+      "id": "s04",
+      "scene": "A08-S04",
+      "vo_line": "Wenn Sie immer noch mit derselben lockeren Prothese kämpfen,",
+      "ref_t": [
+        4.5,
+        7.5
+      ],
+      "vo_s": 3.326,
+      "seed": 10803,
+      "frame": "A08-S04.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a dusty-pink knit cardigan over a white top. She sits at a steakhouse table looking down with concentration as she hesitantly cuts a small piece of steak on her plate with a fork; a man in a red plaid shirt and a woman eat at the table behind her, out of focus. She hesitantly cuts a small piece of steak with slow, careful movements, frowning slightly in concentration, mouth closed; the diners behind keep eating out of focus. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.23
+    },
+    {
+      "id": "s05",
+      "scene": "A08-S05",
+      "vo_line": "testen Sie das 60 Tage lang.",
+      "ref_t": [
+        7.5,
+        9.0
+      ],
+      "vo_s": 2.23,
+      "seed": 10804,
+      "frame": "A08-S05.jpg",
+      "talking": true,
+      "product": true,
+      "h3_prompt": "He talks to the camera with natural lip movement and a small open-hand gesture of his right hand, holding the tube still in his left. Static camera, slow subtle push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s06",
+      "scene": "A08-S06",
+      "vo_line": "Also, hier ist die Challenge:",
+      "ref_t": [
+        9.0,
+        9.9
+      ],
+      "vo_s": 2.069,
+      "seed": 10805,
+      "frame": "A08-S06.jpg",
+      "talking": true,
+      "h3_prompt": "He talks to the camera with natural lip movement, small nods and small hand gestures at the bottom of the frame; handheld selfie camera, slight natural sway. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s07",
+      "scene": "A08-S07",
+      "vo_line": "Nehmen Sie die Prothese, die Ihnen am meisten Ärger macht.",
+      "ref_t": [
+        9.9,
+        12.6
+      ],
+      "vo_s": 3.31,
+      "seed": 10806,
+      "frame": "A08-S07.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "Background: a worn butcher-block wooden counter. The nozzle moves slowly along the inside of the denture, laying a continuous bead of amber-gold gel around the arch; both hands stay steady. Static camera. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s08",
+      "scene": "A08-S08",
+      "vo_line": "Dann testen Sie es im echten Leben.",
+      "ref_t": [
+        12.6,
+        14.4
+      ],
+      "vo_s": 2.359,
+      "seed": 10807,
+      "frame": "A08-S08.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a light-blue chambray button-down shirt. She smiles warmly at the camera with closed lips and gives a small hopeful nod; handheld selfie camera, slight natural sway. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s09",
+      "scene": "A08-S09",
+      "vo_line": "Bestellen Sie das Essen, das Sie sonst meiden.",
+      "ref_t": [
+        14.4,
+        16.4
+      ],
+      "vo_s": 2.74,
+      "seed": 10808,
+      "frame": "A08-S09.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a dusty-pink knit cardigan over a white top. She sits in a wooden booth next to an older bald man with a grey beard in a red-and-black plaid shirt, both studying open brown leather menus; other diners at tables behind them. Both read their open menus; she glances up at him and smiles, he nods back, mouths closed. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s10",
+      "scene": "A08-S10",
+      "vo_line": "Achten Sie darauf, wie oft Sie zur Haftcreme greifen.",
+      "ref_t": [
+        16.4,
+        18.5
+      ],
+      "vo_s": 3.177,
+      "seed": 10809,
+      "frame": "A08-S10.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a dusty-pink knit cardigan over a white top. She sits at the restaurant table looking down into her open tan leather handbag on her lap and pulls out a tube of denture adhesive. She pulls the adhesive tube out of her handbag and glances around discreetly, mouth closed. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.08
+    },
+    {
+      "id": "s11",
+      "scene": "A08-S11",
+      "vo_line": "Ob Sie noch vom Tisch aufstehen müssen, um Ihre Prothese zu richten.",
+      "ref_t": [
+        18.5,
+        22.0
+      ],
+      "vo_s": 3.657,
+      "seed": 10810,
+      "frame": "A08-S11.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a dusty-pink knit cardigan over a white top. She steps away from the table and walks off toward the back of the restaurant while the two at the table watch her go, puzzled. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.56
+    },
+    {
+      "id": "s12",
+      "scene": "A08-S12",
+      "vo_line": "Ob Sie sie immer noch bei jedem Sprechen oder Lachen kontrollieren.",
+      "ref_t": [
+        22.0,
+        25.2
+      ],
+      "vo_s": 4.001,
+      "seed": 10811,
+      "frame": "A08-S12.jpg",
+      "talking": false,
+      "h3_prompt": "He starts to laugh, then catches himself, presses his lips together and touches his left fingertips to his mouth self-consciously. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.9
+    },
+    {
+      "id": "s13",
+      "scene": "A08-S13",
+      "vo_line": "Und wenn Sie nach 60 Tagen immer noch mit demselben Problem kämpfen, behalten Sie es kostenlos.",
+      "ref_t": [
+        25.2,
+        29.4
+      ],
+      "vo_s": 5.857,
+      "seed": 10812,
+      "frame": "A08-S06.jpg",
+      "skip_render": true,
+      "clip_from": "s06",
+      "talking": true
+    },
+    {
+      "id": "s14",
+      "scene": "A08-S14",
+      "vo_line": "Denn Festbiss wirkt anders als",
+      "ref_t": [
+        29.4,
+        31.5
+      ],
+      "vo_s": 1.818,
+      "seed": 10813,
+      "frame": "A08-S14.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "packshot of the tube in a hand on white: the label is the point and nothing should move; covers S58"
+    },
+    {
+      "id": "s15",
+      "scene": "A08-S15",
+      "vo_line": "Haftcreme.",
+      "ref_t": [
+        31.5,
+        32.2
+      ],
+      "vo_s": 1.052,
+      "seed": 10814,
+      "frame": "A08-S15.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "static still life of adhesive tubes with printed packaging H3 would garble; 0.8 s, not reused"
+    },
+    {
+      "id": "s16",
+      "scene": "A08-S16",
+      "vo_line": "Mit der Zeit kann sich die Form unter Ihrer Prothese verändern, während die Prothese selbst gleich bleibt. Dadurch entsteht darunter ein Hohlraum.",
+      "ref_t": [
+        32.2,
+        38.7
+      ],
+      "vo_s": 8.319,
+      "seed": 10815,
+      "note": "Style anchor – generate first; attach it to every scene marked Style: A08-S16. In the clip the ridge sinks and an empty dark crescent gap opens under the denture.",
+      "frame": "A08-S16.jpg",
+      "talking": false,
+      "h3_prompt": "The model: a tall block of jaw ridge with a denture segment on top – a pink acrylic saddle carrying one white molar – sitting snugly on the gum with no gap. The pink gum ridge and bone core slowly sink downward while the tooth and its pink base stay in place, and an empty dark crescent-shaped gap opens beneath them. Slow push-in; nothing else appears. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s17",
+      "scene": "A08-S17",
+      "vo_line": "Haftcreme kann das eine Weile festhalten,",
+      "ref_t": [
+        38.7,
+        41.2
+      ],
+      "vo_s": 2.325,
+      "seed": 10816,
+      "frame": "A08-S17.jpg",
+      "talking": false,
+      "h3_prompt": "Close-up over a white bathroom sink: older hands (grey knit sweater sleeve at the lower left) hold a pink upper denture and squeeze a tube of denture adhesive onto it; a folded grey towel on the sink edge, a window and white tiles behind. The hands squeeze a slow line of white adhesive cream along the denture, the tube moving steadily along it. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s18",
+      "scene": "A08-S18",
+      "vo_line": "aber sie ersetzt nicht die fehlende Passform.",
+      "ref_t": [
+        41.2,
+        43.6
+      ],
+      "vo_s": 3.097,
+      "seed": 10817,
+      "frame": "A08-S18.jpg",
+      "talking": false,
+      "h3_prompt": "The tooth and its pink base wobble slightly on the sunken ridge, the dark gap staying empty beneath the thin white cream. Slow push-in; nothing else appears. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s19",
+      "scene": "A08-S19",
+      "vo_line": "Festbiss nutzt einen italienischen Thermoplast in Dentalqualität, der",
+      "ref_t": [
+        43.6,
+        46.6
+      ],
+      "vo_s": 4.425,
+      "seed": 10818,
+      "note": "Crop in closer than S07.",
+      "frame": "A08-S07.jpg",
+      "skip_render": true,
+      "clip_from": "s07",
+      "talking": false
+    },
+    {
+      "id": "s20",
+      "scene": "A08-S20",
+      "vo_line": "beim Anwärmen weich wird,",
+      "ref_t": [
+        46.6,
+        47.9
+      ],
+      "vo_s": 1.603,
+      "seed": 10819,
+      "frame": "A08-S20.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "Light steam rises gently from the mug while the hand rests still on the wooden worktop. Static camera, very slow push-in. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s21",
+      "scene": "A08-S21",
+      "vo_line": "sich in diesen Raum formt, dann abkühlt und die neue Form hält.",
+      "ref_t": [
+        47.9,
+        51.2
+      ],
+      "vo_s": 4.472,
+      "seed": 10820,
+      "note": "In the clip the gel fills the whole gap.",
+      "frame": "A08-S21.jpg",
+      "talking": false,
+      "h3_prompt": "The model: the same tall block of jaw ridge with the denture segment on top and the empty dark crescent gap under it; a small amount of glossy translucent amber-gold gel (honey-colored, slightly see-through) has just started to fill the bottom of the gap. The amber-gold gel rises steadily from the bottom of the gap and fills it completely until the base sits fully supported, then settles smooth. Slow push-in; nothing else appears. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.37
+    },
+    {
+      "id": "s22",
+      "scene": "A08-S22",
+      "vo_line": "Statt eine lockere Prothese also nur fester anzukleben,",
+      "ref_t": [
+        51.2,
+        54.0
+      ],
+      "vo_s": 3.207,
+      "seed": 10821,
+      "frame": "A08-S22.jpg",
+      "talking": false,
+      "h3_prompt": "She stands at a bathroom vanity squeezing a tube of denture adhesive onto a pink upper denture held in her left hand over the sink, looking down at it with a tired, resigned face; toiletries on the counter and a mirror edge on the right, a warm wall lamp. She squeezes a line of adhesive onto the denture, then pauses and sighs with a tired, resigned face, mouth closed. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.11
+    },
+    {
+      "id": "s23",
+      "scene": "A08-S23",
+      "vo_line": "helfen Sie ihr, zu dem Mund zu passen, den Sie heute haben.",
+      "ref_t": [
+        54.0,
+        56.2
+      ],
+      "vo_s": 3.747,
+      "seed": 10822,
+      "frame": "A08-S23.jpg",
+      "talking": true,
+      "h3_prompt": "He talks to the camera with natural lip movement, a calm reassuring smile and small nods, hands loosely clasped. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 7.0
+    },
+    {
+      "id": "s24",
+      "scene": "A08-S24",
+      "vo_line": "Und dann achten Sie darauf, was sich verändert.",
+      "ref_t": [
+        56.2,
+        58.9
+      ],
+      "vo_s": 2.734,
+      "seed": 10823,
+      "frame": "A08-S06.jpg",
+      "skip_render": true,
+      "clip_from": "s06",
+      "talking": true
+    },
+    {
+      "id": "s25",
+      "scene": "A08-S25",
+      "vo_line": "Das Frühstück ist die erste Mahlzeit, bei der Sie aufessen",
+      "ref_t": [
+        58.9,
+        61.8
+      ],
+      "vo_s": 3.202,
+      "seed": 10824,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S25.jpg",
+      "talking": false,
+      "h3_prompt": "He sits in a warm kitchen with honey-oak cabinets and a window, holding a piece of toast topped with crispy bacon in both hands at chest height, about to bite, smiling with pleasure; a plate with fried eggs, bacon and toast in front of him. He takes a crunchy bite of the bacon toast and chews with pleasure, smiling. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.05
+    },
+    {
+      "id": "s26",
+      "scene": "A08-S26",
+      "vo_line": "und merken, dass Sie Ihre Prothese kein einziges Mal angefasst haben.",
+      "ref_t": [
+        61.8,
+        64.5
+      ],
+      "vo_s": 4.242,
+      "seed": 10825,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S26.jpg",
+      "talking": false,
+      "h3_prompt": "He sits at a wooden picnic table in a sunny backyard with a green lawn and trees, holding a buttered corn on the cob with both hands right at his mouth, about to bite into it; a plate of barbecue ribs and potato salad in front of him on the right. He bites into the buttered corn and chews happily, eyes smiling; leaves move softly in the sunny background. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.14
+    },
+    {
+      "id": "s27",
+      "scene": "A08-S27",
+      "vo_line": "Beim Mittagessen greifen Sie danach nicht zur Haftcreme.",
+      "ref_t": [
+        64.5,
+        67.2
+      ],
+      "vo_s": 3.117,
+      "seed": 10826,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S27.jpg",
+      "talking": false,
+      "h3_prompt": "He sits at a café table by a big window with a small-town street, parked cars and shopfronts outside, holding a big crusty baguette sandwich with both hands at his mouth, about to bite; on the table a plate with a side salad in a bowl and a piece of crusty bread. He takes a big bite of the baguette sandwich and chews with a pleased smile. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.02
+    },
+    {
+      "id": "s28",
+      "scene": "A08-S28",
+      "vo_line": "Beim Abendessen suchen Sie in der Speisekarte nicht mehr nach dem weichsten Gericht.",
+      "ref_t": [
+        67.2,
+        70.7
+      ],
+      "vo_s": 4.362,
+      "seed": 10827,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S28.jpg",
+      "talking": false,
+      "h3_prompt": "He lowers the menu slightly, smiles broadly at the camera and gives a small happy nod; the diners behind move softly. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.26
+    },
+    {
+      "id": "s29",
+      "scene": "A08-S29",
+      "vo_line": "Sie bestellen das Steak.",
+      "ref_t": [
+        70.7,
+        71.8
+      ],
+      "vo_s": 1.352,
+      "seed": 10828,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S29.jpg",
+      "talking": false,
+      "h3_prompt": "He sits at a steakhouse table with knife and fork in his hands over a big grilled T-bone steak, smiling broadly down at it; a bowl of roasted potatoes, a basket of bread and a glass of red wine on the table. He cuts into the T-bone steak with knife and fork, smiling broadly down at it. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s30",
+      "scene": "A08-S30",
+      "vo_line": "Sie essen das knusprige Brot.",
+      "ref_t": [
+        71.8,
+        73.0
+      ],
+      "vo_s": 1.917,
+      "seed": 10829,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S30.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at a wooden table in her warm dining room with a wooden sideboard and framed family photos on the wall behind her, tearing a piece of crusty bread with both hands over a plate with a medium-rare sliced steak, smiling happily. She tears the crusty bread apart with both hands, smiling happily. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s31",
+      "scene": "A08-S31",
+      "vo_line": "Sie wählen das Essen, auf das Sie wirklich Lust haben – nicht das, was Ihre Prothese schafft.",
+      "ref_t": [
+        73.0,
+        77.2
+      ],
+      "vo_s": 5.333,
+      "seed": 10830,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S31.jpg",
+      "talking": false,
+      "h3_prompt": "He stands in a supermarket aisle holding a wire shopping basket in front of him with a wrapped piece of raw steak on brown butcher paper and a long baguette in it, looking down into the basket with a pleased smile; shelves full of colourful products behind him. He looks down into the basket with a pleased smile and a satisfied nod, then walks slowly toward the camera along the aisle. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 6.23
+    },
+    {
+      "id": "s32",
+      "scene": "A08-S32",
+      "vo_line": "Und Sie kommen durch die ganze Mahlzeit, ohne sie zwischendurch richten zu müssen.",
+      "ref_t": [
+        77.2,
+        79.9
+      ],
+      "vo_s": 4.229,
+      "seed": 10831,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S32.jpg",
+      "talking": false,
+      "h3_prompt": "She straightens up a little and smiles warmly at the camera with a small nod, her hand still on the table. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.13
+    },
+    {
+      "id": "s33",
+      "scene": "A08-S33",
+      "vo_line": "Und eines Tages verlassen Sie das Haus",
+      "ref_t": [
+        79.9,
+        81.5
+      ],
+      "vo_s": 1.957,
+      "seed": 10832,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S33.jpg",
+      "talking": false,
+      "h3_prompt": "He walks along a sunny small-town brick sidewalk past brick shopfronts, taking a bite of a pastry from a small brown paper bag held in his left hand. He walks forward along the sidewalk, takes a bite of the pastry and chews with a smile; the camera moves along with him at walking pace. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s34",
+      "scene": "A08-S34",
+      "vo_line": "und merken, dass die Haftcreme gar nicht",
+      "ref_t": [
+        81.5,
+        83.8
+      ],
+      "vo_s": 2.007,
+      "seed": 10833,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S34.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a dusty-pink knit cardigan over a white top. She sits at the restaurant table rummaging through her open tan leather handbag on her lap with both hands, looking down into it, a little surprised – there is only a wallet, glasses case and tissues inside. She rummages through the handbag with both hands, then pauses and looks up with a surprised, pleased smile. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s35",
+      "scene": "A08-S35",
+      "vo_line": "in Ihrer Tasche ist.",
+      "ref_t": [
+        83.8,
+        84.9
+      ],
+      "vo_s": 1.357,
+      "seed": 10834,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S35.jpg",
+      "talking": false,
+      "h3_prompt": "Close-up: a hand in a cream knit sleeve enters from the upper right and is about to drop a set of house keys into an open tan leather handbag standing on a wooden hallway table by a bright window; inside the bag a wallet, a glasses case and a pack of tissues – no adhesive tube. The hand drops the keys into the open handbag and withdraws to the upper right; the bag stays still. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s36",
+      "scene": "A08-S36",
+      "vo_line": "Sie sind mitten in einem Gespräch,",
+      "ref_t": [
+        84.9,
+        86.6
+      ],
+      "vo_s": 1.959,
+      "seed": 10835,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S36.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a dusty-pink knit cardigan over a white top. She sits in a wooden booth talking animatedly with a brunette woman in a green top across from her; a man's shoulder in the foreground at the left; on the table plates with steak and corn on the cob and glasses of water. The two women chat animatedly, smiling, nodding and gesturing with their hands. Slight handheld camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s37",
+      "scene": "A08-S37",
+      "vo_line": "lachen, reden, denken nicht an Ihren Mund –",
+      "ref_t": [
+        86.6,
+        89.4
+      ],
+      "vo_s": 2.363,
+      "seed": 10836,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S37.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a dusty-pink knit cardigan over a white top. She sits at a long table with friends, laughing heartily with her head slightly back; a bearded man in a plaid shirt laughs on the right, a blonde woman behind; plates of steak and corn on the cob on the table. She laughs heartily with her head tipping back, the friends at the table laughing along. Slight handheld camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s38",
+      "scene": "A08-S38",
+      "vo_line": "und merken, dass Sie Ihre Prothese kein einziges Mal kontrolliert haben.",
+      "ref_t": [
+        89.4,
+        92.2
+      ],
+      "vo_s": 4.605,
+      "seed": 10837,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S38.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a light-blue chambray button-down shirt. She sits in a white wicker chair on a sunny front porch with flower boxes and green trees behind, laughing openly; a cup of coffee and a plate of cookies on a small side table at the lower right. She laughs openly and leans back in the wicker chair; leaves move gently in the breeze. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.51
+    },
+    {
+      "id": "s39",
+      "scene": "A08-S39",
+      "vo_line": "Dann verändern sich die größeren Dinge.",
+      "ref_t": [
+        92.2,
+        94.0
+      ],
+      "vo_s": 2.241,
+      "seed": 10838,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S39.jpg",
+      "talking": true,
+      "h3_prompt": "He talks to the camera with natural lip movement, calm open-hand gestures at waist height and small nods. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s40",
+      "scene": "A08-S40",
+      "vo_line": "Das Abendessen mit der Familie fühlt sich nicht mehr an wie etwas, das man durchstehen muss.",
+      "ref_t": [
+        94.0,
+        97.2
+      ],
+      "vo_s": 4.846,
+      "seed": 10839,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S40.jpg",
+      "talking": false,
+      "h3_prompt": "The family chats and laughs around the table with small natural movements; the grandmother at the far end smiles warmly and nods. Static camera with a very slow push-in down the table. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 5.75
+    },
+    {
+      "id": "s41",
+      "scene": "A08-S41",
+      "vo_line": "Mittagessen mit Freunden muss nicht mehr um Ihre Zähne herum geplant werden.",
+      "ref_t": [
+        97.2,
+        99.9
+      ],
+      "vo_s": 3.95,
+      "seed": 10840,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S41.jpg",
+      "talking": false,
+      "h3_prompt": "She sits at a table in a busy, warm restaurant laughing with her hand raised near her mouth, a plate with a steak in front of her; other diners, pendant lamps and a bar behind her. She laughs freely and lowers her hand from her mouth to the table, smiling; the diners behind move softly. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.85
+    },
+    {
+      "id": "s42",
+      "scene": "A08-S42",
+      "vo_line": "Sie verschwinden nicht mehr mitten im Essen auf die Toilette.",
+      "ref_t": [
+        99.9,
+        102.6
+      ],
+      "vo_s": 2.736,
+      "seed": 10841,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S42.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a dusty-pink knit cardigan over a white top. She bites into the buttered corn and chews, laughing with her friends. Slight handheld camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s43",
+      "scene": "A08-S43",
+      "vo_line": "Sie sagen nicht mehr Nein zu Orten,",
+      "ref_t": [
+        102.6,
+        104.2
+      ],
+      "vo_s": 1.647,
+      "seed": 10842,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S43.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a dusty-rose knit cardigan over a cream top. She chats happily with a big smile, nodding and laughing, her left hand resting on her chest. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s44",
+      "scene": "A08-S44",
+      "vo_line": "nur weil Sie Angst haben, was Sie dort essen können.",
+      "ref_t": [
+        104.2,
+        106.7
+      ],
+      "vo_s": 2.872,
+      "seed": 10843,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S44.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a pearl necklace and a navy top. She lowers the menu and smiles delightedly up at the waiter, nodding; he stays still at the edge. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s45",
+      "scene": "A08-S45",
+      "vo_line": "Dafür sind die 60 Tage da. Nicht, damit wir Sie überzeugen – sondern damit Sie es dort testen, wo es wirklich zählt.",
+      "ref_t": [
+        106.7,
+        112.4
+      ],
+      "vo_s": 8.226,
+      "seed": 10844,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S23.jpg",
+      "skip_render": true,
+      "clip_from": "s23",
+      "talking": true
+    },
+    {
+      "id": "s46",
+      "scene": "A08-S46",
+      "vo_line": "Beim Frühstück,",
+      "ref_t": [
+        112.4,
+        113.2
+      ],
+      "vo_s": 0.948,
+      "seed": 10845,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "note": "Crop in closer than S25.",
+      "frame": "A08-S25.jpg",
+      "skip_render": true,
+      "clip_from": "s25",
+      "talking": false
+    },
+    {
+      "id": "s47",
+      "scene": "A08-S47",
+      "vo_line": "beim Abendessen,",
+      "ref_t": [
+        113.2,
+        114.0
+      ],
+      "vo_s": 1.011,
+      "seed": 10846,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S47.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a pearl necklace and a navy top. Over-the-shoulder shot past a man's dark shoulder at the left edge: she sits in the cozy trattoria eating a plate of saffron risotto with a braised veal shank, fork in hand, smiling; a glass of red wine on the right. She lifts a forkful of risotto to her mouth, eats and smiles while chewing. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s48",
+      "scene": "A08-S48",
+      "vo_line": "im Restaurant,",
+      "ref_t": [
+        114.0,
+        115.0
+      ],
+      "vo_s": 0.884,
+      "seed": 10847,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S48.jpg",
+      "talking": false,
+      "h3_prompt": "He dabs his mouth with the napkin and leans back contentedly, smiling at the camera. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s49",
+      "scene": "A08-S49",
+      "vo_line": "unter Menschen,",
+      "ref_t": [
+        115.0,
+        116.0
+      ],
+      "vo_s": 0.948,
+      "seed": 10848,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S49.jpg",
+      "talking": false,
+      "h3_prompt": "He sits at a lively family dinner table, laughing with his family; in front of him a plate of roast chicken, potatoes and green beans with a fork; younger family members laugh behind him. He laughs with his family, shoulders shaking, the family behind him laughing along. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s50",
+      "scene": "A08-S50",
+      "vo_line": "in Ihrem ganz normalen Leben.",
+      "ref_t": [
+        116.0,
+        117.0
+      ],
+      "vo_s": 2.408,
+      "seed": 10849,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S50.jpg",
+      "talking": false,
+      "h3_prompt": "He sits on a wooden park bench under big green trees, laughing, next to his grandson (about 6, light-brown hair, grey long-sleeve t-shirt) who holds an ice-cream cone; a sunny park path with people far behind. He laughs and leans toward the boy, who licks his ice cream and giggles; dappled leaves sway softly. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s51",
+      "scene": "A08-S51",
+      "vo_line": "Wenn es hilft,",
+      "ref_t": [
+        117.0,
+        118.0
+      ],
+      "vo_s": 0.725,
+      "seed": 10850,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S05.jpg",
+      "skip_render": true,
+      "clip_from": "s05",
+      "talking": true
+    },
+    {
+      "id": "s52",
+      "scene": "A08-S52",
+      "vo_line": "benutzen Sie es weiter.",
+      "ref_t": [
+        118.0,
+        118.8
+      ],
+      "vo_s": 1.682,
+      "seed": 10851,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S52.jpg",
+      "talking": false,
+      "product": true,
+      "h3_prompt": "He smiles at the camera and gives a small nod, holding the tube steady next to his face; slight natural handheld sway. The tube keeps its exact shape and label, sharp and unchanged. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. Nothing new enters the frame; the product's printed label stays exactly as in the first frame. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s53",
+      "scene": "A08-S53",
+      "vo_line": "Wenn es nicht genug hilft, behalten Sie es kostenlos.",
+      "ref_t": [
+        118.8,
+        121.0
+      ],
+      "vo_s": 3.426,
+      "seed": 10852,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S06.jpg",
+      "skip_render": true,
+      "clip_from": "s06",
+      "talking": true
+    },
+    {
+      "id": "s54",
+      "scene": "A08-S54",
+      "vo_line": "Wenn also eine lockere Prothese immer noch bestimmt,",
+      "ref_t": [
+        121.0,
+        123.2
+      ],
+      "vo_s": 3.242,
+      "seed": 10853,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S02.jpg",
+      "skip_render": true,
+      "clip_from": "s02",
+      "talking": false
+    },
+    {
+      "id": "s55",
+      "scene": "A08-S55",
+      "vo_line": "was Sie essen,",
+      "ref_t": [
+        123.2,
+        124.0
+      ],
+      "vo_s": 0.873,
+      "seed": 10854,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S55.jpg",
+      "talking": false,
+      "h3_prompt": "She wears a dusty-pink knit cardigan over a white top. She sits at a steakhouse table looking down at a bowl of plain mashed potatoes and a small bowl of soup in front of her, while the man next to her on the right cuts a steak with corn on the cob on his plate. She looks down at her bowl with a quiet sigh while the man next to her cuts his steak. Static camera. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s56",
+      "scene": "A08-S56",
+      "vo_line": "wohin Sie gehen",
+      "ref_t": [
+        124.0,
+        125.2
+      ],
+      "vo_s": 0.998,
+      "seed": 10855,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S56.jpg",
+      "talking": false,
+      "h3_prompt": "He sits at a table in a warm kitchen with oak cabinets and a window, his hand on his chin, looking down pensively at a bowl of soup with a spoon in it. He stares pensively at the soup and sighs, his hand on his chin. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s57",
+      "scene": "A08-S57",
+      "vo_line": "oder wie oft Sie zur Haftcreme greifen,",
+      "ref_t": [
+        125.2,
+        126.8
+      ],
+      "vo_s": 2.431,
+      "seed": 10856,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S57.jpg",
+      "talking": false,
+      "h3_prompt": "He stands in his warm dining room with framed family photos on the wall and a window on the right, looking down at a tube of denture adhesive he holds in both hands at chest height, about to open it. He twists the cap of the adhesive tube open, looking down at it with a resigned face, mouth closed. Static camera, slow subtle push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 4.0
+    },
+    {
+      "id": "s58",
+      "scene": "A08-S58",
+      "vo_line": "dann testen Sie Festbiss 60 Tage lang",
+      "ref_t": [
+        126.8,
+        128.8
+      ],
+      "vo_s": 2.369,
+      "seed": 10857,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor)",
+      "frame": "A08-S14.jpg",
+      "skip_render": true,
+      "talking": false,
+      "still": true,
+      "still_why": "owner is a still: packshot of the tube in a hand on white: the label is the point and nothing should move; covers S58"
+    },
+    {
+      "id": "s59",
+      "scene": "A08-S59",
+      "vo_line": "und sehen Sie selbst, was sich verändert – über den Link unten.",
+      "ref_t": [
+        128.8,
+        132.1
+      ],
+      "vo_s": 4.374,
+      "seed": 10858,
+      "overlay_spec": "Doctor picture-in-picture, lower left (extra asset PiP-Doctor) + green round badge, lower right: „60 TAGE GELD-ZURÜCK-GARANTIE“",
+      "frame": "A08-S59.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "product end card: box front text and tube label are the point, nothing should move"
+    }
+  ]
+}

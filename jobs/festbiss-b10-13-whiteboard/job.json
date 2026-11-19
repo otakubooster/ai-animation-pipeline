@@ -1,0 +1,259 @@
+{
+  "job_id": "festbiss-b10-13-whiteboard-v1",
+  "slug": "festbiss-b10-13-whiteboard",
+  "batch": "batch-10",
+  "product": "Festbiss Prothesen-Unterfütterung",
+  "title": "Festbiss – Video-Ad 13 (DE) · „Was unter Ihrer Prothese passiert“ – Whiteboard-Erklärvideo",
+  "aspect_ratio": "9:16",
+  "language": "de",
+  "engine": "minimax-h3",
+  "render": {
+    "width": 576,
+    "height": 1024,
+    "fps": 24
+  },
+  "frames_release": {
+    "repo": "otakubooster/ai-animation-pipeline",
+    "tag": "batch-10",
+    "asset": "Festbiss_DE_Ads_06-22.zip",
+    "subdir": "Ad-13"
+  },
+  "format": "Whiteboard explainer: one opening shot of the Italian prosthodontist at a whiteboard, then a close-up of his hand (navy scrubs sleeve) drawing simple marker diagrams – denture, ridge, gap, adhesive, gel – with German hand-lettered labels; product shot at the end. Long scenes (8–25 s) with the drawing building up.",
+  "voice_note": "Male VO (the prosthodontist), German with a light Italian accent, calm, clear, teacher-like. Address: Sie.",
+  "captions_note": "White bold sans with a soft black shadow, 2–4 words, centered in the lower middle. S01: red header box with white text at the top. Green round 60-day badge top right in S13–S14.",
+  "vo_ready": true,
+  "cycle_long": true,
+  "shots": [
+    {
+      "id": "s01",
+      "scene": "A13-S01",
+      "vo_line": "Wenn Ihre Prothese anfängt zu wackeln, sobald Sie kauen – lassen Sie mich Ihnen zeigen, warum.",
+      "ref_t": [
+        0.0,
+        4.0
+      ],
+      "vo_s": 5.356,
+      "seed": 11300,
+      "overlay_spec": "Red header box top (white text): „Was unter Ihrer Prothese passiert – bei jedem Bissen“",
+      "frame": "A13-S01.jpg",
+      "talking": true,
+      "h3_prompt": "9:16. He talks to the camera with natural lip movement, calm nods and a small gesture of the marker toward the board, holding the denture steady; static camera, slight slow push-in. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "h3_seconds": 6.26
+    },
+    {
+      "id": "s02",
+      "scene": "A13-S02",
+      "vo_line": "Als Ihre Prothese angefertigt wurde, wurde die Innenseite um den Kieferkamm geformt, den Sie damals hatten. Die Prothese saß also hier, und Ihr Kieferkamm reichte bis hier. Schön passgenau. Aber Ihr Kieferkamm",
+      "ref_t": [
+        4.0,
+        14.8
+      ],
+      "vo_s": 12.084,
+      "seed": 11301,
+      "frame": "A13-S02.jpg",
+      "talking": false,
+      "h3_prompt": "The board is still blank. A right hand in a navy-blue scrubs sleeve, coming in from the lower right, holds a black dry-erase marker, its tip just touching the board left of center, about to start drawing. 9:16. A hand with a black marker draws the remaining lines step by step until the drawing is complete; static camera, the board does not move. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "last_frame": "A13-S02-end.jpg",
+      "h3_seconds": 10.0
+    },
+    {
+      "id": "s03",
+      "scene": "A13-S03",
+      "vo_line": "bleibt nicht für immer gleich. Mit der Zeit schrumpft er. Das Problem: Ihre Prothese schrumpft nicht mit. Also haben Sie jetzt diesen Raum darunter. Und genau hier fängt der Ärger an.",
+      "ref_t": [
+        14.8,
+        24.3
+      ],
+      "vo_s": 10.961,
+      "seed": 11302,
+      "frame": "A13-S03-end.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+    },
+    {
+      "id": "s04",
+      "scene": "A13-S04",
+      "vo_line": "Denn wenn Sie auf einer Seite kauen, kippt die Prothese in diesen leeren Raum. Und wenn eine Seite runtergeht, hebt sich die andere.",
+      "ref_t": [
+        24.3,
+        32.0
+      ],
+      "vo_s": 6.862,
+      "seed": 11303,
+      "frame": "A13-S04-end.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+    },
+    {
+      "id": "s05",
+      "scene": "A13-S05",
+      "vo_line": "Deshalb klappt weiches Essen vielleicht noch. Aber sobald Sie in Fleisch, Brot oder ein Sandwich beißen und echten Druck auf die Prothese bringen, fängt die Unterseite an zu wandern. Also machen die meisten das Naheliegende: mehr Haftcreme. Aber schauen Sie auf die Zeichnung. Haftcreme kann helfen, dass zwei Flächen aneinanderkleben. Sie baut aber nicht diesen ganzen fehlenden Raum unter Ihrer Prothese wieder auf. Wenn das eigentliche Problem also dieser Spalt ist – was wäre dann sinnvoller? Den Spalt füllen.",
+      "ref_t": [
+        32.0,
+        55.5
+      ],
+      "vo_s": 27.525,
+      "seed": 11304,
+      "note": "23.5 s – in the original the board shows a soup bowl first, then the adhesive diagram; generate 3–4 clips.",
+      "frame": "A13-S05-end.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+    },
+    {
+      "id": "s06",
+      "scene": "A13-S06",
+      "vo_line": "Und genau da",
+      "ref_t": [
+        55.5,
+        56.2
+      ],
+      "vo_s": 0.688,
+      "seed": 11305,
+      "frame": "A13-S06.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "FRAME PROBLEM: start frame is a full infographic with ENGLISH labels (THERMOPLAST GEL, DENTURE (SECURE FIT), JAW RIDGE, NO HOT WATER, NO BOILING); 'NO HOT WATER' contradicts the warm-water use of the gel. 0.8 s: drop it or regenerate (prompt wanted only THERMOPLAST being written)"
+    },
+    {
+      "id": "s07",
+      "scene": "A13-S07",
+      "vo_line": "kommt thermoplastisches Gel ins Spiel. In Italien verwenden wir einen Thermoplast in Dentalqualität, der weich wird, wenn man ihn anwärmt. Sie geben ihn in die Prothese, solange er formbar ist. Dann setzen Sie die Prothese wieder ein und beißen zu. Ihr eigener Kieferkamm drückt sich in das weiche Material. So füllt das Gel den Raum darunter und formt sich nach dem Kieferkamm, den Sie heute haben. Dann kühlt es ab und behält diese Form. Und jetzt",
+      "ref_t": [
+        56.2,
+        77.2
+      ],
+      "vo_s": 24.523,
+      "seed": 11306,
+      "note": "21 s – generate 3 clips.",
+      "frame": "A13-S07-end.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+    },
+    {
+      "id": "s08",
+      "scene": "A13-S08",
+      "vo_line": "schauen Sie sich den Unterschied an. Vorher saß Ihre Prothese über leerem Raum. Wenn Sie also auf einer Seite richtig zugebissen haben, konnte sie kippen und sich heben. Jetzt ist dieser leere Raum darunter gefüllt. Die Prothese hat beim Kauen also wieder Halt von unten. Und",
+      "ref_t": [
+        77.2,
+        91.5
+      ],
+      "vo_s": 14.917,
+      "seed": 11307,
+      "frame": "A13-S08.jpg",
+      "talking": false,
+      "h3_prompt": "At the top left of the blank board „VORH“ has just been written in black capitals and one curved line is drawn below it; A right hand in a navy-blue scrubs sleeve, coming in from the lower right, holds a black dry-erase marker, still writing. 9:16. A hand with a black marker draws the remaining lines step by step until the drawing is complete; static camera, the board does not move. One continuous shot from this exact first frame; keep the same people, faces, clothing, setting, background, lighting and colours for the whole clip. No new people, no extra hands. No new objects appear. No text, letters, numbers, signs or logos appear anywhere; anything plain stays plain. Teeth, gums and dentures stay anatomically natural. Gentle natural motion, no morphing.",
+      "last_frame": "A13-S08-end.jpg",
+      "h3_seconds": 10.0
+    },
+    {
+      "id": "s09",
+      "scene": "A13-S09",
+      "vo_line": "das ist der Teil, den die meisten Prothesenträger falsch herum sehen. Sie sehen einen großen Spalt und denken: Ich habe zu viel Kiefer verloren. Da ist nichts mehr, worauf meine Prothese sitzen kann. Aber dieser Spalt ist",
+      "ref_t": [
+        91.5,
+        101.5
+      ],
+      "vo_s": 11.294,
+      "seed": 11308,
+      "frame": "A13-S09-end.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+    },
+    {
+      "id": "s10",
+      "scene": "A13-S10",
+      "vo_line": "genau der Ort, an den das thermoplastische Material kommt. Das, was ich dafür empfehle, ist Festbiss. Es verwendet ein in Italien hergestelltes thermoplastisches Gel in Dentalqualität, das Sie selbst anwärmen und in Ihrer Prothese formen können.",
+      "ref_t": [
+        101.5,
+        114.2
+      ],
+      "vo_s": 13.609,
+      "seed": 11309,
+      "frame": "A13-S10-end.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+    },
+    {
+      "id": "s11",
+      "scene": "A13-S11",
+      "vo_line": "Und testen Sie es nicht,",
+      "ref_t": [
+        114.2,
+        115.2
+      ],
+      "vo_s": 1.085,
+      "seed": 11310,
+      "frame": "A13-S11.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "FRAME PROBLEM: start frame is text-heavy with ENGLISH labels (DENTURE, JAW RIDGE, DENTURE ADHESIVE GEL, DON'T USE TOO MUCH!); 1.0 s, not reused: still, or regenerate with only the mirror being drawn"
+    },
+    {
+      "id": "s12",
+      "scene": "A13-S12",
+      "vo_line": "indem Sie Ihre Prothese im Spiegel anschauen. Testen Sie es mit Essen. Essen Sie ein Sandwich. Kauen Sie Brot. Essen Sie Fleisch. Setzen Sie sich zum Abendessen hin. Bringen Sie echten Druck auf die Unterseite und schauen Sie, ob sie alle paar Bissen noch kippt oder sich hebt. Das ist der Test, der wirklich zählt. Bei Festbiss haben Sie 60 Tage zum Testen. Wenn Ihre Prothese also bei weichem Essen hält, aber anfängt zu wandern, sobald Sie richtig kauen, dann hören Sie auf zu überlegen, wie Sie sie noch fester ankleben. Schauen Sie, was darunter passiert. Füllen",
+      "ref_t": [
+        115.2,
+        139.8
+      ],
+      "vo_s": 33.85,
+      "seed": 11311,
+      "note": "24.5 s – generate 3–4 clips.",
+      "frame": "A13-S12-end.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "whiteboard: finished drawing (start/end frames do not match)"
+    },
+    {
+      "id": "s13",
+      "scene": "A13-S13",
+      "vo_line": "Sie den Raum. Und dann essen Sie damit.",
+      "ref_t": [
+        139.8,
+        141.2
+      ],
+      "vo_s": 2.838,
+      "seed": 11312,
+      "overlay_spec": "Green round badge top right: „60 TAGE GELD-ZURÜCK-GARANTIE“",
+      "frame": "A13-S13.jpg",
+      "talking": false,
+      "still": true,
+      "skip_render": true,
+      "still_why": "hand mid-word on the board (FUELL...): any writing motion would add invented letters"
+    },
+    {
+      "id": "s14",
+      "scene": "A13-S14",
+      "vo_line": "Und wenn es für Sie keinen echten Unterschied macht, sind Sie durch die 60-Tage-Geld-zurück-Garantie abgesichert.",
+      "ref_t": [
+        141.2,
+        145.8
+      ],
+      "vo_s": 5.915,
+      "seed": 11313,
+      "overlay_spec": "Green round badge top right: „60 TAGE GELD-ZURÜCK-GARANTIE“",
+      "frame": "A13-S14.jpg",
+      "talking": false,
+      "product": true,
+      "still": true,
+      "skip_render": true,
+      "still_why": "tube packshot on the counter: label is the point, nothing should move"
+    }
+  ]
+}
