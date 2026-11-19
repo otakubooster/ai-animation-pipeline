@@ -829,6 +829,8 @@ def main() -> None:
                 cw = cw[1:]                             # shown whole at the end of the previous shot
             if cw and k + 1 < len(timeline) and re.search(r"\w-$", cw[-1]["text"]) and (nw := timeline[k + 1].get("words")):
                 cw[-1] = {**cw[-1], "text": cw[-1]["text"] + nw[0]["text"]}   # "Geld-zurück-" | "Garantie." across a cut
+            if sh.get("captions_y") and fname == "9x16":
+                cy = float(sh["captions_y"])           # per-shot line (e.g. the emptiest band of a whiteboard frame)
             if job.get("tier_list") and sh["id"] in job["tier_list"].get("shots", {}) and fname == "9x16":
                 cy = 0.53 - cap_h / 2 - 0.012           # just above the tier panel (it fills 0.53-0.90)
             if sh.get("no_captions"):
