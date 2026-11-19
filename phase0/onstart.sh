@@ -7,7 +7,8 @@ exec >> /proc/1/fd/1 2>&1   # onstart output visible in the Vast container log
 # A renewed token may be saved under GH_TOKEN2 in the Vast account env vars; it wins over an expired GH_TOKEN.
 [ -n "${GH_TOKEN2:-}" ] && export GH_TOKEN="$GH_TOKEN2"
 mkdir -p /workspace && cd /workspace
-command -v git >/dev/null || (apt-get update -qq && apt-get install -y -qq git >/dev/null)
+# apt mirrors can hang for 30+ min (batch 10 r3 box): bounded tries, then install from whatever lists exist
+command -v git >/dev/null || { timeout 240 apt-get update -qq -o Acquire::Retries=2 -o Acquire::http::Timeout=20; timeout 300 apt-get install -y -qq git >/dev/null; }
 if ! git clone -q --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${GH_REPO}.git" /workspace/repo; then
   echo "clone failed (GH_TOKEN missing or wrong?) - destroying instance"
   curl -sS -X DELETE "https://console.vast.ai/api/v0/instances/${CONTAINER_ID}/" -H "Authorization: Bearer ${CONTAINER_API_KEY}"

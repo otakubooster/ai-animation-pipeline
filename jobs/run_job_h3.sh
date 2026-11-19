@@ -36,7 +36,7 @@ stage "setup shard $SHARD ($(echo $JOBS | wc -w) jobs)"
 for J in $JOBS; do mkdir -p "$OUT_ROOT/$(job_id $J)"; cp "$REPO_DIR/$J/job.json" "$OUT_ROOT/$(job_id $J)/job.json"; done
 push "shard $SHARD alive"
 command -v ffmpeg >/dev/null && command -v rsync >/dev/null && command -v unzip >/dev/null \
-  || (apt-get update -qq && apt-get install -y -qq ffmpeg rsync unzip >/dev/null)
+  || { timeout 240 apt-get update -qq -o Acquire::Retries=2 -o Acquire::http::Timeout=20; timeout 600 apt-get install -y -qq ffmpeg rsync unzip >/dev/null; }
 pip install -q -U "huggingface_hub[hf_xet]" pillow
 
 stage "frames"
