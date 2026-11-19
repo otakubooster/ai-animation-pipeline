@@ -6,45 +6,34 @@
   "editor": "assembly/edit_v2.py (caption_style shadow, transitions dtc)",
   "duration_s": 178.98,
   "shots": 49,
-  "animated_shots_planned": 23,
-  "animated_shots_rendered": 9,
-  "not_rendered": [
-    "s01",
-    "s02",
-    "s05",
-    "s08",
-    "s11",
-    "s14",
-    "s18",
-    "s25",
-    "s28",
-    "s30",
-    "s35",
-    "s41",
-    "s45",
-    "s47"
-  ],
-  "borrowed_clips": {
-    "s32": "festbiss-b10-22-krankenkasse:s31 d=2.2"
-  },
+  "animated_shots_planned": 21,
+  "animated_shots_rendered": 21,
+  "not_rendered": [],
+  "borrowed_clips": {},
   "qa": {
+    "s25": "r3: packshot, tube lowered into the hot-water mug fills the frame and the label is the focus: EXTRA STARK / PROTHESEN-UNTERFUETTERUNG small print is gibberish from the first frame (EXDA STARK / PROTHESEN-UNDFETTERING), festbiss logo clean; source label is clean, no clean window (same verdict as the tube-in-mug shots of the other ads)",
     "s26": "tube close-up, label is the focus: EXTRA STARK / PROTHESEN-UNTERFUETTERUNG small print garbled from 0.3 s (DXTRA DIARK / PROTHEZEN-UNBETTEING); source label is clean",
-    "s27": "her cardigan switches from lilac (as in source and s13/s21) to green at ~0.3 s, a hard change for the rest of the clip; no usable window (group s27+s36)",
+    "s27": "re-roll b clean for the whole clip (5.1 s, covers s27+s36): cardigan stays lilac throughout (measured), closed-lip bites then a satisfied smile, static camera, no cut; variant a is near identical (also usable)",
+    "s28": "r3: macro gel shot: the amber gel drips (already short in the source) lengthen from ~1.3 s, reach the bone by ~2.6 s and hang down into it from 3.0 s; clean part 0.2-1.3 s is too short for the 2.2 s line",
     "s29": "from ~1.1 s the gel forms a drop that pushes down into the bone and by 3-4 s hangs deep inside it (gel should spread under the gum); clean part < 1 s for a 3.0 s line",
+    "s30": "r3: the thin gel line along the denture edge swells from ~0.6 s into a thick amber band by 1.4 s and from ~2.0 s a fat glossy ring that bulges over the rim of the model (overflow, the denture does not move); clean part ~1 s for a 3.07 s line",
     "s31": "safety window: from ~1.4 s the gel ring starts to swell and by 1.8 s bulges out past both sides of the model; only 0.86 s are needed for the line",
-    "s32": "(borrowed s31 clip, identical file) from ~1.4 s the gel ring swells and by 1.8 s bulges out past both sides of the model, contradicting 'behaelt die Form'; clean part 1.3 s for a 2.83 s line"
+    "s32": "re-roll b: gel layer stays thin and smooth (no swelling); push-in with orbit reveals a second crown behind the molar from ~1.3 s (reads as the arch behind, acceptable); from ~2.85 s the background darkens and later the crowns fuse into a row, so window 0.2-2.8 (2.6 s for a 2.83 s line). Variant a swells the gel ring again from ~0.6 s",
+    "s41": "r3: the small bread piece in her left fingers fades away at 0.85-0.95 s; window starts after it (both hands then tear the remaining piece cleanly, smile, lilac cardigan), 3.4 s for a 2.2 s line"
   },
-  "gpu_usd": 0.411,
-  "gpu_render_s_own": 59.9,
-  "gpu_note": "share of $10.26 Vast spend (run 20261119-030536, 4 boxes, ended by the credit guard at $0.34), split by own rendered clip-seconds",
+  "gpu_usd": 0.955,
+  "gpu_render_s_own": 167.2,
+  "gpu_note": "share of $17.92 Vast spend (first run 20261119-030536 $10.26 + re-render runs 20261119-104656 and 20261119-131421 $7.66, incl. 26 re-rolls, a broken-ComfyUI box and a hung box), split by own rendered clip-seconds",
   "elevenlabs_credits": 3235,
   "elevenlabs_usd": 0.589,
   "elevenlabs_note": "one eleven_v4 take",
-  "total_usd": 1.0,
+  "total_usd": 1.544,
   "outputs": [
     "festbiss-b10-22-krankenkasse_9x16_music.mp4"
   ],
   "runs": [
-    "20261119-030536"
+    "20261119-030536",
+    "20261119-104656",
+    "20261119-131421"
   ]
 }
