@@ -829,6 +829,8 @@ def main() -> None:
                 cw = cw[1:]                             # shown whole at the end of the previous shot
             if cw and k + 1 < len(timeline) and re.search(r"\w-$", cw[-1]["text"]) and (nw := timeline[k + 1].get("words")):
                 cw[-1] = {**cw[-1], "text": cw[-1]["text"] + nw[0]["text"]}   # "Geld-zurück-" | "Garantie." across a cut
+            if job.get("tier_list") and sh["id"] in job["tier_list"].get("shots", {}) and fname == "9x16":
+                cy = 0.53 - cap_h / 2 - 0.012           # just above the tier panel (it fills 0.53-0.90)
             if sh.get("no_captions"):
                 pass
             elif cstyle in ("box", "box-small"):
@@ -1134,7 +1136,16 @@ def add_tier_list(doc: Ass, fm: Fmt, spec: dict, timeline: list, shots: list) ->
     py0, py1 = 0.53, 0.90
     rh = RH * (py1 - py0) / len(rows)
     px0, px1 = RW * 0.04, RW * 0.96
-    size = int(fm.txt * 0.50)
+    # item text as large as the row allows: per row, the size at which all of its items (the final set) fit
+    sq0 = rh * 0.82
+    avail = px1 - px0 - 14 - sq0 - 18 - 10
+    sizes = {}
+    for r in rows:
+        txts = [it["text"] for its in spec["shots"].values() for it in its if it["row"] == r]
+        sz = int(fm.txt * 0.78)
+        while sz > fm.txt * 0.40 and sum(doc.width(x, sz, True) + sz * 0.9 + 14 for x in txts) > avail:
+            sz -= 2
+        sizes[r] = sz
     placed = {r: [] for r in rows}                     # row -> [(text, t_appear)]
     for sh, t in zip(shots, timeline):
         items = spec["shots"].get(sh["id"])
@@ -1148,8 +1159,9 @@ def add_tier_list(doc: Ass, fm: Fmt, spec: dict, timeline: list, shots: list) ->
             ry = RH * py0 + rh * ri + rh / 2
             sq = rh * 0.82
             doc.add(a, b, "Shp", f"{{\\an5\\pos({px0 + 14 + sq / 2:.0f},{ry:.0f})\\c{bgr(cols[ri])}\\bord0\\shad0\\p1}}{Ass.rrect(sq, sq, 12)}", 23)
-            doc.add(a, b, "TxtB", f"{{\\an5\\pos({px0 + 14 + sq / 2:.0f},{ry:.0f})\\fs{int(size * 1.5)}\\c&HFFFFFF&\\bord0\\shad0}}{r}", 24)
+            doc.add(a, b, "TxtB", f"{{\\an5\\pos({px0 + 14 + sq / 2:.0f},{ry:.0f})\\fs{int(fm.txt * 0.75)}\\c&HFFFFFF&\\bord0\\shad0}}{r}", 24)
             x = px0 + 14 + sq + 18
+            size = sizes[r]
             for txt, ta in placed[r] + [(it["text"], tt) for it, tt in new if it["row"] == r]:
                 w = doc.width(txt, size, True) + size * 0.9
                 appear = max(a, ta)
