@@ -403,15 +403,18 @@ def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg
             ems.setdefault(w, emoji_img(EMOJI_RE.sub(lambda m: m.group(0) if m.group(0) not in "\ufe0f\u200d" else "", w), int(fsize * 1.05)))
             return ems[w].width
         return font.getbbox(w, **({"direction": "rtl"} if rtl else {}))[2]
-    words, maxw, space = text.split(), int(width * 0.80), font.getbbox(" ")[2] or fsize // 3
+    maxw, space = int(width * 0.80), font.getbbox(" ")[2] or fsize // 3
     lw_of = lambda l: sum(wid(w) for w in l) + space * (len(l) - 1)
-    lines, cur = [], []
-    for w in words:
-        if cur and lw_of(cur + [w]) > maxw:
-            lines.append(cur); cur = [w]
-        else:
-            cur.append(w)
-    lines.append(cur)
+    lines = []
+    for para in text.split("\n"):           # "\n" forces a line break (two-line hook boxes)
+        cur = []
+        for w in para.split():
+            if cur and lw_of(cur + [w]) > maxw:
+                lines.append(cur); cur = [w]
+            else:
+                cur.append(w)
+        if cur:
+            lines.append(cur)
     lh = int(fsize * 1.22)
     widths = [lw_of(l) for l in lines]
     pad_x, pad_y = int(fsize * 0.65), int(fsize * 0.5)
