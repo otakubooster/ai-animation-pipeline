@@ -78,8 +78,8 @@
       "h3_prompt": "The snapped fibres hanging from the ceiling quiver and spring loose one by one while the yellow fat cushions slowly deflate and sag. The capped villain talks with clear, natural mouth movement and expressive gestures while he rises up proudly between them. He puffs out his chest and keeps bobbing smugly while the small pink mark nods along. Static camera. No speech bubbles, no text, no new objects. One continuous shot from this first frame: the same characters, design, colours, setting and lighting for the whole clip; no new characters, no humans, no hands, no speech bubbles, no text or letters anywhere, no scene cut.",
       "h3_seconds": 8.21,
       "frame_issue": "Villain's cap is grey/orange here but pink in A4-01 and A4-05.",
-      "still": true,
-      "still_why": "QA: Fibres spring loose, the villain stretches up tall and talks with gestures until ~6.0 s. From ~6.2 s his chest balloons "
+      "clip_variant": "a",
+      "qa": "re-roll a: Fibres spring loose, the villain stretches up tall and talks with gestures until ~6.0 s. From ~6.2 s his chest balloons into a big white bulb (body deforms) until the end. Also the cap goes dark brown and loses its grey/orange look from 3.3 to 5.6 s. The clean part is 5.7 s, which is less than 0.85 x 7.31 s."
     },
     {
       "id": "s04",
@@ -150,8 +150,8 @@
       "h3_seconds": 10.33,
       "frame_issue": "The villain here is the crowned C3 design (Ad 1), not Ad 4's capped one; belly with navel instead of the thigh; the dark hole below the navel (tiny whispering face) reads as a second navel.",
       "split": "a",
-      "still": true,
-      "still_why": "QA: Talking shot, but the crowned villain only talks and gestures until ~4.4 s. From ~5 s to the end (about 6 s) he keeps a "
+      "clip_variant": "b",
+      "qa": "re-roll b: Talking shot, but the crowned villain only talks and gestures until ~4.4 s. From ~5 s to the end (about 6 s) he keeps a closed-mouth frown and just sinks slowly. The golden drops stop falling and hang frozen in mid-air from ~5 s, and the glowing threads fade out by ~4.5 s."
     },
     {
       "id": "s09",
@@ -166,8 +166,24 @@
       "h3_seconds": 10.49,
       "frame_issue": "Same frame as s08: crowned villain instead of the capped one, belly instead of thigh; the whisper from the hole is the tiny face (talking).",
       "split": "b",
-      "still": true,
-      "still_why": "QA: Villain flinches and sinks flat by ~4.3 s. Then a strong camera push-in (4.7-7 s) ends on a big close-up of the hole, wh"
+      "parts": [
+        {
+          "clip": "s09",
+          "start": 0.4,
+          "end": 4.6
+        },
+        {
+          "clip": "s09a",
+          "start": 0.4,
+          "end": 3.6
+        },
+        {
+          "clip": "s09b",
+          "start": 0.4,
+          "end": 3.6
+        }
+      ],
+      "qa": "parts: every take crash-zooms into a human-looking face after ~4 s: clean starts of three takes"
     },
     {
       "id": "e1",
