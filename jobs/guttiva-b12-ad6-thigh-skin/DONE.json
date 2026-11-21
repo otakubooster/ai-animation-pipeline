@@ -1,0 +1,37 @@
+{
+  "slug": "guttiva-b12-ad6-thigh-skin",
+  "batch": "batch-12",
+  "date": "2026-11-21",
+  "product": "Guttiva sérum anti-vergetures",
+  "language": "ar-MA (Darija)",
+  "engine": "minimax-h3 fl2va turbo, 576x1024, 24 fps; cartoon motion prompts (timed beats, one continuous shot)",
+  "editor": "assembly/edit_v2.py (Arabic karaoke captions, hook box with red second line, transitions dtc, trim_idle report, end card offer overlays); colour drift fixed with assembly/color_lock.py",
+  "duration_s": 59.62,
+  "shots": 10,
+  "rendered_shots": 8,
+  "clips_rendered": 12,
+  "qa": {
+    "s04": "window: At 0.71-0.92 s the whole scene snaps to a new layout in ~5 frames (muscle drops his flex to hands-on-hips, the bowl jumps back, the thigh's face slides from the edge to the centre, the cream tube changes height). After that it is clean and alive: she talks and gestures, the muscle re-flexes at ~3.5 s and ~5.95 s (fast cartoon pose snaps, continuous), the bowl scrubs her red hip from ~3.9 s while she winces with fists by her face and keeps talking to the end. 5.55 s clean >= 5.07.",
+    "s05": "re-roll pick: she keeps talking and gesturing, the bowl keeps scrubbing to ~6 s (a: everyone stands still sooner)",
+    "s06": "re-roll pick: the drop runs down her leg as a thin glossy serum drip, no gel blob over the leg or stained shorts (a: amber gel leg from 4 s)",
+    "s08": "color_lock: Content is clean and alive: she slides the bowl onto the table, winks, spins once with the skirt flaring (3.7-4.6 s, back view mid-spin), then dances in small hops facing the camera with arms up and moving mouth until the end; steam curls up, table and tea set stay. The only problem: the warm pink wall and floor drift to grey (~1.9 s) and then teal (from ~3.0 s to the end) while the character, skirt and table keep their colours. Tested assembly/color_lock.py with A6-07.jpg: background returns to a mauve-pink close to the first frame, character still reads fine."
+  },
+  "stills": [
+    "e1",
+    "e2"
+  ],
+  "idle_tails": [],
+  "gpu_usd": 0.375,
+  "gpu_clip_s_own": 88.9,
+  "gpu_note": "share of $2.84 Vast (one RTX 5090 box, run 20261121-190540, first renders + re-rolls), split by own rendered clip-seconds",
+  "elevenlabs_credits": 871,
+  "elevenlabs_usd": 0.159,
+  "elevenlabs_note": "eleven_v4: character take (GHIZLANE, OfGMGmhShO8iL9jCkXy8) + narrator RACHIDA (narr2, shared); credits split by characters; pauses cut + atempo 1.15; word timings voice/known_words.py (0 credits)",
+  "total_usd": 0.534,
+  "outputs": [
+    "guttiva-b12-ad6-thigh-skin_9x16_music.mp4"
+  ],
+  "runs": [
+    "20261121-190540"
+  ]
+}
