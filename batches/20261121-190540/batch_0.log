@@ -4,3 +4,18 @@ Mem:             125           4         118           0           4         120
 CA
 
 2026-11-21T19:06:20Z === push (shard 0/1 alive)
+PUSH ok
+PUSH done
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+diffusers 0.38.0 requires huggingface-hub<2.0,>=0.34.0, but you have huggingface-hub 2.4.0 which is incompatible.
+tokenizers 0.22.2 requires huggingface-hub<2.0,>=0.16.4, but you have huggingface-hub 2.4.0 which is incompatible.
+transformers 5.9.0 requires huggingface-hub<2.0,>=1.5.0, but you have huggingface-hub 2.4.0 which is incompatible.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+2026-11-21T19:06:26Z [+7s] === frames
+guttiva-b12-ad1-villain-belly-v1: 7 frames
+guttiva-b12-ad2-belly-skin-v1: 7 frames
+guttiva-b12-ad3-thread-v1: 6 frames
+guttiva-b12-ad4-villain-thigh-v1: 6 frames
+guttiva-b12-ad5-scale-v1: 7 frames
+guttiva-b12-ad6-thigh-skin-v1: 7 frames
+2026-11-21T19:06:36Z === push (shard 0/1 frames ok)
