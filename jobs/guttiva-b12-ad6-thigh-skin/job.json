@@ -86,7 +86,10 @@
       "h3_prompt": "The thigh character talks with clear, natural mouth movement and expressive gestures while glancing at the muscle character, who flexes from pose to pose, laughing. She rolls her eyes, then winces as the bowl character scrubs her hip with the brush in quick strokes, and keeps squirming while he keeps flexing. Static camera. No speech bubbles, no text, no new objects. One continuous shot from this first frame: the same characters, design, colours, setting and lighting for the whole clip; no new characters, no humans, no hands, no speech bubbles, no text or letters anywhere, no scene cut.",
       "h3_seconds": 5.97,
       "frame_issue": "A6-04 (also s05): the muscle character is a human-shaped bodybuilder with a human head, face and hair - check against the no-humans rule (row asks for a muscle character).",
-      "split": "a"
+      "split": "a",
+      "clip_start": 0.95,
+      "clip_end": 6.5,
+      "qa": "window: At 0.71-0.92 s the whole scene snaps to a new layout in ~5 frames (muscle drops his flex to hands-on-hips, the bowl jumps back, the thigh's face slides from the edge to the centre, the cream tube changes height). After that it is clean and alive: she talks and gestures, the muscle re-flexes at ~3.5 s and ~5.95 s (fast cartoon pose snaps, continuous), the bowl scrubs her red hip from ~3.9 s while she winces with fists by her face and keeps talking to the end. 5.55 s clean >= 5.07."
     },
     {
       "id": "s05",
@@ -100,7 +103,9 @@
       "h3_prompt": "The thigh character talks with clear, natural mouth movement and expressive gestures while pointing up at the cream tube on top of her, which wobbles but stays put. The bowl character stops scrubbing and the muscle character lowers his arms to watch her; she sighs, droops and keeps patting her thigh sadly, blinking. Static camera. No speech bubbles, no text, no new objects. One continuous shot from this first frame: the same characters, design, colours, setting and lighting for the whole clip; no new characters, no humans, no hands, no speech bubbles, no text or letters anywhere, no scene cut.",
       "h3_seconds": 6.34,
       "frame_issue": "Same frame as s04: human-looking muscle character.",
-      "split": "b"
+      "split": "b",
+      "still": true,
+      "still_why": "QA: Active only until ~3.3 s (bowl stops scrubbing, muscle lowers his arms, she talks). From ~3.3 s everyone freezes: the mu"
     },
     {
       "id": "s06",
@@ -114,7 +119,9 @@
       "h3_prompt": "The thigh character talks with clear, natural mouth movement and expressive gestures while looking up as the golden drop falls from the dropper onto her hip and sinks in. A soft golden glow swirls down her thigh; she giggles, hugs herself and keeps taking small happy steps in place. The bottle keeps its exact shape and label, standing still. Static camera. No speech bubbles, no text, no new objects. One continuous shot from this first frame: the same characters, design, colours, setting and lighting for the whole clip; no new characters, no humans, no hands, no speech bubbles, no text or letters anywhere, no scene cut.",
       "h3_seconds": 9.4,
       "product": true,
-      "frame_issue": "Two droppers: the bottle keeps its own dropper cap while a second dropper floats above her. Minor: label small print garbled ('BOUGE ESOSTANTES') and the Arabic line slightly off; brand and headline correct."
+      "frame_issue": "Two droppers: the bottle keeps its own dropper cap while a second dropper floats above her. Minor: label small print garbled ('BOUGE ESOSTANTES') and the Arabic line slightly off; brand and headline correct.",
+      "still": true,
+      "still_why": "QA: Bottle stays still with its shape and Guttiva / SERUM label, she talks, giggles, hugs herself and steps in place to the "
     },
     {
       "id": "s07",
@@ -138,7 +145,8 @@
       "seed": 12607,
       "talking": true,
       "h3_prompt": "The thigh character talks with clear, natural mouth movement and expressive gestures while sliding the bowl onto the table with a wink. She lets go, spins once on one foot so her skirt flares, then keeps dancing in small happy hops, the skirt swishing, as steam curls up from the bowl. Static camera. No speech bubbles, no text, no new objects. One continuous shot from this first frame: the same characters, design, colours, setting and lighting for the whole clip; no new characters, no humans, no hands, no speech bubbles, no text or letters anywhere, no scene cut.",
-      "h3_seconds": 9.73
+      "h3_seconds": 9.73,
+      "qa": "colour-locked: Content is clean and alive: she slides the bowl onto the table, winks, spins once with the skirt flaring (3.7-4.6 s, back view mid-spin), then dances in small hops facing the camera with arms up and moving mouth until the end; steam curls up, table and tea set stay. The only problem: the warm pink wall and floor drift to grey (~1.9 s) and then teal (from ~3.0 s to the end) while the character, skirt and table keep their colours. Tested assembly/color_lock.py with A6-07.jpg: background returns to a mauve-pink close to the first frame, character still reads fine."
     },
     {
       "id": "e1",
