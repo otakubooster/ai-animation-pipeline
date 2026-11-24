@@ -96,7 +96,9 @@
       "talking": false,
       "h3_prompt": "The plain paper roll keeps unrolling slowly toward the floor, its curled top end turning. The alum, the baby-oil and both oil bottles march along it one after another, the alum scowling, the baby-oil hurrying nervously, all with closed mouths. To the end they keep marching in step, bobbing, blinking and swinging their arms, while the paper keeps creeping forward. Static camera. No speech bubbles, no text, no new objects, no people. One continuous shot from this first frame: the same characters, design, colours, setting and lighting for the whole clip; no new characters, no humans, no hands, no speech bubbles, no text or letters anywhere, no scene cut.",
       "h3_seconds": 5.31,
-      "product": false
+      "product": false,
+      "still": true,
+      "still_why": "QA: The paper rolls back up and recedes into the room instead of unrolling forward. From ~2.2 s the marchers bunch up: the t"
     },
     {
       "id": "s03",
@@ -153,7 +155,9 @@
           "scale": 1.0,
           "at_word": "1500"
         }
-      ]
+      ],
+      "still": true,
+      "still_why": "QA: Talking shot whose mouth moves only ~2.2-4.0 s. From 0.4 to 2.1 s the machine rolls well forward and turns with a closed"
     },
     {
       "id": "s05",
@@ -171,18 +175,6 @@
       "h3_seconds": 4.0,
       "product": false,
       "frame_issue": "no characters in frame (payment terminal + paper strip with blank red stamp ring + rubber stamp) although the brief motion asks for character blinks/head tilts; animated as a still life",
-      "parts": [
-        {
-          "clip": "s05",
-          "start": 0.4,
-          "end": 1.67
-        },
-        {
-          "clip": "r1",
-          "start": 1.2,
-          "end": 3.4
-        }
-      ],
       "base_parts": [
         {
           "clip": "s05",
@@ -205,6 +197,19 @@
           "color": "E0245E",
           "at": 0.3,
           "at_word": "والخط"
+        }
+      ],
+      "qa": "window: Used only for ~1.6 s before the R1 insert. The paper end lifts and twists in the breeze (1.1-1.7 s, its tip seen edge-on) and the stamp rocks: acceptable. From ~2.2 s strong leaf shadows sweep in and the wall brightens (lighting change), so end at 2.1 s.",
+      "parts": [
+        {
+          "clip": "s05",
+          "start": 0.4,
+          "end": 1.67
+        },
+        {
+          "clip": "r1",
+          "start": 1.2,
+          "end": 3.4
         }
       ]
     },
