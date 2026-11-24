@@ -868,6 +868,8 @@ def main() -> None:
                     if not d["faces"] and sh.get("product"):
                         fb.append([0.15, 0.27, 0.85, 0.72])
                     cands = [y9] + [min(max(y9 + dy, 0.14), 0.82) for dy in (0.06, 0.12, 0.18, 0.24, 0.30, -0.06, -0.12, -0.18, -0.24)]
+                    if job.get("captions_max_y"):         # keep captions inside the platform safe zone
+                        cands = [c for c in cands if c <= float(job["captions_max_y"])]
                     cy = layout.free_slot(cands, cap_h, fb, 0.08, 0.92, taken)
             elif job.get("captions_pos") == "bottom":     # fixed bottom band (no face search), above the UI safe zone
                 cy = {"9x16": 0.785, "1x1": 0.88, "16x9": 0.89}[fname]
