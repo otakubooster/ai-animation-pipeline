@@ -43,27 +43,37 @@ FPS = 30
 W, H = 1080, 1920
 HERE = Path(__file__).resolve().parent
 SFX_DIR = HERE / "sfx"
+FONTS_DIR = HERE / "fonts"          # bundled fonts (Cairo, OFL) - passed to libass as fontsdir
 FONT_BLACK = "/usr/share/fonts/opentype/inter/InterDisplay-Black.otf"
 FONT_BOLD = "/usr/share/fonts/opentype/inter/InterDisplay-ExtraBold.otf"   # fontconfig family "Inter Display ExtraBold" ("Inter Display Bold" is not a family: libass fell back to a wide font)
 FAM_BLACK, FAM_BOLD, FONT_BOLD_FLAG, ENCODING = "Inter Display Black", "Inter Display ExtraBold", 0, 1
 ASS_EM = 1.21            # ASS font size = ascent + descent; Inter's is 1.21 em
+AR_SCALE = (1.35, 1.45)  # Arabic caption / text size factors (per font, set by use_arabic)
+CAP_ACTIVE = "&H00E1FF&"  # active caption word (yellow); job caption_active (RGB hex) overrides
 PUNCT = "[,.!?:;…،؟]"    # sentence/comma marks (Latin + Arabic)
 
 
-def use_arabic() -> None:
-    """Darija/Arabic jobs: Noto Kufi Arabic Bold everywhere (libass shapes it; Encoding -1 = base direction from the
-    text, so lines run right to left)."""
-    global FONT_BLACK, FONT_BOLD, FAM_BLACK, FAM_BOLD, FONT_BOLD_FLAG, ENCODING, ASS_EM
-    FONT_BLACK = FONT_BOLD = "/usr/share/fonts/truetype/noto/NotoKufiArabic-Bold.ttf"
-    FAM_BLACK = FAM_BOLD = "Noto Kufi Arabic"
+def use_arabic(font: str = "kufi") -> None:
+    """Darija/Arabic jobs: Noto Kufi Arabic Bold (default) or Cairo ExtraBold (job font "cairo", has the Latin marks
+    Kufi lacks: . : ! · + - %) everywhere (libass shapes it; Encoding -1 = base direction from the text, so lines run
+    right to left)."""
+    global FONT_BLACK, FONT_BOLD, FAM_BLACK, FAM_BOLD, FONT_BOLD_FLAG, ENCODING, ASS_EM, AR_SCALE
+    if font == "cairo":
+        FONT_BLACK = FONT_BOLD = str(FONTS_DIR / "Cairo-ExtraBold.ttf")
+        FAM_BLACK = FAM_BOLD = "Cairo ExtraBold"
+        ASS_EM, AR_SCALE = 1.883, (1.42, 1.55)     # Cairo's ascent + descent is 1.883 em
+    else:
+        FONT_BLACK = FONT_BOLD = "/usr/share/fonts/truetype/noto/NotoKufiArabic-Bold.ttf"
+        FAM_BLACK = FAM_BOLD = "Noto Kufi Arabic"
+        ASS_EM = 1.6         # Kufi's ascent + descent is ~1.6 em
     FONT_BOLD_FLAG, ENCODING = -1, -1
-    ASS_EM = 1.6         # Kufi's ascent + descent is ~1.6 em
 MAX_SLOW = 1.15
 PIECE_MAX = 3.4          # longer shots get punch-in cuts
 TRANS_GAP = 7.0          # seconds between two transitions at least
 SEG_VERSION = 2          # bump when segment rendering changes (invalidates the segment cache)
 BLUE, YELLOW, RED, GREEN, INK = "0B5ED7", "FFD60A", "D7263D", "1A9E4B", "111111"
-SFX_PEAK = {"whoosh": 0.33, "whoosh_fast": 0.10, "shutter": 0.05, "pop": 0.0, "ching": 0.02, "swipe": 0.08}
+SFX_PEAK = {"whoosh": 0.33, "whoosh_fast": 0.10, "shutter": 0.05, "pop": 0.0, "ching": 0.02, "swipe": 0.08, "shimmer": 0.15}
+PINK_YUV = (186, 131, 158)   # light pink (#F2A6C4) for the pink light-leak dissolve
 
 
 def F(t: float) -> int:
@@ -239,7 +249,7 @@ class Fmt:
             self.panel = (0.03, 0.315)       # left panel x range (normalised) for on-screen texts
 
         if ENCODING == -1:
-            self.cap, self.txt = int(self.cap * 1.35), int(self.txt * 1.45)
+            self.cap, self.txt = int(self.cap * AR_SCALE[0]), int(self.txt * AR_SCALE[1])
 
     def boxes(self, faces916: list[list[float]]) -> list[list[float]]:
         """Face boxes in this format's normalised coords."""
@@ -434,7 +444,10 @@ def main() -> None:
     job = json.loads((a.job_dir / "job.json").read_text())
     shots = job["shots"]
     if str(job.get("language", "")).startswith("ar"):
-        use_arabic()
+        use_arabic(job.get("font", "kufi"))
+    global CAP_ACTIVE
+    if job.get("caption_active"):
+        CAP_ACTIVE = bgr(job["caption_active"])
     tmp = a.out / "work"
     tmp.mkdir(parents=True, exist_ok=True)
     words = spoken_words(a.words)
@@ -545,7 +558,8 @@ def main() -> None:
         # trans_in: flash | slide | whip | rise | dissolve.
         TR = {"flash": ("fadewhite", 0.30, "shutter"), "slide": ("slideleft", 0.26, "whoosh"),
               "whip": ("smoothleft", 0.22, "whoosh_fast"), "rise": ("smoothup", 0.30, "whoosh_fast"),
-              "dissolve": ("fade", 0.36, None), "zoom": ("zoomin", 0.30, "whoosh_fast")}
+              "dissolve": ("fade", 0.36, None), "zoom": ("zoomin", 0.30, "whoosh_fast"),
+              "dive": ("zoomin", 0.36, "whoosh"), "pinkleak": ("pinkleak", 0.60, "shimmer")}
         gap, cands = 0.6, []
         for k in range(len(shots) - 1):
             if timeline[k + 1]["start"] < 0.8:
@@ -739,7 +753,13 @@ def main() -> None:
             tf = 2 * F(sec / 2)
             off = (length - tf) / FPS
             out = f"x{i}"
-            fcx.append(f"[{prev}][r{i + 1}]xfade=transition={name}:duration={tf / FPS:.4f}:offset={off:.4f}[{out}]")
+            if name == "pinkleak":       # dissolve through a soft pink light leak (peaks half-way)
+                pk = "if(eq(PLANE,0),{0},if(eq(PLANE,1),{1},{2}))".format(*PINK_YUV)
+                w = "(1-abs(2*P-1))*0.85"
+                tr = f"custom:expr='(A*P+B*(1-P))*(1-{w})+{pk}*{w}'"
+            else:
+                tr = name
+            fcx.append(f"[{prev}][r{i + 1}]xfade=transition={tr}:duration={tf / FPS:.4f}:offset={off:.4f}[{out}]")
             length = length + probe_frames(run_files[i + 1]) - tf
             prev = out
         run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(fcx), "-map", f"[{prev}]",
@@ -750,7 +770,7 @@ def main() -> None:
     for k, (name, sec, fx) in trans.items():
         if fx is None:
             continue
-        sfx_events.append((timeline[k + 1]["start"] - SFX_PEAK[fx], fx, 0.45 if fx != "shutter" else 0.5))
+        sfx_events.append((timeline[k + 1]["start"] - SFX_PEAK.get(fx, 0.0), fx, 0.45 if fx != "shutter" else 0.5))
     for k in badge_cuts:                       # time jumps without a flash still get the camera click
         sfx_events.append((timeline[k + 1]["start"] - SFX_PEAK["shutter"], "shutter", 0.4))
 
@@ -869,7 +889,9 @@ def main() -> None:
         overlay = "[base]null[b]"
         if hook:
             hw = int(RW * 0.80) if not fm.panel else int(RW * 0.29)
-            hook_png(hook["text"], hook.get("red", ""), hpng, hw, hook.get("bg", (255, 255, 255)), hook.get("fg", (20, 20, 20)))
+            hook_png(hook["text"], hook.get("red", ""), hpng, hw, hook.get("bg", (255, 255, 255)), hook.get("fg", (20, 20, 20)),
+                     font_path=FONT_BOLD if FAM_BOLD.startswith("Cairo") else None, red_rgb=tuple(hook.get("red_rgb", (200, 16, 46))),
+                     red_scale=float(hook.get("red_scale", 1.0)))
             hi = Image.open(hpng)
             hy = next((d["hook_y"][fname] for d in info if d.get("hook_y", {}).get(fname)), 0.2)
             hx = (RW - hi.width) // 2 if not fm.panel else int(RW * (fm.panel[0] + fm.panel[1]) / 2 - hi.width / 2)
@@ -880,8 +902,39 @@ def main() -> None:
         else:
             Image.new("RGBA", (2, 2), (0, 0, 0, 0)).save(hpng)
         dst = a.out / f"{a.name}_{fname}.mp4"
-        fcx = f"{fm.vf};{overlay};[b]ass={ass}[v]"
-        run(["ffmpeg", "-v", "error", "-y", "-i", str(clean), "-loop", "1", "-i", str(hpng), "-i", str(vo),
+        # image overlays (logo on the end card, screenshots): per shot "images": [{png, x, y (centre, 9:16 normalised),
+        # w (width share), at, until, fade}], faded in with a short rise
+        extra_in, chain, cur = [], [], "b"
+        n_img = 0
+        for t, sh in zip(timeline, shots):
+            for im in sh.get("images", []):
+                src = Path(im["png"])
+                src = src if src.is_absolute() else a.job_dir / src
+                a0 = t["start"] + float(im.get("at", 0.0))
+                b0 = t["start"] + float(im["until"]) if im.get("until") is not None else t["end"]
+                if b0 - a0 < 0.2 or not src.exists():
+                    continue
+                with Image.open(src) as pim:
+                    ar = pim.height / pim.width
+                wpx = int(1080 * float(im.get("w", 0.4)) * (1.0 if fname != "16x9" else 0.5625))
+                hpx = int(wpx * ar)
+                nx, ny = float(im.get("x", 0.5)), float(im.get("y", 0.5))
+                if fname == "1x1":
+                    cxp, cyp = nx * RW, ny * 1920 - 380
+                elif fname == "16x9":
+                    cxp, cyp = RW * (0.342 + 0.316 * nx), ny * RH
+                else:
+                    cxp, cyp = nx * RW, ny * RH
+                fd = float(im.get("fade", 0.18))
+                extra_in += ["-loop", "1", "-i", str(src)]
+                chain.append(f"[{3 + n_img}:v]scale={wpx}:{hpx},format=rgba,fade=t=in:st={a0:.2f}:d={fd}:alpha=1,"
+                             f"fade=t=out:st={max(a0, b0 - fd):.2f}:d={fd}:alpha=1[im{n_img}]")
+                chain.append(f"[{cur}][im{n_img}]overlay=x={cxp - wpx / 2:.0f}:y='{cyp - hpx / 2:.0f}+36*max(0,1-(t-{a0:.2f})/0.25)'"
+                             f":enable='between(t,{a0:.2f},{b0:.2f})'[c{n_img}]")
+                cur = f"c{n_img}"
+                n_img += 1
+        fcx = f"{fm.vf};{overlay};" + "".join(c + ";" for c in chain) + f"[{cur}]ass={ass}:fontsdir={FONTS_DIR}[v]"
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(clean), "-loop", "1", "-i", str(hpng), "-i", str(vo), *extra_in,
              "-filter_complex", fcx, "-map", "[v]", "-map", "2:a", "-c:v", "libx264", "-crf", str(a.crf), "-preset", "medium",
              "-pix_fmt", "yuv420p", "-c:a", "copy", "-t", f"{total:.2f}", "-movflags", "+faststart", str(dst)])
         outputs.append(str(dst))
@@ -1059,7 +1112,7 @@ def add_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: float
             end = g[wi + 1][0]["start"] if wi + 1 < len(g) else g_end
             if end <= w["start"]:
                 continue
-            body = " ".join(("{\\c&H00E1FF&}" + clean(tx) + "{\\c&HFFFFFF&}") if ww is w else clean(tx) for ww, tx in g)
+            body = " ".join(("{\\c" + CAP_ACTIVE + "}" + clean(tx) + "{\\c&HFFFFFF&}") if ww is w else clean(tx) for ww, tx in g)
             pop = "\\fscx82\\fscy82\\t(0,90,\\fscx100\\fscy100)" if wi == 0 else ""
             doc.add(w["start"], end, "Cap", f"{{\\an5\\pos({x:.0f},{y:.0f}){pop}}}{body}", 20)
 
@@ -1230,6 +1283,11 @@ def add_comment_card(doc: Ass, fm: Fmt, card: dict, t0: float, t1: float) -> Non
                            f"\\fs{int(size * 0.72)}\\c&H8A8A8A&}}{card.get('reply', 'Antwort an @nutzerin')}", 32)
 
 
+def strike(text: str) -> str:
+    """~~398~~ -> struck-through, slightly smaller and faded (old prices)."""
+    return re.sub(r"~~(.+?)~~", r"{\\s1\\alpha&H40&\\fscx82\\fscy82}\1{\\s0\\alpha&H00&\\fscx100\\fscy100}", text)
+
+
 def add_marks(doc: Ass, fm: Fmt, marks: list[dict], t0: float, t1: float, sfx, words=None) -> None:
     """Editor graphics on a shot (9:16 coordinates, mapped into 1:1/16:9): red X, red circle, red arrow, coloured
     labels, a number counting up. Each mark: {type, x, y, size?, at? (s after shot start), text?, color?, to?, angle?}."""
@@ -1258,7 +1316,9 @@ def add_marks(doc: Ass, fm: Fmt, marks: list[dict], t0: float, t1: float, sfx, w
         col = bgr(m.get("color", "E0252F"))
         pop = "\\fscx40\\fscy40\\t(0,120,\\fscx110\\fscy110)\\t(120,200,\\fscx100\\fscy100)\\fad(0,120)"
         typ = m["type"]
-        if typ == "x":
+        if typ == "sound":                       # a sound cue only (clock tick, switch click, heartbeat, ...)
+            pass
+        elif typ == "x":
             bar_w, bar_h = sz, sz * 0.16
             bar = Ass.rrect(bar_w, bar_h, bar_h / 2)
             for rot in (45, -45):
@@ -1278,7 +1338,7 @@ def add_marks(doc: Ass, fm: Fmt, marks: list[dict], t0: float, t1: float, sfx, w
             doc.add(a, b, "Shp", f"{{\\an6{mv}\\fad(80,120)\\frz{ang}\\org({cx:.0f},{cy:.0f})\\c{col}\\bord3\\3c&HFFFFFF&\\shad2\\p1}}{arrow}", 26)
         elif typ == "label":
             size = int(fm.txt * float(m.get("scale", 0.75)))
-            doc.pill(a, b, cx, cy, [m["text"]], size, m.get("fg", "FFFFFF"), m.get("color", "E0252F"), bold=True, pad=(0.45, 0.2),
+            doc.pill(a, b, cx, cy, [strike(t_) for t_ in m["text"].split("\\N")], size, m.get("fg", "FFFFFF"), m.get("color", "E0252F"), bold=True, pad=(0.45, 0.2),
                      radius=size / ASS_EM * 0.3, anim=m.get("anim", "pop"), layer=27)
         elif typ == "badge":                     # round seal, e.g. 60 TAGE GELD-ZURUECK-GARANTIE
             r = sz / 2
@@ -1307,7 +1367,60 @@ def add_marks(doc: Ass, fm: Fmt, marks: list[dict], t0: float, t1: float, sfx, w
                 tb = a + dur * (i + 1) / steps if i < steps else b
                 txt = f"{v:,}".replace(",", ".") + m.get("suffix", "")
                 doc.add(ta, tb, "Txt", f"{{\\an5\\pos({cx:.0f},{cy:.0f})\\fs{size}\\c&HFFFFFF&\\bord0\\shad4\\4a&H80&}}{txt}", 26)
-        if sfx is not None and (typ in ("x", "circle", "badge", "big", "button") or (typ == "label" and m.get("anim", "pop") == "pop")):
+        elif typ == "card":                      # big rounded number card (e.g. myth 1..5), pops in with a stamp
+            doc.add(a, b, "Shp", f"{{\\an5\\pos({cx:.0f},{cy:.0f}){pop}\\c{col}\\bord0\\shad5\\4a&H88&\\p1}}{Ass.rrect(sz, sz, sz * 0.24)}", 26)
+            fs = sz * float(m.get("text_scale", 0.95))
+            doc.add(a, b, "TxtB", f"{{\\an5\\pos({cx:.0f},{cy:.0f}){pop}\\fs{fs:.0f}\\c{bgr(m.get('fg', 'FFFFFF'))}\\bord0\\shad0}}{m['text']}", 27)
+        elif typ == "stamp":                     # rubber stamp: double frame + text, slams in from 230 % with a wobble
+            size = int(fm.txt * float(m.get("scale", 1.25)))
+            em = size / ASS_EM
+            tw = doc.width(m["text"], size)
+            bw, bh = tw + 1.3 * em, size * 0.82 + 0.9 * em
+            rot = float(m.get("rot", -9))
+            slam = (f"\\pos({cx:.0f},{cy:.0f})\\frz{rot}\\fscx230\\fscy230\\t(0,110,\\fscx94\\fscy94)"
+                    f"\\t(110,170,\\fscx104\\fscy104\\frz{rot + 3})\\t(170,240,\\fscx100\\fscy100\\frz{rot})\\fad(40,150)")
+            doc.add(a, b, "Shp", f"{{\\an5{slam}\\1a&HFF&\\bord{em * 0.17:.1f}\\3c{col}\\shad0\\p1}}{Ass.rrect(bw, bh, em * 0.28)}", 26)
+            ins = em * 0.34
+            doc.add(a, b, "Shp", f"{{\\an5{slam}\\1a&HFF&\\bord{em * 0.06:.1f}\\3c{col}\\shad0\\p1}}{Ass.rrect(bw - 2 * ins, bh - 2 * ins, em * 0.18)}", 26)
+            doc.add(a, b, "TxtB", f"{{\\an5{slam}\\fs{size}\\c{col}\\bord0\\shad0}}{m['text']}", 27)
+        elif typ in ("pill", "chip"):            # white pill with coloured text (day cards, ingredient chips)
+            size = int(fm.txt * float(m.get("scale", 0.95 if typ == "pill" else 0.72)))
+            doc.pill(a, b, cx, cy, [strike(m["text"])], size, m.get("fg", "E5407E"), m.get("bg", "FFFFFF"), bold=True,
+                     bg_alpha=int(m.get("bg_alpha", 0)), pad=(0.62, 0.20), anim=m.get("anim", "pop"), layer=27)
+        elif typ == "receipt":                   # paper slip; its lines type themselves in (receipt-printer sound)
+            size = int(fm.txt * float(m.get("scale", 0.8)))
+            lines = m["text"].split("\\N")
+            em = size / ASS_EM
+            tw = max(doc.width(l, size) for l in lines)
+            bw, bh = tw + 1.5 * em, len(lines) * size * 0.95 + 0.9 * em
+            teeth = max(int(bw / (em * 0.45)), 6)
+            step = bw / teeth
+            path = f"m 0 0 l {bw:.0f} 0 l {bw:.0f} {bh:.0f}"
+            for i in range(teeth):
+                path += f" l {bw - (i + 0.5) * step:.0f} {bh + em * 0.22:.0f} l {bw - (i + 1) * step:.0f} {bh:.0f}"
+            path += " l 0 0"
+            mv = f"\\move({cx:.0f},{cy - 50:.0f},{cx:.0f},{cy:.0f},0,220)"
+            doc.add(a, b, "Shp", f"{{\\an5{mv}\\c&HFBFBFB&\\bord0\\shad5\\4a&H90&\\p1}}{path}", 26)
+            type_s = float(m.get("type_s", 0.9))
+            chars = sum(len(l) for l in lines)
+            done, t_cur = 0, a + 0.22
+            top = cy - (len(lines) - 1) * size * 0.95 / 2
+            for li, l in enumerate(lines):
+                ly = top + li * size * 0.95
+                for i in range(1, len(l) + 1):
+                    if l[i - 1] == " " and i < len(l):
+                        continue
+                    t_next = a + 0.22 + type_s * (done + i) / max(chars, 1)
+                    end = t_next if (i < len(l)) else b
+                    if li + 1 < len(lines) or i < len(l):
+                        end = t_next if i < len(l) else b
+                    doc.add(t_cur, end if end > t_cur else t_cur + 0.02, "TxtB", f"{{\\an5\\pos({cx:.0f},{ly:.0f})\\fs{size}\\c{bgr(m.get('fg', '2A2A2A'))}\\bord0\\shad0}}{strike(l[:i])}", 27)
+                    t_cur = t_next
+                done += len(l)
+        snd = m.get("sfx", {"card": "stamp", "stamp": "stamp", "pill": "tick", "chip": "pop", "receipt": "printer"}.get(typ))
+        if sfx is not None and snd:
+            sfx.append((a + float(m.get("sfx_at", 0.0)), snd, float(m.get("gain", 0.4))))
+        elif sfx is not None and snd is None and (typ in ("x", "circle", "badge", "big", "button") or (typ == "label" and m.get("anim", "pop") == "pop")):
             sfx.append((a, "pop", 0.3))
 
 

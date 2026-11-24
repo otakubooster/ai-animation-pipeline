@@ -387,14 +387,18 @@ def emoji_img(chars: str, size: int) -> Image.Image:
     return em.resize((max(1, int(em.width * size / em.height)), size), Image.LANCZOS)
 
 
-def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg=(20, 20, 20)) -> None:
-    """Hook title card: white rounded box with bold black text; the words of `red` are drawn in red. Emoji words
-    are drawn in colour from the emoji font (the text font has no emoji glyphs and would show empty boxes)."""
+def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg=(20, 20, 20), font_path=None,
+             red_rgb=(200, 16, 46), red_scale=1.0) -> None:
+    """Hook title card: white rounded box with bold black text; the words of `red` are drawn in `red_rgb` (red by
+    default; red_scale sizes those lines, e.g. a smaller second line). Emoji words are drawn in colour from the emoji
+    font (the text font has no emoji glyphs and would show empty boxes). font_path overrides the text font."""
     fsize = int(width * 0.068)
-    rtl = is_arabic(text)                       # Arabic: Kufi, words laid out right to left (raqm shapes each word)
-    if rtl:          # Noto Sans Arabic has the Latin dots Kufi lacks ("…" becomes "...")
+    rtl = is_arabic(text)                       # Arabic: words laid out right to left (raqm shapes each word)
+    if rtl and not font_path:    # Noto Sans Arabic has the Latin dots Kufi lacks ("…" becomes "...")
         text = text.replace("…", "...")
-    font = ImageFont.truetype("/usr/share/fonts/truetype/noto/NotoSansArabic-Bold.ttf" if rtl else BANNER_FONT, fsize)
+    fpath = font_path or ("/usr/share/fonts/truetype/noto/NotoSansArabic-Bold.ttf" if rtl else BANNER_FONT)
+    font = ImageFont.truetype(fpath, fsize)
+    font_r = ImageFont.truetype(fpath, int(fsize * red_scale)) if red_scale != 1.0 else font
     red_words = {norm(w) for w in red.split()}
     is_em = lambda w: bool(EMOJI_RE.search(w)) and not EMOJI_RE.sub("", w).strip()
     ems = {}
@@ -402,7 +406,8 @@ def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg
         if is_em(w):
             ems.setdefault(w, emoji_img(EMOJI_RE.sub(lambda m: m.group(0) if m.group(0) not in "\ufe0f\u200d" else "", w), int(fsize * 1.05)))
             return ems[w].width
-        return font.getbbox(w, **({"direction": "rtl"} if rtl else {}))[2]
+        f = font_r if norm(w) in red_words else font
+        return f.getbbox(w, **({"direction": "rtl"} if rtl else {}))[2]
     maxw, space = int(width * 0.80), font.getbbox(" ")[2] or fsize // 3
     lw_of = lambda l: sum(wid(w) for w in l) + space * (len(l) - 1)
     lines = []
@@ -424,13 +429,15 @@ def hook_png(text: str, red: str, path: Path, width: int, bg=(255, 255, 255), fg
     d.rounded_rectangle([6, 11, bw + 6, bh + 11], radius=int(fsize * 0.6), fill=(0, 0, 0, 70))
     d.rounded_rectangle([6, 6, bw + 6, bh + 6], radius=int(fsize * 0.6), fill=tuple(bg) + (255,))
     for i, (l, lw) in enumerate(zip(lines, widths)):
-        x, y = 6 + (bw - lw) // 2, 6 + pad_y + i * lh - int(fsize * (0.35 if rtl else 0.1))
+        x, y = 6 + (bw - lw) // 2, 6 + pad_y + i * lh - int(fsize * ((0.32 if font_path else 0.35) if rtl else 0.1))
         for w in (reversed(l) if rtl else l):
             if is_em(w):
                 img.alpha_composite(ems[w], (x, y + int(fsize * 0.12)))
             else:
-                d.text((x, y), w, font=font, fill=(200, 16, 46, 255) if norm(w) in red_words else tuple(fg) + (255,),
-                       **({"direction": "rtl"} if rtl else {}))
+                isr = norm(w) in red_words
+                f = font_r if isr else font
+                d.text((x, y + (int(fsize * (1 - red_scale) * 0.5) if isr else 0)), w, font=f,
+                       fill=tuple(red_rgb) + (255,) if isr else tuple(fg) + (255,), **({"direction": "rtl"} if rtl else {}))
             x += wid(w) + space
     img.save(path)
 
