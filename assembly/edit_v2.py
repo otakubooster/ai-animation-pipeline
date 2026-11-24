@@ -856,6 +856,20 @@ def main() -> None:
             pip = job.get("pip") or {}
             if pip.get("mode") == "cutout" and sh["id"] in set(pip.get("shots", [])) and fname == "9x16":
                 taken.append((1.0 - float(pip.get("height", 0.46)) - 0.01, 1.0))
+            # editor graphics on the shot (stamps, number cards, pills, receipts, labels) keep their band free of captions
+            if fname == "9x16":
+                for m in sh.get("marks", []):
+                    typ, sc = m.get("type"), float(m.get("scale", 1.0))
+                    if typ == "stamp":
+                        hp = fm.txt * float(m.get("scale", 1.25)) * (0.62 + 1.0 / ASS_EM) * 1.35
+                    elif typ == "card":
+                        hp = float(m.get("size", 0.3)) * 1080 * 1.1
+                    elif typ in ("pill", "chip", "label", "receipt"):
+                        hp = fm.txt * float(m.get("scale", 0.9)) * 1.45 * (1 + str(m.get("text", "")).count("\\N"))
+                    else:
+                        continue
+                    yc = float(m["y"]) * RH
+                    taken.append(((yc - hp / 2) / RH - 0.005, (yc + hp / 2) / RH + 0.005))
             # captions
             cap_h = fm.cap * 1.25 / RH
             if job.get("captions_y"):                   # preferred caption line for the whole ad (9:16 position)
