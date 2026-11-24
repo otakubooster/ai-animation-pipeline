@@ -189,6 +189,18 @@ class Ass:
         style = style or ("TxtB" if bold else "Txt")
         ol = "\\bord5\\3c&H000000&" if outline else ""
         self.add(t0, t1, style, f"{{\\an5{a}{r}\\fs{size:.0f}\\c{bgr(fg)}{ol}}}" + "\\N".join(lines), layer + 1)
+        # a struck old price at the end of a one-line pill: draw the strike (libass ignores \s with some fonts)
+        if len(lines) == 1:
+            m = re.search(r"\{\\s1[^}]*\}(.+?)\{\\s0", lines[0])
+            if m and lines[0].rstrip().endswith(m.group(0)[-4:]) or (m and lines[0].strip().endswith("fscy100}")):
+                fnt = self.font(FONT_BOLD if bold else FONT_BLACK, size * 0.82)
+                sw = fnt.getlength(m.group(1))
+                plain_w = tw
+                # RTL text: the last logical segment sits at the left end; LTR: at the right end
+                x0 = cx - plain_w / 2 if ENCODING == -1 else cx + plain_w / 2 - sw
+                lw, lh = sw * 1.12, max(size * 0.07, 3)
+                self.add(t0, t1, "Shp", f"{{\\an5\\pos({x0 + sw / 2:.0f},{cy + size * 0.03:.0f}){'' if anim == 'none' else chr(92) + 'fad(40,120)'}"
+                         f"\\frz-10\\c{bgr(fg)}\\bord0\\shad0\\p1}}{self.rrect(lw, lh, lh / 2)}", layer + 2)
         return cx - bw / 2, cy - bh / 2, cx + bw / 2, cy + bh / 2
 
     @staticmethod
@@ -480,9 +492,13 @@ def main() -> None:
             d |= {"mode": "clip", "src": ls, "head": hd, "end": probe_duration(ls), "lipsync": True}
         elif sh.get("parts"):     # clean windows of several renders of this shot, played one after the other
             parts = [(find_clip(a.clips, q["clip"]), q["start"], q["end"]) for q in sh["parts"]]
+            keep = [i for i, (src, _, _) in enumerate(parts) if src]
             parts = [(src, st, min(en, probe_duration(src))) for src, st, en in parts if src]
-            d["reverse"] = [bool(q.get("reverse")) for q in sh["parts"]]
-            d |= {"mode": "parts", "parts": parts, "src": parts[0][0], "head": parts[0][1], "end": parts[0][2]}
+            if not parts:            # none of its renders exist (yet): the first frame stands in
+                d |= {"mode": "still", "src": frames_dir / sh["frame"], "missing_clip": True}
+            else:
+                d["reverse"] = [bool(sh["parts"][i].get("reverse")) for i in keep]
+                d |= {"mode": "parts", "parts": parts, "src": parts[0][0], "head": parts[0][1], "end": parts[0][2]}
         else:
             src_id, head, end = plan.get(sh["id"], (sh["id"], HEAD_TRIM, None))
             src = find_clip(a.clips, src_id)
@@ -1375,14 +1391,16 @@ def add_marks(doc: Ass, fm: Fmt, marks: list[dict], t0: float, t1: float, sfx, w
             size = int(fm.txt * float(m.get("scale", 1.25)))
             em = size / ASS_EM
             tw = doc.width(m["text"], size)
-            bw, bh = tw + 1.3 * em, size * 0.82 + 0.9 * em
+            bw, bh = tw + 1.3 * em, size * 0.62 + 1.0 * em
             rot = float(m.get("rot", -9))
             slam = (f"\\pos({cx:.0f},{cy:.0f})\\frz{rot}\\fscx230\\fscy230\\t(0,110,\\fscx94\\fscy94)"
                     f"\\t(110,170,\\fscx104\\fscy104\\frz{rot + 3})\\t(170,240,\\fscx100\\fscy100\\frz{rot})\\fad(40,150)")
             doc.add(a, b, "Shp", f"{{\\an5{slam}\\1a&HFF&\\bord{em * 0.17:.1f}\\3c{col}\\shad0\\p1}}{Ass.rrect(bw, bh, em * 0.28)}", 26)
             ins = em * 0.34
             doc.add(a, b, "Shp", f"{{\\an5{slam}\\1a&HFF&\\bord{em * 0.06:.1f}\\3c{col}\\shad0\\p1}}{Ass.rrect(bw - 2 * ins, bh - 2 * ins, em * 0.18)}", 26)
-            doc.add(a, b, "TxtB", f"{{\\an5{slam}\\fs{size}\\c{col}\\bord0\\shad0}}{m['text']}", 27)
+            lift = size * (0.10 if ENCODING == -1 else 0.0)        # Arabic glyphs sit low in the line box
+            slam_t = slam.replace(f"\\pos({cx:.0f},{cy:.0f})", f"\\pos({cx:.0f},{cy - lift:.0f})")
+            doc.add(a, b, "TxtB", f"{{\\an5{slam_t}\\fs{size}\\c{col}\\bord0\\shad0}}{m['text']}", 27)
         elif typ in ("pill", "chip"):            # white pill with coloured text (day cards, ingredient chips)
             size = int(fm.txt * float(m.get("scale", 0.95 if typ == "pill" else 0.72)))
             doc.pill(a, b, cx, cy, [strike(m["text"])], size, m.get("fg", "E5407E"), m.get("bg", "FFFFFF"), bold=True,

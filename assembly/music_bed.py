@@ -8,6 +8,9 @@ Styles (mood A -> mood B):
   cat    gentle minor pad + sparse piano  ->  warm major piano arpeggio, soft bass and light shaker
   tooth  tense minor pizzicato plucks      ->  bright, bouncy major plucks with bass and claps
   theo   slow melancholic piano + pad      ->  hopeful major piano with warm strings
+  playful light pizzicato plucks + piano    ->  bouncy major plucks (no drums, no claps)
+
+  --music-file track.mp3 uses a supplied track instead (trimmed to the ad, faded out), same ducking and mix.
 """
 
 from __future__ import annotations
@@ -113,6 +116,8 @@ def section(style: str, mood: str, length: float, seed: int) -> np.ndarray:
         ("tooth", "B"): dict(bpm=112, prog=[("F", 0), ("C", 0), ("D", 1), ("A#", 0)], pad=0.08, keys="bounce", bass=True, clap=True),
         ("theo", "A"):  dict(bpm=58, prog=[("E", 1), ("C", 0), ("G", 0), ("D", 0)], pad=0.16, keys="sparse"),
         ("theo", "B"):  dict(bpm=70, prog=[("G", 0), ("D", 0), ("E", 1), ("C", 0)], pad=0.16, keys="arp_soft", bass=True),
+        ("playful", "A"): dict(bpm=92, prog=[("C", 0), ("A", 1), ("F", 0), ("G", 0)], pad=0.07, keys="pizz_light", bass=True),
+        ("playful", "B"): dict(bpm=100, prog=[("F", 0), ("C", 0), ("G", 0), ("A", 1)], pad=0.07, keys="bounce", bass=True),
     }
     p = plans[(style, mood)]
     beat = 60 / p["bpm"]
@@ -137,6 +142,10 @@ def section(style: str, mood: str, length: float, seed: int) -> np.ndarray:
         elif k == "pizz":                      # staccato plucks, slightly uneasy rhythm
             for s in (0, 1.5, 2, 3):
                 place(buf, pluck(hz(top[rng.integers(0, 3)]), 0.5, 0.11), t + s * beat)
+        elif k == "pizz_light":                # playful pizzicato with a soft piano note on the downbeat
+            place(buf, piano(hz(top[0]), beat * 2, 0.06), t)
+            for s in (0.5, 1, 2, 2.5, 3.5):
+                place(buf, pluck(hz(top[rng.integers(0, 4)]), 0.4, 0.09), t + s * beat)
         elif k == "bounce":                    # bouncy off-beat plucks
             for s in range(8):
                 if s % 2 or rng.random() < 0.4:
@@ -191,7 +200,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--videos", nargs="+", type=Path, required=True, help="finished MP4s of one ad (same audio)")
     ap.add_argument("--turn", type=float, required=True, help="seconds where mood A turns into mood B")
-    ap.add_argument("--style", choices=["cat", "tooth", "theo"], required=True)
+    ap.add_argument("--style", choices=["cat", "tooth", "theo", "playful"], default="theo")
+    ap.add_argument("--music-file", type=Path, help="use this track instead of composing one")
     ap.add_argument("--music-level", type=float, default=-27.0, help="music loudness (LUFS) before ducking")
     ap.add_argument("--out-suffix", default="_music")
     a = ap.parse_args()
@@ -200,7 +210,12 @@ def main() -> None:
     work = a.videos[0].parent / "music_work"
     work.mkdir(exist_ok=True)
     raw = work / "bed_raw.wav"
-    write_wav(raw, compose(total, a.turn, a.style))
+    if a.music_file:
+        fo = max(total - 2.5, 0)
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-stream_loop", "-1", "-i", str(a.music_file), "-t", f"{total:.2f}",
+                        "-af", f"afade=t=out:st={fo:.2f}:d=2.5", "-ar", str(SR), "-ac", "2", str(raw)], check=True)
+    else:
+        write_wav(raw, compose(total, a.turn, a.style))
     bed = work / "bed.wav"
     # Room reverb + gentle top cut, then set the music level.
     subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(raw), "-af",
