@@ -870,6 +870,12 @@ def main() -> None:
                         continue
                     yc = float(m["y"]) * RH
                     taken.append(((yc - hp / 2) / RH - 0.005, (yc + hp / 2) / RH + 0.005))
+                for im in sh.get("images", []):         # screenshots / logo
+                    src = Path(im["png"]) if Path(im["png"]).is_absolute() else a.job_dir / im["png"]
+                    if src.exists():
+                        with Image.open(src) as pim:
+                            hn = float(im.get("w", 0.4)) * 1080 * pim.height / pim.width / RH
+                        taken.append((float(im["y"]) - hn / 2 - 0.005, float(im["y"]) + hn / 2 + 0.005))
             # captions
             cap_h = fm.cap * 1.25 / RH
             if job.get("captions_y"):                   # preferred caption line for the whole ad (9:16 position)
