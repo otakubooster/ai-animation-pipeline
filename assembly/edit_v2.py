@@ -58,7 +58,11 @@ def use_arabic(font: str = "kufi") -> None:
     Kufi lacks: . : ! · + - %) everywhere (libass shapes it; Encoding -1 = base direction from the text, so lines run
     right to left)."""
     global FONT_BLACK, FONT_BOLD, FAM_BLACK, FAM_BOLD, FONT_BOLD_FLAG, ENCODING, ASS_EM, AR_SCALE
-    if font == "cairo":
+    if font == "tajawal":        # Tajawal Bold (OFL, bundled): has . : ! · + - % and Latin; no Persian gaf (گ falls back)
+        FONT_BLACK = FONT_BOLD = str(FONTS_DIR / "Tajawal-Bold.ttf")
+        FAM_BLACK = FAM_BOLD = "Tajawal"
+        ASS_EM, AR_SCALE = 1.476, (1.42, 1.55)     # Tajawal's win ascent + descent is 1.476 em
+    elif font == "cairo":
         FONT_BLACK = FONT_BOLD = str(FONTS_DIR / "Cairo-ExtraBold.ttf")
         FAM_BLACK = FAM_BOLD = "Cairo ExtraBold"
         ASS_EM, AR_SCALE = 1.883, (1.42, 1.55)     # Cairo's ascent + descent is 1.883 em
@@ -911,6 +915,8 @@ def main() -> None:
                 pass
             elif cstyle in ("box", "box-small"):
                 add_box_captions(doc, fm, cw, cy, seg_end, small=cstyle == "box-small")
+            elif cstyle == "winebox":
+                add_winebox_captions(doc, fm, cw, cy, seg_end, job.get("caption_box", {}))
             elif cstyle == "shadow":
                 add_shadow_captions(doc, fm, cw, cy, seg_end)
             elif cstyle == "redbox":
@@ -1050,6 +1056,51 @@ def add_box_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: f
         em = size / ASS_EM
         doc.pill(t0, t1, RW / 2, cy * RH, lines, size, "111111", "FFFFFF", pad=(0.42, 0.20), radius=em * 0.32,
                  anim="soft", layer=20, style="CapBox", font=FONT_SEMI)
+
+
+def add_winebox_captions(doc: Ass, fm: Fmt, words: list[dict], cy: float, seg_end: float, opt: dict) -> None:
+    """Sentence captions on a translucent coloured box (Vitabelia brief: Tajawal Bold 44 px, white on wine at 75 %,
+    rounded, centred, at most 2 lines of ~5 words, a new caption with each sentence). A sentence longer than
+    max_words is split at a comma or at max_words. opt (job caption_box): bg, fg, opacity, em_px, max_words."""
+    RW, RH = fm.res
+    words = glue_hyphens(words)
+    em_px = float(opt.get("em_px", 46)) * RW / 1080
+    size = em_px * ASS_EM
+    bg, fg = opt.get("bg", "7A1230"), opt.get("fg", "FFFFFF")
+    alpha = int(round(255 * (1 - float(opt.get("opacity", 0.75)))))
+    max_words, max_w = int(opt.get("max_words", 10)), RW * float(opt.get("max_w", 0.80))
+    fnt = ImageFont.truetype(FONT_BOLD, max(int(em_px), 8))
+    groups, cur = [], []
+    for w in words:
+        if not w["text"].strip():
+            continue
+        cur.append(w)
+        t = w["text"]
+        if (re.search(r"[.!?؟…]+[»\"”]?$", t) or len(cur) >= max_words or
+                (re.search(r"[،,:]$", t) and len(cur) >= max(4, max_words // 2))):
+            groups.append(cur)
+            cur = []
+    if cur:
+        if groups and len(cur) <= 2 and len(groups[-1]) + len(cur) <= max_words + 2:
+            groups[-1] += cur                      # no lonely one- or two-word tail box
+        else:
+            groups.append(cur)
+    for gi, g in enumerate(groups):
+        t0 = g[0]["start"]
+        t1 = groups[gi + 1][0]["start"] if gi + 1 < len(groups) else g[-1]["end"] + 0.6
+        t1 = min(t1, g[-1]["end"] + 0.6, seg_end)
+        if t1 - t0 < 0.08:
+            continue
+        line = re.sub(r"\s*[.]+$", "", " ".join(x["text"] for x in g)).strip()
+        ws = line.split()
+        if fnt.getlength(line) <= max_w or len(ws) < 2:
+            lines = [line]
+        else:                                      # two balanced lines (first line not shorter than the second)
+            best = min(range(1, len(ws)), key=lambda i: (max(fnt.getlength(" ".join(ws[:i])), fnt.getlength(" ".join(ws[i:]))),
+                                                         -i))
+            lines = [" ".join(ws[:best]), " ".join(ws[best:])]
+        doc.pill(t0, t1, RW / 2, cy * RH, lines, size, fg, bg, bg_alpha=alpha, bold=True, pad=(0.55, 0.24),
+                 radius=em_px * 0.42, anim="soft", layer=20, font=FONT_BOLD)
 
 
 def caption_groups(doc: Ass, words: list[dict], size: float, max_w: float, n: int, lower: bool = False) -> list:

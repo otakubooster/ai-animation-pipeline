@@ -106,7 +106,7 @@ def align_shots(shots: list[dict], words: list[dict]) -> list[dict]:
     for k, o in enumerate(out):
         if o.get("silent"):
             nxt = out[k + 1]["start"] if k + 1 < len(out) else None
-            o["end"] = nxt if nxt else o["start"] + SILENT_SHOT_S
+            o["end"] = nxt if nxt else o["start"] + (o.get("silent_s") or SILENT_SHOT_S)
         else:
             nxt = out[k + 1]["start"] if k + 1 < len(out) else None
             o["end"] = nxt if nxt is not None else o["words"][-1]["end"] + 1.0
