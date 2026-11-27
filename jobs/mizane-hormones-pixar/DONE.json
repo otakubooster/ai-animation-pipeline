@@ -1,0 +1,47 @@
+{
+ "slug": "mizane-hormones-pixar",
+ "batch": "batch-15",
+ "date": "2026-11-27",
+ "product": "MIZANE Huile Anti-Repousse (legs only), Darija",
+ "outputs": [
+  "MIZANE_hormones_X1_9x16.mp4",
+  "MIZANE_hormones_X1_4x5.mp4",
+  "MIZANE_hormones_X2_9x16.mp4",
+  "MIZANE_hormones_X2_4x5.mp4",
+  "MIZANE_hormones_X3_9x16.mp4",
+  "MIZANE_hormones_X3_4x5.mp4",
+  "MIZANE_hormones_X4_9x16.mp4",
+  "MIZANE_hormones_X4_4x5.mp4",
+  "MIZANE_hormones_X5_9x16.mp4",
+  "MIZANE_hormones_X5_4x5.mp4",
+  "MIZANE_hormones_X6_9x16.mp4",
+  "MIZANE_hormones_X6_4x5.mp4"
+ ],
+ "ads": {
+  "X1": "HX1 PCOS hook, 64.3 s",
+  "X2": "HX2 after birth, 63.5 s",
+  "X3": "HX3 «حبسي!», 59.4 s",
+  "X4": "HX4 «بحال راجل», 63.1 s",
+  "X5": "HX5 «ماشي غلطتك», 64.0 s",
+  "X6": "HX6 hormones, 59.4 s"
+ },
+ "render": {
+  "run": "20261127-141258",
+  "instance": 62866918,
+  "host": "Quebec CA RTX 5090 $1.344/h",
+  "instance_minutes": 59,
+  "clips": 24,
+  "rerolls": 4,
+  "render_s_total": 1167,
+  "failures": 0
+ },
+ "gpu_usd": 1.61,
+ "elevenlabs_credits": 1390,
+ "voice": "GHIZLANE OfGMGmhShO8iL9jCkXy8 (eleven_v4), 12 new lines x 2 takes, best take by faster-whisper match; B9-B12 reused from the round-1 hybrid ads",
+ "qa_fixes": {
+  "E01": "scene cut to a realistic hand at 0.5 s -> re-roll E01b (completely static product shot prompt)",
+  "R09": "razor foam melted over the root -> re-roll R09a (foam stays a thin line on the surface)",
+  "R04": "hair grows into a porcupine after ~3.6 s -> window 0.3-3.6 s"
+ },
+ "editor": "session scratch edit_pixar.py (VO + karaoke captions + hook box + offer overlays + synth music/SFX), 9:16 + 4:5"
+}
